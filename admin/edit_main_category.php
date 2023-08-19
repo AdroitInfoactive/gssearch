@@ -26,7 +26,7 @@ $clspn_val = "4";
 /*****header link********/
 $pagemncat = "Setup";
 $pagecat = "Product Group";
-$pagenm = "Exams";
+$pagenm = "Exam Category";
 /*****header link********/
 if(isset($_POST['txtname']) && (trim($_POST['txtname']) != "") &&
 isset($_POST['edtpdctid']) && (trim($_POST['edtpdctid']) != "") && 
@@ -178,12 +178,12 @@ include_once $inc_adm_lftlnk;
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Edit Main Exams <Link:mf></Link:mf></h1>
+					<h1 class="m-0 text-dark">Edit Exam Category<Link:mf></Link:mf></h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Edit Main Exams</li>
+						<li class="breadcrumb-item active">Edit Exam Category</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
