@@ -1,0 +1,16 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /projects/g/gssearch/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+DirectoryIndex index.html index.php
+
+ErrorDocument 404 /404.php
+
+RewriteRule ^home$ index.php [L]
+RewriteRule ^aboutus$ aboutus.php [L]
+RewriteRule ^contact$ contactus.php [L]
+
+RewriteRule ^error$ error.php [L]
+RewriteRule ^404error$ 404.php [L]
