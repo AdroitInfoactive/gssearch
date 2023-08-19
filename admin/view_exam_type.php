@@ -17,11 +17,11 @@ Modified On :
 Company : Adroit
  ************************************************************/
 global $msg, $loc, $rowsprpg, $dispmsg, $disppg;
-$clspn_val = "5";
+$clspn_val = "4";
 $rd_adpgnm = "add_exam_type.php";
 $rd_edtpgnm = "edit_exam_type.php";
 $rd_crntpgnm = "view_exam_type.php";
-$rd_vwpgnm = "view_download_details.php";
+$rd_vwpgnm = "view_exam_type_details.php";
 $loc = "";
 /*****header link********/
 $pagemncat = "Setup";
@@ -31,7 +31,7 @@ $pagenm = "Exam Type";
 if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
     $dchkval = substr($_POST['hdnchksts'], 1);
     $id       = glb_func_chkvl($dchkval);
-    $updtsts = funcUpdtAllRecSts('dwnld_dtl', 'dwnld_id', $id, 'dwnld_sts');
+    $updtsts = funcUpdtAllRecSts('exam_typ', 'exam_id', $id, 'exam_sts');
     if ($updtsts == 'y') {
         $msg = "<font color=red>Record updated successfully</font>";
     } else if ($updtsts == 'n') {
@@ -41,7 +41,7 @@ if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
 if (($_POST['hdnchkval'] != "") && isset($_REQUEST['hdnchkval'])) {
     $dchkval = substr($_POST['hdnchkval'], 1);
     $did     = glb_func_chkvl($dchkval);
-    $delsts = funcDelAllRec($conn,'dwnld_dtl', 'dwnld_id', $did);
+    $delsts = funcDelAllRec($conn,'exam_typ', 'exam_id', $did);
 
     if ($delsts == 'y') {
         $msg = "<font color=red>Record deleted successfully</font>";
@@ -61,22 +61,21 @@ if (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y")) {
 $rowsprpg = 20; //maximum rows per page
 include_once "../includes/inc_paging1.php"; //Includes pagination
 
-$sqrystdtestmnl_mst1 = "select 
-dwnld_id,dwnld_name,dwnld_sts,dwnld_prty,dwnld_flenm, 
- prodm_id,prodm_name
+$sqrystdtestmnl_mst1 = "SELECT 
+exam_id,exam_name,exam_sts,exam_prty,exam_flenm
 from 
- vw_dwnld_dtl";
+ exam_typ";
 if (isset($_REQUEST['txtsrchval']) && (trim($_REQUEST['txtsrchval']) != "")) {
     $txtsrchval = glb_func_chkvl($_REQUEST['txtsrchval']);
     $loc .= "&txtsrchval=" . $txtsrchval;
     if (isset($_REQUEST['chk']) && (trim($_REQUEST['chk']) == 'y')) {
-        $sqrystdtestmnl_mst1 .= " where dwnld_name ='$txtsrchval'";
+        $sqrystdtestmnl_mst1 .= " where exam_name ='$txtsrchval'";
     } else {
-        $sqrystdtestmnl_mst1 .= " where dwnld_name like '%$txtsrchval%'";
+        $sqrystdtestmnl_mst1 .= " where exam_name like '%$txtsrchval%'";
     }
 }
 $sqrystdtestmnl_mst1 = $sqrystdtestmnl_mst1;
-$sqrystdtestmnl_mst = $sqrystdtestmnl_mst1 . "order by dwnld_name asc limit $offset,$rowsprpg";
+$sqrystdtestmnl_mst = $sqrystdtestmnl_mst1 . "order by exam_name asc limit $offset,$rowsprpg";
 $srsnews_mst = mysqli_query($conn, $sqrystdtestmnl_mst1);
 $serchres = mysqli_num_rows($srsnews_mst);
 
@@ -225,8 +224,8 @@ include_once 'script.php';
                                 </tr>
                                 <tr>
                                     <td width="8%" class="td_bg"><strong>SL.No.</strong></td>
-                                    <td width="28%" class="td_bg"><strong>Download Name</strong></td>
-                                    <td width="24%" class="td_bg"><strong> Product Name</strong></td>
+                                 
+                                    <td width="24%" class="td_bg"><strong> Exam Type </strong></td>
                                     <td width="6%" align="center" class="td_bg"><strong>Priority</strong></td>
                                     <td width="7%" align="center" class="td_bg"><strong>Edit</strong></td>
                                     <td width="7%" class="td_bg" align="center"><strong>
@@ -236,28 +235,16 @@ include_once 'script.php';
 
                                 </tr>
                                 <?php
-                                // $sqrystdtestmnl_mst1 = "select
-                                //                std_testmnlm_id,std_testmnlm_name,std_testmnlm_sts,std_testmnlm_prty,std_testmnlm_typ,
-                                //                std_testmnlm_dwnfl,date_format(std_testmnlm_dt,'%d-%m-%Y') as std_testmnlm_dt						    
-                                //            from
-                                //                std_testmnl_mst
-                                //            where 
-                                //                std_testmnlm_id != ''";
-                                // $srsnews_mst = mysqli_query($conn, $sqrystdtestmnl_mst1);
-                                // $cnt_prodcat = mysqli_num_rows($srsnews_mst);
-                                // $cnt = $offset;
+                               
                                 if ($serchres > 0) {
                                     while ($srowstdtestmnl_mst = mysqli_fetch_assoc($srsnews_mst)) {
-                                        $db_nwid    = $srowstdtestmnl_mst['dwnld_id'];
-                                        $db_nwnm    = $srowstdtestmnl_mst['dwnld_name'];
-                                        $db_id    = $srowstdtestmnl_mst['dwnld_prodm_id'];
-                                        $db_prodname    = $srowstdtestmnl_mst['prodm_name'];
-                                        $db_nwprty  = $srowstdtestmnl_mst['dwnld_prty'];
-                                        $db_std_testmnlts   = $srowstdtestmnl_mst['dwnld_sts'];
-                                        $flenm        = $srowstdtestmnl_mst['std_testmnlm_dwnfl'];
-                                        $std_testmnlDt        = $srowstdtestmnl_mst['std_testmnlm_dt'];
-                                        $std_testmnltyp        = $srowstdtestmnl_mst['std_testmnlm_typ'];
-                                        $flepth        = $dwnfl_upldpth . $db_nwid . "-" . $flenm;
+                                        $db_nwid    = $srowstdtestmnl_mst['exam_id'];
+                                        $db_nwnm    = $srowstdtestmnl_mst['exam_name'];
+                                       
+                                      
+                                        $db_nwprty  = $srowstdtestmnl_mst['exam_prty'];
+                                        $db_std_testmnlts   = $srowstdtestmnl_mst['exam_sts'];
+                                     
                                         $cnt += 1;
                                 ?>
                                         <tr <?php if ($cnt % 2 == 0) {
@@ -266,31 +253,18 @@ include_once 'script.php';
                                                 echo "";
                                             } ?>>
                                             <td><?php echo $cnt; ?></td>
-                                            <!-- <td><?php echo $db_nwid; ?></td> -->
+                                          >
                                             <td>
                                                 <a href="<?php echo $rd_vwpgnm; ?>?vw=<?php echo $db_nwid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="links"><?php echo $db_nwnm; ?></a>
                                             </td>
 
-                                            <td align="left"><?php echo $db_prodname  ?></td>
+                                         
                                             <td align="center"><?php echo $db_nwprty; ?></td>
                                             <td align="center">
                                                 <a href="<?php echo $rd_edtpgnm; ?>?edit=<?php echo $db_nwid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="orongelinks">Edit</a>
                                             </td>
                                             <!-- <td align="left"> -->
-                                            <?php
-
-                                            // $imgnm   = $srowveh_brnd_mst['prodscatm_bnrimg'];
-                                            // $imgpath = $a_scat_bnrfldnm . $imgnm;
-                                            // if (($imgnm != "") && file_exists($imgpath)) {
-                                            //     echo "<img src='$imgpath' width='80pixel' height='80pixel'>";
-                                            // } else {
-                                            //     echo "N.A.";
-                                            // }
-                                            // 
-                                            ?>
-
-                                            <!-- </td> -->
-                                            <!-- <td align="center"><?php echo funcDsplyCattwoTyp($db_scttyp); ?></td> -->
+                                       
 
 
                                             <td align="center">
