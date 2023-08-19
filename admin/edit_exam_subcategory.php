@@ -27,7 +27,7 @@ $pagenm = "Exam Subcategory";
 /*****header link********/
 if (isset($_POST['btneexam_subcategorysbmt']) && (trim($_POST['btneexam_subcategorysbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
 	include_once "../includes/inc_fnct_fleupld.php";
-	include_once "../database/uqry_exam_subcategory_mst.php";
+	include_once "../database/uqry_exam_subcategory.php";
 }
 if (isset($_REQUEST['edit']) && (trim($_REQUEST['edit']) != "") && isset($_REQUEST['pg']) && (trim($_REQUEST['pg']) != "") && isset($_REQUEST['countstart']) && (trim($_REQUEST['countstart']) != "")) {
 	$id = glb_func_chkvl($_REQUEST['edit']);
@@ -45,20 +45,20 @@ if (isset($_REQUEST['edit']) && (trim($_REQUEST['edit']) != "") && isset($_REQUE
 $sqryexam_subcategory_mst = "SELECT 
 								exam_subcategorym_name,exam_subcategorym_desc,exam_subcategorym_seotitle,exam_subcategorym_seodesc,
 								exam_subcategorym_seohone,exam_subcategorym_seohtwo,exam_subcategorym_seokywrd,exam_subcategorym_prty,
-								 exam_subcategorym_sts, exam_subcategorym_topicsm_id, topicsm_name,topicsm_id,exam_subcategorym_admtyp
+								 exam_subcategorym_sts, exam_subcategorym_prodmnexmsm_id, prodmnexmsm_name,prodmnexmsm_id,exam_subcategorym_admtyp
 							from 
 								exam_subcategory_mst
-						inner join topics_mst
-						on		topics_mst.topicsm_id=exam_subcategory_mst.exam_subcategorym_topicsm_id
+						inner join prodmnexms_mst
+						on		prodmnexms_mst.prodmnexmsm_id=exam_subcategory_mst.exam_subcategorym_prodmnexmsm_id
 							where 
 								exam_subcategorym_id='$id'";
 $srsexam_subcategory_mst = mysqli_query($conn, $sqryexam_subcategory_mst);
 $cntrecexam_subcategory_mst = mysqli_num_rows($srsexam_subcategory_mst);
 if ($cntrecexam_subcategory_mst > 0) {
 	$rowsexam_subcategory_mst = mysqli_fetch_assoc($srsexam_subcategory_mst);
-	$db_mnlnksid = $rowsexam_subcategory_mst['topicsm_id'];
-	$db_mnlnksnm = $rowsexam_subcategory_mst['topicsm_name'];
-	$db_catmnlnksid = $rowsexam_subcategory_mst['exam_subcategorym_topicsm_id'];
+	$db_mnlnksid = $rowsexam_subcategory_mst['prodmnexmsm_id'];
+	$db_mnlnksnm = $rowsexam_subcategory_mst['prodmnexmsm_name'];
+	$db_catmnlnksid = $rowsexam_subcategory_mst['exam_subcategorym_prodmnexmsm_id'];
 	$db_catname = $rowsexam_subcategory_mst['exam_subcategorym_name'];
 	$db_catdesc = stripslashes($rowsexam_subcategory_mst['exam_subcategorym_desc']);
 	$db_catseottl = $rowsexam_subcategory_mst['exam_subcategorym_seotitle'];
@@ -82,7 +82,7 @@ $pagetitle = "Edit Category";
 <link rel="stylesheet" type="text/css" href="../includes/yav-style1.css">
 <script language="javascript" type="text/javascript">
 	var rules = new Array();
-	rules[0] = 'lstcat:Category|required|Select Main Link';
+	rules[0] = 'lstcat:Category|required|Select exam_subcategory Link';
 	rules[1] = 'txtname:Name|required|Enter Category Name';
 	rules[2] = 'txtprty:Priority|required|Enter Rank';
 	rules[3] = 'txtprty:Priority|numeric|Enter Only Numbers';
@@ -183,28 +183,28 @@ include_once $inc_adm_lftlnk;
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label>Main Topics *</label>
+								<label>Exam Category *</label>
 							</div>
 							<div class="col-sm-9">
 								<?php
 								$sqryprodmncat_mst = "select 
-								topicsm_id,topicsm_name						
+								prodmnexmsm_id,prodmnexmsm_name						
 							from 
-								topics_mst 
+								prodmnexms_mst 
 							where	 
-								topicsm_sts = 'a'
+								prodmnexmsm_sts = 'a'
 							order by
-							   topicsm_name";
+							   prodmnexmsm_name";
 								$srsexam_subcategory_mst1 = mysqli_query($conn, $sqryprodmncat_mst);
 								$cnt_prodmncat = mysqli_num_rows($srsexam_subcategory_mst1);
 								?>
 								<select name="lstcat" id="lstcat" class="form-control" onchange="get_admsn_dtls();">
-									<option value="">--Select Main Topic--</option>
+									<option value="">--Select exam_subcategory--</option>
 									<?php
 									if ($cnt_prodmncat > 0) {
 										while ($rowsprodmncat_mst = mysqli_fetch_assoc($srsexam_subcategory_mst1)) {
-											$mncatid = $rowsprodmncat_mst['topicsm_id'];
-											$mncatname = $rowsprodmncat_mst['topicsm_name'];
+											$mncatid = $rowsprodmncat_mst['prodmnexmsm_id'];
+											$mncatname = $rowsprodmncat_mst['prodmnexmsm_name'];
 											?>
 											<option value="<?php echo $mncatid; ?>" <?php if ($db_catmnlnksid == $mncatid) echo 'selected'; ?>><?php echo $mncatname; ?></option>
 											<?php
@@ -219,7 +219,7 @@ include_once $inc_adm_lftlnk;
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label>Sub Topic Name *</label>
+								<label>Exam Subcategory Name *</label>
 							</div>
 							<div class="col-sm-9">
 								<input name="txtname" type="text" id="txtname" size="45" maxlength="40" onBlur="funcChkDupName()"
@@ -239,7 +239,7 @@ include_once $inc_adm_lftlnk;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<!-- <div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
 								<label>SEO Title</label>
@@ -293,7 +293,7 @@ include_once $inc_adm_lftlnk;
 									value="<?php echo $db_catseohtwo; ?>">
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">

@@ -25,7 +25,7 @@ $pagenm = "Exam Subcategory";
 global $gmsg;
 if (isset($_POST['btnexam_subcategorysbmt']) && (trim($_POST['btnexam_subcategorysbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
 	include_once "../includes/inc_fnct_fleupld.php";
-	include_once "../database/iqry_exam_subcategory_mst.php";
+	include_once "../database/iqry_exam_subcategory.php";
 }
 $rd_crntpgnm = "view_exam_subcategory.php";
 $clspn_val = "4";

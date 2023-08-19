@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include_once '../includes/inc_config.php'; //Making paging validation	
 include_once $inc_nocache; //Clearing the cache information
 include_once $adm_session; //checking for session
@@ -37,18 +38,18 @@ $sqryexam_subcategory_mst = "SELECT
 exam_subcategorym_name,exam_subcategorym_desc,exam_subcategorym_seotitle,exam_subcategorym_seodesc,
 exam_subcategorym_seohone,exam_subcategorym_seohtwo,exam_subcategorym_seokywrd,exam_subcategorym_prty, 
 if(exam_subcategorym_sts = 'a', 'Active','Inactive') as exam_subcategorym_sts,
-exam_subcategorym_topicsm_id,topicsm_name,exam_subcategorym_admtyp
+exam_subcategorym_prodmnexmsm_id,prodmnexmsm_name,exam_subcategorym_admtyp
 from 
 exam_subcategory_mst
-inner join 	topics_mst
-on		topics_mst.topicsm_id=exam_subcategory_mst.exam_subcategorym_topicsm_id
+inner join 	prodmnexms_mst
+on		prodmnexms_mst.prodmnexmsm_id=exam_subcategory_mst.exam_subcategorym_prodmnexmsm_id
 where 
 exam_subcategorym_id=$id"; 
 $srsexam_subcategory_mst = mysqli_query($conn, $sqryexam_subcategory_mst);
 $cntrecexam_subcategory_mst = mysqli_num_rows($srsexam_subcategory_mst);
 if ($cntrecexam_subcategory_mst > 0) {
 	$rowsexam_subcategory_mst = mysqli_fetch_assoc($srsexam_subcategory_mst);
-	$db_mnlnksnm = $rowsexam_subcategory_mst['topicsm_name'];
+	$db_mnlnksnm = $rowsexam_subcategory_mst['prodmnexmsm_name'];
 	$db_catname = $rowsexam_subcategory_mst['exam_subcategorym_name'];
 	$db_gnrtdfrm = $rowsexam_subcategory_mst['exam_subcategorym_gnrtdfrm'];
 	$db_catdesc = stripslashes($rowsexam_subcategory_mst['exam_subcategorym_desc']);
@@ -119,34 +120,25 @@ include_once $inc_adm_lftlnk;
 				<div class="row justify-content-center">
 					<div class="col-md-12">
 						<div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Main Topics </label>
+							<label for="txtname" class="col-sm-2 col-md-3 col-form-label">Exam Category </label>
 							<div class="col-sm-8">
 								<?php echo $db_mnlnksnm; ?>
 							</div>
 						</div>
-						<?php if ($db_mnlnksnm == 'Admissions' || $db_mnlnksnm == 'Departments') {
-							?>
-							<div class="form-group row">
-								<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Type </label>
-								<div class="col-sm-8">
-									<?php echo $db_typ; ?>
-								</div>
-							</div>
-							<?php
-						} ?>
+					
 						<div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Sub Topic Name </label>
+							<label for="txtname" class="col-sm-2 col-md-3 col-form-label">Exam Subcategory Name </label>
 							<div class="col-sm-8">
 								<?php echo $db_catname; ?>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Description</label>
+							<label for="txtname" class="col-sm-2 col-md-3 col-form-label">Description</label>
 							<div class="col-sm-8">
 								<?php echo $db_catdesc; ?>
 							</div>
 						</div> 
-						<div class="form-group row">
+						<!-- <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">SEO Title </label>
 							<div class="col-sm-8">
 								<?php echo $db_catseottl; ?>
@@ -177,16 +169,16 @@ include_once $inc_adm_lftlnk;
 							<div class="col-sm-8">
 								<?php echo $db_catseohtwo; ?>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Rank</label>
+							<label for="txtname" class="col-sm-2 col-md-3 col-form-label">Rank</label>
 							<div class="col-sm-8">
 								<?php echo $db_catprty; ?>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Status </label>
+							<label for="txtname" class="col-sm-2 col-md-3 col-form-label">Status </label>
 							<div class="col-sm-8">
 								<?php echo $db_catsts; ?>
 							</div>

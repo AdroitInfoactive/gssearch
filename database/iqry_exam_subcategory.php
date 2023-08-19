@@ -10,13 +10,13 @@ include_once $inc_fldr_pth;
 global $ses_admin;
 
 if (
-	isset($_POST['btnsubtopicssbmt']) && (trim($_POST['btnsubtopicssbmt']) != "") &&
+	isset($_POST['btnexam_subcategorysbmt']) && (trim($_POST['btnexam_subcategorysbmt']) != "") &&
 	isset($_POST['lstprodcat']) && (trim($_POST['lstprodcat']) != "") &&
 	isset($_POST['txtname']) && (trim($_POST['txtname']) != "") &&
 	isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")
 ) {
 
-	$subtopics = glb_func_chkvl($_POST['lstprodcat']);
+	$exam_subcategory = glb_func_chkvl($_POST['lstprodcat']);
 	$name = glb_func_chkvl($_POST['txtname']);
 	$desc = addslashes(trim($_POST['txtdesc']));
 	$prior = glb_func_chkvl($_POST['txtprty']);
@@ -32,13 +32,13 @@ if (
 	$sts = $_POST['lststs'];
 	$dt = date('Y-m-d h:i:s');
 	
-	 $sqrysubtopics_mst = "SELECT subtopicsm_name,subtopicsm_topicsm_id,subtopicsm_admtyp from subtopics_mst where subtopicsm_name ='$name' and subtopicsm_topicsm_id ='$subtopics'"; 
-	$srssubtopics_mst = mysqli_query($conn, $sqrysubtopics_mst);
-	 $cntrec_cat = mysqli_num_rows($srssubtopics_mst); 
+	 $sqryexam_subcategory_mst = "SELECT exam_subcategorym_name,exam_subcategorym_prodmnexmsm_id,exam_subcategorym_admtyp from exam_subcategory_mst where exam_subcategorym_name ='$name' and exam_subcategorym_prodmnexmsm_id ='$exam_subcategory'"; 
+	$srsexam_subcategory_mst = mysqli_query($conn, $sqryexam_subcategory_mst);
+	 $cntrec_cat = mysqli_num_rows($srsexam_subcategory_mst); 
 	if ($cntrec_cat < 1) {
   
-		$iqrysubtopics_mst = "INSERT into subtopics_mst(subtopicsm_topicsm_id,subtopicsm_name,subtopicsm_desc,subtopicsm_seotitle,subtopicsm_seodesc,subtopicsm_seokywrd, subtopicsm_seohone,subtopicsm_seohtwo,subtopicsm_sts,subtopicsm_prty, subtopicsm_crtdon,subtopicsm_crtdby)values('$subtopics','$name','$desc','$seotitle','$seodesc','$seokywrd', '$seoh1','$seoh2','$sts',$prior, '$dt','$ses_admin')"; 
-		$irssubtopics_mst = mysqli_query($conn, $iqrysubtopics_mst);
+		$iqryexam_subcategory_mst = "INSERT into exam_subcategory_mst(exam_subcategorym_prodmnexmsm_id,exam_subcategorym_name,exam_subcategorym_desc,exam_subcategorym_seotitle,exam_subcategorym_seodesc,exam_subcategorym_seokywrd, exam_subcategorym_seohone,exam_subcategorym_seohtwo,exam_subcategorym_sts,exam_subcategorym_prty, exam_subcategorym_crtdon,exam_subcategorym_crtdby)values('$exam_subcategory','$name','$desc','$seotitle','$seodesc','$seokywrd', '$seoh1','$seoh2','$sts',$prior, '$dt','$ses_admin')"; 
+		$irsexam_subcategory_mst = mysqli_query($conn, $iqryexam_subcategory_mst);
     $gmsg = "Record saved successfully";
   }
 } else {

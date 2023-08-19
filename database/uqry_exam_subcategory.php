@@ -7,10 +7,10 @@ include_once $inc_usr_fnctn; //checking for session
 include_once $inc_pgng_fnctns; //Making paging validation
 include_once $inc_fldr_pth;
 global $ses_admin;
-if (isset($_POST['btnesubtopicssbmt']) && (trim($_POST['btnesubtopicssbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
+if (isset($_POST['btneexam_subcategorysbmt']) && (trim($_POST['btneexam_subcategorysbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
 	//echo "here";exit;
-	$subtopics = glb_func_chkvl($_POST['lstcat']);
-	$id = glb_func_chkvl($_POST['hdnsubtopicsid']);
+	$exam_subcategory = glb_func_chkvl($_POST['lstcat']);
+	$id = glb_func_chkvl($_POST['hdnexam_subcategoryid']);
 	$name = glb_func_chkvl($_POST['txtname']);
 	$prior = glb_func_chkvl($_POST['txtprty']);
 	//$hmprior = glb_func_chkvl($_POST['txthmprior']);
@@ -38,39 +38,39 @@ if (isset($_POST['btnesubtopicssbmt']) && (trim($_POST['btnesubtopicssbmt']) != 
 	if ($chk != '') {
 		$loc .= "&chk=y";
 	}
-	$sqrysubtopics_mst = "SELECT subtopicsm_name  from subtopics_mst where subtopicsm_name='$name' and subtopicsm_topicsm_id = '$subtopics' and subtopicsm_id='$id'";
-	$srssubtopics_mst = mysqli_query($conn, $sqrysubtopics_mst);
-	$rows_cnt = mysqli_num_rows($srssubtopics_mst);
+	$sqryexam_subcategory_mst = "SELECT exam_subcategorym_name  from exam_subcategory_mst where exam_subcategorym_name='$name' and exam_subcategorym_prodmnexmsm_id = '$exam_subcategory' and exam_subcategorym_id='$id'";
+	$srsexam_subcategory_mst = mysqli_query($conn, $sqryexam_subcategory_mst);
+	$rows_cnt = mysqli_num_rows($srsexam_subcategory_mst);
 	if ($rows_cnt > 1) { ?>
 		<script type="text/javascript">
-			location.href = "view_detail_subtopics.php?vw=<?php echo $id; ?>&sts=d&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
+			location.href = "view_detail_exam_subcategory.php?vw=<?php echo $id; ?>&sts=d&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
 		</script>
 		<?php
 	} else {
-		$uqrysubtopics_mst = "UPDATE subtopics_mst set 
-		subtopicsm_name='$name', 
-		subtopicsm_topicsm_id ='$subtopics',
-		subtopicsm_sts='$sts', 
-		subtopicsm_desc='$desc', 
-		subtopicsm_seotitle='$title', 
-		subtopicsm_seodesc='$seodesc', 
-		subtopicsm_seokywrd='$kywrd', 
-		subtopicsm_seohone='$seoh1', 
-		subtopicsm_seohtwo='$seoh2',
-		subtopicsm_prty ='$prior', 
-		subtopicsm_mdfdon ='$cur_dt',
-		subtopicsm_mdfdby='$ses_admin'";
-		$uqrysubtopics_mst .= " where subtopicsm_id = $id"; 
-		$ursprodmncat_mst = mysqli_query($conn, $uqrysubtopics_mst);
+		$uqryexam_subcategory_mst = "UPDATE exam_subcategory_mst set 
+		exam_subcategorym_name='$name', 
+		exam_subcategorym_prodmnexmsm_id ='$exam_subcategory',
+		exam_subcategorym_sts='$sts', 
+		exam_subcategorym_desc='$desc', 
+		exam_subcategorym_seotitle='$title', 
+		exam_subcategorym_seodesc='$seodesc', 
+		exam_subcategorym_seokywrd='$kywrd', 
+		exam_subcategorym_seohone='$seoh1', 
+		exam_subcategorym_seohtwo='$seoh2',
+		exam_subcategorym_prty ='$prior', 
+		exam_subcategorym_mdfdon ='$cur_dt',
+		exam_subcategorym_mdfdby='$ses_admin'";
+		$uqryexam_subcategory_mst .= " where exam_subcategorym_id = $id"; 
+		$ursprodmncat_mst = mysqli_query($conn, $uqryexam_subcategory_mst);
 		if ($ursprodmncat_mst == true){ 
     ?>
 			<script type="text/javascript">
-				location.href = "view_detail_subtopics.php?vw=<?php echo $id; ?>&sts=y&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
+				location.href = "view_detail_exam_subcategory.php?vw=<?php echo $id; ?>&sts=y&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
 			</script>
 			<?php
 		} else { ?>
 			<script type="text/javascript">
-				location.href = "view_detail_subtopics.php?vw=<?php echo $id; ?>&sts=n&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
+				location.href = "view_detail_exam_subcategory.php?vw=<?php echo $id; ?>&sts=n&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
 			</script>
 			<?php
 		}

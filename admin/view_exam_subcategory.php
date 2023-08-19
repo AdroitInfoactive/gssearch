@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 $pagetitle = "View All Exam Subcategory";
 include_once '../includes/inc_config.php'; //Making paging validation
 include_once $inc_nocache; //Clearing the cache information
@@ -207,27 +208,27 @@ include_once $inc_adm_hdr;
 							<div class="form-group">
 								<?php
 								$sqryprodmcat_mst = "select 
-							topicsm_id,topicsm_name						
+							prodmnexmsm_id,prodmnexmsm_name						
 								from 
-								 topics_mst 
+								 prodmnexms_mst 
 									where	 
-							 topicsm_sts = 'a'
+							 prodmnexmsm_sts = 'a'
 						 order by
-							topicsm_name";
+							prodmnexmsm_name";
 								$srsprodmcat_mst = mysqli_query($conn, $sqryprodmcat_mst);
 								$cnt_prodmcat = mysqli_num_rows($srsprodmcat_mst);
 								?>
 								<select name="lstprodmcat" class="form-control">
-									<option value="">--Select Main Topics--</option>
+									<option value="">--Select Exam Category--</option>
 									<?php
 									if ($cnt_prodmcat > 0) {
 										while ($rowsprodmcat_mst = mysqli_fetch_assoc($srsprodmcat_mst)) {
-											$topicsm_id = $rowsprodmcat_mst['topicsm_id'];
-											$topicsm_name = $rowsprodmcat_mst['topicsm_name'];
+											$prodmnexmsm_id = $rowsprodmcat_mst['prodmnexmsm_id'];
+											$prodmnexmsm_name = $rowsprodmcat_mst['prodmnexmsm_name'];
 									?>
-											<option value="<?php echo $topicsm_id; ?>" <?php if (isset($_REQUEST['lstprodmcat']) && trim($_REQUEST['lstprodmcat']) == $topicsm_id) {
+											<option value="<?php echo $prodmnexmsm_id; ?>" <?php if (isset($_REQUEST['lstprodmcat']) && trim($_REQUEST['lstprodmcat']) == $prodmnexmsm_id) {
 																								echo 'selected';
-																							} ?>><?php echo $topicsm_name; ?></option>
+																							} ?>><?php echo $prodmnexmsm_name; ?></option>
 									<?php
 										}
 									}
@@ -276,8 +277,8 @@ include_once $inc_adm_hdr;
 							</tr>
 							<tr>
 								<td width="7%"><strong>SL.No.</strong></td>
-								<td width="21%"><strong>Sub Topics Name</strong></td>
-								<td width="15%" class="td_bg"><strong>Topics</strong></td>
+								<td width="21%"><strong>Subcategory Name</strong></td>
+								<td width="15%" class="td_bg"><strong>Category</strong></td>
 								<td width="9%" align="center"><strong>Rank</strong></td>
 								<td width="6%" align="center"><strong>Edit</strong></td>
 								<td width="7%" align="center"><strong>
@@ -290,19 +291,19 @@ include_once $inc_adm_hdr;
 							<?php
 							$sqryexam_subcategory_mst1 = "select 
 						exam_subcategorym_id,exam_subcategorym_name,exam_subcategorym_sts,exam_subcategorym_prty,
-						exam_subcategorym_topicsm_id,topicsm_name						       		
+						exam_subcategorym_prodmnexmsm_id,prodmnexmsm_name						       		
 						from 
 					   exam_subcategory_mst
-						inner join topics_mst
-						on		topics_mst.topicsm_id=exam_subcategory_mst.exam_subcategorym_topicsm_id";
+						inner join prodmnexms_mst
+						on		prodmnexms_mst.prodmnexmsm_id=exam_subcategory_mst.exam_subcategorym_prodmnexmsm_id";
 							// echo "here".$sqryexam_subcategory_mst1 ;
 							if (isset($_REQUEST['lstprodmcat']) && (trim($_REQUEST['lstprodmcat']) != "")) {
 								$lstprodmcat = glb_func_chkvl($_REQUEST['lstprodmcat']);
 								$loc .= "&lstprodmcat=" . $lstprodmcat;
 								if (isset($_REQUEST['chk']) && (trim($_REQUEST['chk']) == 'y')) {
-									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_topicsm_id = '$lstprodmcat'";
+									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_prodmnexmsm_id = '$lstprodmcat'";
 								} else {
-									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_topicsm_id like '%$lstprodmcat%'";
+									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_prodmnexmsm_id like '%$lstprodmcat%'";
 								}
 							}
 							if (isset($_REQUEST['txtsrchval']) && (trim($_REQUEST['txtsrchval']) != "")) {
@@ -324,7 +325,7 @@ include_once $inc_adm_hdr;
 									$pgval_srch	= $pgnum . $loc;
 									$db_catid	= $srowexam_subcategory_mst['exam_subcategorym_id'];
 									$db_catname	= $srowexam_subcategory_mst['exam_subcategorym_name'];
-									$db_mncatname	= $srowexam_subcategory_mst['topicsm_name'];
+									$db_mncatname	= $srowexam_subcategory_mst['prodmnexmsm_name'];
 									$db_prty = $srowexam_subcategory_mst['exam_subcategorym_prty'];
 									$db_sts	= $srowexam_subcategory_mst['exam_subcategorym_sts'];
 									$db_hmprty = $srowexam_subcategory_mst['exam_subcategorym_hmprty'];
