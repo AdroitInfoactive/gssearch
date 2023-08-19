@@ -22,7 +22,7 @@ $u_prjct_email_info = "info" . "@$prjct_dmn";
 
 $rtpth = "/projects/g/gssearch/";
 
-$site_logo = '';
+$site_logo = $rtpth.'assets/images/logo.png';
 
 /**************include files*****************/
 /**************include files*****************/

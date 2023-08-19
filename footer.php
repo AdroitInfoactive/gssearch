@@ -182,7 +182,7 @@ require_once('settings.php');
   rgstrrules[2] = 'txtname_rgstr|required|Enter Name';
   rgstrrules[3] = 'txtpswd_rgstr|required|Enter Password';
   rgstrrules[4] = 'txtcnfpswd_rgstr|required|Enter Confirm Password';
-  rgstrrules[5] = 'txtcnfpswd_rgstr|equal|$txtpswd|Password not match';
+  rgstrrules[5] = 'txtcnfpswd_rgstr|equal|$txtpswd_rgstr|Password not match';
 </script>
 </body>
 <!-- Mirrored from raistheme.com/html/GS Search/GS Search/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Aug 2023 19:13:08 GMT -->
