@@ -19,11 +19,11 @@ Company : Adroit
 /*****header link********/
 $pagemncat = "Setup";
 $pagecat = "Product Group";
-$pagenm = "subtopics";
+$pagenm = "Exam Subcategory";
 /*****header link********/
 global $id, $pg, $countstart;
-$rd_crntpgnm = "view_subtopics.php";
-$rd_edtpgnm = "edit_subtopics.php";
+$rd_crntpgnm = "view_exam_subcategory.php";
+$rd_edtpgnm = "edit_exam_subcategory.php";
 $clspn_val = "4";
 if (isset($_REQUEST['vw']) && (trim($_REQUEST['vw']) != "") && isset($_REQUEST['pg']) && (trim($_REQUEST['pg']) != "") && isset($_REQUEST['countstart']) && (trim($_REQUEST['countstart']) != "")) {
 	$id = glb_func_chkvl($_REQUEST['vw']);
@@ -33,35 +33,35 @@ if (isset($_REQUEST['vw']) && (trim($_REQUEST['vw']) != "") && isset($_REQUEST['
 	$chk = glb_func_chkvl($_REQUEST['chk']);
 }
 
-$sqrysubtopics_mst = "SELECT 
-subtopicsm_name,subtopicsm_desc,subtopicsm_seotitle,subtopicsm_seodesc,
-subtopicsm_seohone,subtopicsm_seohtwo,subtopicsm_seokywrd,subtopicsm_prty, 
-if(subtopicsm_sts = 'a', 'Active','Inactive') as subtopicsm_sts,
-subtopicsm_topicsm_id,topicsm_name,subtopicsm_admtyp
+$sqryexam_subcategory_mst = "SELECT 
+exam_subcategorym_name,exam_subcategorym_desc,exam_subcategorym_seotitle,exam_subcategorym_seodesc,
+exam_subcategorym_seohone,exam_subcategorym_seohtwo,exam_subcategorym_seokywrd,exam_subcategorym_prty, 
+if(exam_subcategorym_sts = 'a', 'Active','Inactive') as exam_subcategorym_sts,
+exam_subcategorym_topicsm_id,topicsm_name,exam_subcategorym_admtyp
 from 
-subtopics_mst
+exam_subcategory_mst
 inner join 	topics_mst
-on		topics_mst.topicsm_id=subtopics_mst.subtopicsm_topicsm_id
+on		topics_mst.topicsm_id=exam_subcategory_mst.exam_subcategorym_topicsm_id
 where 
-subtopicsm_id=$id"; 
-$srssubtopics_mst = mysqli_query($conn, $sqrysubtopics_mst);
-$cntrecsubtopics_mst = mysqli_num_rows($srssubtopics_mst);
-if ($cntrecsubtopics_mst > 0) {
-	$rowssubtopics_mst = mysqli_fetch_assoc($srssubtopics_mst);
-	$db_mnlnksnm = $rowssubtopics_mst['topicsm_name'];
-	$db_catname = $rowssubtopics_mst['subtopicsm_name'];
-	$db_gnrtdfrm = $rowssubtopics_mst['subtopicsm_gnrtdfrm'];
-	$db_catdesc = stripslashes($rowssubtopics_mst['subtopicsm_desc']);
-	$db_cattyp = $rowssubtopics_mst['subtopicsm_typ'];
-	$db_dsplytyp = $rowssubtopics_mst['subtopicsm_dsplytyp'];
-	$db_catseottl = $rowssubtopics_mst['subtopicsm_seotitle'];
-	$db_catseodesc = $rowssubtopics_mst['subtopicsm_seodesc'];
-	$db_catseokywrd = $rowssubtopics_mst['subtopicsm_seokywrd'];
-	$db_catseohone = $rowssubtopics_mst['subtopicsm_seohone'];
-	$db_catseohtwo = $rowssubtopics_mst['subtopicsm_seohtwo'];
-	$db_catprty = $rowssubtopics_mst['subtopicsm_prty'];
-	$db_catsts = $rowssubtopics_mst['subtopicsm_sts'];
-	$db_typ = $rowssubtopics_mst['subtopicsm_admtyp'];
+exam_subcategorym_id=$id"; 
+$srsexam_subcategory_mst = mysqli_query($conn, $sqryexam_subcategory_mst);
+$cntrecexam_subcategory_mst = mysqli_num_rows($srsexam_subcategory_mst);
+if ($cntrecexam_subcategory_mst > 0) {
+	$rowsexam_subcategory_mst = mysqli_fetch_assoc($srsexam_subcategory_mst);
+	$db_mnlnksnm = $rowsexam_subcategory_mst['topicsm_name'];
+	$db_catname = $rowsexam_subcategory_mst['exam_subcategorym_name'];
+	$db_gnrtdfrm = $rowsexam_subcategory_mst['exam_subcategorym_gnrtdfrm'];
+	$db_catdesc = stripslashes($rowsexam_subcategory_mst['exam_subcategorym_desc']);
+	$db_cattyp = $rowsexam_subcategory_mst['exam_subcategorym_typ'];
+	$db_dsplytyp = $rowsexam_subcategory_mst['exam_subcategorym_dsplytyp'];
+	$db_catseottl = $rowsexam_subcategory_mst['exam_subcategorym_seotitle'];
+	$db_catseodesc = $rowsexam_subcategory_mst['exam_subcategorym_seodesc'];
+	$db_catseokywrd = $rowsexam_subcategory_mst['exam_subcategorym_seokywrd'];
+	$db_catseohone = $rowsexam_subcategory_mst['exam_subcategorym_seohone'];
+	$db_catseohtwo = $rowsexam_subcategory_mst['exam_subcategorym_seohtwo'];
+	$db_catprty = $rowsexam_subcategory_mst['exam_subcategorym_prty'];
+	$db_catsts = $rowsexam_subcategory_mst['exam_subcategorym_sts'];
+	$db_typ = $rowsexam_subcategory_mst['exam_subcategorym_admtyp'];
 }
 $loc = "&val=$srchval";
 if ($chk != '') {
@@ -78,8 +78,8 @@ if (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y")) {
 <script language="javascript">
 	function update1() //for update download details
 	{
-		document.frmedtsubtopics.action = "<?php echo $rd_edtpgnm; ?>?vw=<?php echo $id; ?>&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
-		document.frmedtsubtopics.submit();
+		document.frmedtexam_subcategory.action = "<?php echo $rd_edtpgnm; ?>?vw=<?php echo $id; ?>&pg=<?php echo $pg; ?>&countstart=<?php echo $countstart . $loc; ?>";
+		document.frmedtexam_subcategory.submit();
 	}
 </script>
 <?php
@@ -91,20 +91,20 @@ include_once $inc_adm_lftlnk;
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">View Sub Topics</h1>
+					<h1 class="m-0 text-dark">View Exam Subcategory</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">View Sub Topics</li>
+						<li class="breadcrumb-item active">View Exam Subcategory</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
 		</div><!-- /.container-fluid -->
 	</div>
-	<form name="frmedtsubtopics" id="frmedtsubtopics" method="post" action="<?php $_SERVER['PHP_SELF']; ?>"
-		onSubmit="return performCheck('frmedtsubtopics', rules, 'inline');">
-		<input type="hidden" name="hdnsubtopicsid" value="<?php echo $id; ?>">
+	<form name="frmedtexam_subcategory" id="frmedtexam_subcategory" method="post" action="<?php $_SERVER['PHP_SELF']; ?>"
+		onSubmit="return performCheck('frmedtexam_subcategory', rules, 'inline');">
+		<input type="hidden" name="hdnexam_subcategoryid" value="<?php echo $id; ?>">
 		<input type="hidden" name="hdnpage" value="<?php echo $pg; ?>">
 		<input type="hidden" name="hdncnt" value="<?php echo $countstart ?>">
 		<?php
@@ -195,11 +195,11 @@ include_once $inc_adm_lftlnk;
 				</td>
       </tr>
       <p class="text-center">
-							<input type="Submit" class="btn btn-primary btn-cst" name="frmedtsubtopics" id="frmedtsubtopics" value="Edit"
+							<input type="Submit" class="btn btn-primary btn-cst" name="frmedtexam_subcategory" id="frmedtexam_subcategory" value="Edit"
 								onclick="update1()">
 							&nbsp;&nbsp;&nbsp;
-							<input type="reset" class="btn btn-primary btn-cst" name="btnsubtopicsreset" value="Clear"
-								id="btnsubtopicsreset">
+							<input type="reset" class="btn btn-primary btn-cst" name="btnexam_subcategoryreset" value="Clear"
+								id="btnexam_subcategoryreset">
 							&nbsp;&nbsp;&nbsp;
 							<input type="button" name="btnBack" value="Back" class="btn btn-primary btn-cst"
 								onclick="location.href='<?php echo $rd_crntpgnm; ?>?<?php echo $loc; ?>'">

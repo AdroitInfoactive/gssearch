@@ -1,5 +1,5 @@
 <?php
-$pagetitle = "View All Categories";
+$pagetitle = "View All Exam Subcategory";
 include_once '../includes/inc_config.php'; //Making paging validation
 include_once $inc_nocache; //Clearing the cache information
 include_once $adm_session; //checking for session
@@ -8,7 +8,7 @@ include_once $inc_usr_fnctn; //checking for session
 include_once $inc_pgng_fnctns; //Making paging validation 
 include_once $inc_fldr_pth; //Making paging validation
 /***************************************************************
-Programm : view_product_subtopics.php	
+Programm : view_product_exam_subcategory.php	
 Purpose : For Viewing all Categories
 Created By : Bharath
 Created On : 20-01-2022
@@ -19,21 +19,21 @@ Company : Adroit
  ************************************************************/
 global $msg, $loc, $rowsprpg, $dispmsg, $disppg;
 $clspn_val = "6";
-$rd_adpgnm = "add_subtopics.php";
-$rd_edtpgnm = "edit_subtopics.php";
-$rd_crntpgnm = "view_subtopics.php";
-$rd_vwpgnm = "view_detail_subtopics.php";
+$rd_adpgnm = "add_exam_subcategory.php";
+$rd_edtpgnm = "edit_exam_subcategory.php";
+$rd_crntpgnm = "view_exam_subcategory.php";
+$rd_vwpgnm = "view_detail_exam_subcategory.php";
 $loc = "";
 /*****header link********/
 $pagemncat = "Setup";
 $pagecat = "Product Group";
-$pagenm = "subtopics";
+$pagenm = "Exam Subcategory";
 /*****header link********/
 if (isset($_POST['hdnchksts']) && (trim($_POST['hdnchksts']) != "")) {
 	$dchkval = substr($_POST['hdnchksts'], 1);
 	$id  	 = glb_func_chkvl($dchkval);
 
-	$updtsts = funcUpdtAllRecSts('subtopics_mst', 'subtopicsm_id', $id, 'subtopicsm_sts');
+	$updtsts = funcUpdtAllRecSts('exam_subcategory_mst', 'exam_subcategorym_id', $id, 'exam_subcategorym_sts');
 	if ($updtsts == 'y') {
 		$msg = "<font color=red>Record updated successfully</font>";
 	} elseif ($updtsts == 'n') {
@@ -48,21 +48,21 @@ if (($_POST['hdnchkval'] != "") && isset($_REQUEST['hdnchkval'])) {
 	$bnrimg      =  array();
 	$bnrimgpth   =  array();
 	for ($i = 0; $i < $count; $i++) {
-		$sqrysubtopics_mst = "select 
-									subtopicsm_bnrimg
+		$sqryexam_subcategory_mst = "select 
+									exam_subcategorym_bnrimg
 								from 
-									subtopics_mst
+									exam_subcategory_mst
 								where
-									subtopicsm_id=$del[$i]";
-		$srssubtopics_mst     = mysqli_query($conn, $sqrysubtopics_mst);
-		$cntrec_subtopics	 = mysqli_num_rows($srssubtopics_mst);
-		if ($cntrec_subtopics > 0) {
-			$srowsubtopics_mst = mysqli_fetch_assoc($srssubtopics_mst);
-			$bnrimg[$i]      = glb_func_chkvl($srowsubtopics_mst['subtopicsm_bnrimg']);
+									exam_subcategorym_id=$del[$i]";
+		$srsexam_subcategory_mst     = mysqli_query($conn, $sqryexam_subcategory_mst);
+		$cntrec_exam_subcategory	 = mysqli_num_rows($srsexam_subcategory_mst);
+		if ($cntrec_exam_subcategory > 0) {
+			$srowexam_subcategory_mst = mysqli_fetch_assoc($srsexam_subcategory_mst);
+			$bnrimg[$i]      = glb_func_chkvl($srowexam_subcategory_mst['exam_subcategorym_bnrimg']);
 			$bnrimgpth[$i]   = $a_cat_bnrfldnm . $bnrimg[$i];
 		}
 	}
-	$delsts = funcDelAllRec($conn,'subtopics_mst', 'subtopicsm_id', $did);
+	$delsts = funcDelAllRec($conn,'exam_subcategory_mst', 'exam_subcategorym_id', $did);
 	$delsts = funcDelAllRec($conn,'prodmcat_dtl', 'prodmcatd_catm_id', $did);
 	if ($delsts == 'y') {
 		for ($i = 0; $i < $count; $i++) {
@@ -161,12 +161,12 @@ include_once $inc_adm_hdr;
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">View All Categories</h1>
+					<h1 class="m-0 text-dark">View All Exam Subcategory</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">View All Categories</li>
+						<li class="breadcrumb-item active">View All Exam Subcategory</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
@@ -288,48 +288,48 @@ include_once $inc_adm_hdr;
 								</td>
 							</tr>
 							<?php
-							$sqrysubtopics_mst1 = "select 
-						subtopicsm_id,subtopicsm_name,subtopicsm_sts,subtopicsm_prty,
-						subtopicsm_topicsm_id,topicsm_name						       		
+							$sqryexam_subcategory_mst1 = "select 
+						exam_subcategorym_id,exam_subcategorym_name,exam_subcategorym_sts,exam_subcategorym_prty,
+						exam_subcategorym_topicsm_id,topicsm_name						       		
 						from 
-					   subtopics_mst
+					   exam_subcategory_mst
 						inner join topics_mst
-						on		topics_mst.topicsm_id=subtopics_mst.subtopicsm_topicsm_id";
-							// echo "here".$sqrysubtopics_mst1 ;
+						on		topics_mst.topicsm_id=exam_subcategory_mst.exam_subcategorym_topicsm_id";
+							// echo "here".$sqryexam_subcategory_mst1 ;
 							if (isset($_REQUEST['lstprodmcat']) && (trim($_REQUEST['lstprodmcat']) != "")) {
 								$lstprodmcat = glb_func_chkvl($_REQUEST['lstprodmcat']);
 								$loc .= "&lstprodmcat=" . $lstprodmcat;
 								if (isset($_REQUEST['chk']) && (trim($_REQUEST['chk']) == 'y')) {
-									$sqrysubtopics_mst1 .= " and subtopicsm_topicsm_id = '$lstprodmcat'";
+									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_topicsm_id = '$lstprodmcat'";
 								} else {
-									$sqrysubtopics_mst1 .= " and subtopicsm_topicsm_id like '%$lstprodmcat%'";
+									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_topicsm_id like '%$lstprodmcat%'";
 								}
 							}
 							if (isset($_REQUEST['txtsrchval']) && (trim($_REQUEST['txtsrchval']) != "")) {
 								$txtsrchval = glb_func_chkvl($_REQUEST['txtsrchval']);
 								$loc .= "&txtsrchval=" . $txtsrchval;
 								if (isset($_REQUEST['chk']) && (trim($_REQUEST['chk']) == 'y')) {
-									$sqrysubtopics_mst1 .= " and subtopicsm_name ='$txtsrchval'";
+									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_name ='$txtsrchval'";
 								} else {
-									$sqrysubtopics_mst1 .= " and subtopicsm_name like '%$txtsrchval%'";
+									$sqryexam_subcategory_mst1 .= " and exam_subcategorym_name like '%$txtsrchval%'";
 								}
 							}
-							$sqrysubtopics_mst = $sqrysubtopics_mst1 . " order by subtopicsm_name asc limit $offset,$rowsprpg";
-							$srssubtopics_mst = mysqli_query($conn, $sqrysubtopics_mst);
-							$cnt_recs = mysqli_num_rows($srssubtopics_mst);
+							$sqryexam_subcategory_mst = $sqryexam_subcategory_mst1 . " order by exam_subcategorym_name asc limit $offset,$rowsprpg";
+							$srsexam_subcategory_mst = mysqli_query($conn, $sqryexam_subcategory_mst);
+							$cnt_recs = mysqli_num_rows($srsexam_subcategory_mst);
 							$cnt = $offset;
 							if ($cnt_recs > 0) {
-								while ($srowsubtopics_mst = mysqli_fetch_assoc($srssubtopics_mst)) {
+								while ($srowexam_subcategory_mst = mysqli_fetch_assoc($srsexam_subcategory_mst)) {
 									$cnt += 1;
 									$pgval_srch	= $pgnum . $loc;
-									$db_catid	= $srowsubtopics_mst['subtopicsm_id'];
-									$db_catname	= $srowsubtopics_mst['subtopicsm_name'];
-									$db_mncatname	= $srowsubtopics_mst['topicsm_name'];
-									$db_prty = $srowsubtopics_mst['subtopicsm_prty'];
-									$db_sts	= $srowsubtopics_mst['subtopicsm_sts'];
-									$db_hmprty = $srowsubtopics_mst['subtopicsm_hmprty'];
-									//$db_catimg = $srowsubtopics_mst['subtopicsm_smlimg'];
-									//$db_catbnrimg = $srowsubtopics_mst['subtopicsm_bnrimg'];
+									$db_catid	= $srowexam_subcategory_mst['exam_subcategorym_id'];
+									$db_catname	= $srowexam_subcategory_mst['exam_subcategorym_name'];
+									$db_mncatname	= $srowexam_subcategory_mst['topicsm_name'];
+									$db_prty = $srowexam_subcategory_mst['exam_subcategorym_prty'];
+									$db_sts	= $srowexam_subcategory_mst['exam_subcategorym_sts'];
+									$db_hmprty = $srowexam_subcategory_mst['exam_subcategorym_hmprty'];
+									//$db_catimg = $srowexam_subcategory_mst['exam_subcategorym_smlimg'];
+									//$db_catbnrimg = $srowexam_subcategory_mst['exam_subcategorym_bnrimg'];
 							?>
 									<tr <?php if ($cnt % 2 == 0) {
 											echo "";
@@ -370,7 +370,7 @@ include_once $inc_adm_hdr;
 								</td>
 							</tr>
 							<?php
-							$disppg = funcDispPag($conn, 'links', $loc, $sqrysubtopics_mst1, $rowsprpg, $cntstart, $pgnum);
+							$disppg = funcDispPag($conn, 'links', $loc, $sqryexam_subcategory_mst1, $rowsprpg, $cntstart, $pgnum);
 							$colspanval = $clspn_val + 2;
 							if ($disppg != "") {
 								$disppg = "<br><tr><td colspan='$colspanval' align='center' >$disppg</td></tr>";

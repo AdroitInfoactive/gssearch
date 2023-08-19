@@ -20,14 +20,14 @@ Company : Adroit
 /*****header link********/
 $pagemncat = "Setup";
 $pagecat = "Product Group";
-$pagenm = "subtopics";
+$pagenm = "Exam Subcategory";
 /*****header link********/
 global $gmsg;
-if (isset($_POST['btnsubtopicssbmt']) && (trim($_POST['btnsubtopicssbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
+if (isset($_POST['btnexam_subcategorysbmt']) && (trim($_POST['btnexam_subcategorysbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
 	include_once "../includes/inc_fnct_fleupld.php";
-	include_once "../database/iqry_subtopics_mst.php";
+	include_once "../database/iqry_exam_subcategory_mst.php";
 }
-$rd_crntpgnm = "view_subtopics.php";
+$rd_crntpgnm = "view_exam_subcategory.php";
 $clspn_val = "4";
 ?>
 <!-- <link href="froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
@@ -112,12 +112,12 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Add Sub Topics</h1>
+					<h1 class="m-0 text-dark">Add Exam Subcategory</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Add Sub Topics</li>
+						<li class="breadcrumb-item active">Add Exam Subcategory</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
@@ -161,28 +161,28 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 						<div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
-									<label>Main Topics *</label>
+									<label>Exam Category *</label>
 								</div>
 								<div class="col-sm-9">
 									<?php
 									$sqryprodmncat_mst = "SELECT 
-									topicsm_id,topicsm_name						
+									prodmnexmsm_id,prodmnexmsm_name						
 								from 
-									 topics_mst 
+									 prodmnexms_mst 
 								where	 
-									 topicsm_sts = 'a'
+									 prodmnexmsm_sts = 'a'
 								 order by
-									topicsm_name";
+									prodmnexmsm_name";
 									$rsprodmncat_mst = mysqli_query($conn, $sqryprodmncat_mst);
 									$cnt_prodmncat = mysqli_num_rows($rsprodmncat_mst);
 									?>
 									<select name="lstprodcat" id="lstprodcat" class="form-control" onchange="get_admsn_dtls();">
-										<option value="">--Select Main Topics--</option>
+										<option value="">--Select Exam Category--</option>
 										<?php
 										if ($cnt_prodmncat > 0) {
 											while ($rowsprodmncat_mst = mysqli_fetch_assoc($rsprodmncat_mst)) {
-												$catid = $rowsprodmncat_mst['topicsm_id'];
-												$catname = $rowsprodmncat_mst['topicsm_name'];
+												$catid = $rowsprodmncat_mst['prodmnexmsm_id'];
+												$catname = $rowsprodmncat_mst['prodmnexmsm_name'];
 												?>
 												<option value="<?php echo $catid; ?>"><?php echo $catname; ?></option>
 												<?php
@@ -296,7 +296,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 							</div>
 						</div>
 						<p class="text-center">
-							<input type="Submit" class="btn btn-primary" name="btnsubtopicssbmt" id="btnsubtopicssbmt" value="Submit">
+							<input type="Submit" class="btn btn-primary" name="btnexam_subcategorysbmt" id="btnexam_subcategorysbmt" value="Submit">
 							&nbsp;&nbsp;&nbsp;
 							<input type="reset" class="btn btn-primary" name="btnprodcatreset" value="Clear" id="btnprodcatreset">
 							&nbsp;&nbsp;&nbsp;

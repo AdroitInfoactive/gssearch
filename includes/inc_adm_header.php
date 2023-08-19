@@ -96,6 +96,22 @@ error_reporting(0);
 									</a>
 								</li>
 								<li class="nav-item">
+									<a href="view_exam_subcategory.php" class="nav-link <?php if ($pagenm == "Exam Subcategory") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Exam Subcategory</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="view_exam_type.php" class="nav-link <?php if ($pagenm == "Exam Type") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Exam Type</p>
+									</a>
+								</li>
+								<li class="nav-item">
 									<a href="view_years.php" class="nav-link <?php if ($pagenm == "years") {
 										echo "active";
 									} ?>">
