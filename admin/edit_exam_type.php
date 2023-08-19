@@ -26,7 +26,7 @@ $pagenm = "Exam Type";
 if (
     isset($_POST['btnedtexams']) && ($_POST['btnedtexams'] != "") &&
     isset($_POST['txtname']) && ($_POST['txtname'] != "") &&
-    isset($_POST['lstprdctcat']) && (trim($_POST['lstprdctcat']) != "") &&
+  
     isset($_POST['hdnbrndid']) && ($_POST['hdnbrndid'] != "") &&
     isset($_POST['txtprior']) && ($_POST['txtprior'] != "")
 ) {
