@@ -19,15 +19,15 @@ Company : Adroit
  ************************************************************/
 /*****header link********/
 $pagemncat = "Setup";
-$pagecat = "Downloads";
-$pagenm = "Downloads";
+$pagecat = "exam_type";
+$pagenm = "Exam Type";
 /*****header link********/
 global $gmsg;
 if (isset($_POST['btnadddwnlds']) && (trim($_POST['btnadddwnlds']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprior']) && (trim($_POST['txtprior']) != "")) {
     include_once "../includes/inc_fnct_fleupld.php"; // For uploading files 
     include_once "../database/iqry_dwnld_dtl.php";
 }
-$rd_crntpgnm = "view_downloads.php";
+$rd_crntpgnm = "view_exam_type.php";
 $clspn_val = "4";
 ?>
 <script language="javaScript" type="text/javascript" src="js/ckeditor.js"></script>
@@ -103,12 +103,12 @@ include_once('../includes/inc_fnct_ajax_validation.php');
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Add Downloads</h1>
+                    <h1 class="m-0 text-dark">Add  Exam Type</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Add Downloads</li>
+                        <li class="breadcrumb-item active">Add  Exam Type</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->

@@ -16,12 +16,12 @@ include_once '../includes/inc_folder_path.php'; //Floder Path
 /************************************************************/
 global $id, $pg, $countstart, $fldnm;
 $fldnm = $gbrnd_upldpth;
-$rd_crntpgnm = "view_downloads.php";
-$rd_vwpgnm = "view_detail_recruiters.php";
+$rd_crntpgnm = "view_exam_type.php";
+// $rd_vwpgnm = "view_detail_recruiters.php";
 /*****header link********/
 $pagemncat = "Setup";
-$pagecat = "Downloads";
-$pagenm = "Downloads";
+$pagecat = "exam_type";
+$pagenm = "Exam Type";
 /*****header link********/
 if (
     isset($_POST['btnedtdwnlds']) && ($_POST['btnedtdwnlds'] != "") &&
@@ -61,7 +61,7 @@ $cntbrnd_mst  = mysqli_num_rows($srsbrnd_mst);
 if ($cntbrnd_mst > 0) {
     $rowsbrnd_mst = mysqli_fetch_assoc($srsbrnd_mst);
 } else {
-    header('Location: view_downloads.php');
+    header('Location: view_exam_type.php');
     exit;
 }
 // $val = glb_func_chkvl($_REQUEST['val']);
@@ -137,12 +137,12 @@ include_once $inc_adm_lftlnk;
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Edit Downloads</h1>
+                    <h1 class="m-0 text-dark">Edit  Exam Type</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Edit Downloads</li>
+                        <li class="breadcrumb-item active">Edit  Exam Type</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->

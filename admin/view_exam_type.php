@@ -18,15 +18,15 @@ Company : Adroit
  ************************************************************/
 global $msg, $loc, $rowsprpg, $dispmsg, $disppg;
 $clspn_val = "5";
-$rd_adpgnm = "add_downloads.php";
-$rd_edtpgnm = "edit_downloads.php";
-$rd_crntpgnm = "view_downloads.php";
+$rd_adpgnm = "add_exam_type.php";
+$rd_edtpgnm = "edit_exam_type.php";
+$rd_crntpgnm = "view_exam_type.php";
 $rd_vwpgnm = "view_download_details.php";
 $loc = "";
 /*****header link********/
 $pagemncat = "Setup";
-$pagecat = "Downloads";
-$pagenm = "Downloads";
+$pagecat = "exam_type";
+$pagenm = "Exam Type";
 /*****header link********/
 if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
     $dchkval = substr($_POST['hdnchksts'], 1);
@@ -41,7 +41,7 @@ if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
 if (($_POST['hdnchkval'] != "") && isset($_REQUEST['hdnchkval'])) {
     $dchkval = substr($_POST['hdnchkval'], 1);
     $did     = glb_func_chkvl($dchkval);
-    $delsts = funcDelAllRec('dwnld_dtl', 'dwnld_id', $did);
+    $delsts = funcDelAllRec($conn,'dwnld_dtl', 'dwnld_id', $did);
 
     if ($delsts == 'y') {
         $msg = "<font color=red>Record deleted successfully</font>";
@@ -129,13 +129,13 @@ include_once 'script.php';
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">View All
-                            Downloads</h1>
+                            Exam Type</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">View All
-                                Downloads</li>
+                            Exam Type</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

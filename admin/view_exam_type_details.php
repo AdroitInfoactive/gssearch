@@ -18,13 +18,13 @@ Purpose :
 Company : Adroit
  ************************************************************/
 global $id, $pg, $countstart;
-$rd_crntpgnm = "view_downloads.php";
-$rd_edtpgnm = "edit_downloads.php";
+$rd_crntpgnm = "view_exam_type.php";
+$rd_edtpgnm = "edit_exam_type.php";
 $clspn_val = "4";
 /*****header link********/
 $pagemncat = "Setup";
-$pagecat = "Downloads";
-$pagenm = "Downloads";
+$pagecat = "exam_type";
+$pagenm = "Exam Type";
 /*****header link********/
 if (isset($_REQUEST['vw']) && (trim($_REQUEST['vw']) != "") && isset($_REQUEST['pg']) && (trim($_REQUEST['pg']) != "") && isset($_REQUEST['countstart']) && (trim($_REQUEST['countstart']) != "")) {
     $id = glb_func_chkvl($_REQUEST['vw']);
@@ -67,12 +67,12 @@ if (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y")) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">View Downloads</h1>
+                    <h1 class="m-0 text-dark">View  Exam Type</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">View Downloads</li>
+                        <li class="breadcrumb-item active">View  Exam Type</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
