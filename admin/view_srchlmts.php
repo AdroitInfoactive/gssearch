@@ -220,7 +220,7 @@ include_once $inc_adm_hdr;
 								&nbsp;&nbsp;&nbsp;
 								<input name="button" type="button" class="btn btn-primary" onClick="srch()" value="Search">
 								<a href="<?php echo $rd_crntpgnm; ?>" class="btn btn-primary">Refresh</a>
-								<button type="submit" class="btn btn-primary" onClick="addnew();">+ Add</button>
+								<!-- <button type="submit" class="btn btn-primary" onClick="addnew();">+ Add</button> -->
 							</div>
 						</div>
 					</div>
@@ -242,7 +242,7 @@ include_once $inc_adm_hdr;
 								<td width="21%" align="left"><strong>Name</strong></td>
 								<!-- <td width="15%"align="left"><strong>Image</strong></td>
 								<td width="15%"  align="center"><strong>Type</strong></td> -->
-								<td width="9%" align="center"><strong>Rank</strong></td>
+								<td width="9%" align="center"><strong>Count</strong></td>
 								<td width="6%" align="center"><strong>Edit</strong></td>
 								<td width="7%" align="center"><strong>
 										<input type="checkbox" name="Check_ctr" id="Check_ctr" value="yes" onClick="Check(document.frmaddsrchlmts.chksts,'Check_ctr','hdnallval')"></strong>
@@ -253,7 +253,7 @@ include_once $inc_adm_hdr;
 							</tr>
 							<?php
 							$sqryprodmcat_mst1 = "select 
-									  	srchlmt_id,srchlmt_name,srchlmt_sts,srchlmt_prty				       		
+									  	srchlmt_id,srchlmt_name,srchlmt_sts,srchlmt_count,srchlmt_prty				       		
 							       from 
 								   		srchlmts_mst"; 
 							if (isset($_REQUEST['val']) && $_REQUEST['val'] != "") {
@@ -276,9 +276,9 @@ include_once $inc_adm_hdr;
 									$pgval_srch	= $pgnum . $loc;
 									$db_catid	= $srowprodcat_mst['srchlmt_id'];
 									$db_catname	= $srowprodcat_mst['srchlmt_name'];
-									// $db_dplytyp	= $srowprodcat_mst['srchlmt_dsplytyp'];
+									$db_cnt	= $srowprodcat_mst['srchlmt_count'];
 									$db_sts		= $srowprodcat_mst['srchlmt_sts'];
-									$db_prty	= $srowprodcat_mst['srchlmt_prty'];
+									// $db_prty	= $srowprodcat_mst['srchlmt_prty'];
 									//$db_mncatimg = $srowprodmcat_mst['prodmn_catm_smlimg'];
 									//$db_mncatbnrimg = $srowprodcat_mst['prodmn_catm_bnrimg'];
                   ?> 
@@ -292,7 +292,7 @@ include_once $inc_adm_hdr;
                     <a href="<?php echo $rd_vwpgnm; ?>?vw=<?php echo $db_catid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="links"><?php echo $db_catname; ?></a>
                   </td>
                   <!-- <td align="center"><?php echo funcDsplyTyp($db_dplytyp); ?></td> -->
-                  <td align="center"><?php echo $db_prty; ?></td>
+                  <td align="center"><?php echo $db_cnt; ?></td>
                   <td align="center">
                     <a href="<?php echo $rd_edtpgnm; ?>?edtpdctid=<?php echo $db_catid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="contentlinks">Edit</a>
                   </td>
