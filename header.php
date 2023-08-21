@@ -1,13 +1,15 @@
 <?php
 error_reporting(0);
 session_start();
+/* echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>"; */
 include_once 'includes/inc_config.php'; //Making paging validation	
 include_once $inc_user_cnctn; //Making database Connection
 include_once $inc_user_usr_fnctn; //checking for session	
 include_once $inc_user_fldr_pth;
-if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login')) {
-  // write new code to check the login
-  // include_once "database/iqry_crsenqry_mst.php";
+if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && isset($_POST['txtpswd']) && (trim($_POST['txtpswd']) != '') && isset($_POST['txtemail']) && (trim($_POST['txtemail']) != '')) {
+  include_once "database/sqry_mbr_mst.php";
 }
 if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Register') && isset($_POST['txtemail_rgstr']) && (trim($_POST['txtemail_rgstr']) != '') && isset($_POST['txtpswd_rgstr']) && (trim($_POST['txtpswd_rgstr']) != '') && isset($_POST['txtcnfpswd_rgstr']) && (trim($_POST['txtcnfpswd_rgstr']) != '')) {
   // write new code to check the login
@@ -16,6 +18,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
   <!--====== Required meta tags ======-->
   <meta charset="utf-8">
@@ -103,17 +106,40 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
               <button><i class="fa fa-search"></i></button>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="header_bottom_login">
-              <ul>
-                <li><a href="" data-toggle="modal" data-target="#registerModal">Create An Account</a></li>
-                <li>
-                  <!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal"> Login </button> -->
-                  <a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i> Login</a>
+          <?php
+          if ($_SESSION['sesmbrid'] == '') { ?>
+            <div class="col-lg-4">
+              <div class="header_bottom_login">
+                <ul>
+                  <li><a href="" data-toggle="modal" data-target="#registerModal">Create An Account</a></li>
+                  <li>
+                    <!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal"> Login </button> -->
+                    <a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
+                      Login</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <?php
+          } else { ?>
+            <ul class="topLinks" id="userMenu">
+              <li class="dropdown show"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                  Welcome, <span class="user"><?php echo $_SESSION['sesmbrname']; ?></span></span><i class="fa fa-user" style="color:#aa8c2c"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right show" role="menu" x-placement="bottom-end"
+                  style="position: absolute; transform: translate3d(-134px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
+                  <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
+                  </li>
+                  <li><a href="<?php echo $rtpth; ?>change-password">Change
+                      Password</a></li>
+                  </li>
+                  <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
+                  </ul>
                 </li>
               </ul>
-            </div>
-          </div>
+            <?php
+          }
+          ?>
         </div>
       </div>
     </div>
