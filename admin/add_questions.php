@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include_once '../includes/inc_nocache.php'; // Clearing the cache information
 include_once "../includes/inc_adm_session.php"; //checking for session
 include_once "../includes/inc_connection.php"; //Making database Connection
