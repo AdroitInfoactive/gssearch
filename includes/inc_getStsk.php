@@ -24,6 +24,24 @@ if(isset($_REQUEST['mncatval']) && (trim($_REQUEST['mncatval']) != ""))
 		<?php
 	}
 }
+// ------------------------- To get related Exam sub Category-------------------
+if (isset($_REQUEST['lastexamnm']) && (trim($_REQUEST['lastexamnm']) != "")) {
+	// creating Drop Down for sub category
+	$result = "";
+	$exmcatid = glb_func_chkvl($_REQUEST['lastexamnm']);
+ 	$sqryexamscat_mst = "SELECT exam_subcategorym_id,exam_subcategorym_name from exam_subcategory_mst	 where exam_subcategorym_sts = 'a' and exam_subcategorym_prodmnexmsm_id = $exmcatid group by exam_subcategorym_id order by exam_subcategorym_prty asc";
+	//  echo $sqrytopic_mst; exit;
+	$srsexmscat_mst = mysqli_query($conn, $sqryexamscat_mst);
+	$cntprodcat_inc = mysqli_num_rows($srsexmscat_mst);
+	$dispstr = "";
+	?>
+	<option value disabled selected>Select Exam Subcategory</option>
+	<?php
+	while ($prgrs = mysqli_fetch_array($srsexmscat_mst)) { ?>
+		<option value="<?php echo $prgrs["exam_subcategorym_id"]; ?>"><?php echo $prgrs["exam_subcategorym_name"]; ?></option>
+		<?php
+	}
+}
 // --------------------------------------------------------------------------
 // ------------------------- To get related exec sub subtopics-------------------
 if (isset($_REQUEST['topicval']) && (trim($_REQUEST['topicval']) != "")) {
