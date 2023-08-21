@@ -152,7 +152,15 @@ error_reporting(0);
 										<p>Question Bulk Upload</p>
 									</a>
 								</li>
-
+								<li class="nav-item">
+									<a href="view_srchlmts.php" class="nav-link <?php if ($pagenm == "Search") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Search Limitations</p>
+									</a>
+								</li>
+								
 								<!-- <li class="nav-item">
 									<a href="view_all_stdtestmnl.php" class="nav-link <?php if ($pagenm == "Student Testimonial") {
 										echo "active";
