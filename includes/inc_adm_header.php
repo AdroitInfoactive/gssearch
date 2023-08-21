@@ -143,7 +143,7 @@ error_reporting(0);
 										<p>Add Questions</p>
 									</a>
 								</li>
-<<<<<<< HEAD
+
 								<li class="nav-item">
 									<a href="add_blkqns.php" class="nav-link <?php if ($pagenm == "Question Bulk Upload") {
 										echo "active";
@@ -153,17 +153,7 @@ error_reporting(0);
 									</a>
 								</li>
 
-								<li class="nav-item">
-=======
-								<!-- <li class="nav-item">
->>>>>>> a2f2a36f7f1b0fa1ecf32b9655aed9636b37b00d
-									<a href="view_product_category.php" class="nav-link <?php if ($pagenm == "Category") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p>Category</p>
-									</a>
-								</li>
+							
 								<li class="nav-item">
 									<a href="view_product_subcategory.php" class="nav-link <?php if ($pagenm == "Subcategory") {
 										echo "active";
