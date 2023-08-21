@@ -15,7 +15,13 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 		$srsmbr_mst = mysqli_query($conn, $sqrymbr_mst);
 		$cntmbr_mst = mysqli_num_rows($srsmbr_mst);
 		if ($cntmbr_mst > 0) {
-			$greg_msg = "Duplicate email id, account not created";
+			?>
+			<script language="javascript" type="text/javascript">
+				alert("User account already exist with the provided email address");
+				location.href = "<?php echo $rtpth . 'home' ?>";
+			</script>
+			<?php
+			// $greg_msg = "Duplicate email id, account not created";
 		} else {
 			$iqrymbr_mst = "INSERT into mbr_mst(mbrm_name, mbrm_emailid,mbrm_pwd,mbrm_mobile, mbrm_ipadrs, mbrm_sts,mbrm_crtdon,mbrm_crtdby)values('$name','$email','$pwd','$mobile','$ipadrs', '$sts','$dt','$email')";
 			$irsmbr_mst = mysqli_query($conn, $iqrymbr_mst);
@@ -72,6 +78,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 				$id = mysqli_insert_id($conn);
 
 				$_SESSION['sesmbremail'] = $email; //assing value of user id to admin session
+				$_SESSION['sesmbrname'] = $name; //assing value of user id to admin session
 				$_SESSION['sesmbrid'] = $id; //assing value of user id to admin session										
 				//echo "$$$$". $id;exit;
 				?>
@@ -82,7 +89,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 				<?php
 			}
 			exit();
-			$greg_msg = "Congratulations <br> Your account has been created successfully";
+			// $greg_msg = "Congratulations <br> Your account has been created successfully";
 		}
 	}
 } else {

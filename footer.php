@@ -50,7 +50,8 @@ require_once('settings.php');
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Not a member yet? <a href="" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" class="text-info">Register</a>.</div>
+        <div class="signup-section">Not a member yet? <a href="" data-toggle="modal" data-target="#registerModal"
+            data-dismiss="modal" class="text-info">Register</a>.</div>
       </div>
     </div>
   </div>
@@ -99,7 +100,8 @@ require_once('settings.php');
           </form>
           <div class="text-center text-muted delimiter">or use a Google Account</div>
           <a class="login-with-google-btn"
-            href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i class="fab fa-google-plus-g"></i> Register with Google</a>
+            href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i
+              class="fab fa-google-plus-g"></i> Register with Google</a>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
@@ -160,18 +162,16 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
 <script type="text/javascript">
-  /* $(document).ready(function () {
-    $('#signInGl').click(function () {
-      $(this).attr('href', 'https://accounts.google.com/o/oauth2/auth?scope=' +
-        'https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&' +
-        'state=generate_a_unique_state_value&' +
-        'redirect_uri=https://www.gssearch.in/gsregister.php&' +
-        'response_type=code&' +
-        'client_id=244983222611-hivb2107c2shd67f2jr6t9s1kgpsog90.apps.googleusercontent.com&' +
-        'access_type=offline');
-      return true; // Continue with the new href.
+  $(document).ready(function () {
+
+    $('.js-btn-tooltip').tooltip();
+    $('.js-btn-tooltip--custom').tooltip({
+      customClass: 'tooltip-custom'
     });
-  }); */
+    $('.js-btn-tooltip--custom-alt').tooltip({
+      customClass: 'tooltip-custom-alt'
+    });
+  });
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';
   lgnrules[1] = 'txtemail|email|Enter Email Id only';
