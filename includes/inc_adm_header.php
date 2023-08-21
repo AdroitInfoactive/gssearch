@@ -153,55 +153,17 @@ error_reporting(0);
 									</a>
 								</li>
 
-							
-								<li class="nav-item">
-									<a href="view_product_subcategory.php" class="nav-link <?php if ($pagenm == "Subcategory") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p>Subcategory</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="view_all_news.php" class="nav-link <?php if ($pagenm == "Updates / Notifications") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p>Updates / Notifications</p>
-									</a>
-								</li>
-								<li class="nav-item">
+								<!-- <li class="nav-item">
 									<a href="view_all_stdtestmnl.php" class="nav-link <?php if ($pagenm == "Student Testimonial") {
 										echo "active";
 									} ?>">
 										<i class="far fa-dot-circle nav-icon"></i>
 										<p>Student Testimonial</p>
 									</a>
-								</li>
-								<li class="nav-item">
-									<a href="product.php" class="nav-link <?php if ($pagenm == "Downloads Category") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p>Downloads Category</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="view_downloads.php" class="nav-link <?php if ($pagenm == "Downloads") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p> Downloads</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="vw_all_achievements.php" class="nav-link <?php if ($pagenm == "Achievements") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p> Achievements</p>
-									</a>
 								</li> -->
+							
+								
+							
 							</ul>
 						</li>
 
@@ -236,18 +198,7 @@ error_reporting(0);
 
 							</ul>
 						</li>
-						<!-- My Account Ends -->
-						<!-- Size Grid -->
-						<!-- <li class="nav-item has-treeview">
-														<a href="size-grid.php" class="nav-link">
-																<i class="far fa-circle nav-icon"></i>
-																<p>
-																		Size Grid
-																		<i class="right fas fa-angle-left"></i>
-																</p>
-														</a>
-												</li> -->
-						<!-- Sixe Grid End -->
+					
 
 					</ul>
 				</nav>
@@ -256,8 +207,5 @@ error_reporting(0);
 			<!-- /.sidebar -->
 		</aside>
 
-		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-
-			<!-- /.content-header -->
+			
