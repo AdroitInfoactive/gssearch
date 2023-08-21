@@ -74,7 +74,7 @@ if (isset($_REQUEST['txtsrchval']) && (trim($_REQUEST['txtsrchval']) != "")) {
         $sqrystdtestmnl_mst1 .= " where exam_name like '%$txtsrchval%'";
     }
 }
-$sqrystdtestmnl_mst1 = $sqrystdtestmnl_mst1;
+// $sqrystdtestmnl_mst1 = $sqrystdtestmnl_mst1;
 $sqrystdtestmnl_mst = $sqrystdtestmnl_mst1 . "order by exam_name asc limit $offset,$rowsprpg";
 $srsnews_mst = mysqli_query($conn, $sqrystdtestmnl_mst1);
 $serchres = mysqli_num_rows($srsnews_mst);
