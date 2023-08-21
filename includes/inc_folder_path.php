@@ -1,5 +1,7 @@
 <?php
 global $a_phtgalspath, $u_phtgalspath, $u_phtgalspath, $a_dprt_bnrfldnm, $u_dprt_bnrfldnm;
+$a_gadmxddlsclm = '../xls/upload/';
+$u_gadmxddlsclm = 'xls/upload/';
 
 $a_phtgalspath = '../photogallery/small/';
 $u_phtgalspath = 'photogallery/small/';

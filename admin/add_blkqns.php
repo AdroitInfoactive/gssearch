@@ -19,7 +19,7 @@ include_once "../includes/inc_config.php";
 /*****header link********/
 
 $pagemncat = "Setup";
-$pagecat = "Product Group";
+$pagecat = "";
 $pagenm = "Question Bulk Upload";
 /*****header link********/
 global $gmsg,$sts,$lin;		 
@@ -81,14 +81,14 @@ include_once $inc_adm_hdr;
 
 <?php
 if($sts == "y"){
-echo "<div class='alert alert-info'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Products Added Successfully</div>";						
+echo "<div class='alert alert-info'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Questions Added Successfully</div>";						
 }else if($sts == "n"){
 echo "<div class='alert alert-info'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Error record not saved. Line Number $lin</div>";						
 
 
 
 }else if($sts == "d"){
-echo "<div class='alert alert-info'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Products Not  Added Duplicate Code Exists  Line Number $lin</div>";						
+echo "<div class='alert alert-info'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Questions Not  Added Duplicate Question Name Exists  Line Number $lin</div>";						
 
 
 
@@ -103,7 +103,7 @@ enctype="multipart/form-data" onSubmit="return performCheck('frmaddprodcat', rul
 <div class="row justify-content-center align-items-center">
 
 <div class="col-md-12">
-<p align="right" ><a href="sample_import.xlsm" download="sample_import.xlsm">Download Sample Excel File</a></p>
+<p align="right" ><a href="sample gs search.xlsm" download="sample gs search.xlsm">Download Sample Excel File</a></p>
 <div class="row mb-2 mt-2">
 <div class="col-sm-3"> <label>1 File (Upload only xls file)*</label> </div>
 <div class="col-sm-6"><input type="file" class="form-control" id="fleblkupld" name="fleblkupld" required class="form-control">

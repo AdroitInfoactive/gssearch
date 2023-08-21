@@ -24,7 +24,7 @@ $clspn_val = "4";
 /*****header link********/
 $pagemncat = "Setup";
 $pagecat = "Product Group";
-$pagenm = "addques";
+$pagenm = "Questions";
 /*****header link********/
 if (isset($_POST['btneaddquessbmt']) && (trim($_POST['btneaddquessbmt']) != "") && isset($_POST['txtque']) && (trim($_POST['txtque']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
 	include_once "../includes/inc_fnct_fleupld.php";

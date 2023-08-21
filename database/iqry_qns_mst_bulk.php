@@ -30,14 +30,14 @@ if (
     $adm_dtls = "," . "'$dt'" . "," . "'$ses_admin'";
     $updtSlno = 0;
     $handle = fopen($ssource, "r");
-    $flg = move_uploaded_file($ssource, $gadmxddlsclm . $sdest);
+    $flg = move_uploaded_file($ssource, $a_gadmxddlsclm . $sdest);
     //header('Content-Type: text/plain');
     require('../spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
     require('../spreadsheet-reader-master/SpreadsheetReader.php');
     date_default_timezone_set('UTC');
     //	$xlfle = $gadmxlsclm.$sdest;exit;
     //	$finm = $gadmxlsclm.$flenm;exit;
-    $Spreadsheet = new SpreadsheetReader($gadmxddlsclm . $sdest);
+    $Spreadsheet = new SpreadsheetReader($a_gadmxddlsclm . $sdest);
     $Sheets = $Spreadsheet->Sheets();
     $i = 0;
     // $c = 1;
@@ -52,27 +52,29 @@ if (
             if ($d > 1) {
 
               $c;
-              $examnm = $filesop[0];
-              $year = $filesop[1];
-              $topic = $filesop[2];
-              $sub_topic = $filesop[3];
-              $qnsnm = $filesop[4];
-            
-              $opt1 = $filesop[5];
-              $opt2 = $filesop[6];
-              $opt3 = $filesop[7];
-              $opt4 = $filesop[8];
-              $corect_ans = $filesop[9];
-              $explntion = $filesop[10];
+              $examnm = glb_func_chkvl(addslashes($filesop[0]));
+              $exmsubnm = $filesop[1];
+              $exmtype = $filesop[2];
+              $year = $filesop[3];
+              $topic = $filesop[4];
+              $sub_topic = $filesop[5];
+              $qnsnm = $filesop[6];
 
-              $rank = $filesop[11];
-              $status = $filesop[12];
+              $opt1 = glb_func_chkvl(addslashes($filesop[7]));
+              $opt2 = glb_func_chkvl(addslashes($filesop[8]));
+              $opt3 = glb_func_chkvl(addslashes($filesop[9]));
+              $opt4 = glb_func_chkvl(addslashes($filesop[10]));
+              $corect_ans = $filesop[11];
+              $explntion = glb_func_chkvl(addslashes($filesop[12]));
+              $tag = $filesop[13];
+              $rank = $filesop[14];
+              $status = $filesop[15];
 
-              if ($ses_admin != '') {
-                $sts = 'i';
+              if ($status == 'Active') {
+                $sts = 'a';
 
               } else {
-                $sts = 'a';
+                $sts = 'i';
 
               }
 
@@ -89,6 +91,31 @@ if (
 
                 }
               }
+              if ($exmsubnm != '') //prod main scat name
+              {
+                $sqlexmsubcat = "SELECT exam_subcategorym_id,exam_subcategorym_prodmnexmsm_id from exam_subcategory_mst
+                      where
+                      exam_subcategorym_name = '$exmsubnm' and exam_subcategorym_prodmnexmsm_id = '$exam_id' ";
+                $resscatexm = mysqli_query($conn, $sqlexmsubcat);
+                $numscatexm = mysqli_num_rows($resscatexm);
+                if ($numscatexm > 0) {
+                  $rowsexamsubcat = mysqli_fetch_array($resscatexm);
+                  $examscat_id = $rowsexamsubcat['exam_subcategorym_id'];
+
+                }
+              }
+              if ($exmtype != '') //year id
+              {
+                $sqlexm_type = "SELECT exam_id from exam_typ where exam_name = '$exmtype' ";
+                $resutexm_type = mysqli_query($conn, $sqlexm_type);
+                $nmmexmtyp = mysqli_num_rows($resutexm_type);
+                if ($nmmexmtyp > 0) {
+                  $rwsexam_type = mysqli_fetch_array($resutexm_type);
+                  $exmtype_id = $rwsexam_type['exam_id'];
+
+                }
+              }
+
               if ($year != '') //year id
               {
                 $sqlyear = "SELECT yearsm_id from years_mst
@@ -139,8 +166,7 @@ if (
                   $typ = 3;
                 } elseif ($corect_ans == 'option 4') {
                   $typ = 4;
-                }
-                else {
+                } else {
                   $typ = 0;
                 }
               } else {
@@ -152,22 +178,23 @@ if (
 
               if ($qnsnm != '') {
 
-                $sqryprod_mst = "SELECT  addquesm_id,addquesm_prodmnexmsm_id,addquesm_yearsm_id,addquesm_topicsm_id,addquesm_subtopicsm_id from  addques_mst where  addquesm_qnm='$qnsnm'";
+              echo   $sqryprod_mst = "SELECT  addquesm_id,addquesm_prodmnexmsm_id,addquesm_exmscat_id,addquesm_typ_id,addquesm_yearsm_id,addquesm_topicsm_id,addquesm_subtopicsm_id from  addques_mst where  addquesm_qnm='$qnsnm' and addquesm_prodmnexmsm_id = '$exam_id' and addquesm_yearsm_id = '$year_id' and addquesm_topicsm_id = '$topic_id' and addquesm_subtopicsm_id ='$sub_topic_id' and addquesm_exmscat_id = '$examscat_id' and addquesm_typ_id = '$exmtype_id'";
                 $srsprod_mst = mysqli_query($conn, $sqryprod_mst);
                 $count1 = mysqli_num_rows($srsprod_mst);
                 $rwsprdid = mysqli_fetch_array($srsprod_mst);
                 if ($count1 > 0) {
                   $strprodid = $rwsprdid['addquesm_id'];
                   $flag = 1;
+                  $line=$d;
                 }
                 if ($flag != 1) {
 
 
 
-                  /**********************Product*****************************/
+                  /**********************Questions*****************************/
                   $iqryprod_mst = "INSERT into addques_mst(
-                  addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_prty, addquesm_sts, addquesm_crtdon, addquesm_crtdby)values(
-                '$qnsnm','$exam_id','$year_id','$topic_id','$sub_topic_id','$opt1','$opt2','$opt3','$opt4','$typ','$explntion','$rank','$sts','$dt','admin')";
+                  addquesm_qnm, addquesm_prodmnexmsm_id,addquesm_exmscat_id,addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln,addquesm_qns_typ,addquesm_qns_tag, addquesm_prty, addquesm_sts, addquesm_crtdon, addquesm_crtdby)values(
+                '$qnsnm','$exam_id','$examscat_id','$exmtype_id','$year_id','$topic_id','$sub_topic_id','$opt1','$opt2','$opt3','$opt4','$typ','$explntion',1,'$tag','$rank','$sts','$dt','admin')";
 
                   // echo 	$iqryprod_mst;exit;
                   $irsprod_mst = mysqli_query($conn, $iqryprod_mst) or die(mysqli_error($conn));
@@ -194,12 +221,7 @@ if (
           $d++;
 
         } //change content loop close
-      } 
-      
-      
-      
-    
-      else {
+      } else {
 
         // skip 3rd sheet
       }
@@ -211,12 +233,11 @@ if (
       echo "location.href='add_blkqns.php?sts=y'";
       echo "</script>";
       exit;
-    }
-     else {
+    } else {
       $gmsg = "Question Not Added Duplicate Question Name Exists";
 
       echo "<script>";
-      echo "location.href='add_blkqns.php?sts=d'";
+      echo "location.href='add_blkqns.php?sts=d&lin=$line'";
       echo "</script>";
       exit;
     }

@@ -332,6 +332,7 @@ include_once $inc_adm_hdr;
 									$pgval_srch = $pgnum . $loc;
 									$db_catid = $srowaddques_mst['addquesm_id'];
 									$db_qunname = strip_tags(html_entity_decode($srowaddques_mst['addquesm_qnm']));
+								
 									$db_exmsmname = $srowaddques_mst['prodmnexmsm_name'];
 									$db_yearsname = $srowaddques_mst['yearsm_name'];
 									$db_prty = $srowaddques_mst['addquesm_prty'];
@@ -350,7 +351,7 @@ include_once $inc_adm_hdr;
 										</td>
 										<td>
 											<a href="<?php echo $rd_vwpgnm; ?>?vw=<?php echo $db_catid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>"
-												class="links"><?php echo $db_qunname; ?></a>
+												class="links">	<?php echo substr($db_qunname, 0, 100); ?>..</a>
 										</td>
 										<td>
 											<?php echo $db_exmsmname; ?>

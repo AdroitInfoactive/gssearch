@@ -40,7 +40,7 @@ error_reporting(0);
 			<!-- Brand Logo -->
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 				<div class="image">
-					<img src="<?php echo $rtpth; ?>assets/images/logos/ihm-logo-main.png" class="elevation-2"
+					<img src="<?php echo $rtpth; ?>assets/images/logos/" class="elevation-2"
 						alt="G S Search" style="background-color: white">
 				</div>
 				<div class="info">
@@ -136,13 +136,22 @@ error_reporting(0);
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="view_questions.php" class="nav-link <?php if ($pagenm == "Add Questions") {
+									<a href="view_questions.php" class="nav-link <?php if ($pagenm == "Questions") {
 										echo "active";
 									} ?>">
 										<i class="far fa-dot-circle nav-icon"></i>
 										<p>Add Questions</p>
 									</a>
 								</li>
+								<li class="nav-item">
+									<a href="add_blkqns.php" class="nav-link <?php if ($pagenm == "Question Bulk Upload") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Question Bulk Upload</p>
+									</a>
+								</li>
+
 								<li class="nav-item">
 									<a href="view_product_category.php" class="nav-link <?php if ($pagenm == "Category") {
 										echo "active";

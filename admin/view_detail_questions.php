@@ -20,7 +20,7 @@ Company : Adroit
 /*****header link********/
 $pagemncat = "Setup";
 $pagecat = "Product Group";
-$pagenm = "Add Questions";
+$pagenm = "Questions";
 /*****header link********/
 global $id, $pg, $countstart;
 $rd_crntpgnm = "view_questions.php";
@@ -60,7 +60,7 @@ if ($cntrecaddques_mst > 0) {
 	$rowsaddques_mst = mysqli_fetch_assoc($srsaddques_mst);
 	$db_exmsmnm = $rowsaddques_mst['prodmnexmsm_name'];
 	$db_yearsm = $rowsaddques_mst['yearsm_name'];
-	$db_qnm = strip_tags(html_entity_decode($rowsaddques_mst['addquesm_qnm']));
+	$db_qnm = html_entity_decode($rowsaddques_mst['addquesm_qnm']);
 	$db_optn1 = strip_tags(html_entity_decode($rowsaddques_mst['addquesm_optn1']));
   $db_optn2 = strip_tags(html_entity_decode($rowsaddques_mst['addquesm_optn2']));
   $db_optn3 = strip_tags(html_entity_decode($rowsaddques_mst['addquesm_optn3']));

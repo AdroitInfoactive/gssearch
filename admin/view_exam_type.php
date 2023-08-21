@@ -253,7 +253,7 @@ include_once 'script.php';
                                                 echo "";
                                             } ?>>
                                             <td><?php echo $cnt; ?></td>
-                                          >
+                                          
                                             <td>
                                                 <a href="<?php echo $rd_vwpgnm; ?>?vw=<?php echo $db_nwid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="links"><?php echo $db_nwnm; ?></a>
                                             </td>
