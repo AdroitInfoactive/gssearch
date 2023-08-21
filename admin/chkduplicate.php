@@ -75,7 +75,9 @@ if (isset($_REQUEST['addquesname']) && (trim($_REQUEST['addquesname']) != "") &&
 	$name = addslashes(glb_func_chkvl($_REQUEST['addquesname']));
 	$examnm = glb_func_chkvl($_REQUEST['exammnid']);
 	$year = glb_func_chkvl($_REQUEST['yearmnid']);
-	$sqryaddquess_mst = "SELECT addquesm_qnm from addques_mst where addquesm_prodmnexmsm_id='$examnm' and addquesm_qnm = '$name'  and addquesm_yearsm_id ='$year'"; 
+	$exmsctid = glb_func_chkvl($_REQUEST['exmsctid']);
+	$exmtypid = glb_func_chkvl($_REQUEST['exmtypid']);
+	$sqryaddquess_mst = "SELECT addquesm_qnm from addques_mst where addquesm_prodmnexmsm_id='$examnm' and addquesm_qnm = '$name'  and addquesm_yearsm_id ='$year'  and addquesm_exmscat_id ='$exmsctid' and addquesm_typ_id ='$exmtypid'"; 
 	if (isset($_REQUEST['qusid']) && ($_REQUEST['qusid'] != "")) {
 		$id = glb_func_chkvl($_REQUEST['qusid']);
 		$sqryaddquess_mst .= " and addquesm_id != $id";

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include_once '../includes/inc_config.php'; //Making paging validation	
 include_once $inc_nocache; //Clearing the cache information
 include_once $adm_session; //checking for session
@@ -33,19 +34,23 @@ if (isset($_REQUEST['vw']) && (trim($_REQUEST['vw']) != "") && isset($_REQUEST['
 	$chk = glb_func_chkvl($_REQUEST['chk']);
 }
 
- $sqryaddques_mst = "SELECT 
-addquesm_qnm,addquesm_prty,addquesm_optn1,addquesm_optn2,addquesm_optn3,addquesm_optn4,addquesm_crtans,addquesm_expln,
+$sqryaddques_mst = "SELECT 
+addquesm_qnm,addquesm_prty,addquesm_optn1,addquesm_optn2,addquesm_optn3,addquesm_optn4,addquesm_crtans,addquesm_expln,addquesm_exmscat_id,addquesm_typ_id,addquesm_qns_typ,addquesm_qns_tag,exam_name,exam_subcategorym_id,exam_subcategorym_name,addquesm_typ_id,
 if(addquesm_sts = 'a', 'Active','Inactive') as addquesm_sts,
 addquesm_prodmnexmsm_id,prodmnexmsm_name,addquesm_yearsm_id,yearsm_name,addquesm_topicsm_id,topicsm_name,addquesm_subtopicsm_id,subtopicsm_name
 from 
 addques_mst
 inner join 	prodmnexms_mst
-on		prodmnexms_mst.prodmnexmsm_id=addques_mst.addquesm_prodmnexmsm_id
+on	prodmnexmsm_id=addquesm_prodmnexmsm_id
+inner join 	exam_subcategory_mst
+on exam_subcategorym_id=addquesm_exmscat_id
+inner join 	exam_typ
+on exam_id=addquesm_typ_id
 inner join 	years_mst
 on		years_mst.yearsm_id=addques_mst.addquesm_yearsm_id
 inner join 	topics_mst
 on		topics_mst.topicsm_id=addques_mst.addquesm_topicsm_id
-inner join 	subtopics_mst
+left join 	subtopics_mst
 on		subtopics_mst.subtopicsm_id=addques_mst.addquesm_subtopicsm_id
 where 
 addquesm_id=$id"; 
@@ -64,9 +69,9 @@ if ($cntrecaddques_mst > 0) {
   $db_expln = strip_tags(html_entity_decode($rowsaddques_mst['addquesm_expln']));
   $db_topic = $rowsaddques_mst['topicsm_name'];
   $db_subtopic = $rowsaddques_mst['subtopicsm_name'];
-	// $db_cattyp = $rowsaddques_mst['addquesm_typ'];
-	// $db_dsplytyp = $rowsaddques_mst['addquesm_dsplytyp'];
-	// $db_catseottl = $rowsaddques_mst['addquesm_seotitle'];
+	$db_tag = $rowsaddques_mst['addquesm_qns_tag'];
+	$db_exmsubcatnm = $rowsaddques_mst['exam_subcategorym_name'];
+	$db_exmtyp = $rowsaddques_mst['exam_name'];
 	// $db_catseodesc = $rowsaddques_mst['addquesm_seodesc'];
 	// $db_catseokywrd = $rowsaddques_mst['addquesm_seokywrd'];
 	// $db_catseohone = $rowsaddques_mst['addquesm_seohone'];
@@ -131,49 +136,79 @@ include_once $inc_adm_lftlnk;
               <div class="row justify-content-center">
                 <div class="col-md-12">
                   <div class="form-group row">
-                    <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Exam </label>
+                    <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Exam Category</label>
                     <div class="col-sm-8">
                       <?php echo $db_exmsmnm; ?>
                     </div>
                   </div>
                 </div>
-              </div>
+             
+							<div class="col-md-12">
+                  <div class="form-group row">
+                    <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Exam Subcategory</label>
+                    <div class="col-sm-8">
+                      <?php echo $db_exmsubcatnm; ?>
+                    </div>
+                  </div>
+                </div>
+              
+							<div class="col-md-12">
+                  <div class="form-group row">
+                    <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Exam Type</label>
+                    <div class="col-sm-8">
+                      <?php echo $db_exmtyp; ?>
+                    </div>
+                  </div>
+                </div>
+								<div class="col-md-12">
               <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Year  </label>
 							<div class="col-sm-8">
 								<?php echo $db_yearsm; ?>
 							</div>
 						</div>
+								</div>
+								<div class="col-md-12">
 						<div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Question </label>
 							<div class="col-sm-8">
 								<?php echo $db_qnm; ?>
 							</div>
 						</div>
+	</div>
+	<div class="col-md-12">
 						<div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Options1</label>
 							<div class="col-sm-8">
 								<?php echo $db_optn1; ?>
 							</div>
-						</div> 
+						</div>
+	</div>
+	<div class="col-md-12"> 
             <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Options2</label>
 							<div class="col-sm-8">
 								<?php echo $db_optn2; ?>
 							</div>
 						</div>
+	</div>
+						<div class="col-md-12">
             <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Options3</label>
 							<div class="col-sm-8">
 								<?php echo $db_optn3; ?>
 							</div>
 						</div>
+						</div>
+						<div class="col-md-12">
             <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Options4</label>
 							<div class="col-sm-8">
 								<?php echo $db_optn4; ?>
 							</div>
 						</div>
+						</div>
+						<div class="col-md-12">
             <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Correct Answer</label>
 							<div class="col-sm-8">
@@ -194,23 +229,38 @@ include_once $inc_adm_lftlnk;
                 ?>
 							</div>
 						</div>
+						</div>
+						<div class="col-md-12">
             <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Explanation</label>
 							<div class="col-sm-8">
 								<?php echo $db_expln; ?>
 							</div>
 						</div>
+						</div>
+						<div class="col-md-12">
             <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Topic</label>
 							<div class="col-sm-8">
 								<?php echo $db_topic; ?>
 							</div>
 						</div>
+						</div>
+						<div class="col-md-12">
             <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Sub Topic</label>
 							<div class="col-sm-8">
 								<?php echo $db_subtopic; ?>
 							</div>
+						</div>
+						</div>
+						<div class="col-md-12">
+						<div class="form-group row">
+							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Tags </label>
+							<div class="col-sm-8">
+								<?php echo $db_tag; ?>
+							</div>
+						</div>
 						</div>
 						<!-- <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">SEO Title </label>
@@ -244,19 +294,22 @@ include_once $inc_adm_lftlnk;
 								<?php echo $db_catseohtwo; ?>
 							</div>
 						</div> -->
-
+						<div class="col-md-12">
 						<div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Rank</label>
 							<div class="col-sm-8">
 								<?php echo $db_catprty; ?>
 							</div>
 						</div>
+							</div>
+							<div class="col-md-12">
 						<div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Status </label>
 							<div class="col-sm-8">
 								<?php echo $db_catsts; ?>
 							</div>
 						</div>
+							</div>
 			  </table>
 				</td>
       </tr>

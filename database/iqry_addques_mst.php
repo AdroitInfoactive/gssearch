@@ -16,6 +16,8 @@ if (
  $ques = glb_func_chkvl(addslashes(($_POST['txtque'])));
 	$year = glb_func_chkvl($_POST['lstyear']);
 	$examnm = glb_func_chkvl(addslashes($_POST['lastexamnm']));
+	$examscatid = glb_func_chkvl(addslashes($_POST['lst_exmsubcat']));
+	$examtypid = glb_func_chkvl(addslashes($_POST['lst_exmtype']));
 	$optn1 = glb_func_chkvl(addslashes($_POST['txtopt1']));
 	$optn2 = glb_func_chkvl(addslashes($_POST['txtopt2']));
 	$optn3 = glb_func_chkvl(addslashes($_POST['txtopt3']));
@@ -26,7 +28,9 @@ if (
 	$subtopic = glb_func_chkvl($_POST['lst_subtopic']);
 	$txtprty = glb_func_chkvl($_POST['txtprty']);
 	$lststs = glb_func_chkvl($_POST['lststs']);
+	$tag = glb_func_chkvl($_POST['txttag']);
 	$crtdt = date('Y-m-d h:i:s');
+	$qnstyp='1';
  $sqryQstMstNm = "SELECT 
 	addquesm_qnm 
 	from
@@ -36,7 +40,7 @@ if (
 	$srsQstMstNm = mysqli_query($conn, $sqryQstMstNm);
 	$cntQstMstNm = mysqli_num_rows($srsQstMstNm);
   
- $iqryQstMst = "INSERT into addques_mst(addquesm_qnm,addquesm_prodmnexmsm_id,addquesm_yearsm_id,addquesm_topicsm_id,addquesm_subtopicsm_id,addquesm_optn1,addquesm_optn1Img,addquesm_optn2,addquesm_optn2Img,addquesm_optn3,addquesm_optn3Img,addquesm_optn4,addquesm_optn4Img,addquesm_crtans,addquesm_expln ,addquesm_prty,addquesm_sts,addquesm_crtdon,addquesm_crtdby) values( '$ques','$examnm','$year','$topic','$subtopic','$optn1', '$optnaimg','$optn2','$optnbimg','$optn3', '$optncimg','$optn4','$optndimg','$crtans', '$explan','$txtprty','$lststs', '$crtdt','$ses_admin')"; 
+ $iqryQstMst = "INSERT into addques_mst(addquesm_qnm,addquesm_prodmnexmsm_id,addquesm_exmscat_id,addquesm_typ_id,addquesm_yearsm_id,addquesm_topicsm_id,addquesm_subtopicsm_id,addquesm_optn1,addquesm_optn1Img,addquesm_optn2,addquesm_optn2Img,addquesm_optn3,addquesm_optn3Img,addquesm_optn4,addquesm_optn4Img,addquesm_crtans,addquesm_expln,addquesm_qns_typ,addquesm_qns_tag,addquesm_prty,addquesm_sts,addquesm_crtdon,addquesm_crtdby) values( '$ques','$examnm','$examscatid','$examtypid','$year','$topic','$subtopic','$optn1', '$optnaimg','$optn2','$optnbimg','$optn3', '$optncimg','$optn4','$optndimg','$crtans', '$explan','$qnstyp','$tag','$txtprty','$lststs', '$crtdt','$ses_admin')"; 
 		$irsQstMst = mysqli_query($conn, $iqryQstMst);
 		// if ($irsQstMst == true) {
 			// if ($sqstimgval != "") {

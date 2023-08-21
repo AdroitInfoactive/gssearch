@@ -1,11 +1,10 @@
 <?php
-include_once '../includes/inc_config.php'; //Making paging validation	
-include_once $inc_nocache; //Clearing the cache information
-include_once $adm_session; //checking for session
-include_once $inc_cnctn; //Making database Connection
-include_once $inc_usr_fnctn; //checking for session	
-include_once $inc_pgng_fnctns; //Making paging validation
-include_once $inc_fldr_pth; //Making paging validation
+include_once '../includes/inc_nocache.php'; // Clearing the cache information
+include_once "../includes/inc_adm_session.php"; //checking for session
+include_once "../includes/inc_connection.php"; //Making database Connection
+include_once "../includes/inc_usr_functions.php"; //checking for session
+include_once '../includes/inc_config.php';       //Making paging validation
+include_once '../includes/inc_folder_path.php'; //Floder Path	
 /***********************************************************
 Programm : add_category.php	
 Package : 
@@ -73,11 +72,13 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 	{
 		// var name = document.getElementById('txtque').value;//name for sub category
 		var name = encodeURI(CKEDITOR.instances.txtque.getData());
-		var exammnid = document.getElementById('lastexamnm').value;//main link id
-		var yearmnid = document.getElementById('lstyear').value;//category id
+		var exammnid = document.getElementById('lastexamnm').value;//maincat link id
+		var exmsctid = document.getElementById('lst_exmsubcat').value;//year id
+		var exmtypid = document.getElementById('lst_exmtype').value;//year id
+		var yearmnid = document.getElementById('lstyear').value;//year id
 		if(name != "")
 		{
-			var url = "chkduplicate.php?addquesname="+name+"&exammnid="+exammnid+"&yearmnid="+yearmnid;
+			var url = "chkduplicate.php?addquesname="+name+"&exammnid="+exammnid+"&yearmnid="+yearmnid+"&exmsctid="+exmsctid+"&exmtypid="+exmtypid;
 			xmlHttp	= GetXmlHttpObject(stateChanged1);
 			xmlHttp.open("GET", url, true);
 			xmlHttp.send(null);
@@ -101,6 +102,29 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 			}
 		}
 	}
+
+	function funcscat() {
+		// var topicval = $("#lst_topic").val();
+		var lastexamnm = document.getElementById('lastexamnm').value;
+		if (lastexamnm != "") {
+      var url = "../includes/inc_getStsk.php?lastexamnm=" + lastexamnm;
+      xmlHttp = GetXmlHttpObject(scatchnge);
+      xmlHttp.open("GET", url, true);
+      xmlHttp.send(null);
+    }
+  }
+	
+  function scatchnge() {
+		// debugger
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+      var temp = xmlHttp.responseText;
+      if (temp != "") {
+        document.getElementById('lst_exmsubcat').innerHTML = temp;
+      }
+    }
+  }
+
+	
 
 	function get_admsn_dtls() {
 		// var topicval = $("#lst_topic").val();
@@ -190,7 +214,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 					<div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
-									<label>Exams *</label>
+									<label>Exams Category *</label>
 								</div>
 								<div class="col-sm-9">
 									<?php
@@ -205,8 +229,8 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 									$rsprodmncat_mst = mysqli_query($conn, $sqryprodmncat_mst);
 									$cnt_prodmncat = mysqli_num_rows($rsprodmncat_mst);
 									?>
-									<select name="lastexamnm" id="lastexamnm" class="form-control">
-										<option value="">--Select  Exam--</option>
+									<select name="lastexamnm" id="lastexamnm" class="form-control" onchange="funcscat()">
+										<option value="">--Select Exam Category--</option>
 										<?php
 										if ($cnt_prodmncat > 0) {
 											while ($rowsprodmncat_mst = mysqli_fetch_assoc($rsprodmncat_mst)) {
@@ -223,6 +247,54 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 								</div>
 							</div>
 						</div>
+						<div class="col-md-12">
+              <div class="row mb-2 mt-2">
+                <div class="col-sm-3">
+                  <label> Exam Subcategory *</label>
+                </div>
+                <div class="col-sm-9">
+                  <select name="lst_exmsubcat" id="lst_exmsubcat" class="form-control" onchange="funcexmtype()" >
+                  </select>
+                  <span id="errorsDiv_lst_exmsubcat"></span>
+                </div>
+              </div>
+            </div>
+						<div class="col-md-12">
+              <div class="row mb-2 mt-2">
+                <div class="col-sm-3">
+                  <label> Exam Type * </label>
+                </div>
+                <div class="col-sm-9">
+								<?php
+									$sqryexmtyp_mst = "SELECT 
+									exam_id,exam_name						
+								from 
+								exam_typ 
+								where	 
+								exam_sts = 'a'
+								 order by
+								 exam_name";
+									$rsexmcat_mst = mysqli_query($conn, $sqryexmtyp_mst);
+									$cnt_exmtyp = mysqli_num_rows($rsexmcat_mst);
+									?>
+                  <select name="lst_exmtype" id="lst_exmtype" class="form-control"  >
+                	<option value="">--Select Exam Type --</option>
+										<?php
+										if ($cnt_exmtyp > 0) {
+											while ($rowexmtype_mst = mysqli_fetch_assoc($rsexmcat_mst)) {
+												$exmid = $rowexmtype_mst['exam_id'];
+												$exmname = $rowexmtype_mst['exam_name'];
+												?>
+												<option value="<?php echo $exmid; ?>"><?php echo $exmname; ?></option>
+												<?php
+											}
+										}
+										?>  
+								</select>
+                  <span id="errorsDiv_lst_exmtype"></span>
+                </div>
+              </div>
+            </div>
             <div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
@@ -380,7 +452,15 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                 </div>
               </div>
             </div>
-						<div id="admtyp" class="col-md-12">
+						<div class="col-md-12">
+							<div class="row mb-2 mt-2">
+								<div class="col-sm-3">
+									<label>Tags</label>
+								</div>
+								<div class="col-sm-9">
+									<textarea name="txttag" id="txttag" rows="3" cols="60" id="txtseodesc" class="form-control"></textarea>
+								</div>
+							</div>
 						</div>
 						<!-- <div id="admtyp" class="col-md-12">
 							<div class="col-md-12">

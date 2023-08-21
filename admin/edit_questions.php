@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include_once '../includes/inc_config.php'; //Making paging validation	
 include_once $inc_nocache; //Clearing the cache information
 include_once $adm_session; //checking for session
@@ -42,9 +43,11 @@ if (isset($_REQUEST['edit']) && (trim($_REQUEST['edit']) != "") && isset($_REQUE
 	$srchval = glb_func_chkvl($_REQUEST['val']);
 	$chk = glb_func_chkvl($_REQUEST['chk']);
 }
-echo  $sqryaddques_mst = "SELECT addquesm_qnm,addquesm_optn1,addquesm_optn2,addquesm_optn3,addquesm_optn4,addquesm_crtans,addquesm_expln,addquesm_prty, addquesm_sts, addquesm_prodmnexmsm_id, prodmnexmsm_name,addquesm_yearsm_id,yearsm_name,addquesm_topicsm_id,topicsm_name,addquesm_subtopicsm_id,subtopicsm_name from
+$sqryaddques_mst = "SELECT addquesm_qnm,addquesm_optn1,addquesm_optn2,addquesm_optn3,addquesm_optn4,addquesm_crtans,addquesm_expln,addquesm_prty, addquesm_sts, addquesm_prodmnexmsm_id, prodmnexmsm_name,addquesm_yearsm_id,yearsm_name,addquesm_topicsm_id,topicsm_name,addquesm_subtopicsm_id,subtopicsm_name,addquesm_typ_id,addquesm_qns_typ,addquesm_qns_tag,exam_name,exam_subcategorym_id,exam_subcategorym_name from
  addques_mst 
 inner join prodmnexms_mst on prodmnexms_mst.prodmnexmsm_id=addques_mst.addquesm_prodmnexmsm_id 
+inner join 	exam_subcategory_mst on exam_subcategorym_id=addquesm_exmscat_id
+inner join 	exam_typ on exam_id=addquesm_typ_id
 inner join 	years_mst on years_mst.yearsm_id=addques_mst.addquesm_yearsm_id
 inner join 	topics_mst on	topics_mst.topicsm_id=addques_mst.addquesm_topicsm_id
 left join 	subtopics_mst on subtopics_mst.subtopicsm_id=addques_mst.addquesm_subtopicsm_id
@@ -56,6 +59,7 @@ if ($cntrecaddques_mst > 0) {
 	$db_mnlnksid = $rowsaddques_mst['prodmnexmsm_id'];
 	$db_mnlnksnm = $rowsaddques_mst['prodmnexmsm_name'];
 	$db_catmnlnksid = $rowsaddques_mst['addquesm_prodmnexmsm_id'];
+	$db_exmtypid = $rowsaddques_mst['addquesm_typ_id'];
   $db_yearid = $rowsaddques_mst['addquesm_yearsm_id'];
   $db_yearsmid = $rowsaddques_mst['yearsm_name'];
 	$db_catname = $rowsaddques_mst['addquesm_name'];
@@ -70,8 +74,8 @@ if ($cntrecaddques_mst > 0) {
   $db_topicnm = $rowsaddques_mst['topicsm_name'];
   $db_subtopicmnm = $rowsaddques_mst['subtopicsm_name'];
 	$db_subtopicid = $rowsaddques_mst['subtopicsm_id'];
-	// $db_catseottl = $rowsaddques_mst['addquesm_seotitle'];
-	// $db_catseodesc = $rowsaddques_mst['addquesm_seodesc'];
+	$db_exmsctid = $rowsaddques_mst['addquesm_exmscat_id'];
+	$db_tag = $rowsaddques_mst['addquesm_qns_tag'];
 	// $db_catseokywrd = $rowsaddques_mst['addquesm_seokywrd'];
 	// $db_catseohone = $rowsaddques_mst['addquesm_seohone'];
 	// $db_catseohtwo = $rowsaddques_mst['addquesm_seohtwo'];
@@ -121,7 +125,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 		id = <?php echo $id; ?>;
 		if(name != "")
 		{
-			var url = "chkduplicate.php?addquesname="+name+"&exammnid="+exammnid+"&yearmnid="+yearmnid+"&qusid="+id;
+			var url = "chkduplicate.php?addquesname="+name+"&exammnid="+exammnid+"&yearmnid="+yearmnid+"&exmsctid="+exmsctid+"&exmtypid="+exmtypid+"&qusid="+id;
 			xmlHttp	= GetXmlHttpObject(stateChanged1);
 			xmlHttp.open("GET", url, true);
 			xmlHttp.send(null);
@@ -164,6 +168,26 @@ include_once('../includes/inc_fnct_ajax_validation.php');
       var temp = xmlHttp.responseText;
       if (temp != "") {
         document.getElementById('lstsubtopic').innerHTML = temp;
+      }
+    }
+  }
+	function funcscat() {
+		// var topicval = $("#lst_topic").val();
+		var lastexamnm = document.getElementById('lastexamnm').value;
+		if (lastexamnm != "") {
+      var url = "../includes/inc_getStsk.php?lastexamnm=" + lastexamnm;
+      xmlHttp = GetXmlHttpObject(scatchnge);
+      xmlHttp.open("GET", url, true);
+      xmlHttp.send(null);
+    }
+  }
+	
+  function scatchnge() {
+		// debugger
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+      var temp = xmlHttp.responseText;
+      if (temp != "") {
+        document.getElementById('lst_exmsubcat').innerHTML = temp;
       }
     }
   }
@@ -243,7 +267,7 @@ include_once $inc_adm_lftlnk;
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label>Exams *</label>
+								<label>Exam Category *</label>
 							</div>
 							<div class="col-sm-9">
 								<?php
@@ -258,8 +282,8 @@ include_once $inc_adm_lftlnk;
 								$srsaddques_mst1 = mysqli_query($conn, $sqryprodmncat_mst);
 								$cnt_prodmncat = mysqli_num_rows($srsaddques_mst1);
 								?>
-								<select name="lastexamnm" id="lastexamnm" class="form-control" onchange="get_admsn_dtls();">
-									<option value="">--Select Exams--</option>
+								<select name="lastexamnm" id="lastexamnm" class="form-control" onchange="funcscat()">
+									<option value="">--Select Exam Category--</option>
 									<?php
 									if ($cnt_prodmncat > 0) {
 										while ($rowsprodmncat_mst = mysqli_fetch_assoc($srsaddques_mst1)) {
@@ -276,6 +300,74 @@ include_once $inc_adm_lftlnk;
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12">
+              <div class="row mb-2 mt-2">
+                <div class="col-sm-3">
+                  <label> Exam Subcategory *</label>
+                </div>
+                <div class="col-sm-9">
+								<?php
+								$sqryexmscat_mst = "SELECT exam_subcategorym_id,exam_subcategorym_name from exam_subcategory_mst where exam_subcategorym_sts = 'a' and exam_subcategorym_prodmnexmsm_id ='$db_catmnlnksid' group by exam_subcategorym_id order by exam_subcategorym_prty asc";
+								 $srsexmscts_mst = mysqli_query($conn, $sqryexmscat_mst);
+								 $cnt_exmscat = mysqli_num_rows($srsexmscts_mst);
+								?>
+					
+							<select name="lst_exmsubcat" id="lst_exmsubcat" class="form-control" onchange="funcexmtype()" >
+									<!-- <option value="">--Select sub topic--</option> -->
+									<?php
+									if ($cnt_exmscat > 0) { 
+										while ($rowsexmscat_mst = mysqli_fetch_assoc($srsexmscts_mst)) {
+											$examscatid = $rowsexmscat_mst['exam_subcategorym_id'];
+											 $exmsctnm = $rowsexmscat_mst['exam_subcategorym_name']; 
+											?>
+											<option value="<?php echo $examscatid; ?>" <?php if ($db_exmsctid == $examscatid) echo 'selected'; ?>><?php echo $exmsctnm; ?></option>
+											<?php
+										}
+									}?>
+               
+                  </select>
+                  <span id="errorsDiv_lst_exmsubcat"></span>
+                </div>
+              </div>
+            </div>
+					</div>
+						<div class="col-md-12">
+              <div class="row mb-2 mt-2">
+                <div class="col-sm-3">
+                  <label> Exam Type * </label>
+                </div>
+                <div class="col-sm-9">
+								<?php
+									$sqryexmtyp_mst = "SELECT 
+									exam_id,exam_name						
+								from 
+								exam_typ 
+								where	 
+								exam_sts = 'a'
+								 order by
+								 exam_name";
+									$rsexmcat_mst = mysqli_query($conn, $sqryexmtyp_mst);
+									$cnt_exmtyp = mysqli_num_rows($rsexmcat_mst);
+									?>
+                  <select name="lst_exmtype" id="lst_exmtype" class="form-control"  >
+                	<option value="">--Select Exam Type --</option>
+										<?php
+										if ($cnt_exmtyp > 0) {
+											while ($rowexmtype_mst = mysqli_fetch_assoc($rsexmcat_mst)) {
+												$exmid = $rowexmtype_mst['exam_id'];
+												$exmname = $rowexmtype_mst['exam_name'];
+												?>
+													<option value="<?php echo $exmid; ?>"<?php if ($db_exmtypid== $exmid) echo 'selected'; ?>><?php echo $exmname; ?></option>
+												
+												<?php
+											}
+										}
+										?>  
+								</select>
+                  <span id="errorsDiv_lst_exmtype"></span>
+                </div>
+              </div>
+            </div>
           <div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
@@ -446,10 +538,21 @@ include_once $inc_adm_lftlnk;
 											<?php
 										}
 									}?>
-									<!-- <option value="<?php echo $db_subtopicid; ?>"><?php echo $db_subtopicmnm?></option> -->
+									
 							</select>
 								<span id="errorsDiv_lstsubtopic"></span>
-								<!-- <?php echo $db_subtopicmnm; ?> -->
+							
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="row mb-2 mt-2">
+							<div class="col-sm-3">
+								<label>Tags</label>
+							</div>
+							<div class="col-sm-9">
+							<textarea name="txttag" rows="3" cols="60" id="txttag"
+									class="form-control"><?php echo $db_tag; ?></textarea>
 							</div>
 						</div>
 					</div>
