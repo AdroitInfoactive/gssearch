@@ -67,6 +67,13 @@ include('header.php');
 </section>
 <!--====== Slider PART ENDS ======-->
 <!--====== Courses PART START ======-->
+<?php
+$sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc from prodmnexms_mst
+inner join addques_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id where prodmnexmsm_sts='a'";
+$srs_exm_cat = mysqli_query($conn, $sqry_exm_cat);
+$cntrec_exm_cat = mysqli_num_rows($srs_exm_cat);
+if ($cntrec_exm_cat > 0)
+{ ?>
 <section class="courses_area pt-120 pb-130">
   <div class="container">
     <div class="row justify-content-center">
@@ -80,76 +87,41 @@ include('header.php');
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-3 col-sm-6">
-        <div class="single_courses courses_gray mt-30">
-          <div class="courses_image">
-            <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses">
-          </div>
-          <div class="courses_content">
-            <h4 class="title"><a href="#">Group 1</a></h4>
-            <p class="mt-2">
-              At Adroit, we add value and contribute to your success. If you're looking...
-            </p>
-            <div class="meta d-flex justify-content-between">
-              <span><a href="#" class="w100">Read More</a></span>
+      <?php
+      while ($srow_exm_cat = mysqli_fetch_array($srs_exm_cat))
+      {
+        $exm_cat_id = $srow_exm_cat['prodmnexmsm_id'];
+        $exm_cat_name = $srow_exm_cat['prodmnexmsm_name'];
+        $exm_cat_desc = $srow_exm_cat['prodmnexmsm_desc'];
+        ?>
+        <div class="col-lg-3 col-sm-6">
+          <div class="single_courses courses_gray mt-30">
+            <div class="courses_image">
+              <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
+            </div>
+            <div class="courses_content">
+              <h4 class="title"><a href="#"><?php echo $exm_cat_name; ?></a></h4>
+              <p class="mt-2">
+                <?php echo $exm_cat_desc; ?>
+              </p>
+              <div class="meta d-flex justify-content-between">
+                <span><a href="#" class="w100">View</a></span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="single_courses courses_gray mt-30">
-          <div class="courses_image">
-            <img src="<?php echo $rtpth; ?>assets/images/courses-3.jpg" alt="courses">
-          </div>
-          <div class="courses_content">
-            <h4 class="title"><a href="#">Group 2</a></h4>
-            <p class="mt-2">
-              At Adroit, we add value and contribute to your success. If you're looking...
-            </p>
-            <div class="meta d-flex justify-content-between">
-              <span><a href="#" class="w100">Read More</a></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="single_courses courses_gray mt-30">
-          <div class="courses_image">
-            <img src="<?php echo $rtpth; ?>assets/images/courses-4.jpg" alt="courses">
-          </div>
-          <div class="courses_content">
-            <h4 class="title"><a href="#">Prelims Samples</a></h4>
-            <p class="mt-2">
-              At Adroit, we add value and contribute to your success. If you're looking...
-            </p>
-            <div class="meta d-flex justify-content-between">
-              <span><a href="#" class="w100">Read More</a></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="single_courses courses_gray mt-30">
-          <div class="courses_image">
-            <img src="<?php echo $rtpth; ?>assets/images/courses-1.jpg" alt="courses">
-          </div>
-          <div class="courses_content">
-            <h4 class="title"><a href="#">Mains Papers </a></h4>
-            <p class="mt-2">
-              At Adroit, we add value and contribute to your success. If you're looking...
-            </p>
-            <div class="meta d-flex justify-content-between">
-              <span><a href="#" class="w100">Read More</a></span>
-            </div>
-          </div>
-        </div>
-      </div>
+        <?php
+      }
+      ?>
       <div class="col-sm-12 mt-4">
-        <p class="text-center"><a href="" class="main-btn">View All</a></p>
+        <p class="text-center"><a href="<?php echo $rtpth; ?>exam-categories" class="main-btn">View All</a></p>
       </div>
     </div>
   </div>
 </section>
+<?php
+}
+?>
 <!--====== Courses PART ENDS ======-->
 <!--====== Register PART START ======-->
 <section class="register_area bg_cover"
