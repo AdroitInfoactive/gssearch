@@ -156,12 +156,12 @@ include_once $inc_adm_hdr;
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">View All srchlmts</h1>
+					<h1 class="m-0 text-dark">View All Search Limitations</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">View All srchlmts</li>
+						<li class="breadcrumb-item active">View All  Search Limitations</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
@@ -239,7 +239,7 @@ include_once $inc_adm_hdr;
 							</tr>
 							<tr>
 								<td width="7%" align="left"><strong>SL.No.</strong></td>
-								<td width="21%" align="left"><strong>Year</strong></td>
+								<td width="21%" align="left"><strong>Name</strong></td>
 								<!-- <td width="15%"align="left"><strong>Image</strong></td>
 								<td width="15%"  align="center"><strong>Type</strong></td> -->
 								<td width="9%" align="center"><strong>Rank</strong></td>
