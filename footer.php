@@ -111,6 +111,25 @@ require_once('settings.php');
     </div>
   </div>
 </div>
+<div class="modal fade" id="shareProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ps-popup--select">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="wrap-modal-slider container-fluid">
+          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <div class="ps-popup__body">
+            <h3 class="ps-popup__title">Share</h3>
+            <div class="ps-product__social d-flex justify-content-center">
+              <ul class="ps-social ps-social--color" id="sclshare">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--====== Footer PART ENDS ======-->
 <!--====== BACK TOP TOP PART START ======-->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -162,6 +181,69 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
 <script type="text/javascript">
+  function show_ans(sno, optnid, qtnid) {
+    $.ajax({
+      url: `<?php echo $rtpth; ?>get_ans.php?sno=${sno}&optnid=${optnid}&qtnid=${qtnid}`,
+      type: 'GET',
+      success: function (data) {
+        var data_arr = data.split("<-->");
+        var crct_ans = data_arr[0];
+        var expl = data_arr[1];
+        if (Number(optnid) == Number(crct_ans)) {
+          $('#crct' + sno).css('display', 'block');
+          $('#wrng' + sno).css('display', 'none');
+        }
+        else {
+          $('#crct' + sno).css('display', 'none');
+          $('#wrng' + sno).css('display', 'block');
+        }
+        if (expl != '') {
+          expl_cntnt = '<h4 class="courses_details_title">Explanation</h4><p style="text-align: left;">' + expl + '</p >';
+          $('#explnbx_' + sno).html(expl_cntnt);
+          $('#explnbx_' + sno).css('display', 'block');
+        }
+      }
+    });
+  }
+  $(document).ready(function () {
+    // Initial page load
+    var cat_id = "<?php echo $cat_id; ?>";
+    var scat_id = "<?php echo $scat_id; ?>";
+    var yr_id = "<?php echo $yr_id; ?>";
+    var tot_qns = <?php echo $tot_qns; ?>;
+    loadPage(1, cat_id, scat_id, yr_id);
+    // Load next page
+    $('#qns_lst_dsp').on('click', '.next', function () {
+      let nextPage = parseInt($(this).data('page'))
+      loadPage(nextPage, cat_id, scat_id, yr_id);
+    });
+
+    // Load previous page
+    $('#qns_lst_dsp').on('click', '.prev', function () {
+      let prevPage = parseInt($(this).data('page'))
+      loadPage(prevPage, cat_id, scat_id, yr_id);
+    });
+    function loadPage(page, cat_id, scat_id, yr_id) {
+      $.ajax({
+        url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
+        type: 'GET',
+        success: function (data) {
+          var content = '';
+          content += data;
+          // Append pagination controls
+          content += '<div class="row">';
+          if (page > 1) {
+            content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
+          }
+          if (page * 2 < tot_qns) {
+            content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
+          }
+          content += '</div></div>';
+          $('#qns_lst_dsp').html(content);
+        }
+      });
+    }
+  });
   $(document).ready(function () {
 
     $('.js-btn-tooltip').tooltip();
@@ -183,6 +265,22 @@ require_once('settings.php');
   rgstrrules[3] = 'txtpswd_rgstr|required|Enter Password';
   rgstrrules[4] = 'txtcnfpswd_rgstr|required|Enter Confirm Password';
   rgstrrules[5] = 'txtcnfpswd_rgstr|equal|$txtpswd_rgstr|Password not match';
+  function get_qns_lnk(url) {
+    var encurl = encodeURI(url)
+    var waurl = "whatsapp://send?text=" + encurl;
+    var fburl = "https://www.facebook.com/sharer.php?u=" + encurl;
+    var twturl = "https://twitter.com/intent/tweet?url=" + encurl;
+    var mlurl = "mailto:?Subject=I would like to share a link with you&body=" + encurl;
+    var disp = "<li><a class='ps-social__link facebook' href='" + fburl +
+      "' target='_blank'><i class='fa fa-facebook'> </i><span class='ps-tooltip'>Facebook</span></a></li>";
+    disp += "<li><a class='ps-social__link twitter' href='" + twturl +
+      "' target='_blank'><i class='fa fa-twitter'></i><span class='ps-tooltip'>Twitter</span></a></li>";
+    disp += "<li><a class='ps-social__link whatsapp' href='" + waurl +
+      "' target='_blank'><i class='fa fa-whatsapp'></i><span class='ps-tooltip'>Whatsapp</span></a></li>";
+    disp += "<li><a class='ps-social__link envelope' href='" + mlurl +
+      "' target='_blank'><i class='fa fa-envelope-o'></i><span class='ps-tooltip'>Email</span></a></li>";
+    document.getElementById("sclshare").innerHTML = disp;
+  }
 </script>
 </body>
 <!-- Mirrored from raistheme.com/html/GS Search/GS Search/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Aug 2023 19:13:08 GMT -->

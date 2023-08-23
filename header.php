@@ -63,7 +63,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
     </script>
     <?php
   }
-  ?>                  
+  ?>
 </head>
 
 <body>
@@ -223,7 +223,6 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
                   <button><i class="fa fa-search"></i></button>
                 </div>
               </li>
-
             </ul>
           </div>
         </nav>

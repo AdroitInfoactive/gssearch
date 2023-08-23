@@ -178,14 +178,16 @@ if (
 
               if ($qnsnm != '') {
 
-              echo   $sqryprod_mst = "SELECT  addquesm_id,addquesm_prodmnexmsm_id,addquesm_exmscat_id,addquesm_typ_id,addquesm_yearsm_id,addquesm_topicsm_id,addquesm_subtopicsm_id from  addques_mst where  addquesm_qnm='$qnsnm' and addquesm_prodmnexmsm_id = '$exam_id' and addquesm_yearsm_id = '$year_id' and addquesm_topicsm_id = '$topic_id' and addquesm_subtopicsm_id ='$sub_topic_id' and addquesm_exmscat_id = '$examscat_id' and addquesm_typ_id = '$exmtype_id'";
+                $sqryprod_mst = "SELECT  addquesm_id,addquesm_prodmnexmsm_id,addquesm_exmscat_id,addquesm_typ_id,addquesm_yearsm_id,addquesm_topicsm_id,addquesm_subtopicsm_id from  addques_mst where  addquesm_qnm='$qnsnm' and addquesm_prodmnexmsm_id = '$exam_id' and addquesm_yearsm_id = '$year_id' and addquesm_topicsm_id = '$topic_id' and addquesm_exmscat_id = '$examscat_id' and addquesm_typ_id = '$exmtype_id'";
                 $srsprod_mst = mysqli_query($conn, $sqryprod_mst);
                 $count1 = mysqli_num_rows($srsprod_mst);
                 $rwsprdid = mysqli_fetch_array($srsprod_mst);
+                $flag = "";
                 if ($count1 > 0) {
                   $strprodid = $rwsprdid['addquesm_id'];
                   $flag = 1;
                   $line=$d;
+                  continue;
                 }
                 if ($flag != 1) {
 

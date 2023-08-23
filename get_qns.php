@@ -47,6 +47,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = strip_tags(html_entity_decode($srows_qns['addquesm_expln']));
+        $qns_lnk = $rtpth.$cat_id."/".$scat_id . "/" . $yr_id. "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
           <h4 class="courses_details_title">Q:
@@ -57,13 +58,19 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
               <h4 class="courses_details_title">
                 <?php echo $qn_qnm; ?>
               </h4>
+              <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
+                data-original-title="Share">
+                <a data-toggle="modal" data-target="#shareProduct"><i class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+              </div>
             </div>
           </div>
           <div class="card-body">
             <?php
             for ($j = 1; $j < 5; $j++) { ?>
               <div class="custom-control custom-radio">
-                <input type="radio" id="<?php echo $i; ?>customRadioInline<?php echo $j; ?>" name="<?php echo $i; ?>customRadioInline<?php echo $i; ?>" class="custom-control-input" onclick="show_ans(<?php echo $i; ?>,<?php echo $j; ?>,<?php echo $qn_id; ?>);">
+                <input type="radio" id="<?php echo $i; ?>customRadioInline<?php echo $j; ?>"
+                  name="<?php echo $i; ?>customRadioInline<?php echo $i; ?>" class="custom-control-input"
+                  onclick="show_ans(<?php echo $i; ?>,<?php echo $j; ?>,<?php echo $qn_id; ?>);">
                 <label class="custom-control-label" for="<?php echo $i; ?>customRadioInline<?php echo $j; ?>">
                   <?php echo strip_tags(html_entity_decode($srows_qns['addquesm_optn' . $j])); ?>
                 </label>
@@ -90,8 +97,10 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
             </div> -->
             <p>
               <strong>
-                <span class="text-success" style="display: none" id="crct<?php echo $i; ?>"><i class="fa fa-check"></i> Correct</span>
-                <span class="text-danger" style="display: none" id="wrng<?php echo $i; ?>"><i class="fa fa-close"></i> Wrong</span>
+                <span class="text-success" style="display: none" id="crct<?php echo $i; ?>"><i class="fa fa-check"></i>
+                  Correct</span>
+                <span class="text-danger" style="display: none" id="wrng<?php echo $i; ?>"><i class="fa fa-close"></i>
+                  Wrong</span>
               </strong>
             </p>
           </div>
