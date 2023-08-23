@@ -1,6 +1,7 @@
 <?php
 error_reporting(0);
 session_start();
+$servr_ip = $_SERVER['SERVER_ADDR'];
 include_once 'includes/inc_config.php'; //Making paging validation	
 include_once $inc_user_cnctn; //Making database Connection
 include_once $inc_user_usr_fnctn; //checking for session	
@@ -48,6 +49,21 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
   <link rel="stylesheet" href="<?php echo $rtpth; ?>assets/css/style.css">
   <!--====== Responsive css ======-->
   <link rel="stylesheet" href="<?php echo $rtpth; ?>assets/css/responsive.css">
+  <?php
+  if ($servr_ip != "127.0.0.1") { ?>
+    <script>
+      document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
+    </script>
+    <?php
+  }
+  ?>
 </head>
 
 <body>
@@ -120,8 +136,11 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
             <?php
           } else { ?>
             <ul class="topLinks" id="userMenu">
-              <li class="dropdown show"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-                  Welcome, <span class="user"><?php echo $_SESSION['sesmbrname']; ?></span></span><i class="fa fa-user" style="color:#aa8c2c"></i>
+              <li class="dropdown show"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                  aria-expanded="true">
+                  Welcome, <span class="user">
+                    <?php echo $_SESSION['sesmbrname']; ?>
+                  </span></span><i class="fa fa-user" style="color:#aa8c2c"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right show" role="menu" x-placement="bottom-end"
                   style="position: absolute; transform: translate3d(-134px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -129,11 +148,11 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
                   </li>
                   <li><a href="<?php echo $rtpth; ?>change-password">Change
                       Password</a></li>
-                  </li>
-                  <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
-                  </ul>
-                </li>
-              </ul>
+              </li>
+              <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
+            </ul>
+            </li>
+            </ul>
             <?php
           }
           ?>

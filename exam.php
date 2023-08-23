@@ -43,7 +43,7 @@ if ((isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") && (isset($_REQUEST[
   </script>
   <?php
 }
-$page_title = $exm_catnm . "-" . $exm_scatnm;
+$page_title = $exm_scatnm;
 $page_seo_title = $exm_catnm . "-" . $exm_scatnm . " | GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
@@ -63,7 +63,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
           <ul class="breadcrumb justify-content-center">
             <li><a href="<?php echo $rtpth; ?>home">Home</a></li>
             <li><a class="active">
-                <?php echo $page_title; ?>
+                <?php echo $exm_catnm." / ".$page_title; ?>
               </a></li>
           </ul>
         </div>
@@ -129,7 +129,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                       }
                       ?>
                       <li><a style="<?php echo $mn_bg; ?>"
-                          href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr_nm; ?>"><?php echo $exm_yr_nm; ?></a></li>
+                          href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url . "/" . $exm_yr_nm; ?>"><?php echo $exm_yr_nm; ?></a></li>
                       <?php
                     }
                     ?>
@@ -223,10 +223,12 @@ include_once('../includes/inc_fnct_ajax_validation.php');
           $('#crct'+sno).css('display', 'none');
           $('#wrng'+sno).css('display', 'block');
         }
-        expl_cntnt = '<h4 class="courses_details_title">Explanation</h4><p style="text-align: left;">'+expl+'</p >';
-        $('#explnbx_'+sno).html(expl_cntnt);
-        $('#explnbx_'+sno).css('display', 'block');        
-        // $('#chng').html(content);
+        if(expl != '')
+        {
+          expl_cntnt = '<h4 class="courses_details_title">Explanation</h4><p style="text-align: left;">'+expl+'</p >';
+          $('#explnbx_'+sno).html(expl_cntnt);
+          $('#explnbx_'+sno).css('display', 'block');
+        }
       }
     });
   }
