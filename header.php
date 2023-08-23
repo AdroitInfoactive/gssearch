@@ -63,7 +63,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
     </script>
     <?php
   }
-  ?>
+  ?>                  
 </head>
 
 <body>
@@ -95,11 +95,11 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
               <a href="#">About Us</a>
             </li>
             <li>
-              <a href="#">Practice Zone </a>
+              <a href="<?php echo $rpth; ?>exam-categories">Practice Zone </a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#">Gallery </a>
-            </li>
+            </li> -->
             <li>
               <a href="#">Contact Us</a>
             </li>
@@ -204,11 +204,11 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
                 <a href="#">About Us</a>
               </li>
               <li>
-                <a href="#">Practice Zone </a>
+                <a href="<?php echo $rtpth; ?>exam-categories">Practice Zone </a>
               </li>
-              <li>
+              <!-- <li>
                 <a href="#">Gallery </a>
-              </li>
+              </li> -->
               <li>
                 <a href="#">Contact Us</a>
               </li>
