@@ -1,9 +1,6 @@
 <?php
 error_reporting(0);
 session_start();
-/* echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>"; */
 include_once 'includes/inc_config.php'; //Making paging validation	
 include_once $inc_user_cnctn; //Making database Connection
 include_once $inc_user_usr_fnctn; //checking for session	
@@ -55,12 +52,12 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 
 <body>
   <!--====== PRELOADER PART START ======-->
-  <div id="preloader">
+  <!-- <div id="preloader">
     <div class="preloader">
       <span></span>
       <span></span>
     </div>
-  </div>
+  </div> -->
   <!--====== PRELOADER PART ENDS ======-->
   <!--====== Header Desktop PART START ======-->
   <section class="header_area header_area_2 d-none d-lg-block">
@@ -97,7 +94,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
         <div class="row align-items-center">
           <div class="col-lg-3">
             <div class="logo">
-              <a href="#"><img src="<?php echo $rtpth; ?>assets/images/logo.png" alt="logo"></a>
+              <a href="<?php echo $rtpth; ?>home"><img src="<?php echo $rtpth; ?>assets/images/logo.png" alt="logo"></a>
             </div>
           </div>
           <div class="col-lg-5">
@@ -170,7 +167,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
     <div class="header_menu  header_mobile">
       <div class="container">
         <nav class="navbar navbar-expand-lg header_mobile_bg">
-          <a class="navbar-brand" href="index-3.html">
+          <a class="navbar-brand" href="<?php echo $rtpth; ?>home">
             <img src="<?php echo $rtpth; ?>assets/images/logo.png" alt="logo">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

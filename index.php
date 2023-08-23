@@ -68,101 +68,66 @@ include('header.php');
 <!--====== Slider PART ENDS ======-->
 <!--====== Courses PART START ======-->
 <?php
-$sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc from prodmnexms_mst
-inner join addques_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id where prodmnexmsm_sts='a'";
+$sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc, exam_subcategorym_name, yearsm_id, yearsm_name from prodmnexms_mst
+inner join addques_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+inner join exam_subcategory_mst on exam_subcategorym_prodmnexmsm_id = prodmnexmsm_id
+inner join years_mst on yearsm_id = addquesm_yearsm_id
+where prodmnexmsm_sts='a' group by prodmnexmsm_id order by yearsm_name,prodmnexmsm_name desc limit 4";
 $srs_exm_cat = mysqli_query($conn, $sqry_exm_cat);
 $cntrec_exm_cat = mysqli_num_rows($srs_exm_cat);
-if ($cntrec_exm_cat > 0)
-{ ?>
-<section class="courses_area pt-120 pb-130">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="section_title text-center pb-20">
-          <h3 class="main_title">Practice Zones</h3>
-          <p>At Adroit, we add value and contribute to your success. If you're looking for a dynamic and
-            innovative approach in maximising your organisation's communication potential, look no further
-            than Adroit Infoactive Services.</p>
+if ($cntrec_exm_cat > 0) { ?>
+  <section class="courses_area pt-120 pb-130">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section_title text-center pb-20">
+            <h3 class="main_title">Practice Zones</h3>
+            <p>At Adroit, we add value and contribute to your success. If you're looking for a dynamic and
+              innovative approach in maximising your organisation's communication potential, look no further
+              than Adroit Infoactive Services.</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <?php
-      while ($srow_exm_cat = mysqli_fetch_array($srs_exm_cat))
-      {
-        $exm_cat_id = $srow_exm_cat['prodmnexmsm_id'];
-        $exm_cat_name = $srow_exm_cat['prodmnexmsm_name'];
-        $exm_cat_desc = $srow_exm_cat['prodmnexmsm_desc'];
-        ?>
-        <div class="col-lg-3 col-sm-6">
-          <div class="single_courses courses_gray mt-30">
-            <div class="courses_image">
-              <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
-            </div>
-            <div class="courses_content">
-              <h4 class="title"><a href="#"><?php echo $exm_cat_name; ?></a></h4>
-              <p class="mt-2">
-                <?php echo $exm_cat_desc; ?>
-              </p>
-              <div class="meta d-flex justify-content-between">
-                <span><a href="#" class="w100">View</a></span>
+      <div class="row">
+        <?php
+        while ($srow_exm_cat = mysqli_fetch_array($srs_exm_cat)) {
+          $exm_cat_id = $srow_exm_cat['prodmnexmsm_id'];
+          $exm_cat_name = $srow_exm_cat['prodmnexmsm_name'];
+          $exm_cat_url = funcStrRplc($exm_cat_name);
+          $exm_cat_desc = $srow_exm_cat['prodmnexmsm_desc'];
+          $exm_scatnm = $srow_exm_cat['exam_subcategorym_name'];
+          $exm_scatnm_url = funcStrRplc($exm_scatnm);
+          $exm_yr = $srow_exm_cat['yearsm_name'];
+          ?>
+          <div class="col-lg-3 col-sm-6">
+            <div class="single_courses courses_gray mt-30">
+              <div class="courses_image">
+                <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
+              </div>
+              <div class="courses_content">
+                <h4 class="title"><a href="<?php echo $rtpth . $exm_cat_url."/".$exm_scatnm_url."/".$exm_yr; ?>"><?php echo $exm_cat_name; ?></a></h4>
+                <p class="mt-2">
+                  <?php echo $exm_cat_desc; ?>
+                </p>
+                <div class="meta d-flex justify-content-between">
+                  <span><a href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>" class="w100">View</a></span>
+                </div>
               </div>
             </div>
           </div>
+          <?php
+        }
+        ?>
+        <div class="col-sm-12 mt-4">
+          <p class="text-center"><a href="<?php echo $rtpth; ?>exam-categories" class="main-btn">View All</a></p>
         </div>
-        <?php
-      }
-      ?>
-      <div class="col-sm-12 mt-4">
-        <p class="text-center"><a href="<?php echo $rtpth; ?>exam-categories" class="main-btn">View All</a></p>
       </div>
     </div>
-  </div>
-</section>
-<?php
+  </section>
+  <?php
 }
 ?>
 <!--====== Courses PART ENDS ======-->
-<!--====== Register PART START ======-->
-<section class="register_area bg_cover"
-  style="background-image: url(<?php echo $rtpth; ?>assets/images/register_bg.jpg)">
-  <div class="container">
-    <div class="row justify-content-center justify-content-lg-between">
-      <div class="col-lg-6">
-        <div class="register_countdown_content">
-          <h4 class="title">Register for <br>Free <br>Test Papers</h4>
-        </div>
-      </div>
-      <div class="col-xl-5 col-lg-5 col-md-8">
-        <div class="register_form text-center">
-          <div class="register_form_title">
-            <h4 class="title">Register Now</h4>
-          </div>
-          <div class="register_form_wrapper">
-            <!-- <form action="#">
-              <div class="single_form">
-                <input type="text" placeholder="Full Name">
-              </div>
-              <div class="single_form">
-                <input type="text" placeholder="Your Email">
-              </div>
-              <div class="single_form">
-                <input type="text" placeholder="Phone Number">
-              </div>
-              <div class="single_form">
-                <textarea placeholder="Message"></textarea>
-              </div> -->
-              <div class="single_form">
-                <button class="main-btn">Submit A Request</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--====== Register PART ENDS ======-->
 <!--====== Blog PART START ======-->
 <section class="blog_area pt-120 pb-130">
   <div class="container">

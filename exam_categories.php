@@ -1,6 +1,6 @@
 <?php
-$page_title = "Exam";
-$page_seo_title = "Exam | GS Search";
+$page_title = "Exam Categories";
+$page_seo_title = "Exam Categories| GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
 $current_page = "home";
@@ -16,8 +16,8 @@ include('header.php');
             <?php echo $page_title; ?>
           </h4>
           <ul class="breadcrumb justify-content-center">
-            <li><a href="#">Home</a></li>
-            <li><a class="active" href="#">
+            <li><a href="<?php echo $rtpth; ?>home">Home</a></li>
+            <li><a class="active">
                 <?php echo $page_title; ?>
               </a></li>
           </ul>
@@ -26,365 +26,59 @@ include('header.php');
     </div>
   </div>
 </section>
-<section class="about_area pt-80">
-  <div class="container-fluid">
-    <div class="row ">
-      <div class="col-lg-3 col-sm-3 ">
-        <ul id="accordion" class="accordion">
-          <li>
-            <div class="link">UPSC CSE Prelims <i class="fa fa-chevron-down"></i></div>
-            <ul class="submenu">
-              <li><a href="#">2022</a></li>
-              <li><a href="#">2021</a></li>
-              <li><a href="#">2020</a></li>
-              <li><a href="#">2019</a></li>
-            </ul>
-          </li>
-          <li>
-            <div class="link">CDS-I <i class="fa fa-chevron-down"></i></div>
-            <ul class="submenu">
-              <li><a href="#">2022</a></li>
-              <li><a href="#">2021</a></li>
-              <li><a href="#">2020</a></li>
-              <li><a href="#">2019</a></li>
-            </ul>
-          </li>
-          <li>
-            <div class="link">CDS-II<i class="fa fa-chevron-down"></i></div>
-            <ul class="submenu">
-              <li><a href="#">2022</a></li>
-              <li><a href="#">2021</a></li>
-              <li><a href="#">2020</a></li>
-              <li><a href="#">2019</a></li>
-            </ul>
-          </li>
-          <li>
-            <div class="link">CAPF<i class="fa fa-chevron-down"></i></div>
-            <ul class="submenu">
-              <li><a href="#">2022</a></li>
-              <li><a href="#">2021</a></li>
-              <li><a href="#">2020</a></li>
-              <li><a href="#">2019</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="single_courses_details  mb-60">
-          <h4 class="courses_details_title">Similar Questions</h4>
-          <div class="courses_curriculum mt-50">
-            <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
-              <div class="courses_title">
-                <h4 class="courses_details_title">'Rapid Financing Instrument' and 'Rapid Credit Facility' are related
-                  to the provisions of lending by which one of the following ?
-                </h4>
+<section class="courses_area pt-120 pb-130">
+  <div class="container">
+    <div class="row">
+      <?php
+      $sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc, exam_subcategorym_name, yearsm_id, yearsm_name from prodmnexms_mst
+      inner join addques_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+      inner join exam_subcategory_mst on exam_subcategorym_prodmnexmsm_id = prodmnexmsm_id
+      inner join years_mst on yearsm_id = addquesm_yearsm_id
+      where prodmnexmsm_sts='a' group by prodmnexmsm_id order by yearsm_name,prodmnexmsm_name desc";
+      $srs_exm_cat = mysqli_query($conn, $sqry_exm_cat);
+      $cntrec_exm_cat = mysqli_num_rows($srs_exm_cat);
+      if ($cntrec_exm_cat > 0) {
+        while ($srow_exm_cat = mysqli_fetch_array($srs_exm_cat)) {
+          $exm_cat_id = $srow_exm_cat['prodmnexmsm_id'];
+          $exm_cat_name = $srow_exm_cat['prodmnexmsm_name'];
+          $exm_catnm_url = funcStrRplc($exm_cat_name);
+          $exm_cat_desc = $srow_exm_cat['prodmnexmsm_desc'];
+          $exm_scatnm = $srow_exm_cat['exam_subcategorym_name'];
+          $exm_scatnm_url = funcStrRplc($exm_scatnm);
+          $exm_yr = $srow_exm_cat['yearsm_name'];
+          ?>
+          <div class="col-lg-3 col-sm-6">
+            <div class="single_courses courses_gray mt-30">
+              <div class="courses_image">
+                <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
               </div>
-            </div>
-            <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">World Bank</label>
+              <div class="courses_content">
+                <h4 class="title"><a href="<?php echo $rtpth . $exm_catnm_url."/".$exm_scatnm_url."/".$exm_yr; ?>">
+                    <?php echo $exm_cat_name; ?>
+                  </a></h4>
+                <p class="mt-2">
+                  <?php echo $exm_cat_desc; ?>
+                </p>
+                <div class="meta d-flex justify-content-between">
+                  <span><a href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url."/".$exm_yr; ?>" class="w100">View</a></span>
                 </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-                <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                      class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-9 col-sm-9 pr-md-5">
-        <div class="single_courses_details  mb-60">
-          <h4 class="courses_details_title">Q: 1 (IAS/2022)</h4>
-          <div class="courses_curriculum mt-50">
-            <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
-              <div class="courses_title">
-                <h4 class="courses_details_title">'Rapid Financing Instrument' and 'Rapid Credit Facility' are related
-                  to the provisions of lending by which one of the following ?
-                </h4>
-              </div>
-            </div>
-            <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">World Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-                <?php /*?>     <div class="custom-control custom-radio custom-control-inline">
-   <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-   <label class="custom-control-label" for="customRadioInline1">World Bank</label>
- </div>
- <div class="custom-control custom-radio custom-control-inline">
-   <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-   <label class="custom-control-label" for="customRadioInline2">Asian Development Bank</label>
- </div>
-  <div class="custom-control custom-radio custom-control-inline">
-   <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
-   <label class="custom-control-label" for="customRadioInline3">International Monetary Fund</label>
- </div>
-  <div class="custom-control custom-radio custom-control-inline">
-   <input type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input">
-   <label class="custom-control-label" for="customRadioInline4">United Nations Environment Programme Finance Initiative</label>
- </div><?php */?>
-              </form>
-              <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                    class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
-            </div>
-            <div class="scrolling-box">
-              <h4 class="courses_details_title">Explanation</h4>
-              <p>'Rapid Financing Instrument' and 'Rapid Credit Facility' are related to the provisions of lending by
-                the International Monetary Fund (IMF).</p>
-              <p>The Rapid Financing Instrument (RFI) and the Rapid Credit Facility (RCF) are emergency lending
-                facilities established by the IMF to provide financial assistance to low-income and emerging market
-                countries facing urgent balance of payment needs due to external shocks, natural disasters, conflicts,
-                or other crises.</p>
-              <p>The RFI provides rapid and low-conditionality financial assistance to member countries, whereas the RCF
-                provides financing on concessional terms with a higher degree of conditionality. These facilities
-                provide immediate access to financial resources to help countries address their urgent balance of
-                payment needs and maintain economic stability.</p>
-              <p>Therefore, RFI and RCF are provisions of lending by the IMF to provide emergency financial assistance
-                to member countries.</p>
-            </div>
-          </div>
-          <div class="courses_curriculum mt-50">
-            <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
-              <div class="courses_title">
-                <h4 class="courses_details_title">'Rapid Financing Instrument' and 'Rapid Credit Facility' are related
-                  to the provisions of lending by which one of the following ?
-                </h4>
-              </div>
-            </div>
-            <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">World Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-              </form>
-              <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                    class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
-            </div>
-            <div class="scrolling-box">
-              <h4 class="courses_details_title">Explanation</h4>
-              <p>'Rapid Financing Instrument' and 'Rapid Credit Facility' are related to the provisions of lending by
-                the International Monetary Fund (IMF).</p>
-              <p>The Rapid Financing Instrument (RFI) and the Rapid Credit Facility (RCF) are emergency lending
-                facilities established by the IMF to provide financial assistance to low-income and emerging market
-                countries facing urgent balance of payment needs due to external shocks, natural disasters, conflicts,
-                or other crises.</p>
-              <p>The RFI provides rapid and low-conditionality financial assistance to member countries, whereas the RCF
-                provides financing on concessional terms with a higher degree of conditionality. These facilities
-                provide immediate access to financial resources to help countries address their urgent balance of
-                payment needs and maintain economic stability.</p>
-              <p>Therefore, RFI and RCF are provisions of lending by the IMF to provide emergency financial assistance
-                to member countries.</p>
-            </div>
-          </div>
-          <div class="courses_curriculum mt-50">
-            <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
-              <div class="courses_title">
-                <h4 class="courses_details_title">'Rapid Financing Instrument' and 'Rapid Credit Facility' are related
-                  to the provisions of lending by which one of the following ?
-                </h4>
-              </div>
-            </div>
-            <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">World Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-              </form>
-              <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                    class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
-            </div>
-          </div>
-          <div class="courses_curriculum mt-50">
-            <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
-              <div class="courses_title">
-                <h4 class="courses_details_title">'Rapid Financing Instrument' and 'Rapid Credit Facility' are related
-                  to the provisions of lending by which one of the following ?
-                </h4>
-              </div>
-            </div>
-            <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">World Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-              </form>
-              <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                    class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
-            </div>
-          </div>
-          <div class="courses_curriculum mt-50">
-            <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
-              <div class="courses_title">
-                <h4 class="courses_details_title">'Rapid Financing Instrument' and 'Rapid Credit Facility' are related
-                  to the provisions of lending by which one of the following ?
-                </h4>
-              </div>
-            </div>
-            <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">World Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-              </form>
-              <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                    class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
-            </div>
-          </div>
-        </div>
-        <div class="courses_details_content">
-          <?php /*?><div class="single_courses_details  mt-40">
-                      <ul id="accordion2" class="accordion">
-<li>
-<div class="link bg-dark text-white">UPSC CSE Prelims <i class="fa fa-chevron-down"></i></div>
-<div class="submenu p-3 bg-light">
-<h4 class="courses_details_title">Heading</h4>
-                       <p>'Rapid Financing Instrument' and 'Rapid Credit Facility' are related to the provisions of lending by the International Monetary Fund (IMF).</p>
-<p>The Rapid Financing Instrument (RFI) and the Rapid Credit Facility (RCF) are emergency lending facilities established by the IMF to provide financial assistance to low-income and emerging market countries facing urgent balance of payment needs due to external shocks, natural disasters, conflicts, or other crises.</p>
-<p>The RFI provides rapid and low-conditionality financial assistance to member countries, whereas the RCF provides financing on concessional terms with a higher degree of conditionality. These facilities provide immediate access to financial resources to help countries address their urgent balance of payment needs and maintain economic stability.</p>
-<p>Therefore, RFI and RCF are provisions of lending by the IMF to provide emergency financial assistance to member countries.</p>
-</div>
-</li>
-</ul>
-                   </div><?php */?>
-          <div class="row">
-            <div class="col-6">
-              <div class="single_form">
-                <button class="main-btn">Prev</button>
-              </div>
-            </div>
-            <div class="col-6 text-right">
-              <div class="single_form">
-                <button class="main-btn">Next</button>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          <?php
+        }
+      } else {
+        ?>
+        <script type="text/javascript">
+          location.href = "<?php echo $rtpth; ?>home";
+        </script>
+        <?php
+      }
+      ?>
+    </div>
+  </div>
 </section>
 <?php include('footer.php'); ?>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script>
-  $(function () {
-    var Accordion = function (el, multiple) {
-      this.el = el || {};
-      this.multiple = multiple || false;
-      // Variables privadas
-      var links = this.el.find('.link');
-      // Evento
-      links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown)
-    }
-    Accordion.prototype.dropdown = function (e) {
-      var $el = e.data.el;
-      $this = $(this),
-        $next = $this.next();
-      $next.slideToggle();
-      $this.parent().toggleClass('open');
-      if (!e.data.multiple) {
-        $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-      };
-    }
-    var accordion = new Accordion($('#accordion'), false);
-    var accordion = new Accordion($('#accordion2'), false);
-  });
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-  (function () {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
