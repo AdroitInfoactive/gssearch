@@ -7,17 +7,17 @@ if ((isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") && (isset($_REQUEST[
   inner join years_mst on yearsm_id = addquesm_yearsm_id
   where exam_subcategorym_sts = 'a'";
   if (isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") {
-    $cat_id = glb_func_chkvl($_REQUEST['catid']);
+    $cat_id = ($_REQUEST['catid']);
     $cat_id_qry = funcStrUnRplc($cat_id);
     $sqry_exm_scat1 .= " and prodmnexmsm_name = '$cat_id_qry'";
   }
   if (isset($_REQUEST['scatid']) && $_REQUEST['scatid'] != "") {
-    $scat_id = glb_func_chkvl($_REQUEST['scatid']);
+    echo $scat_id = ($_REQUEST['scatid']);
     $scat_id_qry = funcStrUnRplc($scat_id);
     $sqry_exm_scat1 .= " and exam_subcategorym_name = '$scat_id_qry'";
   }
   if (isset($_REQUEST['yr']) && $_REQUEST['yr'] != "") {
-    $yr_id = glb_func_chkvl($_REQUEST['yr']);
+    $yr_id = ($_REQUEST['yr']);
     $yr_id_qry = funcStrUnRplc($yr_id);
     $sqry_exm_scat1 .= " and  yearsm_name= '$yr_id_qry'";
   }
@@ -49,8 +49,6 @@ $db_seokywrd = "";
 $db_seodesc = "";
 $current_page = "home";
 $body_class = "homepage";
-include_once('script.php');
-include_once('../includes/inc_fnct_ajax_validation.php');
 ?>
 <section class="page_banner bg_cover" style="background-image: url(<?php echo $rtpth; ?>assets/images/about_bg.jpg)">
   <div class="container">

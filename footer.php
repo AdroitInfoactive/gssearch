@@ -141,8 +141,7 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo $rtpth; ?>assets/js/popper.min.js"></script>
 <!--====== Slick js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/slick.min.js"></script>
-<!--====== Magnific Popup js ======-->
+<script src="<?php echo $rtpth; ?>assets/js/slick.min.js"></script><!--====== Magnific Popup js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/jquery.magnific-popup.min.js"></script>
 <!--====== Counter Up js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/waypoints.min.js"></script>
@@ -224,6 +223,7 @@ require_once('settings.php');
       loadPage(prevPage, cat_id, scat_id, yr_id);
     });
     function loadPage(page, cat_id, scat_id, yr_id) {
+      debugger;
       $.ajax({
         url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
         type: 'GET',

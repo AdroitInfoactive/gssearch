@@ -7,22 +7,22 @@ if ((isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") && (isset($_REQUEST[
   inner join years_mst on yearsm_id = addquesm_yearsm_id
   where exam_subcategorym_sts = 'a'";
   if (isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") {
-    $cat_id = glb_func_chkvl($_REQUEST['catid']);
+    $cat_id = ($_REQUEST['catid']);
     $cat_id_qry = funcStrUnRplc($cat_id);
     $sqry_exm_scat1 .= " and prodmnexmsm_name = '$cat_id_qry'";
   }
   if (isset($_REQUEST['scatid']) && $_REQUEST['scatid'] != "") {
-    $scat_id = glb_func_chkvl($_REQUEST['scatid']);
+    $scat_id = ($_REQUEST['scatid']);
     $scat_id_qry = funcStrUnRplc($scat_id);
     $sqry_exm_scat1 .= " and exam_subcategorym_name = '$scat_id_qry'";
   }
   if (isset($_REQUEST['yr']) && $_REQUEST['yr'] != "") {
-    $yr_id = glb_func_chkvl($_REQUEST['yr']);
+    $yr_id = ($_REQUEST['yr']);
     $yr_id_qry = funcStrUnRplc($yr_id);
     $sqry_exm_scat1 .= " and yearsm_name= '$yr_id_qry'";
   }
   if (isset($_REQUEST['qnsid']) && $_REQUEST['qnsid'] != "") {
-    $qns_id = glb_func_chkvl($_REQUEST['qnsid']);
+    $qns_id = ($_REQUEST['qnsid']);
     $qns_id_qry = funcStrUnRplc($qns_id);
     $sqry_exm_scat1 .= " and addquesm_id = '$qns_id_qry'";
   }

@@ -14,17 +14,17 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
   inner join topics_mst on topicsm_id = addquesm_topicsm_id
   left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a'";
   if (isset($_GET['catid']) && $_GET['catid'] != "") {
-    $cat_id = glb_func_chkvl($_GET['catid']);
+    $cat_id = ($_GET['catid']);
     $cat_id_qry = funcStrUnRplc($cat_id);
     $sqry_qns1 .= " and prodmnexmsm_name = '$cat_id_qry'";
   }
   if (isset($_GET['scatid']) && $_GET['scatid'] != "") {
-    $scat_id = glb_func_chkvl($_GET['scatid']);
+    $scat_id = ($_GET['scatid']);
     $scat_id_qry = funcStrUnRplc($scat_id);
     $sqry_qns1 .= " and exam_subcategorym_name = '$scat_id_qry'";
   }
   if (isset($_GET['yr']) && $_GET['yr'] != "") {
-    $yr_id = glb_func_chkvl($_GET['yr']);
+    $yr_id = ($_GET['yr']);
     $yr_id_qry = funcStrUnRplc($yr_id);
     $sqry_qns1 .= " and  yearsm_name= '$yr_id_qry'";
   }

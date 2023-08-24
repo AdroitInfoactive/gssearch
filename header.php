@@ -6,6 +6,8 @@ include_once 'includes/inc_config.php'; //Making paging validation
 include_once $inc_user_cnctn; //Making database Connection
 include_once $inc_user_usr_fnctn; //checking for session	
 include_once $inc_user_fldr_pth;
+include_once $rtpth."script.php";
+include_once $rtpth."includes/inc_fnct_ajax_validation.php";
 if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && isset($_POST['txtpswd']) && (trim($_POST['txtpswd']) != '') && isset($_POST['txtemail']) && (trim($_POST['txtemail']) != '')) {
   include_once "database/sqry_mbr_mst.php";
 }
@@ -95,7 +97,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
               <a href="#">About Us</a>
             </li>
             <li>
-              <a href="<?php echo $rpth; ?>exam-categories">Practice Zone </a>
+              <a href="<?php echo $rtpth; ?>exam-categories">Practice Zone </a>
             </li>
             <!-- <li>
               <a href="#">Gallery </a>
