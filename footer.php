@@ -180,6 +180,27 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
 <script type="text/javascript">
+  function srch(substs) {
+    txtsrchval = document.frmserqtn.txtsrchval.value;
+    if (txtsrchval == "") {
+      alert("Please Enter Search criteria");
+      document.frmserqtn.txtsrchval.focus();
+      return false;
+    }
+    if (txtsrchval != "") {
+      if (substs == 'y')
+      {
+        // get searches count from database
+      }
+      else
+      {
+        debugger;
+        var srchid = encodeURI(document.frmserqtn.txtsrchval.value);
+        document.frmserqtn.action = "<?php echo $rtpth; ?>"+srchid;
+        document.frmserqtn.submit();
+      }
+    }
+  }
   function show_ans(sno, optnid, qtnid) {
     $.ajax({
       url: `<?php echo $rtpth; ?>get_ans.php?sno=${sno}&optnid=${optnid}&qtnid=${qtnid}`,
@@ -257,60 +278,85 @@ require_once('settings.php');
           });
         }
       });
-          <?php
-  } else { ?>
-      $(document).ready(function () {
-        // Initial page load
-        var cat_id = "<?php echo $cat_id; ?>";
-        var scat_id = "<?php echo $scat_id; ?>";
-        var yr_id = "<?php echo $yr_id; ?>";
-        var tot_qns = <?php echo $tot_qns; ?>;
-        loadPage(1, cat_id, scat_id, yr_id);
-        // Load next page
-        $('#qns_lst_dsp').on('click', '.next', function () {
-          let nextPage = parseInt($(this).data('page'))
-          loadPage(nextPage, cat_id, scat_id, yr_id);
-        });
-
-        // Load previous page
-        $('#qns_lst_dsp').on('click', '.prev', function () {
-          let prevPage = parseInt($(this).data('page'))
-          loadPage(prevPage, cat_id, scat_id, yr_id);
-        });
-        function loadPage(page, cat_id, scat_id, yr_id) {
-          $.ajax({
-            url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
-            type: 'GET',
-            success: function (data) {
-              var content = '';
-              content += data;
-              // Append pagination controls
-              content += '<div class="row">';
-              if (page > 1) {
-                content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
-              }
-              if (page * 2 < tot_qns) {
-                content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
-              }
-              content += '</div></div>';
-              $('#qns_lst_dsp').html(content);
-            }
+      <?php
+  } else {
+    if ($tot_qns == "") {
+      $tot_qns1 = 0;
+    } else {
+      $tot_qns1 = $tot_qns;
+    }
+    ?>
+        $(document).ready(function () {
+          // Initial page load
+          var cat_id = "<?php echo $cat_id; ?>";
+          var scat_id = "<?php echo $scat_id; ?>";
+          var yr_id = "<?php echo $yr_id; ?>";
+          var tot_qns = <?php echo $tot_qns1; ?>;
+          loadPage(1, cat_id, scat_id, yr_id);
+          // Load next page
+          $('#qns_lst_dsp').on('click', '.next', function () {
+            let nextPage = parseInt($(this).data('page'))
+            loadPage(nextPage, cat_id, scat_id, yr_id);
           });
-        }
+
+          // Load previous page
+          $('#qns_lst_dsp').on('click', '.prev', function () {
+            let prevPage = parseInt($(this).data('page'))
+            loadPage(prevPage, cat_id, scat_id, yr_id);
+          });
+          function loadPage(page, cat_id, scat_id, yr_id) {
+            $.ajax({
+              url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
+              type: 'GET',
+              success: function (data) {
+                var content = '';
+                content += data;
+                // Append pagination controls
+                content += '<div class="row">';
+                if (page > 1) {
+                  content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
+                }
+                if (page * 2 < tot_qns) {
+                  content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
+                }
+                content += '</div></div>';
+                $('#qns_lst_dsp').html(content);
+              }
+            });
+          }
+        });
+                    <?php
+  }
+  if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
+      onst searchInput = document.getElementById('header_search');
+      const errorMessage = document.getElementById('error-message');
+
+      searchInput.addEventListener('mouseover', () => {
+        errorMessage.style.display = 'block';
+      });
+
+      searchInput.addEventListener('mouseout', () => {
+        errorMessage.style.display = 'none';
+      });
+
+      searchInput.addEventListener('blur', () => {
+        searchInput.blur();
+        // searchButton.blur();
       });
         <?php
   }
   ?>
-    $(document).ready(function () {
+  $(document).ready(function () {
 
-      $('.js-btn-tooltip').tooltip();
-      $('.js-btn-tooltip--custom').tooltip({
-        customClass: 'tooltip-custom'
-      });
-      $('.js-btn-tooltip--custom-alt').tooltip({
-        customClass: 'tooltip-custom-alt'
-      });
+    $('.js-btn-tooltip').tooltip();
+    $('.js-btn-tooltip--custom').tooltip({
+      customClass: 'tooltip-custom'
     });
+    $('.js-btn-tooltip--custom-alt').tooltip({
+      customClass: 'tooltip-custom-alt'
+    });
+  });
+
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';
   lgnrules[1] = 'txtemail|email|Enter Email Id only';

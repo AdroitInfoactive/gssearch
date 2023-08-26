@@ -6,20 +6,9 @@ include_once 'includes/inc_config.php'; //Making paging validation
 include_once $inc_user_cnctn; //Making database Connection
 include_once $inc_user_usr_fnctn; //checking for session	
 include_once $inc_user_fldr_pth;
-include_once $rtpth."script.php";
-include_once $rtpth."includes/inc_fnct_ajax_validation.php";
-
-require 'vendor/autoload.php';
-
-use Ramsey\Uuid\Uuid;
-
-// Replace with your actual device identifier (e.g., MAC address)
-$deviceIdentifier = '00:11:22:33:44:55';
-
-// Generate a version 5 UUID (namespace-based UUID using DNS namespace)
-$deviceUuid = Uuid::uuid5(Uuid::NAMESPACE_DNS, $deviceIdentifier);
-
-echo "Device UUID: " . $deviceUuid->toString() . "\n"; exit;
+include_once $rtpth . "script.php";
+include_once $rtpth . "includes/inc_fnct_ajax_validation.php";
+include_once $inc_mbr_sess;
 
 if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && isset($_POST['txtpswd']) && (trim($_POST['txtpswd']) != '') && isset($_POST['txtemail']) && (trim($_POST['txtemail']) != '')) {
   include_once "database/sqry_mbr_mst.php";
@@ -82,6 +71,15 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 </head>
 
 <body>
+  <?php
+  if ($_SESSION['sesmbrid'] == '') {
+    $stl = "filter: blur(1.5px);";
+    $dsbld = "disabled";
+  } else {
+    $stl = "";
+    $dsbld = "";
+  }
+  ?>
   <!--====== PRELOADER PART START ======-->
   <!-- <div id="preloader">
     <div class="preloader">
@@ -129,10 +127,14 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
             </div>
           </div>
           <div class="col-lg-5">
-            <div class="header_search">
-              <input type="text" placeholder="Search">
-              <button><i class="fa fa-search"></i></button>
+            <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
+              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
+                <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
+              </form>
             </div>
+            <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search
+              questions across the site</div>
           </div>
           <?php
           if ($_SESSION['sesmbrid'] == '') { ?>
@@ -154,7 +156,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
               <li class="dropdown show"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                   aria-expanded="true">
                   Welcome, <span class="user">
-                    <?php echo $_SESSION['sesmbrname']; ?>
+                    <?php echo $membrname; ?>
                   </span></span><i class="fa fa-user" style="color:#aa8c2c"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right show" role="menu" x-placement="bottom-end"

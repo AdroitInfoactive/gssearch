@@ -8,6 +8,11 @@ DirectoryIndex index.html index.php
 
 ErrorDocument 404 /404.php
 RewriteRule ^home$ index.php [L]
+RewriteRule ^exam-categories$ exam_categories.php [L]
+RewriteRule ^aboutus$ aboutus.php [L]
+RewriteRule ^contact$ contactus.php [L]
+RewriteRule ^logout$ usrlogout.php [L]
+
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^([A-Za-z0-9-_~()]+)$ search_results.php?srch=$1 [L,QSA]
@@ -16,10 +21,7 @@ RewriteRule ^([A-Za-z0-9-_~()]+)/([A-Za-z0-9-_~()]+)/([A-Za-z0-9-_~()]+)/([A-Za-
 
 # RewriteRule ^(.*)/(.*)/(.*)/(.*)$ lnk_shrd.php?catid=$1&scatid=$2&yr=$3&qnsid=$4 [L,QSA]
 
-RewriteRule ^aboutus$ aboutus.php [L]
-RewriteRule ^contact$ contactus.php [L]
-RewriteRule ^logout$ usrlogout.php [L]
-RewriteRule ^exam-categories$ exam_categories.php [L]
+
 RewriteRule ^error$ error.php [L]
 RewriteRule ^404error$ 404.php [L]
 
