@@ -120,6 +120,14 @@ error_reporting(0);
 									</a>
 								</li>
 								<li class="nav-item">
+									<a href="view_subscription_amt.php" class="nav-link <?php if ($pagenm == "Subscription") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Subscription</p>
+									</a>
+								</li>
+								<li class="nav-item">
 									<a href="view_topics.php" class="nav-link <?php if ($pagenm == "topics") {
 										echo "active";
 									} ?>">
