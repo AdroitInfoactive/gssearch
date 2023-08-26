@@ -288,10 +288,11 @@ include_once $inc_adm_hdr;
                     echo "";
                   } ?>>
                   <td><?php echo $cnt; ?></td>
-                  <td>
+				  <td><?php echo $db_catname; ?></td>
+                  <!-- <td>
                     <a href="<?php echo $rd_vwpgnm; ?>?vw=<?php echo $db_catid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="links"><?php echo $db_catname; ?></a>
-                  </td>
-                  <!-- <td align="center"><?php echo funcDsplyTyp($db_dplytyp); ?></td> -->
+                  </td> -->
+                 
                   <td align="center"><?php echo $db_cnt; ?></td>
                   <td align="center">
                     <a href="<?php echo $rd_edtpgnm; ?>?edtpdctid=<?php echo $db_catid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="contentlinks">Edit</a>
