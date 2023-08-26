@@ -185,20 +185,36 @@ require_once('settings.php');
     if (txtsrchval == "") {
       alert("Please Enter Search criteria");
       document.frmserqtn.txtsrchval.focus();
+      event.preventDefault();
       return false;
     }
     if (txtsrchval != "") {
-      if (substs == 'y')
-      {
+      var srchid = document.frmserqtn.txtsrchval.value;
+      srchtxt = srchid.replace(/ /g, "-");
+      if (substs == 'n') {
         // get searches count from database
+        $.ajax({
+          url: `<?php echo $rtpth; ?>get_srchs_cnt.php?srchtxt=${srchtxt}`,
+          type: 'GET',
+          success: function (data) {
+            alert(data);
+            if (data == "y")
+            {
+              document.frmserqtn.action = "<?php echo $rtpth; ?>search/" + srchtxt;
+              document.frmserqtn.submit();
+            }
+            else
+            {
+              alert("Please subscribe to get full search access");
+            }
+          }
+        });
       }
-      else
-      {
-        debugger;
-        var srchid = encodeURI(document.frmserqtn.txtsrchval.value);
-        document.frmserqtn.action = "<?php echo $rtpth; ?>"+srchid;
+      else {
+        document.frmserqtn.action = "<?php echo $rtpth; ?>search/" + srchtxt;
         document.frmserqtn.submit();
       }
+      event.preventDefault();
     }
   }
   function show_ans(sno, optnid, qtnid) {
@@ -278,7 +294,7 @@ require_once('settings.php');
           });
         }
       });
-      <?php
+          <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -325,7 +341,7 @@ require_once('settings.php');
             });
           }
         });
-                    <?php
+        <?php
   }
   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
       onst searchInput = document.getElementById('header_search');
@@ -343,19 +359,19 @@ require_once('settings.php');
         searchInput.blur();
         // searchButton.blur();
       });
-        <?php
+            <?php
   }
   ?>
-  $(document).ready(function () {
+    $(document).ready(function () {
 
-    $('.js-btn-tooltip').tooltip();
-    $('.js-btn-tooltip--custom').tooltip({
-      customClass: 'tooltip-custom'
+      $('.js-btn-tooltip').tooltip();
+      $('.js-btn-tooltip--custom').tooltip({
+        customClass: 'tooltip-custom'
+      });
+      $('.js-btn-tooltip--custom-alt').tooltip({
+        customClass: 'tooltip-custom-alt'
+      });
     });
-    $('.js-btn-tooltip--custom-alt').tooltip({
-      customClass: 'tooltip-custom-alt'
-    });
-  });
 
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';

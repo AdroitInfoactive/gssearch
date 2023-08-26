@@ -1,4 +1,6 @@
 <?php
+session_start();
+error_reporting(0);
 include_once 'includes/inc_config.php'; //Making paging validation	
 include_once $inc_user_cnctn; //Making database Connection
 include_once $inc_user_usr_fnctn; //checking for session	
