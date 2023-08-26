@@ -8,6 +8,19 @@ include_once $inc_user_usr_fnctn; //checking for session
 include_once $inc_user_fldr_pth;
 include_once $rtpth."script.php";
 include_once $rtpth."includes/inc_fnct_ajax_validation.php";
+
+require 'vendor/autoload.php';
+
+use Ramsey\Uuid\Uuid;
+
+// Replace with your actual device identifier (e.g., MAC address)
+$deviceIdentifier = '00:11:22:33:44:55';
+
+// Generate a version 5 UUID (namespace-based UUID using DNS namespace)
+$deviceUuid = Uuid::uuid5(Uuid::NAMESPACE_DNS, $deviceIdentifier);
+
+echo "Device UUID: " . $deviceUuid->toString() . "\n"; exit;
+
 if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && isset($_POST['txtpswd']) && (trim($_POST['txtpswd']) != '') && isset($_POST['txtemail']) && (trim($_POST['txtemail']) != '')) {
   include_once "database/sqry_mbr_mst.php";
 }

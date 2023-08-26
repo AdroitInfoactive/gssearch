@@ -204,56 +204,113 @@ require_once('settings.php');
       }
     });
   }
-  $(document).ready(function () {
-    // Initial page load
-    var cat_id = "<?php echo $cat_id; ?>";
-    var scat_id = "<?php echo $scat_id; ?>";
-    var yr_id = "<?php echo $yr_id; ?>";
-    var tot_qns = <?php echo $tot_qns; ?>;
-    loadPage(1, cat_id, scat_id, yr_id);
-    // Load next page
-    $('#qns_lst_dsp').on('click', '.next', function () {
-      let nextPage = parseInt($(this).data('page'))
-      loadPage(nextPage, cat_id, scat_id, yr_id);
-    });
+  <?php
+  if ($page_title == "Search") { ?>
+      $(document).ready(function () {
+        // Initial page load
+        var srch_txt = "<?php echo $srch_txt; ?>";
+        var tot_qns_srch = <?php echo $tot_qns; ?>;
+        loadPage_srch(1, srch_txt);
+        // Load next page
+        $('#qns_lst_dsp_srch').on('click', '.next', function () {
+          let nextPage_srch = parseInt($(this).data('page'))
+          loadPage_srch(nextPage_srch, srch_txt);
+        });
+        // Load specific page
+        $('#qns_lst_dsp_srch').on('click', '.page-number', function () {
+          debugger;
+          let pageNumber = parseInt($(this).data('page'));
+          loadPage_srch(pageNumber, srch_txt);
+        });
 
-    // Load previous page
-    $('#qns_lst_dsp').on('click', '.prev', function () {
-      let prevPage = parseInt($(this).data('page'))
-      loadPage(prevPage, cat_id, scat_id, yr_id);
-    });
-    function loadPage(page, cat_id, scat_id, yr_id) {
-      debugger;
-      $.ajax({
-        url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
-        type: 'GET',
-        success: function (data) {
-          var content = '';
-          content += data;
-          // Append pagination controls
-          content += '<div class="row">';
-          if (page > 1) {
-            content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
-          }
-          if (page * 2 < tot_qns) {
-            content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
-          }
-          content += '</div></div>';
-          $('#qns_lst_dsp').html(content);
+        // Load previous page
+        $('#qns_lst_dsp_srch').on('click', '.prev', function () {
+          let prevPage_srch = parseInt($(this).data('page'))
+          loadPage_srch(prevPage_srch, srch_txt);
+        });
+        function loadPage_srch(page_srch, srch_txt) {
+          $.ajax({
+            url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
+            type: 'GET',
+            success: function (data_srch) {
+              var content_srch = '';
+              content_srch += data_srch;
+              // Append pagination controls
+              content_srch += '<div class="row">';
+              if (page_srch > 1) {
+                content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
+              }
+              for (let k = 1; k <= Math.ceil(tot_qns_srch / 10); k++) {
+                if (k === page_srch) {
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
+                } else {
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
+                }
+                content_srch += ``;
+              }
+              if (page_srch * 2 < tot_qns_srch) {
+                content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
+              }
+              content_srch += '</div>';
+              $('#qns_lst_dsp_srch').html(content_srch);
+            }
+          });
         }
       });
-    }
-  });
-  $(document).ready(function () {
+          <?php
+  } else { ?>
+      $(document).ready(function () {
+        // Initial page load
+        var cat_id = "<?php echo $cat_id; ?>";
+        var scat_id = "<?php echo $scat_id; ?>";
+        var yr_id = "<?php echo $yr_id; ?>";
+        var tot_qns = <?php echo $tot_qns; ?>;
+        loadPage(1, cat_id, scat_id, yr_id);
+        // Load next page
+        $('#qns_lst_dsp').on('click', '.next', function () {
+          let nextPage = parseInt($(this).data('page'))
+          loadPage(nextPage, cat_id, scat_id, yr_id);
+        });
 
-    $('.js-btn-tooltip').tooltip();
-    $('.js-btn-tooltip--custom').tooltip({
-      customClass: 'tooltip-custom'
+        // Load previous page
+        $('#qns_lst_dsp').on('click', '.prev', function () {
+          let prevPage = parseInt($(this).data('page'))
+          loadPage(prevPage, cat_id, scat_id, yr_id);
+        });
+        function loadPage(page, cat_id, scat_id, yr_id) {
+          $.ajax({
+            url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
+            type: 'GET',
+            success: function (data) {
+              var content = '';
+              content += data;
+              // Append pagination controls
+              content += '<div class="row">';
+              if (page > 1) {
+                content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
+              }
+              if (page * 2 < tot_qns) {
+                content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
+              }
+              content += '</div></div>';
+              $('#qns_lst_dsp').html(content);
+            }
+          });
+        }
+      });
+        <?php
+  }
+  ?>
+    $(document).ready(function () {
+
+      $('.js-btn-tooltip').tooltip();
+      $('.js-btn-tooltip--custom').tooltip({
+        customClass: 'tooltip-custom'
+      });
+      $('.js-btn-tooltip--custom-alt').tooltip({
+        customClass: 'tooltip-custom-alt'
+      });
     });
-    $('.js-btn-tooltip--custom-alt').tooltip({
-      customClass: 'tooltip-custom-alt'
-    });
-  });
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';
   lgnrules[1] = 'txtemail|email|Enter Email Id only';
