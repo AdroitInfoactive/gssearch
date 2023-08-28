@@ -344,7 +344,7 @@ require_once('settings.php');
         <?php
   }
   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
-      onst searchInput = document.getElementById('header_search');
+      const searchInput = document.getElementById('header_search');
       const errorMessage = document.getElementById('error-message');
 
       searchInput.addEventListener('mouseover', () => {

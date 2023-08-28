@@ -22,7 +22,7 @@ global $id, $pg, $countstart;
 $rd_vwpgnm = "view_detail_questions.php";
 $clspn_val = "4";
 /*****header link********/
-$pagemncat = "Setup";
+$pagemncat = "Questions";
 $pagecat = "Product Group";
 $pagenm = "Questions";
 /*****header link********/

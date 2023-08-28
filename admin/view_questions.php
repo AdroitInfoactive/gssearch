@@ -25,7 +25,7 @@ $rd_crntpgnm = "view_questions.php";
 $rd_vwpgnm = "view_detail_questions.php";
 $loc = "";
 /*****header link********/
-$pagemncat = "Setup";
+$pagemncat = "Questions";
 $pagecat = "";
 $pagenm = "Questions";
 /*****header link********/

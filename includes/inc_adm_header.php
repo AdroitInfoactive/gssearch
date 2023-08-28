@@ -40,8 +40,8 @@ error_reporting(0);
 			<!-- Brand Logo -->
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 				<div class="image">
-					<img src="<?php echo $rtpth; ?>assets/images/logos/" class="elevation-2"
-						alt="G S Search" style="background-color: white">
+					<img src="<?php echo $rtpth; ?>assets/images/logos/" class="elevation-2" alt="G S Search"
+						style="background-color: white">
 				</div>
 				<div class="info">
 					<a href="#" class="d-block"></a>
@@ -144,23 +144,6 @@ error_reporting(0);
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="view_questions.php" class="nav-link <?php if ($pagenm == "Questions") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p>Add Questions</p>
-									</a>
-								</li>
-
-								<li class="nav-item">
-									<a href="add_blkqns.php" class="nav-link <?php if ($pagenm == "Question Bulk Upload") {
-										echo "active";
-									} ?>">
-										<i class="far fa-dot-circle nav-icon"></i>
-										<p>Question Bulk Upload</p>
-									</a>
-								</li>
-								<li class="nav-item">
 									<a href="view_srchlmts.php" class="nav-link <?php if ($pagenm == "Search") {
 										echo "active";
 									} ?>">
@@ -168,7 +151,6 @@ error_reporting(0);
 										<p>Search Limitations</p>
 									</a>
 								</li>
-								
 								<!-- <li class="nav-item">
 									<a href="view_all_stdtestmnl.php" class="nav-link <?php if ($pagenm == "Student Testimonial") {
 										echo "active";
@@ -177,9 +159,35 @@ error_reporting(0);
 										<p>Student Testimonial</p>
 									</a>
 								</li> -->
-							
-								
-							
+
+							</ul>
+						</li>
+						<li class="nav-item has-treeview <?php if ($pagemncat == "Questions") {
+							echo "menu-open";
+						} ?>">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-circle"></i>
+								<p>Questions<i class="right fas fa-angle-left"></i></p>
+							</a>
+							<ul class="nav nav-treeview <?php if ($pagemncat == "Questions") {
+								echo "menu-open";
+							} ?>">
+								<li class="nav-item">
+									<a href="view_questions.php" class="nav-link <?php if ($pagenm == "Questions") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Add Questions</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="add_blkqns.php" class="nav-link <?php if ($pagenm == "Question Bulk Upload") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Question Bulk Upload</p>
+									</a>
+								</li>
 							</ul>
 						</li>
 
@@ -214,7 +222,7 @@ error_reporting(0);
 
 							</ul>
 						</li>
-					
+
 
 					</ul>
 				</nav>
@@ -224,4 +232,3 @@ error_reporting(0);
 		</aside>
 
 		<div class="content-wrapper">
-			

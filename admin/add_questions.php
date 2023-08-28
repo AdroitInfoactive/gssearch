@@ -18,7 +18,7 @@ Purpose :
 Company : Adroit
  ************************************************************/
 /*****header link********/
-$pagemncat = "Setup";
+$pagemncat = "Questions";
 $pagecat = "";
 $pagenm = "Questions";
 /*****header link********/

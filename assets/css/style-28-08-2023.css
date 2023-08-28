@@ -134,7 +134,7 @@ ol {
     padding: 0px;
     list-style-type: none;
 }
-.rightlinks li a{ color:#484848 !important;}
+
 p {
     font-size: 16px;
     font-weight: 400;
@@ -4903,10 +4903,9 @@ p {
 .courses_details_content {}
 
 .courses_details_title {
-    font-size: 15px;
+    font-size: 24px;
     color: #002639;
-    font-weight: normal;
-	line-height:20px;
+    font-weight: 600;
 }
 
 .single_courses_details {}

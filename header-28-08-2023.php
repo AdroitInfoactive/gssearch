@@ -55,7 +55,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
   <link rel="stylesheet" href="<?php echo $rtpth; ?>assets/css/responsive.css">
   <?php
   if ($servr_ip != "127.0.0.1") { ?>
-  <script>
+    <script>
       document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
       });
@@ -152,13 +152,15 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
             </div>
             <?php
           } else { ?>
-            <div class="col-sm-4"><ul class="main_menu rightlinks text-center" id="userMenu">
-              <li class="text-dark"> <a href="#" style="color:#484848;">
+            <ul class="topLinks" id="userMenu">
+              <li class="dropdown show"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                  aria-expanded="true">
                   Welcome, <span class="user">
                     <?php echo $membrname; ?>
-                  </span></span><i class="fa fa-user"></i>
+                  </span></span><i class="fa fa-user" style="color:#aa8c2c"></i>
                 </a>
-                <ul class="sub-menu text-left">
+                <ul class="dropdown-menu dropdown-menu-right show" role="menu" x-placement="bottom-end"
+                  style="position: absolute; transform: translate3d(-134px, 18px, 0px); top: 0px; left: 0px; will-change: transform;">
                   <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
                   </li>
                   <li><a href="<?php echo $rtpth; ?>change-password">Change
@@ -168,7 +170,6 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
             </ul>
             </li>
             </ul>
-            </div>
             <?php
           }
           ?>
@@ -232,44 +233,6 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
           </div>
           <div class="navbar_meta">
             <ul>
-            
-            
-            
-            <?php
-          if ($_SESSION['sesmbrid'] == '') { ?>
-           
-                <a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
-                  Login</a>
-              </li>
-              
-              
-            
-            <?php
-          } else { ?>
-           <li> <ul class="main_menu rightlinks text-center" id="userMenu">
-              <li class="text-dark"> <a href="#" style="color:#484848;">
-               <span class="user">
-                  <?php echo $membrname; ?>
-                </span></span><i class="fa fa-user"></i>
-              </a>
-              <ul class="sub-menu text-left">
-                <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
-                </li>
-                <li><a href="<?php echo $rtpth; ?>change-password">Change
-                    Password</a></li>
-              </li>
-              <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
-            </ul></li>
-            </li>
-            </ul>
-            
-            <?php
-          }
-          ?>
-            
-            
-            
-            
               <li>
                 <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
                 <div class="search_bar">
