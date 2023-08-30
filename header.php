@@ -14,8 +14,10 @@ if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && 
   include_once "database/sqry_mbr_mst.php";
 }
 if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Register') && isset($_POST['txtemail_rgstr']) && (trim($_POST['txtemail_rgstr']) != '') && isset($_POST['txtpswd_rgstr']) && (trim($_POST['txtpswd_rgstr']) != '') && isset($_POST['txtcnfpswd_rgstr']) && (trim($_POST['txtcnfpswd_rgstr']) != '')) {
-  // write new code to check the login
   include_once "database/iqry_mbr_mst.php";
+}
+if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'Submit') && isset($_POST['txtchngpwd_oldpswd']) && (trim($_POST['txtchngpwd_oldpswd']) != '') && isset($_POST['txtchngpwd_nwpswd']) && (trim($_POST['txtchngpwd_nwpswd']) != '') && isset($_POST['txtchngpwd_nwcnfpswd']) && (trim($_POST['txtchngpwd_nwcnfpswd']) != '')) {
+  include_once "database/uqry_chng_pwd.php";
 }
 ?>
 <!doctype html>
@@ -161,8 +163,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
                 <ul class="sub-menu text-left">
                   <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
                   </li>
-                  <li><a href="<?php echo $rtpth; ?>change-password">Change
-                      Password</a></li>
+                  <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
               </li>
               <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
             </ul>

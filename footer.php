@@ -56,6 +56,58 @@ require_once('settings.php');
     </div>
   </div>
 </div>
+<div class="modal fade" id="chngpwdModal" tabindex="-1" role="dialog" aria-labelledby="chngpwdModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Change Password</h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form name="frm_chng_pwd" id="frm_chng_pwd" enctype="multipart/form-data" method="POST" action=""
+            onsubmit="return performCheck('frm_chng_pwd', chng_pwdrules,'inline')">
+            <input type="hidden" name="hdn_mbr_id" id="hdn_mbr_id" value="<?php echo $membrid; ?>" />
+            <div class="form-group">
+              <input type="text" class="form-control" id="txtchngpwd_email" name="txtchngpwd_email"
+                placeholder="Email Address*" value="<?php echo $membremail; ?>" disabled style="cursor: not-allowed;">
+              <span id="errorsDiv_txtchngpwd_email" style="color: orangered;"></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="txtchngpwd_oldpswd" name="txtchngpwd_oldpswd"
+                placeholder="Old Password*">
+              <span id="errorsDiv_txtchngpwd_oldpswd" style="color: orangered;"></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="txtchngpwd_nwpswd" name="txtchngpwd_nwpswd"
+                placeholder="New Password*">
+              <span id="errorsDiv_txtchngpwd_nwpswd" style="color: orangered;"></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="txtchngpwd_nwcnfpswd" name="txtchngpwd_nwcnfpswd"
+                placeholder="New Password*">
+              <span id="errorsDiv_txtchngpwd_nwcnfpswd" style="color: orangered;"></span>
+            </div>
+            <!-- <button type="button" class="btn btn-info btn-block btn-round">Login</button> -->
+            <input type="submit" name="btnsbmt_chng_pwd" id="btnsbmt_chng_pwd" value="Submit"
+              class="btn btn-info btn-block btn-round" />
+          </form>
+          <!-- <div class="text-center text-muted delimiter">or use a Google Account</div>
+          <button type="button" class="login-with-google-btn">Login with Google</button> -->
+        </div>
+      </div>
+      <!-- <div class="modal-footer d-flex justify-content-center">
+        <div class="signup-section">Not a member yet? <a href="" data-toggle="modal" data-target="#registerModal"
+            data-dismiss="modal" class="text-info">Register</a>.</div>
+      </div> -->
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -197,14 +249,12 @@ require_once('settings.php');
           url: `<?php echo $rtpth; ?>get_srchs_cnt.php?srchtxt=${srchtxt}`,
           type: 'GET',
           success: function (data) {
-            alert(data);
-            if (data == "y")
-            {
+            // alert(data);
+            if (data == "y") {
               document.frmserqtn.action = "<?php echo $rtpth; ?>search/" + srchtxt;
               document.frmserqtn.submit();
             }
-            else
-            {
+            else {
               alert("Please subscribe to get full search access");
             }
           }
@@ -294,7 +344,7 @@ require_once('settings.php');
           });
         }
       });
-          <?php
+              <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -341,10 +391,10 @@ require_once('settings.php');
             });
           }
         });
-        <?php
+            <?php
   }
   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
-      const searchInput = document.getElementById('header_search');
+          const searchInput = document.getElementById('header_search');
       const errorMessage = document.getElementById('error-message');
 
       searchInput.addEventListener('mouseover', () => {
@@ -359,7 +409,7 @@ require_once('settings.php');
         searchInput.blur();
         // searchButton.blur();
       });
-            <?php
+                <?php
   }
   ?>
     $(document).ready(function () {
@@ -384,6 +434,11 @@ require_once('settings.php');
   rgstrrules[3] = 'txtpswd_rgstr|required|Enter Password';
   rgstrrules[4] = 'txtcnfpswd_rgstr|required|Enter Confirm Password';
   rgstrrules[5] = 'txtcnfpswd_rgstr|equal|$txtpswd_rgstr|Password not match';
+  var chng_pwdrules = new Array();
+  chng_pwdrules[1] = 'txtchngpwd_oldpswd|required|Enter Old Password';
+  chng_pwdrules[2] = 'txtchngpwd_nwpswd|required|Enter New Password';
+  chng_pwdrules[3] = 'txtchngpwd_nwcnfpswd|required|Enter Confirm Password';
+  chng_pwdrules[4] = 'txtchngpwd_nwcnfpswd|equal|$txtchngpwd_nwpswd|Password not match';
   function get_qns_lnk(url) {
     var encurl = encodeURI(url)
     var waurl = "whatsapp://send?text=" + encurl;
