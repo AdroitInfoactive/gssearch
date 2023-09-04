@@ -48,10 +48,18 @@ if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && 
       $sub_sts = "n";
     }
     $_SESSION['sesssubsts'] = $sub_sts;
+    if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '')
+    {
+      $rdpth = $_SERVER['HTTP_REFERER'];
+    }
+    else {
+      $rdpth = $rtpth.'home';
+    }
+    $_SERVER['HTTP_REFERER']
     ?>
     <script language="javascript" type="text/javascript">
       // alert("User account already exist with the provided email address");
-      location.href = "<?php echo $rtpth . 'home' ?>";
+      location.href = "<?php echo $rdpth; ?>";
     </script>
     <?php
     // $greg_msg = "Duplicate email id, account not created";
@@ -59,7 +67,7 @@ if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && 
     ?>
     <script language="javascript" type="text/javascript">
       alert("No Account found with the provided credentials. Please try again");
-      location.href = "<?php echo $rtpth . 'home' ?>";
+      location.href = "<?php echo $rdpth; ?>";
     </script>
     <?php
   }

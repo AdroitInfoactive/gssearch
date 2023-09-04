@@ -18,7 +18,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 			?>
 			<script language="javascript" type="text/javascript">
 				alert("User account already exist with the provided email address");
-				location.href = "<?php echo $rtpth . 'home' ?>";
+				location.href = "<?php echo $rdpth; ?>";
 			</script>
 			<?php
 			// $greg_msg = "Duplicate email id, account not created";
@@ -104,17 +104,22 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 					$sub_sts = "n";
 				}
 				$_SESSION['sesssubsts'] = $sub_sts;
+				if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '') {
+					$rdpth = $_SERVER['HTTP_REFERER'];
+				} else {
+					$rdpth = $rtpth . 'home';
+				}
 				?>
 				<script language="javascript" type="text/javascript">
 					// alert("User account already exist with the provided email address");
-					location.href = "<?php echo $rtpth . 'home' ?>";
+					location.href = "<?php echo $rdpth; ?>";
 				</script>
 				<?php
 				//echo "$$$$". $id;exit;
 				?>
 				<script language="javascript" type="text/javascript">
 					alert("Congratulations \n Your account has been created successfully");
-					location.href = "<?php echo $rtpth . 'home' ?>";
+					location.href = "<?php echo $rdpth; ?>";
 				</script>
 				<?php
 			}
