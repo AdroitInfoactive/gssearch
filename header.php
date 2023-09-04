@@ -11,6 +11,7 @@ include_once $rtpth . "includes/inc_fnct_ajax_validation.php";
 include_once $inc_mbr_sess;
 
 if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && isset($_POST['txtpswd']) && (trim($_POST['txtpswd']) != '') && isset($_POST['txtemail']) && (trim($_POST['txtemail']) != '')) {
+  echo "here"; exit;
   include_once "database/sqry_mbr_mst.php";
 }
 if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Register') && isset($_POST['txtemail_rgstr']) && (trim($_POST['txtemail_rgstr']) != '') && isset($_POST['txtpswd_rgstr']) && (trim($_POST['txtpswd_rgstr']) != '') && isset($_POST['txtcnfpswd_rgstr']) && (trim($_POST['txtcnfpswd_rgstr']) != '')) {
@@ -58,14 +59,14 @@ if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'S
   <?php
   if ($servr_ip != "127.0.0.1") { ?>
   <script>
-      document.addEventListener('contextmenu', function (e) {
+     /*  document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
       });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'F12' || e.keyCode === 123) {
           e.preventDefault();
         }
-      });
+      }); */
     </script>
     <?php
   }
@@ -129,14 +130,19 @@ if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'S
             </div>
           </div>
           <div class="col-lg-5">
-            <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
+            <div class="header_search" id="header_search">
+              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
+                <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
               <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
                 <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
                 <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
               </form>
             </div>
-            <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search
-              questions across the site</div>
+            <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
           </div>
           <?php
           if ($_SESSION['sesmbrid'] == '') { ?>

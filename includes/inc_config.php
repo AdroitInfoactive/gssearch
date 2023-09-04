@@ -51,6 +51,7 @@ $inc_user_fnct_fleupld = "includes/inc_fnct_fleupld.php";
 $inc_user_fnc_ajax_vdtn = "includes/inc_fnct_ajax_validation.php";
 $inc_user_fldr_pth = "includes/inc_folder_path.php";
 $inc_user_pgng_fnctns = "includes/inc_paging_functions.php";
+$inc_user_pswd_gnrtr= "includes/inc_password_generator.php";
 $inc_user_pgng1 = "includes/inc_paging1.php";
 $inc_user_usrsesn = "includes/inc_usr_session.php";
 $inc_user_lftblck = "leftblock.php";

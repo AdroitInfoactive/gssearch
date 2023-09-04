@@ -4912,7 +4912,7 @@ p {
 .single_courses_details {}
 
 .single_courses_details p {
-    margin-top: 15px;
+    margin-top: 0;
 }
 
 .single_courses_details ul {
@@ -4959,6 +4959,7 @@ p {
 
 .courses_curriculum {
     border: 1px solid #ebebeb;
+	padding: 10px;
 }
 
 .courses_curriculum .accordion {

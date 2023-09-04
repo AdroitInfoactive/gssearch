@@ -45,10 +45,10 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
       while ($srows_qns = mysqli_fetch_assoc($srs_qns)) {
         $i++;
         $qn_id = $srows_qns['addquesm_id'];
-        $qn_qnm = strip_tags(html_entity_decode($srows_qns['addquesm_qnm']));
+        $qn_qnm = html_entity_decode($srows_qns['addquesm_qnm']);
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
-        $qn_expln = strip_tags(html_entity_decode($srows_qns['addquesm_expln']));
+        $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
         $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
@@ -75,7 +75,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
                   name="<?php echo $i; ?>customRadioInline<?php echo $i; ?>" class="custom-control-input"
                   onclick="show_ans(<?php echo $i; ?>,<?php echo $j; ?>,<?php echo $qn_id; ?>);">
                 <label class="custom-control-label" for="<?php echo $i; ?>customRadioInline<?php echo $j; ?>">
-                  <?php echo strip_tags(html_entity_decode($srows_qns['addquesm_optn' . $j])); ?>
+                  <?php echo html_entity_decode($srows_qns['addquesm_optn' . $j]); ?>
                 </label>
               </div>
               <?php
@@ -156,10 +156,10 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
       while ($srows_qns = mysqli_fetch_assoc($srs_qns_srch)) {
         $i++;
         $qn_id = $srows_qns['addquesm_id'];
-        $qn_qnm = strip_tags(html_entity_decode($srows_qns['addquesm_qnm']));
+        $qn_qnm = html_entity_decode($srows_qns['addquesm_qnm']);
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
-        $qn_expln = strip_tags(html_entity_decode($srows_qns['addquesm_expln']));
+        $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
         $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
@@ -186,7 +186,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
                   name="<?php echo $i; ?>customRadioInline<?php echo $i; ?>" class="custom-control-input"
                   onclick="show_ans(<?php echo $i; ?>,<?php echo $j; ?>,<?php echo $qn_id; ?>);">
                 <label class="custom-control-label" for="<?php echo $i; ?>customRadioInline<?php echo $j; ?>">
-                  <?php echo strip_tags(html_entity_decode($srows_qns['addquesm_optn' . $j])); ?>
+                  <?php echo html_entity_decode($srows_qns['addquesm_optn' . $j]); ?>
                 </label>
               </div>
               <?php

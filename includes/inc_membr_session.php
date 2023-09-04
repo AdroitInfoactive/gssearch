@@ -1,5 +1,8 @@
 <?php
-session_start();
+/* session_start();
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>"; exit; */
 /* if ((!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) && (!isset($_SESSION['sesmbremail']) || ($_SESSION['sesmbremail'] == ""))) {
 	?>
 	<script type="text/javascript">

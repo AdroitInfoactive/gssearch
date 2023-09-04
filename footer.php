@@ -46,7 +46,9 @@ require_once('settings.php');
               class="btn btn-info btn-block btn-round" />
           </form>
           <div class="text-center text-muted delimiter">or use a Google Account</div>
-          <button type="button" class="login-with-google-btn">Login with Google</button>
+          <a class="login-with-google-btn"
+            href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i
+              class="fab fa-google-plus-g"></i> Login / Register with Google</a>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
@@ -153,7 +155,7 @@ require_once('settings.php');
           <div class="text-center text-muted delimiter">or use a Google Account</div>
           <a class="login-with-google-btn"
             href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i
-              class="fab fa-google-plus-g"></i> Register with Google</a>
+              class="fab fa-google-plus-g"></i> Register / Login with Google</a>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
@@ -243,6 +245,11 @@ require_once('settings.php');
     if (txtsrchval != "") {
       var srchid = document.frmserqtn.txtsrchval.value;
       srchtxt = srchid.replace(/ /g, "-");
+      if (substs == '') {
+        alert("Please Login to enable search...");
+        event.preventDefault();
+        return false;
+      }
       if (substs == 'n') {
         // get searches count from database
         $.ajax({
@@ -256,6 +263,8 @@ require_once('settings.php');
             }
             else {
               alert("Please subscribe to get full search access");
+              event.preventDefault();
+              return false;
             }
           }
         });
@@ -344,7 +353,7 @@ require_once('settings.php');
           });
         }
       });
-              <?php
+                  <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -391,26 +400,26 @@ require_once('settings.php');
             });
           }
         });
-            <?php
-  }
-  if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
-          const searchInput = document.getElementById('header_search');
-      const errorMessage = document.getElementById('error-message');
-
-      searchInput.addEventListener('mouseover', () => {
-        errorMessage.style.display = 'block';
-      });
-
-      searchInput.addEventListener('mouseout', () => {
-        errorMessage.style.display = 'none';
-      });
-
-      searchInput.addEventListener('blur', () => {
-        searchInput.blur();
-        // searchButton.blur();
-      });
                 <?php
   }
+  /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
+              const searchInput = document.getElementById('header_search');
+        const errorMessage = document.getElementById('error-message');
+
+        searchInput.addEventListener('mouseover', () => {
+          errorMessage.style.display = 'block';
+        });
+
+        searchInput.addEventListener('mouseout', () => {
+          errorMessage.style.display = 'none';
+        });
+
+        searchInput.addEventListener('blur', () => {
+          searchInput.blur();
+          // searchButton.blur();
+        });
+                    <?php
+    } */
   ?>
     $(document).ready(function () {
 
