@@ -31,7 +31,7 @@ require_once('settings.php');
           <h4>Login</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form name="frm_lgn" id="frm_lgn" enctype="multipart/form-data" method="POST" action=""
+          <form name="frm_lgn" id="frm_lgn" enctype="multipart/form-data" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>"
             onsubmit="return performCheck('frm_lgn', lgnrules,'inline')">
             <div class="form-group">
               <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="Email Address*">

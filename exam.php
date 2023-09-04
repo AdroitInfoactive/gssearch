@@ -153,49 +153,47 @@ $body_class = "homepage";
                 </h4>
               </div>
             </div>
-            <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">
-                    <?php echo $qn_optn1; ?>
-                  </label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-                <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                      class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="customRadioInlineA">
+                <?php echo $qn_optn1; ?>
+              </label>
             </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
+                Finance Initiative
+              </label>
+            </div>
+            <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
+                  class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-9 col-sm-9 pr-md-5">
-        <?php
-        $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
+    </div>
+    <div class="col-lg-9 col-sm-9 pr-md-5">
+      <?php
+      $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
         inner join topics_mst on topicsm_id = addquesm_topicsm_id
         left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_name='$cat_id_qry' and exam_subcategorym_name = '$scat_id_qry' and yearsm_name = '$yr_id_qry'";
-        $srs_tot_qns = mysqli_query($conn, $sqry_tot_qns);
-        $tot_qns = mysqli_num_rows($srs_tot_qns);
-        ?>
-        <div id="qns_lst_dsp">
-        </div>
+      $srs_tot_qns = mysqli_query($conn, $sqry_tot_qns);
+      $tot_qns = mysqli_num_rows($srs_tot_qns);
+      ?>
+      <div id="qns_lst_dsp">
       </div>
     </div>
+  </div>
   </div>
 </section>
 <?php include('footer.php'); ?>
