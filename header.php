@@ -10,6 +10,9 @@ include_once $rtpth . "script.php";
 include_once $rtpth . "includes/inc_fnct_ajax_validation.php";
 include_once $inc_mbr_sess;
 
+if (isset($_POST['btnsbmt_subs']) && (trim($_POST['btnsbmt_subs']) == 'Continue to payment')) {
+  include_once "database/iqry_mbrsub_mst.php";
+}
 if (isset($_POST['btnsbmt_lgn']) && (trim($_POST['btnsbmt_lgn']) == 'Login') && isset($_POST['txtpswd']) && (trim($_POST['txtpswd']) != '') && isset($_POST['txtemail']) && (trim($_POST['txtemail']) != '')) {
   include_once "database/sqry_mbr_mst.php";
 }

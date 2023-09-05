@@ -17,6 +17,57 @@ require_once('settings.php');
     </div>
   </div>
 </footer>
+<div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>OOPS..!</h4>
+          <p class="text-danger">You have reached your free searches limit or your subscription expired.</p>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <p>Please subscribe to continue searching. </p>
+          <?php
+          $sqry_sub_amt = "SELECT subscrptnm_amt_id,subscrptnm_amt_name from subscrptn_amt_mst where subscrptnm_amt_sts = 'a' order by subscrptnm_amt_id limit 1";
+          $srs_sub_amt = mysqli_query($conn, $sqry_sub_amt);
+          $srow_sub_amt = mysqli_fetch_array($srs_sub_amt);
+          $sub_id = $srow_sub_amt['subscrptnm_amt_id'];
+          $sub_amt = $srow_sub_amt['subscrptnm_amt_name'];
+          ?>
+          <h4>₹
+            <?php echo $sub_amt; ?>/- per year
+          </h4>
+          <form name="frm_subs" id="frm_subs" enctype="multipart/form-data" method="POST"
+            action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <div class="form-group">
+              <input type="hidden" name="hdn_mbrsub_id" id="hdn_mbrsub_id" value="<?php echo $membrid; ?>" />
+              <input type="hidden" name="hdn_sub_amt_id" id="hdn_sub_amt_id" value="<?php echo $sub_id; ?>" />
+              <input type="hidden" name="hdn_sub_amt" id="hdn_sub_amt" value="<?php echo $sub_amt; ?>" />
+            </div>
+            <!-- <div class="form-group">
+              <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="Email Address*">
+              <span id="errorsDiv_txtemail" style="color: orangered;"></span>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="txtpswd" name="txtpswd" placeholder="Password*">
+          <span id="errorsDiv_txtpswd" style="color: orangered;"></span>
+        </div> -->
+            <!-- <button type="button" class="btn btn-info btn-block btn-round">Login</button> -->
+            <input type="submit" name="btnsbmt_subs" id="btnsbmt_subs" value="Continue to payment"
+              class="btn btn-info btn-block btn-round" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ------------------------------------------------------------------------------------- -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -31,8 +82,8 @@ require_once('settings.php');
           <h4>Login</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form name="frm_lgn" id="frm_lgn" enctype="multipart/form-data" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>"
-            onsubmit="return performCheck('frm_lgn', lgnrules,'inline')">
+          <form name="frm_lgn" id="frm_lgn" enctype="multipart/form-data" method="POST"
+            action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return performCheck('frm_lgn', lgnrules,'inline')">
             <div class="form-group">
               <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="Email Address*">
               <span id="errorsDiv_txtemail" style="color: orangered;"></span>
@@ -159,7 +210,7 @@ require_once('settings.php');
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Already a member? <a href="#" data-toggle="modal" data-target="#loginModal"
+        <div class="signup-section">Already a member? <a href="#" data-toggle="modal" data-target="#subscribeModal"
             data-dismiss="modal" class="text-info"> Login</a>.</div>
       </div>
     </div>
@@ -262,7 +313,8 @@ require_once('settings.php');
               document.frmserqtn.submit();
             }
             else {
-              alert("Please subscribe to get full search access");
+              $('#subscribeModal').modal('show');
+              // alert("Please subscribe to get full search access");
               event.preventDefault();
               return false;
             }
@@ -353,7 +405,7 @@ require_once('settings.php');
           });
         }
       });
-                  <?php
+                    <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -400,7 +452,7 @@ require_once('settings.php');
             });
           }
         });
-                <?php
+                  <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');

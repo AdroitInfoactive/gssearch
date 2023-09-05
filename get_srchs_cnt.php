@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 error_reporting(0);
 include_once 'includes/inc_config.php'; //Making paging validation	
 include_once $inc_user_cnctn; //Making database Connection
@@ -26,7 +26,7 @@ if ((isset($_GET['srchtxt']) && $_GET['srchtxt'] != ""))
     $srs_srch_cnt = mysqli_query($conn, $sqry_srch_cnt);
     $srows_srch_cnt = mysqli_fetch_assoc($srs_srch_cnt);
     $tot_cnt = $srows_srch_cnt['tot_cnt'];
-    if ($tot_cnt < $lmt_cnt)
+    if ($tot_cnt < $lmt_cnt || $lmt_cnt == 0)
     {
       if($db_srch_txt != $srchtxt_qry)
       {
