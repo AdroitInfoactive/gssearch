@@ -10,8 +10,7 @@ include_once $inc_fldr_pth;
 global $ses_admin;
 	if(isset($_POST['btneuserssbmt']) && (trim($_POST['btneuserssbmt']) != "") &&
   isset($_POST['edtpdctid']) && (trim($_POST['edtpdctid']) != "") && 	
-	   isset($_POST['txtname'])  &&  (trim($_POST['txtname']) != "")&& 	
-	   isset($_POST['hdnpwd'])  &&  (trim($_POST['txtname']) != ""))
+	   isset($_POST['txtname'])  &&  (trim($_POST['txtname']) != ""))
 	  {	
       
 	   
@@ -25,7 +24,7 @@ global $ses_admin;
 		}
 		else
 		{
-			$pwd = glb_func_chkvl($_POST['hdnpwd']);
+			$pwd = glb_func_chkvl($_POST['hdnpwd']); 
 		}
        
 		$sts      	= glb_func_chkvl($_POST['lststs']);
@@ -36,6 +35,7 @@ global $ses_admin;
 		$chk 		= glb_func_chkvl($_REQUEST['chkexact']);
 		$curdt      = date('Y-m-d h:i:s');
 		$cntstart   = glb_func_chkvl($_POST['hdncnt']);	
+    $pg  = glb_func_chkvl($_POST['hdnpage']);	
 		
 		$rd_vwpgnm   = "view_detail_users.php";
 		

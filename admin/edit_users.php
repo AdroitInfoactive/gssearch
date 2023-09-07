@@ -56,8 +56,8 @@ isset($_REQUEST['pg']) && trim($_REQUEST['pg'])!="" &&
 	// $$countstart = glb_func_chkvl($_REQUEST['countstart']);
 	$srchval = glb_func_chkvl($_REQUEST['val']);
 	//$chk = glb_func_chkvl($_REQUEST['chk']);
-		$id = glb_func_chkvl($_REQUEST['edtpdctid']);
-		$pg         = glb_func_chkvl($_REQUEST['pg']);
+	   $id = glb_func_chkvl($_REQUEST['edtpdctid']); 
+	  	$pg         = glb_func_chkvl($_REQUEST['pg']); 
 		$countstart	= glb_func_chkvl($_REQUEST['countstart']);
 		//echo "here".$countstart;exit;
 		$optn 		= glb_func_chkvl($_REQUEST['optn']);
@@ -99,7 +99,7 @@ isset($_REQUEST['pg']) && trim($_REQUEST['pg'])!="" &&
 			 $db_usrsts		 = $rowsprodcat_mst['lgnm_sts'];
 		}
 		else{
-      echo"here1";exit;
+      // echo"here1";exit;
 			header("Location:".$rd_vwpgnm);
 			exit();
 		}
@@ -195,7 +195,7 @@ include_once $inc_adm_lftlnk;
 		<input type="hidden" name="hdnchk" value="<?php echo $chk;?>">
 		<input type="hidden" name="hdnloc" value="<?php echo $loc?>">
 		<input type="hidden" name="hdncnt" value="<?php echo $countstart?>">
-    <input name="hdnpwd" type="hidden" id="hdnpwd" value="<?php echo $rowsusr_mst[$db_usrpwd];?>">		
+	
 		<!-- <input type="hidden" name="hdnsmlimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_smlimg'];?>">
 		<input type="hidden" name="hdnbnrimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_bnrimg'];?>"> -->
 		<div class="card">
@@ -249,6 +249,7 @@ include_once $inc_adm_lftlnk;
 							</div>
 						</div>
 					</div>
+          <input name="hdnpwd" type="hidden" id="hdnpwd" value="<?php echo $rowsprodcat_mst['lgnm_pwd'];?>">	
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
