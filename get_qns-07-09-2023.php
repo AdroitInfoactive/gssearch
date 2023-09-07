@@ -62,10 +62,9 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
-                <a data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i class="fa fa-share-square-o"
-                    onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
-                    
-                    <a data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i class="fa fa-bookmark"
+                <button type="button" class="pp-bookmark-btn btn btn-default btn-lg pull-right" data-context="investor"
+                  data-context-action="view" data-context-id="7"></button>
+                <a data-toggle="modal" data-target="#shareProduct"><i class="fa fa-share-square-o"
                     onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
               </div>
             </div>
@@ -141,7 +140,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
     foreach ($searchWords as $word) {
       $likeConditions[] = "addquesm_optn1 LIKE '%$word%' OR addquesm_optn2 LIKE '%$word%' or addquesm_optn3 LIKE '%$word%' OR addquesm_optn4 LIKE '%$word%'";
     }
-    $sqry_qns_srch1 .= " or ".implode(' OR ', $likeConditions).")";
+    $sqry_qns_srch1 .= " or " . implode(' OR ', $likeConditions) . ")";
   }
   $sqry_qns_srch2 = " group by addquesm_id order by result_priority, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END, addquesm_prty asc limit $offset,$qnsperpg";
   $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2;
@@ -152,7 +151,8 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
   $cntrec_qns_srch = mysqli_num_rows($srs_qns_srch);
   if ($cntrec_qns_srch > 0) { ?>
     <div class="single_courses_details mb-60">
-      Search Results for: "<?php echo $srch_txt_1; ?>"
+      Search Results for: "
+      <?php echo $srch_txt_1; ?>"
       <?php
       $page = 1;
       $i = $offset;
@@ -176,10 +176,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
-                <a data-toggle="modal" data-target="#shareProduct" class="sharelink"><i class="fa fa-share-square-o"
-                    onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
-                    
-                     <a data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i class="fa fa-bookmark"
+                <a data-toggle="modal" data-target="#shareProduct"><i class="fa fa-share-square-o"
                     onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
               </div>
             </div>

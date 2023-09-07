@@ -3,8 +3,8 @@ $page_title = "Exam Categories";
 $page_seo_title = "Exam Categories| GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
-$current_page = "inner";
-$body_class = "inner";
+$current_page = "home";
+$body_class = "homepage";
 include('header.php');
 ?>
 <section class="page_banner bg_cover" style="background-image: url(assets/images/about_bg.jpg)">

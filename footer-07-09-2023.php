@@ -28,8 +28,8 @@ require_once('settings.php');
       </div>
       <div class="modal-body">
         <div class="form-title text-center">
-          <h4 class="text-danger">OOPS..!</h4>
-          <p class="bg-primary p-3 mt-3 text-white">You have reached your free searches limit or your subscription expired.</p>
+          <h4>OOPS..!</h4>
+          <p class="text-danger">You have reached your free searches limit or your subscription expired.</p>
         </div>
         <div class="d-flex flex-column text-center">
           <p>Please subscribe to continue searching. </p>
@@ -40,7 +40,7 @@ require_once('settings.php');
           $sub_id = $srow_sub_amt['subscrptnm_amt_id'];
           $sub_amt = $srow_sub_amt['subscrptnm_amt_name'];
           ?>
-          <h4 class="text-primary"><i class="fa fa-rupee"></i>
+          <h4>₹
             <?php echo $sub_amt; ?>/- per year
           </h4>
           <form name="frm_subs" id="frm_subs" enctype="multipart/form-data" method="POST"
@@ -58,9 +58,9 @@ require_once('settings.php');
           <input type="password" class="form-control" id="txtpswd" name="txtpswd" placeholder="Password*">
           <span id="errorsDiv_txtpswd" style="color: orangered;"></span>
         </div> -->
-            <!-- <button type="button" class="main-btn">Login</button> -->
+            <!-- <button type="button" class="btn btn-info btn-block btn-round">Login</button> -->
             <input type="submit" name="btnsbmt_subs" id="btnsbmt_subs" value="Continue to payment"
-              class="main-btn" />
+              class="btn btn-info btn-block btn-round" />
           </form>
         </div>
       </div>
@@ -92,9 +92,9 @@ require_once('settings.php');
               <input type="password" class="form-control" id="txtpswd" name="txtpswd" placeholder="Password*">
               <span id="errorsDiv_txtpswd" style="color: orangered;"></span>
             </div>
-            <!-- <button type="button" class="main-btn">Login</button> -->
+            <!-- <button type="button" class="btn btn-info btn-block btn-round">Login</button> -->
             <input type="submit" name="btnsbmt_lgn" id="btnsbmt_lgn" value="Login"
-              class="main-btn" />
+              class="btn btn-info btn-block btn-round" />
           </form>
           <div class="text-center text-muted delimiter">or use a Google Account</div>
           <a class="login-with-google-btn"
@@ -146,9 +146,9 @@ require_once('settings.php');
                 placeholder="New Password*">
               <span id="errorsDiv_txtchngpwd_nwcnfpswd" style="color: orangered;"></span>
             </div>
-            <!-- <button type="button" class="main-btn">Login</button> -->
+            <!-- <button type="button" class="btn btn-info btn-block btn-round">Login</button> -->
             <input type="submit" name="btnsbmt_chng_pwd" id="btnsbmt_chng_pwd" value="Submit"
-              class="main-btn" />
+              class="btn btn-info btn-block btn-round" />
           </form>
           <!-- <div class="text-center text-muted delimiter">or use a Google Account</div>
           <button type="button" class="login-with-google-btn">Login with Google</button> -->
@@ -199,9 +199,9 @@ require_once('settings.php');
             <div class="form-group">
               <input type="text" class="form-control" id="txtphn_rgstr" name="txtphn_rgstr" placeholder="Mobile Number">
             </div>
-            <!-- <button type="button" class="main-btn">Login</button> -->
+            <!-- <button type="button" class="btn btn-info btn-block btn-round">Login</button> -->
             <input type="submit" name="btnsbmt_rgstr" id="btnsbmt_rgstr" value="Register"
-              class="main-btn" />
+              class="btn btn-info btn-block btn-round" />
           </form>
           <div class="text-center text-muted delimiter">or use a Google Account</div>
           <a class="login-with-google-btn"
@@ -226,9 +226,7 @@ require_once('settings.php');
           <div class="ps-popup__body">
             <h3 class="ps-popup__title">Share</h3>
             <div class="ps-product__social d-flex justify-content-center">
-            
-            
-              <ul class="ps-social ps-social--color social" id="sclshare">
+              <ul class="ps-social ps-social--color" id="sclshare">
               </ul>
             </div>
           </div>
@@ -509,17 +507,13 @@ require_once('settings.php');
     var twturl = "https://twitter.com/intent/tweet?url=" + encurl;
     var mlurl = "mailto:?Subject=I would like to share a link with you&body=" + encurl;
     var disp = "<li><a class='ps-social__link facebook' href='" + fburl +
-      "' target='_blank'><i class='fa fa-facebook'> </i><span class='ps-tooltip'></span></a></li>";
+      "' target='_blank'><i class='fa fa-facebook'> </i><span class='ps-tooltip'>Facebook</span></a></li>";
     disp += "<li><a class='ps-social__link twitter' href='" + twturl +
-      "' target='_blank'><i class='fa fa-twitter'></i><span class='ps-tooltip'></span></a></li>";
+      "' target='_blank'><i class='fa fa-twitter'></i><span class='ps-tooltip'>Twitter</span></a></li>";
     disp += "<li><a class='ps-social__link whatsapp' href='" + waurl +
-      "' target='_blank'><i class='fa fa-whatsapp'></i><span class='ps-tooltip'></span></a></li>";
+      "' target='_blank'><i class='fa fa-whatsapp'></i><span class='ps-tooltip'>Whatsapp</span></a></li>";
     disp += "<li><a class='ps-social__link envelope' href='" + mlurl +
-      "' target='_blank'><i class='fa fa-envelope-o'></i><span class='ps-tooltip'></span></a></li>";
-	  disp += "<li><a class='ps-social__link telegram' href='" + mlurl +
-      "' target='_blank'><i class='fa fa-telegram'></i><span class='ps-tooltip'></span></a></li>";
-	  disp += "<li><a class='ps-social__link copy' href='" + mlurl +
-      "' target='_blank'><i class='fa fa-copy'></i><span class='ps-tooltip'></span></a></li>";
+      "' target='_blank'><i class='fa fa-envelope-o'></i><span class='ps-tooltip'>Email</span></a></li>";
     document.getElementById("sclshare").innerHTML = disp;
   }
 </script>

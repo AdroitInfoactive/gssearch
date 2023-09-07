@@ -5,35 +5,15 @@ $db_seokywrd = "";
 $db_seodesc = "";
 $current_page = "home";
 $body_class = "homepage";
-include('header-home.php');
+include('header.php');
 ?>
 <!--====== Slider PART START ======-->
 <section class="slider_area_3 bg_cover d-flex align-items-center"
   style="background-image: url(<?php echo $rtpth; ?>assets/images/slider-4.jpg)">
   <div class="container">
-    <div class="row align-items-center">
-    
-    
-          
+    <div class="row">
       <div class="col-lg-12">
         <div class="slider_content_3 text-center">
-       <div class="row  justify-content-center"> <div class="col-lg-8">
-            <div class="header_search" id="header_search">
-              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
-                <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
-              </form>
-            </div>
-            <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
-              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
-                <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
-              </form>
-            </div>
-            <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
-          </div>
-          </div>
-          
           <h2 class="main_title">Master your <span>Thousands of
             </span> with in the Practice zone</h2>
           <div class="slider_box_wrapper d-flex flex-wrap justify-content-between">
@@ -147,78 +127,59 @@ if ($cntrec_exm_cat > 0) { ?>
   <?php
 }
 ?>
-
-
-
-
-<section class="testimonial_area_3">
-        <div class="testimonial_title_wrapper_2 bg_cover" style="background-image: url(assets/images/testimonial_bg.jpg)">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="testimonial_title text-center">
-                            <img src="assets/images/quota.png" alt="quota">
-                            <h2 class="title">What Students Say</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial_title_shape">
-                <img src="assets/images/shape/shape-8.png" alt="shape">
-            </div>
+<!--====== Courses PART ENDS ======-->
+<!--====== Blog PART START ======-->
+<section class="blog_area pt-120 pb-130">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section_title text-center pb-20">
+          <h3 class="main_title">Year Wise Test Papers</h3>
+          <p>What do you think is better to receive after each lesson: a lovely looking badge or important
+            skills you can immediately put into practice.</p>
         </div>
-
-        <div class="testimonial_content_wrapper">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7">
-                        <div class="testimonial">
-                            <div class="testimonial_content_active_3">
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Arnold Holder</h5>
-                                    <span>Student, Language</span>
-                                </div>
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Nrnold Molder</h5>
-                                    <span>Student, Language</span>
-                                </div>
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Hrnold Aolder</h5>
-                                    <span>Student, Language</span>
-                                </div>
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Jrnold Iolder</h5>
-                                    <span>Student, Language</span>
-                                </div>
-                            </div>
-                            <div class="testimonial_author_active_3">
-                                <div class="single_author">
-                                    <img src="assets/images/author-4.jpg" alt="author">
-                                </div>
-                                <div class="single_author">
-                                    <img src="assets/images/author-5.jpg" alt="author">
-                                </div>
-                                <div class="single_author">
-                                    <img src="assets/images/author-6.jpg" alt="author">
-                                </div>
-                                <div class="single_author">
-                                    <img src="assets/images/author-5.jpg" alt="author">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-7">
+        <div class="single_blog mt-30">
+          <div class="blog_image">
+            <img src="<?php echo $rtpth; ?>assets/images/blog-1.jpg" alt="blog">
+          </div>
+          <div class="blog_content">
+            <div class="blog_content_wrapper">
+              <h4 class="blog_title"><a href="#">Mains Test 2021</a></h4>
             </div>
+          </div>
         </div>
-    </section>
-
-
-
-
+      </div>
+      <div class="col-lg-4 col-md-7">
+        <div class="single_blog mt-30">
+          <div class="blog_image">
+            <img src="<?php echo $rtpth; ?>assets/images/blog-2.jpg" alt="blog">
+          </div>
+          <div class="blog_content">
+            <div class="blog_content_wrapper">
+              <h4 class="blog_title"><a href="#">Groups Tests 2019</a></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-7">
+        <div class="single_blog mt-30">
+          <div class="blog_image">
+            <img src="<?php echo $rtpth; ?>assets/images/blog-3.jpg" alt="blog">
+          </div>
+          <div class="blog_content">
+            <div class="blog_content_wrapper">
+              <h4 class="blog_title"><a href="#">Prelims Tests 2018</a></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!--====== Blog PART ENDS ======-->
 <div class="container">
   <div class="row mb-4 justify-content-center">
