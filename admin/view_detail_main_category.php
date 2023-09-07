@@ -38,14 +38,14 @@ if(isset($_REQUEST['vw']) && (trim($_REQUEST['vw'])!="") && isset($_REQUEST['pg'
 // $srsprodmncat_mst = mysqli_query($conn,$sqryprodmncat_mst);
 // $rowsprodmncat_mst = mysqli_fetch_assoc($srsprodmncat_mst);
 
-$sqryprodcat_mst="SELECT 
-			prodmnexmsm_name,prodmnexmsm_desc,prodmnexmsm_seotitle,prodmnexmsm_seodesc,
+ $sqryprodcat_mst="SELECT 
+			prodmnexmsm_name,prodmnexmsm_desc,prodmnexmsm_img,prodmnexmsm_seotitle,prodmnexmsm_seodesc,
 			prodmnexmsm_seohone,prodmnexmsm_seohtwo,prodmnexmsm_seokywrd,prodmnexmsm_prty, 
 			if(prodmnexmsm_sts = 'a', 'Active','Inactive') as prodmnexmsm_sts
 		from 
 			prodmnexms_mst
 						  where 
-							prodmnexmsm_id=$id";
+							prodmnexmsm_id=$id"; 
 		$srsprodcat_mst  = mysqli_query($conn,$sqryprodcat_mst);
 		$cntrecprodcat_mst = mysqli_num_rows($srsprodcat_mst);
 		if($cntrecprodcat_mst  > 0){
@@ -155,13 +155,11 @@ include_once $inc_adm_lftlnk;
 								?>	
 							</div>
 						</div> -->
-						<!-- <div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Banner Image</label>
+						<div class="form-group row">
+							<label for="txtname" class="col-sm-2 col-md-2 col-form-label"> Image</label>
 							<div class="col-sm-8">
 								<?php
-								$mncatbnrimgnm = $rowsprodmncat_mst['prodmn_catm_bnrimg'];
-								$mncatbnrimgpath  = $gcat_fldnm.$mncatbnrimgnm;
-								$imgnm   = $rowsprodcat_mst['prodmnexmsm_bnrimg'];
+								$imgnm   = $rowsprodcat_mst['prodmnexmsm_img'];
 									$imgpath = $a_mnlnks_bnrfldnm.$imgnm;
 									if(($imgnm !="") && file_exists($imgpath)){
 										echo "<img src='$imgpath' width='80pixel' height='80pixel'>";					
@@ -172,7 +170,7 @@ include_once $inc_adm_lftlnk;
 						?>
 								
 							</div>
-						</div> -->
+						</div>
 						<!-- <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Type </label>
 							<div class="col-sm-8">

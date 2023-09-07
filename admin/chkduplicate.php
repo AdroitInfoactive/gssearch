@@ -18,6 +18,8 @@ Purpose 	  :
 Company 	  : Adroit
  ************************************************************/
 /************************************************************/
+
+
 // ----------------------- to check duplicate main link name -----------------
 if (isset($_REQUEST['prodmnexmsname']) && (trim($_REQUEST['prodmnexmsname']) != "")) {
 	$name = glb_func_chkvl($_REQUEST['prodmnexmsname']);
@@ -843,3 +845,22 @@ if(isset($_REQUEST['evntname']) && (trim($_REQUEST['evntname']) != "") &&
 // 		echo "<font color=red><strong>Duplicate Combination Of Main Link & Category Name</strong></font>";
 // 	}
 // }
+// ----------------------------------------------------Users Valiodation--------------------------------------------------------------
+if (isset($_REQUEST['usrnm'])&& (trim($_REQUEST['usrnm']) != ""))
+{
+	$result ="";
+	$usrnm = glb_func_chkvl($_REQUEST['usrnm']);			 
+	$sqryusr_mst ="SELECT lgnm_uid FROM lgn_mst WHERE lgnm_uid = '".mysqli_real_escape_string($conn,$usrnm)."'";
+	if(isset($_REQUEST['usrid']) && (trim($_REQUEST['usrid']) != ""))
+	{
+		$usr_id = glb_func_chkvl($_REQUEST['usrid']);
+		$sqryusr_mst .= " and lgnm_id != $usr_id";	
+	}
+	$srsusr_mst  = mysqli_query($conn,$sqryusr_mst);
+	$reccnt		   = mysqli_num_rows($srsusr_mst);		
+	if($reccnt > 0)
+	{
+		$result = "<font color ='red'><b>Duplicate Username</b></font>";
+	}
+	echo $result;
+}

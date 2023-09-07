@@ -20,14 +20,14 @@ Company : Adroit
 /*****header link********/
 $pagemncat = "Setup";
 $pagecat = "Product Group";
-$pagenm = "Exam Category";
+$pagenm = "users";
 /*****header link********/
 global $gmsg;
-if (isset($_POST['btnprodmnexmssbmt']) && (trim($_POST['btnprodmnexmssbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprty']) && (trim($_POST['txtprty']) != "")) {
+if (isset($_POST['btnuserssbmt']) && (trim($_POST['btnuserssbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "")) {
 	include_once "../includes/inc_fnct_fleupld.php";
-	include_once "../database/iqry_mnexams_mst.php";
+	include_once "../database/iqry_users_mst.php";
 }
-$rd_crntpgnm = "view_main_category.php";
+$rd_crntpgnm = "view_users.php";
 $clspn_val = "4";
 ?>
 <script language="javaScript" type="text/javascript" src="js/ckeditor.js"></script>
@@ -36,10 +36,13 @@ $clspn_val = "4";
 <link rel="stylesheet" type="text/css" href="../includes/yav-style1.css">
 <script language="javascript" type="text/javascript">
 	var rules = new Array();
-	rules[0] = 'txtname:Name|required|Enter Exam Name';
-	rules[1] = 'txtprty:txtprty|required|Enter Rank';
-	rules[2] = 'txtprty:txtprty|numeric|Enter Only Numbers';
-	rules[2] = 'lstcattyp:lstcattyp|required|Please Select';
+  rules[0]='txtname:Name|required|Enter Username';
+    	rules[1]='txtpwd:Password|required|Enter Password';
+    	rules[2]='txtcnfpwd:Confirm Password|equal|$txtpwd|Passwords donot match';
+    	rules[3]='txtcnfpwd:Password|required|Enter Confirm Password';
+    	rules[4]='lststr:Store|required|Select Store';
+    	rules[5]='txtprty:Rank|required|Enter Rank';
+      rules[6]='txttyp:UserType|required|Select Type';
 
 	function setfocus() {
 		document.getElementById('txtname').focus();
@@ -54,7 +57,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 		var name;
 		name = document.getElementById('txtname').value;
 		if (name != "") {
-			var url = "chkduplicate.php?prodmnexmsname=" + name;
+			var url = "chkduplicate.php?usrnm=" + name;
 			xmlHttp = GetXmlHttpObject(stateChanged);
 			xmlHttp.open("GET", url, true);
 			xmlHttp.send(null);
@@ -79,12 +82,12 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Add Exams Category</h1>
+					<h1 class="m-0 text-dark">Add Users</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Add Exams Category</li>
+						<li class="breadcrumb-item active">Add Users</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
@@ -127,129 +130,53 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 						<div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
-									<label>Name *</label>
+									<label>User Type*</label>
 								</div>
 								<div class="col-sm-9">
-									<input name="txtname" type="text" id="txtname" size="45" maxlength="40" onBlur="funcChkDupName()" class="form-control">
+									<select name="txttyp" type="text" id="txttyp" class="form-control">
+                  <option value="">--Select--</option>
+					                    <option value="u">User</option> 
+					                    <option value="a">Admin</option>
+					                  </select>
+									<span id="errorsDiv_txttyp"></span>
+								</div>
+							</div>
+						</div>
+            <div class="col-md-12">
+							<div class="row mb-2 mt-2">
+								<div class="col-sm-3">
+									<label>User Name *</label>
+								</div>
+								<div class="col-sm-9">
+									<input type="text" name="txtname" id="txtname" class="form-control" size="45" maxlength="40" onBlur="funcChkDupName()">
 									<span id="errorsDiv_txtname"></span>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-12">
+            <div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
-									<label>Description</label>
+									<label>Password *</label>
 								</div>
 								<div class="col-sm-9">
-									<textarea name="txtdesc" cols="60" rows="3" id="txtdesc" class="form-control"></textarea>
+									<input type="password" name="txtpwd" id="txtpwd" class="form-control" size="45" maxlength="40">
+									<span id="errorsDiv_txtpwd"></span>
 								</div>
 							</div>
 						</div>
+            <div class="col-md-12">
+							<div class="row mb-2 mt-2">
+								<div class="col-sm-3">
+									<label>Confirm Password*</label>
+								</div>
+								<div class="col-sm-9">
+									<input type="password" name="txtcnfpwd" id="txtcnfpwd" class="form-control" size="45" maxlength="40">
+									<span id="errorsDiv_txtcnfpwd"></span>
+								</div>
+							</div>
+						</div>
+						
 						<!-- <div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>Image</label>
-								</div>
-								<div class="col-sm-9">
-									<div class="custom-file">
-										<input name="flemncatimg" type="file" class="form-control" id="flemncatimg" maxlength="250">
-									</div>
-								</div>
-							</div>
-						</div> -->
-						 <div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label> Image</label>
-								</div>
-								<div class="col-sm-9">
-									<div class="custom-file">
-										<input name="flebnrimg" type="file" class="form-control" id="flebnrimg" maxlength="250">
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--<div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>Menu Display Position</label>
-								</div>
-								<div class="col-sm-9">
-									<select name="lstcattyp" id="lstcattyp" class="form-control">
-									<option value="" selected>--Select--</option>
-									<option value="h">Header</option>
-										<option value="f">Footer</option>
-									</select>
-									<span id="errorsDiv_lstcattyp"></span>
-								</div>
-							</div>
-						</div> -->
-						<!-- <div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label> Menu Display Type</label>
-								</div>
-								<div class="col-sm-9">
-									<select name="lstdsplytyp" id="lstdsplytyp" class="form-control">
-										<option value="1">General</option>
-										<option value="2">Mega Menu</option>
-									</select>
-								</div>
-							</div>
-						</div> -->
-						<div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>SEO Title</label>
-								</div>
-								<div class="col-sm-9">
-									<input type="text" name="txtseotitle" id="txtseotitle" size="45" maxlength="250" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>SEO Description</label>
-								</div>
-								<div class="col-sm-9">
-									<textarea name="txtseodesc" rows="3" cols="60" id="txtseodesc" class="form-control"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>SEO Keyword</label>
-								</div>
-								<div class="col-sm-9">
-									<textarea name="txtseokywrd" rows="3" cols="60" id="txtseokywrd" class="form-control"></textarea>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>SEO H1 Description</label>
-								</div>
-								<div class="col-sm-9">
-									<textarea name="txtseoh1" rows="3" cols="60" id="txtseoh1" class="form-control"></textarea>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>SEO H2 Description</label>
-								</div>
-								<div class="col-sm-9">
-									<textarea name="txtseoh2" rows="3" cols="60" id="txtseoh2" class="form-control"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
 									<label>Rank *</label>
@@ -259,7 +186,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 									<span id="errorsDiv_txtprty"></span>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
@@ -274,7 +201,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 							</div>
 						</div>
 						<p class="text-center">
-							<input type="Submit" class="btn btn-primary" name="btnprodmnexmssbmt" id="btnprodmnexmssbmt" value="Submit">
+							<input type="Submit" class="btn btn-primary" name="btnuserssbmt" id="btnuserssbmt" value="Submit">
 							&nbsp;&nbsp;&nbsp;
 							<input type="reset" class="btn btn-primary" name="btnprodmn_catreset" value="Clear" id="btnprodmn_catreset">
 							&nbsp;&nbsp;&nbsp;

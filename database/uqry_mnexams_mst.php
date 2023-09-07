@@ -17,7 +17,7 @@ global $ses_admin;
 		$name     	= glb_func_chkvl($_POST['txtname']);
 		$prior    	= glb_func_chkvl($_POST['txtprty']);
 		$desc     	= addslashes(trim($_POST['txtdesc']));
-		// $hdnbgimg	= glb_func_chkvl($_POST['hdnbgimg']);
+		$hdnbgimg	= glb_func_chkvl($_POST['hdnbgimg']); 
 		// $cattyp    	= glb_func_chkvl($_POST['lstcattyp']);
 		// $disptyp  	= glb_func_chkvl($_POST['lstdsplytyp']);
 		$title    	= glb_func_chkvl($_POST['txtseotitle']);
@@ -78,25 +78,25 @@ global $ses_admin;
 								prodmnexmsm_prty ='$prior',
 								prodmnexmsm_mdfdon ='$curdt',
 								prodmnexmsm_mdfdby='$ses_admin'";
-			//  if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){							
-			// 	$bimgval = funcUpldImg('flebnrimg','bimg');
-			// 	if($bimgval != ""){
-			// 		$bimgary    = explode(":",$bimgval,2);
-			// 		$bdest 		= $bimgary[0];					
-			// 		$bsource 	= $bimgary[1];					
-			// 	}						
-			// 		$uqryprodcat_mst .= ",prodmnexmsm_bnrimg='$bdest'";
-			// }
-			// else{			
-			// 	if(isset($_POST['chkbximg']) && ($_POST['chkbximg'] != "")){
-			// 		$delimgnm   = glb_func_chkvl($_POST['chkbximg']);	
-			// 		$delimgpth  = $a_mnlnks_bnrfldnm.$delimgnm;								
-			// 		if(isset($delimgnm) && file_exists($delimgpth)){
-			// 			unlink($delimgpth);											
-			// 			$uqryprodcat_mst .= ",prodmnexmsm_bnrimg=''";
-			// 		}					
-			// 	}				
-			// }
+			 if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){							
+				$bimgval = funcUpldImg('flebnrimg','bimg');
+				if($bimgval != ""){
+					$bimgary    = explode(":",$bimgval,2);
+					$bdest 		= $bimgary[0];					
+					$bsource 	= $bimgary[1];					
+				}						
+					$uqryprodcat_mst .= ",prodmnexmsm_img='$bdest'";
+			}
+			else{			
+				if(isset($_POST['chkbximg']) && ($_POST['chkbximg'] != "")){
+					$delimgnm   = glb_func_chkvl($_POST['chkbximg']);	
+					$delimgpth  = $a_mnlnks_bnrfldnm.$delimgnm;								
+					if(isset($delimgnm) && file_exists($delimgpth)){
+						unlink($delimgpth);											
+						$uqryprodcat_mst .= ",prodmnexmsm_img=''";
+					}					
+				}				
+			}
 			$uqryprodcat_mst .= "where prodmnexmsm_id=$id";
 			$ursprodmncat_mst = mysqli_query($conn,$uqryprodcat_mst);
 			if($ursprodmncat_mst==true){
@@ -104,9 +104,14 @@ global $ses_admin;
 					$bgimgpth      = $a_mnlnks_bnrfldnm.$hdnbgimg;
 					if(($hdnbgimg != '') && file_exists($bgimgpth)){
 						unlink($bgimgpth);
+
 					}
+											
+					// $uqryprodcat_mst . = ",prodmnexmsm_img='$bdest',
+					
 					move_uploaded_file($bsource,$a_mnlnks_bnrfldnm.$bdest);	
-				}	
+				}
+				// echo 	$uqryprodcat_mst ; 
 			?>
 			  <script type="text/javascript">
 				location.href="<?php echo $rd_vwpgnm;?>?vw=<?php echo $id;?>&pg=<?php echo $pg;?>&sts=y&countstart=<?php echo $cntstart;?><?php echo $srchval;?>";</script>

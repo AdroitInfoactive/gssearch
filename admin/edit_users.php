@@ -15,33 +15,34 @@ Purpose : For Edit Main Category
 Created By : Bharath
 Created On : 20-01-2022
 Modified By : 
-Modified On : btneprodmnexmssbmtedtpdctid
+Modified On : btneuserssbmtedtpdctid
 Purpose : 
 Company : Adroit
 ************************************************************/
 //global $id,$pg,$$countstart;
 global $id,$pg,$countstart,$loc,$rd_crntpgnm;
-$rd_vwpgnm = "view_detail_main_category.php";
-$rd_crntpgnm="view_main_category.php";
+$rd_vwpgnm = "view_users.php";
+$rd_crntpgnm="view_users.php";
 $clspn_val = "4";
 /*****header link********/
 $pagemncat = "Setup";
-$pagecat = "Product Group";
-$pagenm = "Exam Category";
+$pagecat = "users";
+$pagenm = "users";
 /*****header link********/
-if(isset($_POST['txtname']) && (trim($_POST['txtname']) != "") &&
-isset($_POST['edtpdctid']) && (trim($_POST['edtpdctid']) != "") && 
-isset($_POST['txtprty']) && (trim($_POST['txtprty']) != ""))
+if(isset($_POST['btneuserssbmt']) && (trim($_POST['btneuserssbmt']) != "") &&
+isset($_REQUEST['edtpdctid']) && trim($_REQUEST['edtpdctid'])!="" && 
+isset($_POST['txtname']) && (trim($_POST['txtname']) != ""))
 {
+
 	include_once "../includes/inc_fnct_fleupld.php";
-	include_once "../database/uqry_mnexams_mst.php";
+	include_once "../database/uqry_users_mst.php";
 }
 
 if(isset($_REQUEST['edtpdctid']) && trim($_REQUEST['edtpdctid'])!="" && 
 isset($_REQUEST['pg']) && trim($_REQUEST['pg'])!="" &&
  isset($_REQUEST['countstart']) && trim($_REQUEST['countstart'])!="")
  {
-	//echo "haiddfhjfhf";exit;	
+	// echo "here";exit;	
 	
 // 	$id = glb_func_chkvl($_REQUEST['edit']);
 // 	$pg = glb_func_chkvl($_REQUEST['pg']);
@@ -81,30 +82,24 @@ isset($_REQUEST['pg']) && trim($_REQUEST['pg'])!="" &&
 // $sqryprodmncat_mst="SELECT prodmn_catm_id, prodmn_catm_name, prodmn_catm_desc, prodmn_catm_smlimg, prodmn_catm_bnrimg, prodmn_catm_seotitle, prodmn_catm_seodesc, prodmn_catm_seokywrd, prodmn_catm_seohonetitle, prodmn_catm_seohonedesc, prodmn_catm_seohtwotitle, prodmn_catm_seohtwodesc, prodmn_catm_sts, prodmn_catm_prty, prodmn_catm_hmprty FROM prodmcat_mst WHERE prodmn_catm_id = $id";
 // $srsprodmncat_mst  = mysqli_query($conn,$sqryprodmncat_mst);
 // $rowsprodmncat_mst = mysqli_fetch_assoc($srsprodmncat_mst);
-// echo"here"; exit;
      $sqryprodcat_mst = "select 
-								prodmnexmsm_name,prodmnexmsm_img,prodmnexmsm_desc,prodmnexmsm_seotitle,prodmnexmsm_seodesc,
-								prodmnexmsm_seohone,prodmnexmsm_seohtwo,prodmnexmsm_seokywrd,prodmnexmsm_prty,
-								prodmnexmsm_sts 
+     lgnm_uid,lgnm_pwd,lgnm_typ,
+     lgnm_sts 
 							from 
-								prodmnexms_mst
+              lgn_mst
 							where 
-								prodmnexmsm_id='$id'"; 
+              lgnm_id='$id'"; 
 		$srsprodcat_mst  = mysqli_query($conn,$sqryprodcat_mst);
 		$cntrecprodcat_mst = mysqli_num_rows($srsprodcat_mst);
 		if($cntrecprodcat_mst  > 0){
 			$rowsprodcat_mst = mysqli_fetch_assoc($srsprodcat_mst);
-			$db_catname		 = $rowsprodcat_mst['prodmnexmsm_name'];
-			$db_catdesc		 = stripslashes($rowsprodcat_mst['prodmnexmsm_desc']);
-			$db_catseottl	 = $rowsprodcat_mst['prodmnexmsm_seotitle'];
-			$db_catseodesc	 = $rowsprodcat_mst['prodmnexmsm_seodesc'];
-			$db_catseokywrd	 = $rowsprodcat_mst['prodmnexmsm_seokywrd'];
-			$db_catseohone	 = $rowsprodcat_mst['prodmnexmsm_seohone'];
-			$db_catseohtwo	 = $rowsprodcat_mst['prodmnexmsm_seohtwo'];
-			$db_catprty		 = $rowsprodcat_mst['prodmnexmsm_prty'];
-			 $db_catsts		 = $rowsprodcat_mst['prodmnexmsm_sts'];
+			$db_usrname		 = $rowsprodcat_mst['lgnm_uid'];
+      $db_usrpwd		 = $rowsprodcat_mst['lgnm_pwd'];
+			$db_usrprty		 = $rowsprodcat_mst['lgnm_typ'];
+			 $db_usrsts		 = $rowsprodcat_mst['lgnm_sts'];
 		}
 		else{
+      echo"here1";exit;
 			header("Location:".$rd_vwpgnm);
 			exit();
 		}
@@ -126,10 +121,12 @@ isset($_REQUEST['pg']) && trim($_REQUEST['pg'])!="" &&
 <link rel="stylesheet" type="text/css" href="../includes/yav-style1.css">
 <script language="javascript" type="text/javascript">
  	var rules=new Array();
- 	rules[0]='txtname:Name|required|Enter Main Link Name';
- 	rules[1]='txtprty:Priority|required|Enter Rank';
-	rules[2]='txtprty:Priority|numeric|Enter Only Numbers';
-	rules[3]='lstcattyp:lstcattyp|required|Please Select';
+   rules[0]='txtname:Name|required|Enter Username';
+    	rules[1]='txtpwd:Password|required|Enter Password';
+    	rules[2]='txtcnfpwd:Confirm Password|equal|$txtpwd|Passwords donot match';
+    	rules[3]='txtcnfpwd:Password|required|Enter Confirm Password';
+    	rules[4]='lststs:Store|required|Select Store';
+    	rules[5]='txttyp:Type|required|Select Type';
 	function setfocus()
 	{
 		document.getElementById('txtname').focus();
@@ -147,7 +144,7 @@ include_once ('../includes/inc_fnct_ajax_validation.php');
 		id 	 = <?php echo $id;?>;
 		if((name != "") && (id != ""))
 		{
-			var url = "chkduplicate.php?prodmnexmsname="+name+"&prodmncatid="+id;
+			var url = "chkduplicate.php?usrnm="+name+"&usrid="+id;
 			xmlHttp	= GetXmlHttpObject(stateChanged);
 			xmlHttp.open("GET", url , true);
 			xmlHttp.send(null);
@@ -180,162 +177,75 @@ include_once $inc_adm_lftlnk;
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Edit Exam Category<Link:mf></Link:mf></h1>
+					<h1 class="m-0 text-dark">Edit Users<Link:mf></Link:mf></h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Edit Exam Category</li>
+						<li class="breadcrumb-item active">Edit Users</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
 		</div><!-- /.container-fluid -->
 	</div>
-	<form name="frmedtprodmnexms" id="frmedtprodmnexms" method="post" action="<?php $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" onSubmit="return performCheck('frmedtprodmnexms', rules, 'inline');">
-		<input type="hidden" name="edtpdctid" value="<?php echo $id;?>">
+	<form name="frmedtusers" id="frmedtusers" method="post" action="<?php $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" onSubmit="return performCheck('frmedtusers', rules, 'inline');">
+		<input type="hidden" name="edtpdctid" id="edtpdctid" value="<?php echo $id;?>">
 		<input type="hidden" name="hdnpage" value="<?php echo $pg;?>">
 		<input type="hidden" name="hdnval" value="<?php echo $srchval;?>">
 		<input type="hidden" name="hdnchk" value="<?php echo $chk;?>">
 		<input type="hidden" name="hdnloc" value="<?php echo $loc?>">
-		<input type="hidden" name="hdncnt" value="<?php echo $countstart?>">		
-		 <!-- <input type="hidden" name="hdnsmlimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_smlimg'];?>"> -->
-		 <input type="hidden" name="hdnbgimg" value="<?php echo $rowsprodcat_mst['prodmnexmsm_img'];?>">  
+		<input type="hidden" name="hdncnt" value="<?php echo $countstart?>">
+    <input name="hdnpwd" type="hidden" id="hdnpwd" value="<?php echo $rowsusr_mst[$db_usrpwd];?>">		
+		<!-- <input type="hidden" name="hdnsmlimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_smlimg'];?>">
+		<input type="hidden" name="hdnbnrimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_bnrimg'];?>"> -->
 		<div class="card">
 			<div class="card-body">
 				<div class="row justify-content-center">
+        <div class="col-md-12">
+						<div class="row mb-2 mt-2">
+							<div class="col-sm-3">
+								<label>Type *</label>
+							</div>
+							<div class="col-sm-9">
+								<select name="txttyp" type="text" id="txttyp"  class="form-control">
+					                    <option value="" <?php if($db_usrprty =='') echo 'selected';?>>--Select--</option>
+					                    <option value="u" <?php if($db_usrprty =='u') echo 'selected';?>>User</option>
+					                    <option value="a" <?php if($db_usrprty =='a') echo 'selected';?>>Admin</option>
+					                  </select>
+								<span id="errorsDiv_txttyp"></span>
+							</div>
+						</div>
+					</div>
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label>Name *</label>
+								<label>Users *</label>
 							</div>
 							<div class="col-sm-9">
-								<input name="txtname" type="text" id="txtname" size="45" maxlength="40" onBlur="funcChkDupName()" class="form-control" value="<?php echo $db_catname;?>">
+								<input name="txtname" type="text" id="txtname" size="45" maxlength="40" onBlur="funcChkDupName()" class="form-control" value="<?php echo $db_usrname;?>">
 								<span id="errorsDiv_txtname"></span>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12">
+          <div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label>Description</label>
+								<label>Password *</label>
 							</div>
-							<div class="col-sm-9"> 
-								<textarea name="txtdesc" cols="60" rows="3" id="txtdesc" class="form-control"><?php echo stripslashes($db_catdesc);?></textarea>
+							<div class="col-sm-9">
+								<input name="txtpwd" type="password" id="txtpwd" size="45" maxlength="40"  class="form-control" value="<?php echo $db_usrpwd;?>">
+								<span id="errorsDiv_txtpwd"></span>
 							</div>
 						</div>
 					</div>
-					
-						
-					<div class="col-md-12">
+          <div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label> Image</label>
+								<label>Confirm Password *</label>
 							</div>
 							<div class="col-sm-9">
-								<div class="custom-file">
-									<input name="flebnrimg" type="file" class="form-control" id="flebnrimg">
-								</div>
-								<?php
-								$imgnm   = $rowsprodcat_mst['prodmnexmsm_img'];
-								$imgpath = $a_mnlnks_bnrfldnm.$imgnm;
-								if(($imgnm !="") && file_exists($imgpath)){
-									echo "<img src='$imgpath' width='80pixel' height='80pixel'><br><input type='checkbox' name='chkbximg' id='chkbximg' value='$imgpath'>Remove Image";					
-								}
-								else{
-									echo "N.A.";						 			  
-								}
-								?>
-							</div>
-						</div>
-					</div> 
-					<!-- <div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>Type</label>
-							</div>
-							<div class="col-sm-9">
-								<select name="lstcattyp" id="lstcattyp" class="form-control">
-								<option value="" <?php if($db_cattyp =='') echo 'selected';?>>--Select--</option>
-								<option value="h" <?php if($db_cattyp =='h') echo 'selected';?>>Header</option>
-							<option value="f" <?php if($db_cattyp =='f') echo 'selected';?>>Footer</option>
-								</select>
-								<span id="errorsDiv_lstcattyp"></span>
-							</div>
-						</div>
-					</div> -->
-					<!-- <div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>Menu Display Type</label>
-							</div>
-							<div class="col-sm-9">
-								<select name="lstdsplytyp" id="lstdsplytyp" class="form-control">
-								<option value="1"<?php if($db_dsplytyp=='1') echo 'selected';?>>General</option>
-						 	<option value="2"<?php if($db_dsplytyp=='2') echo 'selected';?>>Mega Menu</option>
-								</select>
-							</div>
-						</div>
-					</div> -->
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>SEO Title</label>
-							</div>
-							<div class="col-sm-9"> 
-								<input type="text" name="txtseotitle" id="txtseotitle" size="45" maxlength="250" class="form-control" value="<?php echo $db_catseottl;?>">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>SEO Description</label>
-							</div>
-							<div class="col-sm-9">
-								<textarea name="txtseodesc" rows="3" cols="60" id="txtseodesc" class="form-control"><?php echo stripslashes($db_catseodesc);?></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>SEO Keyword</label>
-							</div>
-							<div class="col-sm-9">
-								<textarea name="txtseokywrd" rows="3" cols="60" id="txtseokywrd" class="form-control"><?php echo stripslashes($db_catseokywrd);?></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>SEO H1 </label>
-							</div>
-							<div class="col-sm-9">
-								<input type="text" name="txtseoh1" id="txtseoh1" size="45" maxlength="250" class="form-control" value="<?php echo $db_catseohone;?>">
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>SEO H2 </label>
-							</div>
-							<div class="col-sm-9">
-								<input type="text" name="txtseoh2" id="txtseoh2" size="45" maxlength="250" class="form-control" value="<?php echo $db_catseohtwo;?>">
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>Rank *</label>
-							</div>
-							<div class="col-sm-9"> 
-								<input type="text" name="txtprty" id="txtprty" class="form-control" size="4" maxlength="3" value="<?php echo $db_catprty;?>">
-								<span id="errorsDiv_txtprty"></span>
+								<input name="txtcnfpwd" type="password" id="txtcnfpwd" size="45" maxlength="40"  class="form-control" value="<?php echo $db_usrpwd;?>">
+								<span id="errorsDiv_txtcnfpwd"></span>
 							</div>
 						</div>
 					</div>
@@ -353,7 +263,7 @@ include_once $inc_adm_lftlnk;
 						</div>
 					</div>
 					<p class="text-center">
-						<input type="Submit" class="btn btn-primary btn-cst" name="btneprodmnexmssbmt" id="btneprodmnexmssbmt" value="Submit">
+						<input type="Submit" class="btn btn-primary btn-cst" name="btneuserssbmt" id="btneuserssbmt" value="Submit">
 						&nbsp;&nbsp;&nbsp;
 						<input type="reset" class="btn btn-primary btn-cst" name="btnprodcatreset" value="Clear" id="btnprodcatreset">
 						&nbsp;&nbsp;&nbsp;
