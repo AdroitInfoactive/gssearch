@@ -88,6 +88,14 @@ error_reporting(0);
 									</a>
 								</li> -->
 								<li class="nav-item">
+									<a href="view_users.php" class="nav-link <?php if ($pagenm == "users") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Users</p>
+									</a>
+								</li>
+								<li class="nav-item">
 									<a href="view_main_category.php" class="nav-link <?php if ($pagenm == "Exam Category") {
 										echo "active";
 									} ?>">
