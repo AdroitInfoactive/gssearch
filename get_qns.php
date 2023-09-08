@@ -130,6 +130,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
   <?php
   }
 }
+
 if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
   $srch_txt_1 = funcStrUnRplc($_GET['srch']);
   $page = isset($_GET['page']) ? $_GET['page'] : 1;

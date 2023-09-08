@@ -238,7 +238,7 @@ require_once('settings.php');
   </div>
 </div>
 <!-- lokesh write book mark start -->
-<!-- <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered ps-popup--select">
     <div class="modal-content">
       <div class="modal-body">
@@ -252,9 +252,9 @@ require_once('settings.php');
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
-<div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+<!-- <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered ps-addcart">
     <div class="modal-content">
       <div class="modal-body">
@@ -273,7 +273,7 @@ require_once('settings.php');
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- lokesh write book mark end -->
 <!--====== Footer PART ENDS ======-->
 <!--====== BACK TOP TOP PART START ======-->
@@ -451,7 +451,7 @@ debugger
     });
   }
   <?php
-  if ($page_title == "Search") { ?>
+  if ($page_title == "Search" ) { ?>
       $(document).ready(function () {
         // Initial page load
         var srch_txt = "<?php echo $srch_txt; ?>";
