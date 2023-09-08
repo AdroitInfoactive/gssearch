@@ -237,6 +237,44 @@ require_once('settings.php');
     </div>
   </div>
 </div>
+<!-- lokesh write book mark start -->
+<!-- <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered ps-popup--select">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="wrap-modal-slider container-fluid">
+          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <div class="ps-popup__body">
+            <h3 class="ps-popup__title">Question Added To Bookmark.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered ps-addcart">
+    <div class="modal-content">
+      <div class="modal-body">
+      <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+        <div class="wrap-modal-slider container-fluid ps-addcart__body">
+          <div class="ps-addcart__product">
+            <div class="ps-product ps-product--standard pb-0">
+              <div class="ps-product__content text-center ">
+                <div class="ps-product__title acc-succ" style="background-color:lightgreen ;"><i class="fa fa-check"></i> Question Added To Bookmark.</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- lokesh write book mark end -->
 <!--====== Footer PART ENDS ======-->
 <!--====== BACK TOP TOP PART START ======-->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -244,6 +282,7 @@ require_once('settings.php');
 <!--====== jquery js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <script src="<?php echo $rtpth; ?>assets/js/vendor/jquery-1.12.4.min.js"></script>
+<!-- <script src="<?php echo $rtpth; ?>assets/js/vendor/jquery.min.js"></script> -->
 <!--====== Bootstrap js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo $rtpth; ?>assets/js/popper.min.js"></script>
@@ -287,6 +326,63 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
 <script type="text/javascript">
+// function frmprdsub(qns_id, crtactn) {
+//   debugger
+
+//  if ((qns_id != '') && (crtactn == 'b')) {
+//   var action='add';
+//         var url = "<?php echo $rtpth; ?>bookmark.php?qnsid=" +qns_id+"&action="+action;
+//        alert(url);
+// 						xmlHttp = GetXmlHttpObject(stchng_UpdtWishList);
+// 						xmlHttp.open("GET", url, true);
+// 						xmlHttp.send(null);
+//     }
+// }
+
+// function stchng_UpdtWishList() {
+//     if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+//         var temp = xmlHttp.responseText;
+//         if (temp == "yes") {
+//             mod = "add_wsh"
+//             document.getElementById(mod).classList.add("show");
+//             document.getElementById(mod).style.display = "block";
+//             setTimeout(function() {
+//                 document.getElementById(mod).classList.remove("show");
+//                 document.getElementById(mod).style.display = "none";
+//                 location.reload();
+//             }, 5000);
+//         } else {
+//             window.location = "<?php echo $rtpth; ?>wishlist";
+//         }
+//     }
+// }
+function frmprdsub(qns_id, crtactn) {
+debugger
+
+    		$.ajax({
+		
+      url: `<?php echo $rtpth; ?>manage_bookmark.php?qnsid=${qns_id}&action=${crtactn}`,
+      type: "GET",
+			success: function(data) {
+				//debugger;
+				// alert(data);
+        if (data == "yes") {
+            mod = "add_wsh"
+            document.getElementById(mod).classList.add("show");
+            document.getElementById(mod).style.display = "block";
+            setTimeout(function() {
+                document.getElementById(mod).classList.remove("show");
+                document.getElementById(mod).style.display = "none";
+                location.reload();
+            }, 5000);
+        } else {
+            window.location = "<?php echo $rtpth; ?>bookmark";
+        }
+			}
+		});
+	}
+
+
   function srch(substs) {
     txtsrchval = document.frmserqtn.txtsrchval.value;
     if (txtsrchval == "") {

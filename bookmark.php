@@ -1,15 +1,8 @@
 <?php
 include('header.php');
-if ((!isset($_REQUEST['srch']) && $_REQUEST['srch'] == "")) {
-  ?>
-  <script type="text/javascript">
-    location.href = "<?php echo $rtpth; ?>home";
-  </script>
-  <?php
-}
-$srch_txt = funcStrUnRplc($_REQUEST['srch']);
-$page_title = "Search";
-$page_seo_title = "Search | GS Search";
+$membrid = $_SESSION['sesmbrid'];
+$page_title = "Bookmark Questions";
+$page_seo_title = "Bookmark Questions | GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
 $current_page = "home";
@@ -25,7 +18,7 @@ $body_class = "homepage";
           </h4>
           <ul class="breadcrumb justify-content-center">
             <li><a href="<?php echo $rtpth; ?>home">Home</a></li>
-            <li><a class="active">Search
+            <li><a class="active">Bookmark Questions
               </a></li>
           </ul>
         </div>
@@ -38,11 +31,12 @@ $body_class = "homepage";
     <div class="row ">
       <!-- <div class="col-lg-3 col-sm-3 ">
         <?php
-      $sqry_exmscat_nms = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_id, prodmnexmsm_name, addquesm_yearsm_id, yearsm_id, yearsm_name from exam_subcategory_mst
+      $sqry_exmscat_nms = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_id, prodmnexmsm_name, addquesm_yearsm_id, yearsm_id, yearsm_name,bookmark_usr_id from exam_subcategory_mst
         inner join addques_mst on addquesm_exmscat_id = exam_subcategorym_id
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
-        where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and prodmnexmsm_name= '$cat_id_qry' group by exam_subcategorym_id order by exam_subcategorym_prty asc";
+        inner join bookmark_mst on bookmark_qns_id=addquesm_id
+        where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and bookmark_usr_id= '$membrid' group by exam_subcategorym_id order by exam_subcategorym_prty asc";
         $srs_exmscat_nms = mysqli_query($conn, $sqry_exmscat_nms);
         $cntrec_exmscat_nms = mysqli_num_rows($srs_exmscat_nms);
         if ($cntrec_exmscat_nms > 0) { ?>
@@ -71,6 +65,7 @@ $body_class = "homepage";
                 inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
                 inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
                 inner join years_mst on yearsm_id = addquesm_yearsm_id
+                inner join bookmark_mst on bookmark_qns_id=addquesm_id
                 where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and exam_subcategorym_id = '$scatid' group by yearsm_id order by yearsm_name desc";
                 $srs_exm_nms = mysqli_query($conn, $sqry_exm_nms);
                 $cntrec_exm_nms = mysqli_num_rows($srs_exm_nms);
@@ -147,16 +142,18 @@ $body_class = "homepage";
       </div> -->
       <div class="col-lg-12 col-sm-12 pr-md-12">
         <?php
-      echo  $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
+        $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
         inner join topics_mst on topicsm_id = addquesm_topicsm_id
-        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
+        inner join bookmark_mst on bookmark_qns_id=addquesm_id
+       
+        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a'";
         
         // prodmnexmsm_name='$cat_id_qry' and exam_subcategorym_name = '$scat_id_qry' and yearsm_name = '$yr_id_qry'";
         $srs_tot_qns = mysqli_query($conn, $sqry_tot_qns);
-        $tot_qns = mysqli_num_rows($srs_tot_qns);
+      echo  $tot_qns = mysqli_num_rows($srs_tot_qns);
         if ($tot_qns > 0)
         {
           ?>

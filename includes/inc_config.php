@@ -20,7 +20,7 @@ $prjct_dmn = "gssearch.in";
 $u_prjct_email = "info" . "@$prjct_dmn";
 $u_prjct_email_info = "info" . "@$prjct_dmn";
 
-$rtpth = "/projects/praveen/g/gssearch/";
+$rtpth = "/projects/g/gssearch/";
 
 $site_logo = $rtpth.'assets/images/logo.png';
 

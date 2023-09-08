@@ -171,6 +171,7 @@ if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'S
                 <ul class="sub-menu text-left">
                   <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
                   </li>
+                  <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
                   <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
               </li>
               <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
