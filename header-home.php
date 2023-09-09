@@ -171,16 +171,9 @@ if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'S
                 <ul class="sub-menu text-left">
                   <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
                   </li>
-                  <?php
-                    $membrid = $_SESSION['sesmbrid'];
-                    $sqrybok = "SELECT bookmark_usr_id from bookmark_mst where bookmark_usr_id='$membrid'";
-                    $res = mysqli_query($conn, $sqrybok);
-                    $cnt = mysqli_num_rows($res);
-                    if ($cnt > 0) {
-                    ?>
+                 
                       <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
-                    <?php
-                    } ?>
+                    
                
                   <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
               </li>
