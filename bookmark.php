@@ -1,6 +1,9 @@
 <?php
-// include('includes/inc_pagging_functions.php');
+
 include('header.php');
+echo "<pre>";
+var_dump($_REQUEST);
+echo"</pre>";
 $membrid = $_SESSION['sesmbrid'];
 $page_title = "Bookmark Questions";
 $page_seo_title = "Bookmark Questions | GS Search";
@@ -10,6 +13,7 @@ $current_page = "home";
 $body_class = "homepage";
 $loc = "";
 $rowsprpg = 5; //maximum rows per page
+
 ?>
 <section class="page_banner bg_cover" style="background-image: url(<?php echo $rtpth; ?>assets/images/about_bg.jpg)">
     <div class="container">
@@ -146,16 +150,16 @@ $rowsprpg = 5; //maximum rows per page
             <div class="col-lg-12 col-sm-12 pr-md-12">
                 <?php
                 $offset = 0;
-                    $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
+                $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag,bookmark_id from addques_mst
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
         inner join topics_mst on topicsm_id = addquesm_topicsm_id
         inner join bookmark_mst on bookmark_qns_id=addquesm_id
        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id
-        where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and bookmark_usr_id='$membrid' ";
-   
-    
+        where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and bookmark_usr_id='$membrid' order by bookmark_id asc";
+
+
                 // prodmnexmsm_name='$cat_id_qry' and exam_subcategorym_name = '$scat_id_qry' and yearsm_name = '$yr_id_qry'";
                 $srs_tot_qns = mysqli_query($conn, $sqry_tot_qns);
                 $tot_qns = mysqli_num_rows($srs_tot_qns);
@@ -169,6 +173,7 @@ $rowsprpg = 5; //maximum rows per page
                     while ($srows_qns = mysqli_fetch_assoc($srs_tot_qns)) {
 
                         $i++;
+                        $bkmrk_id = $srows_qns['bookmark_id'];
                         $qn_id = $srows_qns['addquesm_id'];
                         $qn_qnm = html_entity_decode($srows_qns['addquesm_qnm']);
                         $qn_tag = $srows_qns['addquesm_qns_tag'];
@@ -187,22 +192,27 @@ $rowsprpg = 5; //maximum rows per page
                                     </h4>
                                     <div class="pull-right ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title="" data-original-title="Share">
                                         <a data-toggle="modal" data-target="#shareProduct" class="sharelink"><i class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
-                                       <?php
-                $membrid = $_SESSION['sesmbrid'];
-                $sqrybok = "select bookmark_qns_id from bookmark_mst where bookmark_qns_id='$qn_id' and bookmark_usr_id='$membrid'";
-                $res = mysqli_query($conn, $sqrybok);
-                $result_book = mysqli_fetch_assoc($res);
-             $bk_qns_id = $result_book['bookmark_qns_id'];
-                if ($bk_qns_id == $qn_id) {
-                
-                }else{
-                    ?>
-                       <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-bookmark" onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
-                    <?php
-                  
-                }
-                ?>  
-                                     
+                                        <?php
+                                        $membrid = $_SESSION['sesmbrid'];
+                                        $sqrybok = "select bookmark_qns_id from bookmark_mst where bookmark_qns_id='$qn_id' and bookmark_usr_id='$membrid'";
+                                        $res = mysqli_query($conn, $sqrybok);
+                                        $result_book = mysqli_fetch_assoc($res);
+                                        $bk_qns_id = $result_book['bookmark_qns_id'];
+                                        if ($bk_qns_id == $qn_id) {
+
+                                        ?>
+
+                                            <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-trash-o" onClick="remvbkmrkqns('<?php echo $bkmrk_id ?>','d')"></i></a>
+
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-bookmark" onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
+                                        <?php
+
+                                        }
+                                        ?>
+
                                     </div>
                                 </div>
                             </div>

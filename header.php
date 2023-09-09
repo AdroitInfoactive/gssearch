@@ -22,6 +22,10 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'Submit') && isset($_POST['txtchngpwd_oldpswd']) && (trim($_POST['txtchngpwd_oldpswd']) != '') && isset($_POST['txtchngpwd_nwpswd']) && (trim($_POST['txtchngpwd_nwpswd']) != '') && isset($_POST['txtchngpwd_nwcnfpswd']) && (trim($_POST['txtchngpwd_nwcnfpswd']) != '')) {
   include_once "database/uqry_chng_pwd.php";
 }
+if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Submit') && isset($_POST['edttxtname']) && (trim($_POST['edttxtname']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '')) {
+
+  include_once "database/uqry_edit_mbr.php";
+}
 ?>
 <!doctype html>
 <html lang="en">

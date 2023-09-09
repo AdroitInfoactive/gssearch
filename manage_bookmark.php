@@ -5,7 +5,7 @@ include_once 'includes/inc_config.php'; //Making paging validation
 include_once $inc_user_cnctn; //Making database Connection
 include_once $inc_user_usr_fnctn; //checking for session	
 include_once $inc_user_fldr_pth;
-	
+$membrid = $_SESSION['sesmbrid'];
 /*************** Checking And Assigning Request Values *************************/
 if(isset($_REQUEST['qnsid']) && (trim($_REQUEST['qnsid']) != "")){
 	$wshprdid	 = addslashes(trim($_REQUEST['qnsid'])); 	// Stores the requested productid
@@ -48,4 +48,16 @@ else
 {
 	
 }
+if(isset($_REQUEST['bokmark_id']) && $_REQUEST['bokmark_id'] !=''&& isset($_REQUEST['bokaction']) && $_REQUEST['bokaction'] =='d'){
+	$id=$_REQUEST['bokmark_id'];
+	 $wshlstdel="DELETE from  bookmark_mst where bookmark_id='$id' and bookmark_usr_id='$membrid'";
+	$rwswshlstdel=mysqli_query($conn,$wshlstdel);
+	if($rwswshlstdel == true){
+		$sts='yes';
+		}else{
+			$sts='n';
+			}
+			echo  $sts;
+	}
+
 ?>

@@ -1,15 +1,26 @@
 <?php
+error_reporting(0);
+session_start();
+$servr_ip = $_SERVER['SERVER_ADDR'];
+include_once 'includes/inc_config.php'; //Making paging validation	
+include_once $inc_user_cnctn; //Making database Connection
+include_once $inc_user_usr_fnctn; //checking for session	
+include_once $inc_user_fldr_pth;
+include_once $rtpth . "script.php";
+include_once $rtpth . "includes/inc_fnct_ajax_validation.php";
+include_once $inc_mbr_sess;
 $page_title ="My Account";
 $page_seo_title ="My Account | GS Search";
 $db_seokywrd ="";
 $db_seodesc ="";
 $current_page ="myaccount";
 $body_class ="myaccount";
+include('header.php');
 ?>
 
     
 
-<section class="page_banner bg_cover" style="background-image: url(assets/images/about_bg.jpg)">
+<section class="page_banner bg_cover" style="background-image: url(<?php echo $rtpth;?>assets/images/about_bg.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
