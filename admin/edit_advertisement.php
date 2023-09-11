@@ -7,8 +7,8 @@ include_once $inc_usr_fnctn; //checking for session
 include_once $inc_pgng_fnctns; //Making paging validation
 include_once $inc_fldr_pth; //Making paging validation
 /**********************************************************
-Programm : edit_banner.php 
-Purpose : For Editing Banner
+Programm : edit_advertisement.php 
+Purpose : For Editing advertisement
 Created By : Bharath
 Created On : 05-01-2022
 Modified By : 
@@ -18,31 +18,31 @@ Company : Adroit
 ************************************************************/
 /*****header link********/
 $pagemncat = "Setup";
-$pagecat = "Banner";
-$pagenm = "Banner";
+$pagecat = "advertisement";
+$pagenm = "advertisement";
 /*****header link********/
 global $id, $pg, $countstart;
-$rd_vwpgnm = "view_detail_banner.php";
-$rd_crntpgnm = "view_all_banner.php";
+$rd_vwpgnm = "view_detail_advertisement.php";
+$rd_crntpgnm = "view_all_advertisement.php";
 $clspn_val = "4";
-if (isset($_POST['btnebnrsbmt']) && (trim($_POST['btnebnrsbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprior']) && (trim($_POST['txtprior']) != "")) {
+if (isset($_POST['btneadvdsbmt']) && (trim($_POST['btneadvdsbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprior']) && (trim($_POST['txtprior']) != "")) {
 	include_once "../includes/inc_fnct_fleupld.php"; // For uploading files 
-	include_once "../database/uqry_bnr_mst.php";
+	include_once "../database/uqry_advd_mst.php";
 }
 if (isset($_REQUEST['edit']) && (trim($_REQUEST['edit']) != "") && isset($_REQUEST['pg']) && (trim($_REQUEST['pg']) != "") && isset($_REQUEST['countstart']) && (trim($_REQUEST['countstart']) != "")) {
 	$id = glb_func_chkvl($_REQUEST['edit']);
 	$pg = glb_func_chkvl($_REQUEST['pg']);
 	$countstart = glb_func_chkvl($_REQUEST['countstart']);
-} elseif (isset($_REQUEST['hdnbnrid']) && (trim($_REQUEST['hdnbnrid']) != "") && isset($_REQUEST['hdnpage']) && (trim($_REQUEST['hdnpage']) != "") && isset($_REQUEST['hdncnt']) && (trim($_REQUEST['hdncnt']) != "")) {
-	$id = glb_func_chkvl($_REQUEST['hdnbnrid']);
+} elseif (isset($_REQUEST['hdnadvdid']) && (trim($_REQUEST['hdnadvdid']) != "") && isset($_REQUEST['hdnpage']) && (trim($_REQUEST['hdnpage']) != "") && isset($_REQUEST['hdncnt']) && (trim($_REQUEST['hdncnt']) != "")) {
+	$id = glb_func_chkvl($_REQUEST['hdnadvdid']);
 	$pg = glb_func_chkvl($_REQUEST['hdnpage']);
 	$countstart = glb_func_chkvl($_REQUEST['hdncnt']);
 }
-$sqrybnr_mst = "SELECT bnrm_name, bnrm_desc, bnrm_sts, bnrm_prty, bnrm_lnk, bnrm_dimgnm, bnrm_mimgnm from bnr_mst where bnrm_id = $id";
-$srsbnr_mst = mysqli_query($conn, $sqrybnr_mst);
-$cntrec = mysqli_num_rows($srsbnr_mst);
+$sqryadvd_mst = "SELECT advdm_name, advdm_desc, advdm_sts, advdm_prty, advdm_lnk, advdm_dimgnm, advdm_mimgnm from advd_mst where advdm_id = $id";
+$srsadvd_mst = mysqli_query($conn, $sqryadvd_mst);
+$cntrec = mysqli_num_rows($srsadvd_mst);
 if ($cntrec > 0) {
-	$rowsbnr_mst = mysqli_fetch_assoc($srsbnr_mst);
+	$rowsadvd_mst = mysqli_fetch_assoc($srsadvd_mst);
 } else { ?>
 	<script>location.href = "<?php echo $rd_crntpgnm; ?>";</script>
 	<?php
@@ -71,7 +71,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 		var name = document.getElementById('txtname').value;
 		id = <?php echo $id; ?>;
 		if (name != "") {
-			var url = "chkduplicate.php?bnrname=" + name + "&bnrid=" + id;
+			var url = "chkduplicate.php?advdname=" + name + "&advdid=" + id;
 			xmlHttp = GetXmlHttpObject(stateChanged);
 			xmlHttp.open("GET", url, true);
 			xmlHttp.send(null);
@@ -97,25 +97,25 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Edit Banner</h1>
+					<h1 class="m-0 text-dark">Edit advertisement</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Edit Banner</li>
+						<li class="breadcrumb-item active">Edit advertisement</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
 		</div><!-- /.container-fluid -->
 	</div>
-	<form name="frmedtbnrid" id="frmedtbnrid" method="post" action="<?php $_SERVER['PHP_SELF']; ?>"
-		onSubmit="return performCheck('frmedtbnrid', rules, 'inline');" enctype="multipart/form-data">
-		<input type="hidden" name="hdnbnrid" value="<?php echo $id; ?>">
+	<form name="frmedtadvdid" id="frmedtadvdid" method="post" action="<?php $_SERVER['PHP_SELF']; ?>"
+		onSubmit="return performCheck('frmedtadvdid', rules, 'inline');" enctype="multipart/form-data">
+		<input type="hidden" name="hdnadvdid" value="<?php echo $id; ?>">
 		<input type="hidden" name="hdnpage" value="<?php echo $pg; ?>">
 		<input type="hidden" name="hdncnt" value="<?php echo $countstart ?>">
 		<input type="hidden" name="hdnloc" value="<?php echo $loc ?>">
-		<input type="hidden" name="hdndbnrimg" id="hdndbnrimg" value="<?php echo $rowsbnr_mst['bnrm_dimgnm']; ?>">
-		<input type="hidden" name="hdnmbnrimg" id="hdnmbnrimg" value="<?php echo $rowsbnr_mst['bnrm_mimgnm']; ?>">
+		<input type="hidden" name="hdndadvdimg" id="hdndadvdimg" value="<?php echo $rowsadvd_mst['advdm_dimgnm']; ?>">
+		<input type="hidden" name="hdnmadvdimg" id="hdnmadvdimg" value="<?php echo $rowsadvd_mst['advdm_mimgnm']; ?>">
 		<div class="card">
 			<div class="card-body">
 				<div class="row justify-content-center align-items-center">
@@ -126,7 +126,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 							</div>
 							<div class="col-sm-9">
 								<input name="txtname" type="text" id="txtname" size="45" maxlength="40" onBlur="funcChkDupName()"
-									class="form-control" value="<?php echo $rowsbnr_mst['bnrm_name']; ?>">
+									class="form-control" value="<?php echo $rowsadvd_mst['advdm_name']; ?>">
 								<span id="errorsDiv_txtname"></span>
 							</div>
 						</div>
@@ -138,24 +138,24 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 							</div>
 							<div class="col-sm-9">
 								<textarea name="txtdesc" cols="60" rows="3" id="txtdesc"
-									class="form-control"><?php echo $rowsbnr_mst['bnrm_desc']; ?></textarea>
+									class="form-control"><?php echo $rowsadvd_mst['advdm_desc']; ?></textarea>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label>Desktop Image</label>
+								<label>Advertisement Image</label>
 							</div>
 							<div class="col-sm-9">
 								<div class="custom-file">
-									<input name="fledbnrimg" type="file" class="form-control" id="fledbnrimg">
+									<input name="fledadvdimg" type="file" class="form-control" id="fledadvdimg">
 								</div>
 								<?php
-								$bnrimgnm = $rowsbnr_mst['bnrm_dimgnm'];
-								$bnrimgpath = $gbnr_fldnm . $bnrimgnm;
-								if (($bnrimgnm != "") && file_exists($bnrimgpath)) {
-									echo "<img src='$bnrimgpath' width='50pixel' height='50pixel'>";
+								$advdimgnm = $rowsadvd_mst['advdm_dimgnm'];
+								$advdimgpath = $gadvd_fldnm . $advdimgnm;
+								if (($advdimgnm != "") && file_exists($advdimgpath)) {
+									echo "<img src='$advdimgpath' width='50pixel' height='50pixel'>";
 								} else {
 									echo "Image not available";
 								}
@@ -163,56 +163,6 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>Mobile Image</label>
-							</div>
-							<div class="col-sm-9">
-								<div class="custom-file">
-									<input name="flembnrimg" type="file" class="form-control" id="flembnrimg">
-								</div>
-								<?php
-								$bnrmimgnm = $rowsbnr_mst['bnrm_mimgnm'];
-								$bnrmimgpath = $gbnr_fldnm . $bnrmimgnm;
-								if (($bnrmimgnm != "") && file_exists($bnrmimgpath)) {
-									echo "<img src='$bnrmimgpath' width='50pixel' height='50pixel'>";
-								} else {
-									echo "Image not available";
-								}
-								?>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>Link</label>
-							</div>
-							<div class="col-sm-9">
-								<input type="text" name="txtlnk" id="txtlnk" size="45" maxlength="250" class="form-control"
-									value="<?php echo $rowsbnr_mst['bnrm_lnk']; ?>">
-							</div>
-						</div>
-					</div>
-					<!-- <div class="col-md-12">
-						<div class="row mb-2 mt-2">
-							<div class="col-sm-3">
-								<label>TextAlign</label>
-							</div>
-							<div class="col-sm-9">
-								<select name="txtalin" id="txtalin" class="form-control">
-									<option value="L" <?php if ($rowsbnr_mst['bnrm_text'] == 'L')
-										echo 'selected'; ?>>Left</option>
-									<option value="R" <?php if ($rowsbnr_mst['bnrm_text'] == 'R')
-										echo 'selected'; ?>>Right</option>
-									<option value="C" <?php if ($rowsbnr_mst['bnrm_text'] == 'C')
-										echo 'selected'; ?>>Center</option>
-								</select>
-
-							</div>
-						</div>
-					</div> -->
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
@@ -220,7 +170,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 							</div>
 							<div class="col-sm-9">
 								<input type="text" name="txtprior" id="txtprior" class="form-control" size="4" maxlength="3"
-									value="<?php echo $rowsbnr_mst['bnrm_prty']; ?>">
+									value="<?php echo $rowsadvd_mst['advdm_prty']; ?>">
 								<span id="errorsDiv_txtprior"></span>
 							</div>
 						</div>
@@ -232,9 +182,9 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 							</div>
 							<div class="col-sm-9">
 								<select name="lststs" id="lststs" class="form-control">
-									<option value="a" <?php if ($rowsbnr_mst['bnrm_sts'] == 'a')
+									<option value="a" <?php if ($rowsadvd_mst['advdm_sts'] == 'a')
 										echo 'selected'; ?>>Active</option>
-									<option value="i" <?php if ($rowsbnr_mst['bnrm_sts'] == 'i')
+									<option value="i" <?php if ($rowsadvd_mst['advdm_sts'] == 'i')
 										echo 'selected'; ?>>Inactive</option>
 								</select>
 
@@ -242,7 +192,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 						</div>
 					</div>
 					<p class="text-center">
-						<input type="Submit" class="btn btn-primary" name="btnebnrsbmt" id="btnebnrsbmt" value="Submit">
+						<input type="Submit" class="btn btn-primary" name="btneadvdsbmt" id="btneadvdsbmt" value="Submit">
 						&nbsp;&nbsp;&nbsp;
 						<input type="reset" class="btn btn-primary" name="btnbrndreset" value="Clear" id="btnbrndreset">
 						&nbsp;&nbsp;&nbsp;

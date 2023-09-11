@@ -185,12 +185,12 @@ include_once 'script.php';
 		<div class="card">
 			<?php if(isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y"))
 			{ ?>
-				<div class="alert alert-danger alert-dismissible fade show" role="alert" id="delids">
+				<!-- <div class="alert alert-danger alert-dismissible fade show" role="alert" id="delids">
 					<strong>Deleted Successfully !</strong>
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-				</div>
+				</div> -->
 				<?php
 			}
 			?>

@@ -97,12 +97,6 @@ if (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y")) {
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Link</label>
-							<div class="col-sm-8">
-								<?php echo $rowsadvd_mst['advdm_lnk']; ?>
-							</div>
-						</div>
-						<div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Advertisement Image</label>
 							<div class="col-sm-8">
 								<?php
