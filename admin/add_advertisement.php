@@ -39,6 +39,7 @@ $clspn_val = "4";
 	// rules[1]='txtname:Name|alphaspace|Name only characters and numbers';
 	rules[1] = 'txtprior:Priority|required|Enter Rank';
 	rules[2] = 'txtprior:Priority|numeric|Enter Only Numbers';
+  rules[2] = 'fledadvdimg:Advertisiment|required|Please Fill';
 	// rules[3] = 'txtalin:Alignment|required|Select The Text Alignment';
 	function setfocus() {
 		document.getElementById('txtname').focus();
@@ -153,6 +154,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 								<div class="col-sm-9">
 									<div class="custom-file">
 										<input name="fledadvdimg" type="file" class="form-control" id="fledadvdimg" maxlength="250">
+                    <span id="errorsDiv_fledadvdimg"></span>
 									</div>
 								</div>
 							</div>
