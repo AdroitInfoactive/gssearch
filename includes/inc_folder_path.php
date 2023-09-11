@@ -80,6 +80,9 @@ $gusrglry_fldnm = "gallery/";
 $gadvd_fldnm = "../advertisementimg/";
 $gusradvd_fldnm = "advertisementimg/";
 
+$dwnfl_upldpth = "../studtstmnl/";
+$usrdwnfl_upldpth = "studtstmnl/";
+
 $a_phtgalspath1 = '../gallery/photos/';
 $u_phtgalspath1 = 'gallery/photos/';
 

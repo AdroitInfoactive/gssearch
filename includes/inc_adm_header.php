@@ -159,24 +159,39 @@ error_reporting(0);
 										<p>Search Limitations</p>
 									</a>
 								</li>
-								<!-- <li class="nav-item">
+								<li class="nav-item">
 									<a href="view_all_stdtestmnl.php" class="nav-link <?php if ($pagenm == "Student Testimonial") {
 										echo "active";
 									} ?>">
 										<i class="far fa-dot-circle nav-icon"></i>
 										<p>Student Testimonial</p>
 									</a>
-								</li> -->
+								</li>
 
 							</ul>
 						</li>
-
+						<!-- <li class="nav-item">
+									<a href="view_all_stdtestmnl.php" class="nav-link <?php if ($pagenm == "student testmonials") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Student Testmonials</p>
+									</a>
+								</li> -->
 						<li class="nav-item">
 									<a href="view_all_advertisement.php" class="nav-link <?php if ($pagenm == "advertisement") {
 										echo "active";
 									} ?>">
 										<i class="far fa-dot-circle nav-icon"></i>
 										<p>Advertisement</p>
+									</a>
+								</li>
+						<li class="nav-item">
+									<a href="view_all_members.php" class="nav-link <?php if ($pagenm == "Members") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Members</p>
 									</a>
 								</li>
 						<li class="nav-item has-treeview <?php if ($pagemncat == "Questions") {

@@ -172,23 +172,6 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                         <div class="col-md-12">
                             <div class="row mb-2 mt-2">
                                 <div class="col-sm-3">
-                                    <label>Start Date</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input name="txtnwsdt" type="text" id="txtnwsdt" size="45" maxlength="40" onBlur="funcChkDupName()" class="form-control">
-                                    <span id="errorsDiv_txtnwsdt"></span>
-                                    <script language='javascript'>
-                                        if (!document.layers) {
-                                            document.write("<img src='images/calendar.gif' onclick='popUpCalendar(this,frmanews.txtnwsdt, \"yyyy-mm-dd\")'  style='font-size:11px' style='cursor:pointer'>")
-                                        }
-                                    </script>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-md-12">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-sm-3">
                                     <label>Description</label>
                                 </div>
                                 <div class="col-sm-9">
@@ -196,26 +179,14 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-12">
-							<div class="row mb-2 mt-2">
-								<div class="col-sm-3">
-									<label>Image</label>
-								</div>
-								<div class="col-sm-9">
-									<div class="custom-file">
-										<input name="flemncatimg" type="file" class="form-control" id="flemncatimg" maxlength="250">
-									</div>
-								</div>
-							</div>
-						</div> -->
                         <div class="col-md-12">
                             <div class="row mb-2 mt-2">
                                 <div class="col-sm-3">
-                                    <label>Link</label>
+                                    <label>Short Description</label>
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="custom-file">
-                                        <input name="txtlnk" type="text" class="form-control" id="txtlnk" maxlength="250">
+                                        <input name="txtshrtdesc" type="text" class="form-control" id="txtshrtdesc" maxlength="250">
                                     </div>
                                 </div>
                             </div>
@@ -233,71 +204,6 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-12">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-sm-3">
-                                    <label>Display Type</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <select name="lstdsplytyp" id="lstdsplytyp" class="form-control">
-                                        <option value="1">General</option>
-                                        <option value="2">Tabular</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-12">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-sm-3">
-                                    <label>SEO Title</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input type="text" name="txtseotitle" id="txtseotitle" size="45" maxlength="250" class="form-control">
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-12">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-sm-3">
-                                    <label>SEO Description</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <textarea name="txtseodesc" rows="3" cols="60" id="txtseodesc" class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-md-12">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-sm-3">
-                                    <label>SEO Keyword</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <textarea name="txtseokywrd" rows="3" cols="60" id="txtseokywrd" class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="col-md-12">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-sm-3">
-                                    <label>SEO H1 Description</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <textarea name="txtseoh1" rows="3" cols="60" id="txtseoh1" class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="col-md-12">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-sm-3">
-                                    <label>SEO H2 Description</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <textarea name="txtseoh2" rows="3" cols="60" id="txtseoh2" class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-md-12">
                             <div class="row mb-2 mt-2">
                                 <div class="col-sm-3">

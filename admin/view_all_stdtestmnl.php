@@ -28,6 +28,7 @@ $pagemncat = "Setup";
 $pagecat = "Student Testimonial";
 $pagenm = "Student Testimonial";
 /*****header link********/
+// echo"here"; exit;
 if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
   $dchkval = substr($_POST['hdnchksts'], 1);
   $id       = glb_func_chkvl($dchkval);
@@ -41,7 +42,7 @@ if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
 if (($_POST['hdnchkval'] != "") && isset($_REQUEST['hdnchkval'])) {
   $dchkval = substr($_POST['hdnchkval'], 1);
   $did     = glb_func_chkvl($dchkval);
-  $delsts = funcDelAllRec('std_testmnl_mst', 'std_testmnlm_id', $did);
+  $delsts = funcDelAllRec('std_testmnl_mst', 'std_testmnlm_id', $did,$conn); 
 
   if ($delsts == 'y') {
     $msg = "<font color=red>Record deleted successfully</font>";
@@ -63,7 +64,7 @@ include_once "../includes/inc_paging1.php"; //Includes pagination
 
 $sqrystdtestmnl_mst1 = "select
 std_testmnlm_id,std_testmnlm_name,std_testmnlm_sts,std_testmnlm_prty,std_testmnlm_typ,
-std_testmnlm_dwnfl,date_format(std_testmnlm_dt,'%d-%m-%Y') as std_testmnlm_dt						    
+std_testmnlm_dwnfl,date_format(std_testmnlm_dt,'%d-%m-%Y') as std_testmnlm_dt,std_testmnlm_img						    
 from
 std_testmnl_mst";
 if (isset($_REQUEST['txtsrchval']) && (trim($_REQUEST['txtsrchval']) != "")) {
@@ -212,13 +213,13 @@ include_once 'script.php';
                           ?> -->
                   </td>
                   <td width="7%" align="right" valign="bottom">
-                    <div align="right">
+                    <div align="center">
 
                       <input name="btnsts" id="btnsts" type="button" class="btn btn-xs btn-primary" value="Status" onClick="updatests('hdnchksts','frmnews','chksts')">
                     </div>
                   </td>
                   <td width="7%" align="right" valign="bottom">
-                    <div align="right">
+                    <div align="center">
                       <input name="btndel" id="btndel" type="button" class="btn btn-xs btn-primary" value="Delete" onClick="deleteall('hdnchkval','frmnews','chkdlt');">
                     </div>
                   </td>
@@ -226,7 +227,7 @@ include_once 'script.php';
                 <tr>
                   <td width="8%" class="td_bg"><strong>SL.No.</strong></td>
                   <td width="28%" class="td_bg"><strong>Name</strong></td>
-                  <td width="24%" class="td_bg"><strong>Date</strong></td>
+                  <td width="24%" class="td_bg"><strong>Image</strong></td>
                   <td width="6%" align="center" class="td_bg"><strong>Rank</strong></td>
                   <td width="7%" align="center" class="td_bg"><strong>Edit</strong></td>
                   <td width="7%" class="td_bg" align="center"><strong>
@@ -255,6 +256,7 @@ include_once 'script.php';
                     $flenm        = $srowstdtestmnl_mst['std_testmnlm_dwnfl'];
                     $std_testmnlDt        = $srowstdtestmnl_mst['std_testmnlm_dt'];
                     $std_testmnltyp        = $srowstdtestmnl_mst['std_testmnlm_typ'];
+                    $db_szchrt = $srowstdtestmnl_mst['std_testmnlm_img'];
                     $flepth        = $dwnfl_upldpth . $db_nwid . "-" . $flenm;
                     $cnt += 1;
                 ?>
@@ -268,8 +270,21 @@ include_once 'script.php';
                       <td>
                         <a href="<?php echo $rd_vwpgnm; ?>?vw=<?php echo $db_nwid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="links"><?php echo $db_nwnm; ?></a>
                       </td>
-
-                      <td align="left"><?php echo $std_testmnlDt  ?></td>
+											<td align="left">
+												<?php 
+												$imgnm = $db_szchrt;
+												$imgpath = $dwnfl_upldpth.$imgnm;
+												if(($imgnm !="") && file_exists($imgpath))
+												{
+													echo "<img src='$imgpath' width='50pixel' height='50pixel'>";     
+												}
+												else
+												{
+													echo "NA";            
+												}
+												?>
+											</td>
+                      <!-- <td align="left"><?php echo $std_testmnlDt  ?></td> -->
                       <td align="center"><?php echo $db_nwprty; ?></td>
                       <td align="center">
                         <a href="<?php echo $rd_edtpgnm; ?>?edit=<?php echo $db_nwid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="orongelinks">Edit</a>
@@ -309,11 +324,11 @@ include_once 'script.php';
                 <tr>
                   <td colspan="<?php echo $clspn_val; ?>">&nbsp;</td>
                   <td width="7%" align="right" valign="bottom">
-                    <div align="right">
+                    <div align="Center">
                       <input name="btnsts" id="btnsts" type="button" value="Status" onClick="updatests('hdnchksts','frmnews','chksts')" class="btn btn-xs btn-primary">
                     </div>
                   </td>
-                  <td width="7%" align="right" valign="bottom">
+                  <td width="7%" align="center" valign="bottom">
                     <div align="right">
                       <input name="btndel" id="btndel" type="button" value="Delete" onClick="deleteall('hdnchkval','frmnews','chkdlt');" class="btn btn-xs btn-primary">
                     </div>

@@ -31,8 +31,8 @@ if (isset($_REQUEST['vw']) && (trim($_REQUEST['vw']) != "") && isset($_REQUEST['
     $countstart = glb_func_chkvl($_REQUEST['countstart']);
     $srchval = glb_func_chkvl($_REQUEST['val']);
 }
-$sqryprodscat_mst = "select
-std_testmnlm_id,std_testmnlm_name,std_testmnlm_sts,std_testmnlm_prty,std_testmnlm_typ,std_testmnlm_desc,std_testmnlm_lnk,std_testmnlm_img,
+ $sqryprodscat_mst = "select
+std_testmnlm_id,std_testmnlm_name,std_testmnlm_sts,std_testmnlm_prty,std_testmnlm_typ,std_testmnlm_desc,std_testmnlm_shrtdesc,std_testmnlm_img,
 std_testmnlm_dwnfl,date_format(std_testmnlm_dt,'%d-%m-%Y') as std_testmnlm_dt						    
 from
 std_testmnl_mst
@@ -97,12 +97,12 @@ if (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y")) {
                                 <?php echo $rowsprodscat_mst['std_testmnlm_name']; ?>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Date</label>
                             <div class="col-sm-8">
                                 <?php echo $rowsprodscat_mst['std_testmnlm_dt']; ?>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="form-group row">
@@ -112,96 +112,23 @@ if (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y")) {
                             </div>
                         </div>
 
-                        <!-- <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Description</label>
+                        <div class="form-group row">
+                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Short Description</label>
                             <div class="col-sm-8">
-                                <?php
-                                $imgnm = $rowsprodscat_mst['std_testmnlm_img'];
-                                $imgpath = $gbrnd_upldpth . $imgnm;
-                                if (($imgnm != "") && file_exists($imgpath)) {
-                                    echo "<img src='$imgpath' width='80pixel' height='80pixel'><br>";
-                                } else {
-                                    echo "Image not available";
-                                }
-                                ?>
-                            </div>
-                        </div> -->
-
-
-                        <!-- <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Type</label>
-                            <div class="col-sm-8">
-                                <?php echo funcDsplyCattwoTyp($db_scattype); ?>
+                                <?php echo $rowsprodscat_mst['std_testmnlm_shrtdesc']; ?>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Department Title</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['prodscatm_dpttitle']; ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Head of the Department Name</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['prodscatm_dpthead']; ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">SEO Title</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['prodscatm_seotitle']; ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">SEO Description</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['prodscatm_seodesc']; ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">SEO Keyword</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['prodscatm_seokywrd']; ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">SEO H1</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['prodscatm_seohone']; ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">SEO H2 </label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['prodscatm_seohtwo']; ?>
-                            </div>
-                        </div> -->
-
-                        <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Link</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['std_testmnlm_lnk']; ?>
-                            </div>
-                        </div>
-                        <!-- <div class="form-group row">
-                            <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Image</label>
-                            <div class="col-sm-8">
-                                <?php echo $rowsprodscat_mst['nwsm_typ']; ?>
-                            </div>
-                        </div> -->
 
                         <div class="form-group row">
                             <label for="txtname" class="col-sm-2 col-md-2 col-form-label">Image</label>
                             <div class="col-sm-8">
                                 <?php
                                 $imgnm = $rowsprodscat_mst['std_testmnlm_img'];
-                                $imgpath = $a_cat_std_testmnlfldnm . $imgnm;
+                                 $imgpath = $dwnfl_upldpth . $imgnm;
                                 if (($imgnm != "") && file_exists($imgpath)) {
                                     echo "<img src='$imgpath' width='80pixel' height='80pixel'><br>";
                                 } else {
-                                    echo "Image not available";
+                                    echo "Image not available1";
                                 }
                                 ?>
                             </div>
