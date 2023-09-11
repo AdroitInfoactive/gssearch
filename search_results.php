@@ -38,7 +38,7 @@ $body_class = "homepage";
     <div class="row ">
       <!-- <div class="col-lg-3 col-sm-3 ">
         <?php
-        $sqry_exmscat_nms = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_id, prodmnexmsm_name, addquesm_yearsm_id, yearsm_id, yearsm_name from exam_subcategory_mst
+      $sqry_exmscat_nms = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_id, prodmnexmsm_name, addquesm_yearsm_id, yearsm_id, yearsm_name from exam_subcategory_mst
         inner join addques_mst on addquesm_exmscat_id = exam_subcategorym_id
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id

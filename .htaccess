@@ -1,6 +1,6 @@
 Options +FollowSymLinks
 RewriteEngine On
-RewriteBase /projects/praveen/g/gssearch/
+RewriteBase /projects/g/gssearch-1/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
@@ -12,6 +12,10 @@ RewriteRule ^exam-categories$ exam_categories.php [L]
 RewriteRule ^aboutus$ aboutus.php [L]
 RewriteRule ^contact$ contactus.php [L]
 RewriteRule ^logout$ usrlogout.php [L]
+RewriteRule ^bookmark$ bookmark.php [L]
+RewriteRule ^my-account$ my-account.php [L]
+
+
 
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
