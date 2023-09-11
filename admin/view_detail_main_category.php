@@ -38,7 +38,7 @@ if(isset($_REQUEST['vw']) && (trim($_REQUEST['vw'])!="") && isset($_REQUEST['pg'
 // $srsprodmncat_mst = mysqli_query($conn,$sqryprodmncat_mst);
 // $rowsprodmncat_mst = mysqli_fetch_assoc($srsprodmncat_mst);
 
- $sqryprodcat_mst="SELECT 
+  $sqryprodcat_mst="SELECT 
 			prodmnexmsm_name,prodmnexmsm_desc,prodmnexmsm_img,prodmnexmsm_seotitle,prodmnexmsm_seodesc,
 			prodmnexmsm_seohone,prodmnexmsm_seohtwo,prodmnexmsm_seokywrd,prodmnexmsm_prty, 
 			if(prodmnexmsm_sts = 'a', 'Active','Inactive') as prodmnexmsm_sts

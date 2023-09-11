@@ -30,7 +30,7 @@ include('header.php');
   <div class="container">
     <div class="row">
       <?php
-      $sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc, exam_subcategorym_name, yearsm_id, yearsm_name from prodmnexms_mst
+      $sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc,prodmnexmsm_img, exam_subcategorym_name, yearsm_id, yearsm_name from prodmnexms_mst
       inner join addques_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
       inner join exam_subcategory_mst on exam_subcategorym_prodmnexmsm_id = prodmnexmsm_id
       inner join years_mst on yearsm_id = addquesm_yearsm_id
@@ -46,11 +46,20 @@ include('header.php');
           $exm_scatnm = $srow_exm_cat['exam_subcategorym_name'];
           $exm_scatnm_url = funcStrRplc($exm_scatnm);
           $exm_yr = $srow_exm_cat['yearsm_name'];
+          $exm_cat_img = $srow_exm_cat['prodmnexmsm_img'];
+          $path=$u_mnlnks_bnrfldnm.$exm_cat_img;
+          if($exm_cat_img!=''&&file_exists($path)){
+            $image=$rtpth.$path;
+          }
+          else{
+            $image=$rtpth.'exm_cat_img/default.jpg';
+          }
           ?>
           <div class="col-lg-3 col-sm-6">
             <div class="single_courses courses_gray mt-30">
               <div class="courses_image">
                 <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
+                <img src="<?php echo $image ?>" alt="courses">
               </div>
               <div class="courses_content">
                 <h4 class="title"><a href="<?php echo $rtpth . $exm_catnm_url."/".$exm_scatnm_url."/".$exm_yr; ?>">
