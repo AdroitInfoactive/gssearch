@@ -53,7 +53,7 @@ if (
     $countstart = $_REQUEST['hdncnt'];
 }
 $sqrystdtestmnl_dtl = "select 
-std_testmnlm_name,std_testmnlm_desc,std_testmnlm_prty,std_testmnlm_sts,std_testmnlm_img,std_testmnlm_lnk,
+std_testmnlm_name,std_testmnlm_desc,std_testmnlm_prty,std_testmnlm_sts,std_testmnlm_img,std_testmnlm_shrtdesc,
 std_testmnlm_dwnfl,std_testmnlm_typ,date_format(std_testmnlm_dt,'%d-%m-%Y') as std_testmnlm_dt
 from 
 std_testmnl_mst
@@ -132,7 +132,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 </script>
 <?php
 include_once $inc_adm_hdr;
-include_once $inc_adm_lftlnk;
+include_once $inc_adm_lftshrtdesc;
 ?>
 <section class="content">
     <div class="content-header">
@@ -172,26 +172,6 @@ include_once $inc_adm_lftlnk;
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>Date</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input name="txtnwsdt" type="text" id="txtnwsdt" size="45" maxlength="40" onBlur="funcChkDupName()" class="form-control" value="<?php echo $rowsstdtestmnl_dtl['std_testmnlm_dt']; ?>">
-                                <span id="errorsDiv_txtnwsdt"></span>
-                                <script language='javascript'>
-                                    if (!document.layers) {
-                                        document.write("<img src='images/calendar.gif' onclick='popUpCalendar(this,frmedtbrnd.txtnwsdt, \"yyyy-mm-dd\")'  style='font-size:11px' style='cursor:pointer'>")
-                                    }
-                                </script>
-                            </div>
-                        </div>
-
-                    </div>
-
                     <div class="col-md-12">
                         <div class="row mb-2 mt-2">
                             <div class="col-sm-3">
@@ -213,7 +193,7 @@ include_once $inc_adm_lftlnk;
                                 </div>
                                 <?php
                                 $imgnm = $rowsstdtestmnl_dtl['std_testmnlm_img'];
-                                $imgpath = $a_cat_std_testmnlfldnm . $imgnm;
+                                $imgpath = $dwnfl_upldpth . $imgnm;
                                 if (($imgnm != "") && file_exists($imgpath)) {
                                     echo "<img src='$imgpath' width='80pixel' height='80pixel'><br><input type='checkbox' name='chkbximg' id='chkbximg' value='$imgpath'>Remove Image";
                                 } else {
@@ -223,85 +203,6 @@ include_once $inc_adm_lftlnk;
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>Link</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" name="txtlnk" id="txtlnk" class="form-control" size="4" value="<?php echo $rowsstdtestmnl_dtl['std_testmnlm_lnk']; ?>">
-                                <span id="errorsDiv_txtlnk"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>Display Type</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <select name="lstdsplytyp" id="lstdsplytyp" class="form-control">
-
-                                    <option value="1" <?php if ($db_dsplytyp == '1') echo 'selected'; ?>>General</option>
-                                    <option value="2" <?php if ($db_dsplytyp == '2') echo 'selected'; ?>>Tabular</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>SEO Title</label>
-                            </div>
-
-
-                            <div class="col-sm-9">
-                                <input type="text" name="txtseotitle" id="txtseotitle" size="45" maxlength="250" class="form-control" value="<?php echo $db_catseottl; ?>">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>SEO Description</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <textarea name="txtseodesc" rows="3" cols="60" id="txtseodesc" class="form-control"><?php echo $db_catseodesc; ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>SEO Keyword</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <textarea name="txtseokywrd" rows="3" cols="60" id="txtseokywrd" class="form-control"><?php echo $db_catseokywrd; ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>SEO H1 </label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" name="txtseoh1" id="txtseoh1" size="45" maxlength="250" class="form-control" value="<?php echo $db_catseohone; ?>">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="row mb-2 mt-2">
-                            <div class="col-sm-3">
-                                <label>SEO H2 </label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" name="txtseoh2" id="txtseoh2" size="45" maxlength="250" class="form-control" value="<?php echo $db_catseohtwo; ?>">
-                            </div>
-                        </div>
-                    </div> -->
 
                     <div class="col-md-12">
                         <div class="row mb-2 mt-2">

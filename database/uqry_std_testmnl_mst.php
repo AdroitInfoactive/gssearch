@@ -17,7 +17,7 @@ if (
     $prty         = glb_func_chkvl($_POST['txtprior']);
     $sts          = glb_func_chkvl($_POST['lststs']);
     $typval    = glb_func_chkvl($_POST['lsttyp']);
-    $std_testmnllnk           = glb_func_chkvl(trim($_POST['txtlnk']));
+    $std_testmnlshrtdesc           = glb_func_chkvl(trim($_POST['txtshrtdesc']));
     $hdndwnfle = $id . "-" . glb_func_chkvl($_POST['hdndwnfle']);
     $curdt     = date('Y-m-d h:i:s');
     $pg           = glb_func_chkvl($_REQUEST['pg']);
@@ -55,7 +55,7 @@ if (
 						    std_testmnlm_sts='$sts',
 							std_testmnlm_typ='$typval',
 							std_testmnlm_dt='$std_testmnlDt',
-							std_testmnlm_lnk='$std_testmnllnk',
+							std_testmnlm_shrtdesc='$std_testmnlshrtdesc',
 						    std_testmnlm_prty='$prty',
 						    std_testmnlm_mdfdon='$curdt',
 						    std_testmnlm_mdfdby='$ses_admin'";
@@ -85,11 +85,11 @@ if (
         $ursstd_testmnl_mst = mysqli_query($conn, $uqrystd_testmnl_mst);
         if ($ursstd_testmnl_mst == true) {
             if (($bsource != 'none') && ($bsource != '') && ($bdest != "")) {
-                $bgimgpth      = $a_cat_std_testmnlfldnm . $hdnbgimg;
+                $bgimgpth      = $dwnfl_upldpth . $hdnbgimg;
                 if (($hdnbgimg != '') && file_exists($bgimgpth)) {
                     unlink($bgimgpth);
                 }
-                move_uploaded_file($bsource, $a_cat_std_testmnlfldnm . $bdest);
+                move_uploaded_file($bsource, $dwnfl_upldpth . $bdest);
             }
             /*if(($fsource!='none') && ($fsource!='') && ($fdest!= "")){ 
 					$flepth      = $dwnfl_upldpth.$hdndwnfle;	
