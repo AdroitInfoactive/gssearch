@@ -170,6 +170,14 @@ error_reporting(0);
 
 							</ul>
 						</li>
+						<li class="nav-item">
+									<a href="view_all_members.php" class="nav-link <?php if ($pagenm == "Members") {
+										echo "active";
+									} ?>">
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Members</p>
+									</a>
+								</li>
 						<li class="nav-item has-treeview <?php if ($pagemncat == "Questions") {
 							echo "menu-open";
 						} ?>">
