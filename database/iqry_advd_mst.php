@@ -32,7 +32,7 @@ if(isset($_POST['btnadvdsbmt']) && (trim($_POST['btnadvdsbmt']) != "") && isset(
 				$dadvdsource = $dadvdimgary[1];
 			}
 		}
-		 echo $iqryadvd_mst="INSERT into advd_mst(advdm_name, advdm_desc, advdm_prty, advdm_sts, advdm_dimgnm,advdm_crtdon, advdm_crtdby) values ('$name', '$desc','$prior', '$sts', '$dadvddest','$curdt', '$ses_admin')"; 
+		  $iqryadvd_mst="INSERT into advd_mst(advdm_name, advdm_desc, advdm_prty, advdm_sts, advdm_dimgnm,advdm_crtdon, advdm_crtdby) values ('$name', '$desc','$prior', '$sts', '$dadvddest','$curdt', '$ses_admin')"; 
 		$irsadvd_mst= mysqli_query($conn,$iqryadvd_mst) or die(mysqli_error($conn));
 		if($irsadvd_mst==true)
 		{
