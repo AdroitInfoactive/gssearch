@@ -105,30 +105,30 @@ include_once('script.php');
 include_once('../includes/inc_fnct_ajax_validation.php');
 ?>
 <script language="javascript" type="text/javascript">
-    function funcChkDupName() {
-        var name;
-        name = document.getElementById('txtname').value;
-        var prodmcatid = document.getElementById('lstcat').value;
-        id = <?php echo $id; ?>;
-        if (name != "" && prodmcatid != "" && id != "") {
-            var url = "chkduplicate.php?prodcatname=" + name + "&prodmcatid=" + prodmcatid + "&prodcatid=" + id;
-            xmlHttp = GetXmlHttpObject(stateChanged);
-            xmlHttp.open("GET", url, true);
-            xmlHttp.send(null);
-        } else {
-            document.getElementById('errorsDiv_txtname').innerHTML = "";
-        }
-    }
-
-    function stateChanged() {
-        if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-            var temp = xmlHttp.responseText;
-            document.getElementById("errorsDiv_txtname").innerHTML = temp;
-            if (temp != 0) {
-                document.getElementById('txtname').focus();
-            }
-        }
-    }
+	function funcChkDupName() {
+        debugger
+		var name = document.getElementById('txtname').value;
+		id = <?php echo $id; ?>;
+		if (name != "") {
+			var url = "chkduplicate.php?stdtestmnl=" + name + "&stdtest=" + id;
+			xmlHttp = GetXmlHttpObject(stateChanged);
+			xmlHttp.open("GET", url, true);
+			xmlHttp.send(null);
+		}
+		else {
+			document.getElementById('errorsDiv_txtname').innerHTML = "";
+		}
+	}
+	function stateChanged() {
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			var temp = xmlHttp.responseText;
+			// alert(temp);
+			document.getElementById("errorsDiv_txtname").innerHTML = temp;
+			if (temp != 0) {
+				document.getElementById('txtname').focus();
+			}
+		}
+	}
 </script>
 <?php
 include_once $inc_adm_hdr;

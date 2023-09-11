@@ -160,44 +160,47 @@ include_once $inc_adm_lftlnk;
 									<table width="100%"  border="0" cellspacing="1" cellpadding="1" class="table table-striped table-bordered">
 										<tr bgcolor="#FFFFFF">
 											<td width="1%"  align="Left" ><strong>S.No.</strong></td>
-											<td width="15%" align="Left" ><strong>Subscription Amount</strong></td>
-                      <td width="15%" align="Left" ><strong>From Date</strong></td>
-                      <td width="15%" align="Left" ><strong>To Date</strong></td>
+											<td width="15%" align="center" ><strong>Subscription Amount</strong></td>
+                      <td width="15%" align="center" ><strong>From Date</strong></td>
+                      <td width="15%" align="center" ><strong>To Date</strong></td>
 										</tr>
                     <?php
-                    echo  $sqrymembers_mst ="SELECT   mbrm_id,mbrm_emailid,mbrd_fstname,mbrd_fstname,mbrd_bdayphone,cntym_name,cntrym_name, mbrd_lstname,mbrm_sts,date_format(mbrm_crtdon,'%d-%m-%Y') as mbrm_crtdon  ,mbrm_id,mbrd_bmbrcntrym_id,mbrd_bmbrcntym_id,mbrd_bcty_id,mbrd_dfltbil, mbrd_dfltshp,mbrd_bzip,mbrd_badrs,mbrd_mbrm_id,mbrd_id,ctym_name,mbrd_bmbrpan,mbrd_bmbrgstn 
+                      $sqrysubscrib_mst ="SELECT  mbrd_sbcr_id,mbrd_sbcr_mbrm_id,mbrd_sbcr_amt_id,mbrd_sbcr_paidon,mbrd_sbcr_endon
                     from  
-                    mbr_mst  
-                    left join mbr_dtl on mbr_dtl.mbrd_mbrm_id = mbr_mst.mbrm_id
-                    left join cntry_mst on cntry_mst.cntrym_id  = mbr_dtl.mbrd_bmbrcntrym_id  
-                    left join cnty_mst on cnty_mst.cntym_id  = mbr_dtl.mbrd_bmbrcntym_id 
-                    left join cty_mst on cty_mst.ctym_id  = mbr_dtl.mbrd_bcty_id 
-                    where 
-                    mbrm_id = $id";		
-                     $srsmembers_mst = mysqli_query($conn, $sqrymembers_mst);
-                     $cnt_recs = mysqli_num_rows($srsmembers_mst);
-                     $cnt = $offset;
-                     if ($cnt_recs > 0) {
-                      while ($srowmember_mst = mysqli_fetch_assoc($srsmembers_mst)) {
-                        $cnt += 1;
-                        $pgval_srch	= $pgnum . $loc;
-                        $db_catid	= $srowmember_mst['mbrm_id'];
-                        $db_catname	= $srowmember_mst['mbrm_name'];
-                        $db_emailid	= $srowmember_mst['mbrm_emailid'];
-                        $db_mobil		= $srowmember_mst['mbrm_mobile'];
-                        ?> 
+										mbr_sbcr_dtl
+										where 
+										mbrd_sbcr_mbrm_id= $id";		
+										$srssubscrib_mst = mysqli_query($conn, $sqrysubscrib_mst);
+										$cnt_recs = mysqli_num_rows($srssubscrib_mst);
+										$cnt = $offset;
+										if ($cnt_recs > 0) {
+										while ($srowsubscrib_mst = mysqli_fetch_assoc($srssubscrib_mst)) {
+										
+											// inner join subscrptn_amt_mst on subscrptn_amt_mst.subscrptnm_amt_id = mbr_sbcr_dtl.mbrd_sbcr_amt_id                   
+
+											$cnt += 1;
+											$pgval_srch	= $pgnum . $loc;
+									 		$db_subamtid		= $srowsubscrib_mst['mbrd_sbcr_amt_id'];
+
+											$db_amtpaidon		= $srowsubscrib_mst['mbrd_sbcr_paidon'];
+											$db_amtendon		= $srowsubscrib_mst['mbrd_sbcr_endon'];
+											$sqrysubscribamt_mst = "SELECT subscrptnm_amt_name,subscrptnm_amt_sts,subscrptnm_amt_id from subscrptn_amt_mst where subscrptnm_amt_id = '$db_subamtid'";
+											$srsubscribamt_mst = mysqli_query($conn, $sqrysubscribamt_mst);
+											while($subscrib_mst = mysqli_fetch_assoc($srsubscribamt_mst)){
+												$db_subamt		= $subscrib_mst['subscrptnm_amt_name'];
+									?> 
                         <tr <?php if ($cnt % 2 == 0) {
                           echo "";
                         } else {
                           echo "";
                         } ?>>
                         <td><?php echo $cnt; ?></td>
-                        <td align="center"><?php echo $db_emailid;?></td>
-                        <td align="center"><?php echo $db_; ?></td>
-                        <td align="center"><?php echo $db_; ?></td>
+                        <td align="center"><?php echo $db_subamt;?></td>
+                        <td align="center"><?php echo $db_amtpaidon; ?></td>
+                        <td align="center"><?php echo $db_amtendon; ?></td>
                         </tr>
                     <?php
-								}
+								}}
 							} else {
 								$msg = "<font color=red>No Records In Database</font>";
 							}
