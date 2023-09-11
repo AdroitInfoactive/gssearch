@@ -77,6 +77,9 @@ $gusrbnr_fldnm = "banner/";
 $galry_fldnm = "../gallery/";
 $gusrglry_fldnm = "gallery/";
 
+$gadvd_fldnm = "../advertisementimg/";
+$gusradvd_fldnm = "advertisementimg/";
+
 $a_phtgalspath1 = '../gallery/photos/';
 $u_phtgalspath1 = 'gallery/photos/';
 

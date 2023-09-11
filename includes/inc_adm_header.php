@@ -170,12 +170,13 @@ error_reporting(0);
 
 							</ul>
 						</li>
+
 						<li class="nav-item">
-									<a href="view_all_members.php" class="nav-link <?php if ($pagenm == "Members") {
+									<a href="view_all_advertisement.php" class="nav-link <?php if ($pagenm == "advertisement") {
 										echo "active";
 									} ?>">
 										<i class="far fa-dot-circle nav-icon"></i>
-										<p>Members</p>
+										<p>Advertisement</p>
 									</a>
 								</li>
 						<li class="nav-item has-treeview <?php if ($pagemncat == "Questions") {

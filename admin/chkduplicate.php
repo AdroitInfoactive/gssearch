@@ -126,6 +126,30 @@ if (isset($_REQUEST['prodscatname']) && (trim($_REQUEST['prodscatname']) != "") 
 		echo "<font color=red><strong>Duplicate Combination Of Main Category, Category & Name</strong></font>";
 	}
 }
+
+// ----------------------- to check duplicate Advertisement name -----------------
+if (isset($_REQUEST['advdname']) && (trim($_REQUEST['advdname']) != "")) {
+	// checking Duplicate name for Categoryone
+	$result = "";
+	$advdname = glb_func_chkvl($_REQUEST['advdname']);
+	$sqryadvd_mst = "select 
+								advdm_name 
+							from 
+								advd_mst
+						   	where 
+						   		advdm_name = '" . $advdname . "'";
+	if (isset($_REQUEST['advdid']) && (trim($_REQUEST['advdid']) != "")) {
+		$advdid = glb_func_chkvl($_REQUEST['advdid']);
+		$sqryadvd_mst .= " and advdm_id != $advdid";
+	}
+	$srsadvd_mst  = mysqli_query($conn, $sqryadvd_mst);
+	$reccnt_advd  = mysqli_num_rows($srsadvd_mst);
+	if ($reccnt_advd > 0) {
+		$result = "<font color ='red'><b>Duplicate Name</b></font>";
+	}
+	echo $result;
+}
+// ------------------------------------------------------------------------------
 // ----------------------- to check duplicate Sub Category name -----------------
 if (isset($_REQUEST['bnrname']) && (trim($_REQUEST['bnrname']) != "")) {
 	// checking Duplicate name for Categoryone
