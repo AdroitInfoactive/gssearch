@@ -8,32 +8,40 @@ $body_class = "homepage";
 include('header-home.php');
 ?>
 <!--====== Slider PART START ======-->
-<section class="slider_area_3 bg_cover d-flex align-items-center"
-  style="background-image: url(<?php echo $rtpth; ?>assets/images/slider-4.jpg)">
+<section class="slider_area_3 bg_cover d-flex align-items-center" style="background-image: url(<?php echo $rtpth; ?>assets/images/slider-4.jpg)">
   <div class="container">
     <div class="row align-items-center">
-    
-    
-          
+
+
+
       <div class="col-lg-12">
         <div class="slider_content_3 text-center">
-       <div class="row  justify-content-center"> <div class="col-lg-8">
-            <div class="header_search" id="header_search">
+          <div class="row  justify-content-center">
+            <div class="col-lg-8">
+              <div class="header_search" id="header_search">
+                <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                  <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
+                                                                                                      echo $_POST['txtsrchval'];
+                                                                                                    } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
+                                                                                                      echo $_REQUEST['txtsrchval'];
+                                                                                                    } ?>">
+                  <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+              <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
               <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
-                <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
-              </form>
-            </div>
-            <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
-              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
+                <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
+                                                                                                                          echo $_POST['txtsrchval'];
+                                                                                                                        } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
+                                                                                                                          echo $_REQUEST['txtsrchval'];
+                                                                                                                        } ?>">
                 <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
               </form>
             </div>
             <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
+            </div>
           </div>
-          </div>
-          
+
           <h2 class="main_title">Master your <span>Thousands of
             </span> with in the Practice zone</h2>
           <div class="slider_box_wrapper d-flex flex-wrap justify-content-between">
@@ -119,14 +127,13 @@ if ($cntrec_exm_cat > 0) { ?>
           $exm_scatnm_url = funcStrRplc($exm_scatnm);
           $exm_yr = $srow_exm_cat['yearsm_name'];
           $exm_cat_img = $srow_exm_cat['prodmnexmsm_img'];
-          $path=$u_mnlnks_bnrfldnm.$exm_cat_img;
-          if($exm_cat_img!=''&&file_exists($path)){
-            $image=$rtpth.$path;
+          $path = $u_mnlnks_bnrfldnm . $exm_cat_img;
+          if ($exm_cat_img != '' && file_exists($path)) {
+            $image = $rtpth . $path;
+          } else {
+            $image = $rtpth . 'exm_cat_img/default.jpg';
           }
-          else{
-            $image=$rtpth.'exm_cat_img/default.jpg';
-          }
-          ?>
+        ?>
           <div class="col-lg-3 col-sm-6">
             <div class="single_courses courses_gray mt-30">
               <div class="courses_image">
@@ -134,7 +141,7 @@ if ($cntrec_exm_cat > 0) { ?>
                 <img src="<?php echo $image ?>" alt="courses">
               </div>
               <div class="courses_content">
-                <h4 class="title"><a href="<?php echo $rtpth . $exm_cat_url."/".$exm_scatnm_url."/".$exm_yr; ?>"><?php echo $exm_cat_name; ?></a></h4>
+                <h4 class="title"><a href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>"><?php echo $exm_cat_name; ?></a></h4>
                 <p class="mt-2">
                   <?php echo $exm_cat_desc; ?>
                 </p>
@@ -144,7 +151,7 @@ if ($cntrec_exm_cat > 0) { ?>
               </div>
             </div>
           </div>
-          <?php
+        <?php
         }
         ?>
         <div class="col-sm-12 mt-4">
@@ -153,7 +160,7 @@ if ($cntrec_exm_cat > 0) { ?>
       </div>
     </div>
   </section>
-  <?php
+<?php
 }
 ?>
 
@@ -161,105 +168,116 @@ if ($cntrec_exm_cat > 0) { ?>
 
 
 <section class="testimonial_area_3">
-        <div class="testimonial_title_wrapper_2 bg_cover" style="background-image: url(assets/images/testimonial_bg.jpg)">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="testimonial_title text-center">
-                            <img src="assets/images/quota.png" alt="quota">
-                            <h2 class="title">What Students Say</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial_title_shape">
-                <img src="assets/images/shape/shape-8.png" alt="shape">
-            </div>
+  <div class="testimonial_title_wrapper_2 bg_cover" style="background-image: url(assets/images/testimonial_bg.jpg)">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="testimonial_title text-center">
+            <img src="assets/images/quota.png" alt="quota">
+            <h2 class="title">What Students Say</h2>
+          </div>
         </div>
+      </div>
+    </div>
+    <div class="testimonial_title_shape">
+      <img src="assets/images/shape/shape-8.png" alt="shape">
+    </div>
+  </div>
+  <?php
+  $testqry = "SELECT std_testmnlm_id,std_testmnlm_name,std_testmnlm_img,std_testmnlm_shrtdesc,std_testmnlm_desc,std_testmnlm_sts,std_testmnlm_prty from std_testmnl_mst where std_testmnlm_sts='a' order by std_testmnlm_prty asc ";
+  $exuqry_test = mysqli_query($conn, $testqry);
+  $count_test = mysqli_num_rows($exuqry_test);
+  if ($count_test > 0) {
+  ?>
 
-        <div class="testimonial_content_wrapper">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7">
-                        <div class="testimonial">
-                            <div class="testimonial_content_active_3">
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best1. </p>
-                                    <h5 class="author_name">Arnold Holder1</h5>
-                                    <span>Student, Language1</span>
-                                </div>
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best2. </p>
-                                    <h5 class="author_name">Nrnold Molder2</h5>
-                                    <span>Student, Language2</span>
-                                </div>
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best3. </p>
-                                    <h5 class="author_name">Hrnold Aolder3</h5>
-                                    <span>Student, Language3</span>
-                                </div>
-                                <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best4. </p>
-                                    <h5 class="author_name">Jrnold Iolder4</h5>
-                                    <span>Student, Language4</span>
-                                </div>
-                            </div>
-                            <div class="testimonial_author_active_3">
-                                <div class="single_author">
-                                    <img src="assets/images/author-4.jpg" alt="author">
-                                </div>
-                                <div class="single_author">
-                                    <img src="assets/images/author-5.jpg" alt="author">
-                                </div>
-                                <div class="single_author">
-                                    <img src="assets/images/author-6.jpg" alt="author">
-                                </div>
-                                <div class="single_author">
-                                    <img src="assets/images/author-5.jpg" alt="author">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="testimonial_content_wrapper">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-7">
+            <div class="testimonial">
+              <div class="testimonial_content_active_3">
+                <?php
+
+                while ($test_rows = mysqli_fetch_assoc($exuqry_test)) {
+                  $tst_name = $test_rows['std_testmnlm_name'];
+                  $tst_desc = $test_rows['std_testmnlm_desc'];
+                  $tst_shrt_desc = $test_rows['std_testmnlm_shrtdesc'];
+
+                ?>
+                  <div class="single_testimonial_3 text-center">
+                    <p><?php echo $tst_desc; ?></p>
+                    <h5 class="author_name"><?php echo $tst_name; ?></h5>
+                    <span><?php echo $tst_shrt_desc; ?></span>
+                  </div>
+
+                <?php
+                }
+
+                ?>
+              </div>
+              <div class="testimonial_author_active_3">
+                <?php
+                $exuqry_test1 = mysqli_query($conn, $testqry);
+                while ($test_rows1 = mysqli_fetch_assoc($exuqry_test1)) {
+                  $tst_img = $test_rows1['std_testmnlm_img'];
+                    $tst_path = $usrdwnfl_upldpth . $tst_img;
+                  if ($tst_img != '' && file_exists($tst_path)) {
+                    $tst_image = $rtpth . $tst_path;
+                  } else {
+                    $tst_image = $rtpth . 'exm_cat_img/default.jpg';
+                  }
+                ?>
+                  <div class="single_author">
+                    <img src="<?php echo $tst_image; ?>" alt="author">
+                  </div>
+                <?php
+                }
+                ?>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  <?php
+  }
+  ?>
+</section>
 
 
 
 
 <!--====== Blog PART ENDS ======-->
 <?php
-$adrqry="SELECT advdm_id,advdm_name,advdm_desc,advdm_dimgnm,advdm_mimgnm,advdm_lnk,advdm_text,advdm_prty,advdm_sts from advd_mst where advdm_sts='a' and advdm_id!='' order by  advdm_prty asc";
-$exuqry=mysqli_query($conn,$adrqry);
-$count_advt=mysqli_num_rows($exuqry);
-if($count_advt>0){
-  ?>
+$adrqry = "SELECT advdm_id,advdm_name,advdm_desc,advdm_dimgnm,advdm_mimgnm,advdm_lnk,advdm_text,advdm_prty,advdm_sts from advd_mst where advdm_sts='a' and advdm_id!='' order by  advdm_prty asc";
+$exuqry = mysqli_query($conn, $adrqry);
+$count_advt = mysqli_num_rows($exuqry);
+if ($count_advt > 0) {
+?>
   <div class="container">
-  <div class="row mb-4 justify-content-center">
-    <?php
-    while($advt_rows=mysqli_fetch_assoc($exuqry)){
-      $ad_name=$advt_rows['advdm_name'];
-      $ad_img = $advt_rows['advdm_dimgnm'];
-      $ad_path=$gusradvd_fldnm.$ad_img;
-      if($ad_img!=''&&file_exists($ad_path)){
-        $ad_image=$rtpth.$ad_path;
-      }
-      else{
-        $ad_image=$rtpth.'exm_cat_img/default.jpg';
-      }
+    <div class="row mb-4 justify-content-center">
+      <?php
+      while ($advt_rows = mysqli_fetch_assoc($exuqry)) {
+        $ad_name = $advt_rows['advdm_name'];
+        $ad_img = $advt_rows['advdm_dimgnm'];
+        $ad_path = $gusradvd_fldnm . $ad_img;
+        if ($ad_img != '' && file_exists($ad_path)) {
+          $ad_image = $rtpth . $ad_path;
+        } else {
+          $ad_image = $rtpth . 'exm_cat_img/default.jpg';
+        }
       ?>
 
-    <div class="col-sm-3">
-    <img src="<?php echo $ad_image; ?>">
-    </div>
+        <div class="col-sm-3">
+          <img src="<?php echo $ad_image; ?>">
+        </div>
 
       <?php
-    }
-    ?>
+      }
+      ?>
     </div>
   </div>
-  <?php
+<?php
 }
 ?>
 

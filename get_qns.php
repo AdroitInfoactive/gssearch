@@ -240,3 +240,82 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
 <?php
   }
 }
+//bookmark questions start
+
+       /*   $page = 1;
+          $i = $offset;
+          while ($srows_qns = mysqli_fetch_assoc($srs_tot_qns1)) {
+
+            $i++;
+            $bkmrk_id = $srows_qns['bookmark_id'];
+            $qn_id = $srows_qns['addquesm_id'];
+            $qn_qnm = html_entity_decode($srows_qns['addquesm_qnm']);
+            $qn_tag = $srows_qns['addquesm_qns_tag'];
+            $qn_crtans = $srows_qns['addquesm_crtans'];
+            $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
+            $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+          ?>
+            <div class="courses_curriculum mt-50">
+              <h4 class="courses_details_title">Q:
+                <?php echo $i . " (" . $qn_tag . ")"; ?>
+              </h4>
+              <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
+                <div class="courses_title">
+                  <h4 class="courses_details_title">
+                    <?php echo $qn_qnm; ?>
+                  </h4>
+                  <div class="pull-right ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title="" data-original-title="Share">
+                    <a data-toggle="modal" data-target="#shareProduct" class="sharelink"><i class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                    <?php
+                    $membrid = $_SESSION['sesmbrid'];
+                    $sqrybok = "select bookmark_qns_id from bookmark_mst where bookmark_qns_id='$qn_id' and bookmark_usr_id='$membrid'";
+                    $res = mysqli_query($conn, $sqrybok);
+                    $result_book = mysqli_fetch_assoc($res);
+                    $bk_qns_id = $result_book['bookmark_qns_id'];
+                    if ($bk_qns_id == $qn_id) {
+
+                    ?>
+
+                      <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-trash-o" onClick="remvbkmrkqns('<?php echo $bkmrk_id ?>','d')"></i></a>
+
+                    <?php
+                    } else {
+                    ?>
+                      <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-bookmark" onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
+                    <?php
+
+                    }
+                    ?>
+
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <?php
+                for ($j = 1; $j < 5; $j++) { ?>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="<?php echo $i; ?>customRadioInline<?php echo $j; ?>" name="<?php echo $i; ?>customRadioInline<?php echo $i; ?>" class="custom-control-input" onclick="show_ans(<?php echo $i; ?>,<?php echo $j; ?>,<?php echo $qn_id; ?>);">
+                    <label class="custom-control-label" for="<?php echo $i; ?>customRadioInline<?php echo $j; ?>">
+                      <?php echo html_entity_decode($srows_qns['addquesm_optn' . $j]); ?>
+                    </label>
+                  </div>
+                <?php
+                }
+                ?>
+
+                <p>
+                  <strong>
+                    <span class="text-success" style="display: none" id="crct<?php echo $i; ?>"><i class="fa fa-check"></i>
+                      Correct</span>
+                    <span class="text-danger" style="display: none" id="wrng<?php echo $i; ?>"><i class="fa fa-close"></i>
+                      Wrong</span>
+                  </strong>
+                </p>
+              </div>
+              <div class="scrolling-box" id="explnbx_<?php echo $i; ?>" style="display: none">
+              </div>
+            </div>
+
+          <?php
+          }
+          ?> */

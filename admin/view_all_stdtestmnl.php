@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 include_once '../includes/inc_config.php'; //Making paging validation 
 include_once $inc_nocache; //Clearing the cache information
 include_once $adm_session; //checking for session
@@ -220,7 +220,7 @@ include_once 'script.php';
                   </td>
                   <td width="7%" align="right" valign="bottom">
                     <div align="center">
-                      <input name="btndel" id="btndel" type="button" class="btn btn-xs btn-primary" value="Delete" onClick="deleteall('hdnchkval','frmnews','chkdlt');">
+                      <input name="btndel" id="btndel" type="button" class="btn btn-xs btn-primary" value="Delete" onClick="deleteall('hdnchkval','frmnews','chkdlt')">
                     </div>
                   </td>
                 </tr>
@@ -330,7 +330,7 @@ include_once 'script.php';
                   </td>
                   <td width="7%" align="center" valign="bottom">
                     <div align="right">
-                      <input name="btndel" id="btndel" type="button" value="Delete" onClick="deleteall('hdnchkval','frmnews','chkdlt');" class="btn btn-xs btn-primary">
+                      <input name="btndel" id="btndel" type="button" value="Delete" onClick="deleteall('hdnchkval','frmnews','chkdlt')" class="btn btn-xs btn-primary">
                     </div>
                   </td>
                 </tr>
