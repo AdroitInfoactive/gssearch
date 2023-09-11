@@ -88,7 +88,7 @@ include('header-home.php');
 <!--====== Slider PART ENDS ======-->
 <!--====== Courses PART START ======-->
 <?php
-$sqry_exm_cat = "SELECT count(addquesm_id) as qnscnt, prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc, exam_subcategorym_name, yearsm_id, yearsm_name from addques_mst
+$sqry_exm_cat = "SELECT count(addquesm_id) as qnscnt, prodmnexmsm_id, prodmnexmsm_name,prodmnexmsm_img, prodmnexmsm_desc, exam_subcategorym_name, yearsm_id, yearsm_name from addques_mst
 inner join prodmnexms_mst on prodmnexmsm_id =  addquesm_prodmnexmsm_id
 inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
 inner join years_mst on yearsm_id = addquesm_yearsm_id
@@ -118,11 +118,20 @@ if ($cntrec_exm_cat > 0) { ?>
           $exm_scatnm = $srow_exm_cat['exam_subcategorym_name'];
           $exm_scatnm_url = funcStrRplc($exm_scatnm);
           $exm_yr = $srow_exm_cat['yearsm_name'];
+          $exm_cat_img = $srow_exm_cat['prodmnexmsm_img'];
+          $path=$u_mnlnks_bnrfldnm.$exm_cat_img;
+          if($exm_cat_img!=''&&file_exists($path)){
+            $image=$rtpth.$path;
+          }
+          else{
+            $image=$rtpth.'exm_cat_img/default.jpg';
+          }
           ?>
           <div class="col-lg-3 col-sm-6">
             <div class="single_courses courses_gray mt-30">
               <div class="courses_image">
                 <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
+                <img src="<?php echo $image ?>" alt="courses">
               </div>
               <div class="courses_content">
                 <h4 class="title"><a href="<?php echo $rtpth . $exm_cat_url."/".$exm_scatnm_url."/".$exm_yr; ?>"><?php echo $exm_cat_name; ?></a></h4>
@@ -175,24 +184,24 @@ if ($cntrec_exm_cat > 0) { ?>
                         <div class="testimonial">
                             <div class="testimonial_content_active_3">
                                 <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Arnold Holder</h5>
-                                    <span>Student, Language</span>
+                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best1. </p>
+                                    <h5 class="author_name">Arnold Holder1</h5>
+                                    <span>Student, Language1</span>
                                 </div>
                                 <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Nrnold Molder</h5>
-                                    <span>Student, Language</span>
+                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best2. </p>
+                                    <h5 class="author_name">Nrnold Molder2</h5>
+                                    <span>Student, Language2</span>
                                 </div>
                                 <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Hrnold Aolder</h5>
-                                    <span>Student, Language</span>
+                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best3. </p>
+                                    <h5 class="author_name">Hrnold Aolder3</h5>
+                                    <span>Student, Language3</span>
                                 </div>
                                 <div class="single_testimonial_3 text-center">
-                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best. </p>
-                                    <h5 class="author_name">Jrnold Iolder</h5>
-                                    <span>Student, Language</span>
+                                    <p>I found myself working in a true partnership that results in an incredible experience, and an end product that is the best4. </p>
+                                    <h5 class="author_name">Jrnold Iolder4</h5>
+                                    <span>Student, Language4</span>
                                 </div>
                             </div>
                             <div class="testimonial_author_active_3">
@@ -220,7 +229,41 @@ if ($cntrec_exm_cat > 0) { ?>
 
 
 <!--====== Blog PART ENDS ======-->
-<div class="container">
+<?php
+$adrqry="SELECT advdm_id,advdm_name,advdm_desc,advdm_dimgnm,advdm_mimgnm,advdm_lnk,advdm_text,advdm_prty,advdm_sts from advd_mst where advdm_sts='a' and advdm_id!='' order by  advdm_prty asc";
+$exuqry=mysqli_query($conn,$adrqry);
+$count_advt=mysqli_num_rows($exuqry);
+if($count_advt>0){
+  ?>
+  <div class="container">
+  <div class="row mb-4 justify-content-center">
+    <?php
+    while($advt_rows=mysqli_fetch_assoc($exuqry)){
+      $ad_name=$advt_rows['advdm_name'];
+      $ad_img = $advt_rows['advdm_dimgnm'];
+      $ad_path=$gusradvd_fldnm.$ad_img;
+      if($ad_img!=''&&file_exists($ad_path)){
+        $ad_image=$rtpth.$ad_path;
+      }
+      else{
+        $ad_image=$rtpth.'exm_cat_img/default.jpg';
+      }
+      ?>
+
+    <div class="col-sm-3">
+    <img src="<?php echo $ad_image; ?>">
+    </div>
+
+      <?php
+    }
+    ?>
+    </div>
+  </div>
+  <?php
+}
+?>
+
+<!-- <div class="container">
   <div class="row mb-4 justify-content-center">
     <div class="col-sm-3">
       <img src="<?php echo $rtpth; ?>assets/images/ad-1.jpg">
@@ -235,5 +278,5 @@ if ($cntrec_exm_cat > 0) { ?>
       <img src="<?php echo $rtpth; ?>assets/images/ad-4.jpg">
     </div>
   </div>
-</div>
+</div> -->
 <?php include('footer.php'); ?>
