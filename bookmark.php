@@ -250,8 +250,8 @@ $rowsprpg = 5; //maximum rows per page
           <?php
           }
           ?>
-           <div id="qns_lst_dsp_pg">
-          </div>
+           <!-- <div id="qns_lst_dsp_pg">
+          </div> -->
           
         
         <?php

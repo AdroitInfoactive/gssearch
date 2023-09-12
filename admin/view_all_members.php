@@ -19,7 +19,7 @@ Purpose :
 Company : Adroit
  ************************************************************/
 global $msg, $loc, $rowsprpg, $dispmsg, $disppg, $offset;
-$clspn_val = "7";
+$clspn_val = "6";
 $rd_adpgnm = "add_mbr.php";
 $rd_edtpgnm = "edit_mbr.php";
 $rd_crntpgnm = "view_all_members.php";
@@ -243,7 +243,7 @@ include_once $inc_adm_hdr;
 								<td width="10%" align="left"><strong>Members Name</strong></td>
                 <td width="10%" align="center"><strong>Mobile</strong></td>
                 <td width="10%" align="center"><strong>Created On</strong></td>
-								<td width="6%" align="center"><strong>Edit</strong></td>
+								<!-- <td width="6%" align="center"><strong>Edit</strong></td> -->
 								<td width="7%" align="center"><strong>
 										<input type="checkbox" name="Check_ctr" id="Check_ctr" value="yes" onClick="Check(document.frmaddmbr.chksts,'Check_ctr','hdnallval')"></strong>
 								</td>
@@ -293,9 +293,9 @@ include_once $inc_adm_hdr;
                   </td>
                   <td align="center"><?php echo $db_mobil; ?></td>
                   <td align="center"><?php echo $db_crtdon; ?></td>
-                  <td align="center">
+                  <!-- <td align="center">
                     <a href="<?php echo $rd_edtpgnm; ?>?edtpdctid=<?php echo $db_catid; ?>&pg=<?php echo $pgnum; ?>&countstart=<?php echo $cntstart . $loc; ?>" class="contentlinks">Edit</a>
-                  </td>
+                  </td> -->
                   <td align="center">
                     <input type="checkbox" name="chksts" id="chksts" value="<?php echo $db_catid; ?>" <?php if ($db_sts == 'a') {
                       echo "checked";
