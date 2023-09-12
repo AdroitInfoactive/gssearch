@@ -193,7 +193,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
                     
                     <!-- <?php
                     } ?> -->
-  <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
+                    <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
                     <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
                 </li>
                 <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
