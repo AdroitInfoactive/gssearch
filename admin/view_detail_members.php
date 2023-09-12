@@ -23,7 +23,7 @@ $pagenm = "Members";
 /*****header link********/
 global $id,$pg,$cntstart,$msg,$loc,$rd_crntpgnm,$rd_edtpgnm,$clspn_val;
 global $id,$pg,$countstart;
-$rd_crntpgnm = "view_all_Members.php";
+$rd_crntpgnm = "view_all_members.php";
 $rd_edtpgnm  = "edit_all_Members.php";
 $clspn_val   = "4";
 if(isset($_REQUEST['vw']) && (trim($_REQUEST['vw'])!="") && isset($_REQUEST['pg']) && (trim($_REQUEST['pg'])!="") && isset($_REQUEST['countstart']) && (trim($_REQUEST['countstart'])!=""))
@@ -201,7 +201,7 @@ include_once $inc_adm_lftlnk;
 						 &nbsp;&nbsp;&nbsp;
 						 <!-- <input type="reset" class="btn btn-primary btn-cst" name="btnprodcatreset" value="Clear" id="btnprodcatreset">
 						 &nbsp;&nbsp;&nbsp; -->
-						 <input type="button" name="btnBack" value="Back" class="btn btn-primary btn-cst" onclick="location.href='<?php echo $rd_crntpgnm;?>?<?php echo $loc;?>'">
+						 <input type="button" name="btnBack" value="Back" class="btn btn-primary btn-cst" onclick="location.href='<?php echo $rd_crntpgnm;?>'">
 						</p>
 					</div>
 				</div>

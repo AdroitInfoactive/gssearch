@@ -19,7 +19,7 @@ Purpose :
 Company : Adroit
  ************************************************************/
 global $msg, $loc, $rowsprpg, $dispmsg, $disppg, $offset;
-$clspn_val = "7";
+$clspn_val = "6";
 $rd_adpgnm = "add_mbr.php";
 $rd_edtpgnm = "edit_mbr.php";
 $rd_crntpgnm = "view_all_members.php";
