@@ -163,6 +163,18 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 						<div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
+									<label>Link</label>
+								</div>
+								<div class="col-sm-9">
+									<input name="txtlnk" type="text" id="txtlnk" size="45" maxlength="40" 
+										class="form-control">
+									<span id="errorsDiv_txtlnk"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="row mb-2 mt-2">
+								<div class="col-sm-3">
 									<label>Rank *</label>
 								</div>
 								<div class="col-sm-9">
