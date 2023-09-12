@@ -17,14 +17,14 @@ if (
     $prty         = glb_func_chkvl($_POST['txtprior']);
     $sts          = glb_func_chkvl($_POST['lststs']);
     $typval    = glb_func_chkvl($_POST['lsttyp']);
-    $std_testmnlshrtdesc           = glb_func_chkvl(trim($_POST['txtshrtdesc']));
+    $std_testmnlshrtdesc           = glb_func_chkvl(trim($_POST['txtsdesc']));
     $hdndwnfle = $id . "-" . glb_func_chkvl($_POST['hdndwnfle']);
     $curdt     = date('Y-m-d h:i:s');
     $pg           = glb_func_chkvl($_REQUEST['pg']);
     $cntstart  = glb_func_chkvl($_REQUEST['countstart']);
     $val          = glb_func_chkvl($_REQUEST['txtsrchval']);
     $std_testmnlDt     = glb_func_chkvl(trim($_POST['txtstd_testmnldt']));
-    $hdnbgimg    = glb_func_chkvl($_POST['hdnbgimg']);
+    $hdnbgimg    = glb_func_chkvl($_POST['hdnbgimg']); 
     $std_testmnlDt           = date('Y-m-d', strtotime($std_testmnlDt));
 
     if (isset($_REQUEST['chkexact']) && $_REQUEST['chkexact'] == 'y') {
@@ -72,7 +72,7 @@ if (
 				$uqrystd_testmnl_mst .= ",std_testmnlm_dwnfl='$fdest'";
 			}	*/
         if (isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")) {
-            $bimgval = funcUpldImg('flebnrimg', 'news');
+            $bimgval = funcUpldImg('flebnrimg', 'simg');
             if ($bimgval != "") {
                 $bimgary    = explode(":", $bimgval, 2);
                 $bdest         = $bimgary[0];

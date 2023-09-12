@@ -170,12 +170,12 @@ include_once 'script.php';
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0 text-dark">View All advertisements</h1>
+						<h1 class="m-0 text-dark">View All Advertisements</h1>
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">View All advertisements</li>
+							<li class="breadcrumb-item active">View All Advertisements</li>
 						</ol>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -255,7 +255,7 @@ include_once 'script.php';
 								<tr>
 									<td width="8%" class="td_bg"><strong>SL.No.</strong></td>
 									<td width="28%" class="td_bg"><strong>Name</strong></td>
-									<td width="15%" class="td_bg"><strong>advertisement Image</strong></td>
+									<td width="15%" class="td_bg"><strong>Advertisement Image</strong></td>
 									<td width="6%" align="center" class="td_bg"><strong>Rank</strong></td>
 									<td width="7%" align="center" class="td_bg"><strong>Edit</strong></td>
 									<td width="7%" class="td_bg" align="center"><strong>

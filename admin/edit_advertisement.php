@@ -97,12 +97,12 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Edit advertisement</h1>
+					<h1 class="m-0 text-dark">Edit Advertisement</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Edit advertisement</li>
+						<li class="breadcrumb-item active">Edit Advertisement</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->

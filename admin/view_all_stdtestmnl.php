@@ -1,4 +1,5 @@
 <?php
+ 
 error_reporting(0);
 include_once '../includes/inc_config.php'; //Making paging validation 
 include_once $inc_nocache; //Clearing the cache information
@@ -28,7 +29,7 @@ $pagemncat = "Setup";
 $pagecat = "Student Testimonial";
 $pagenm = "Student Testimonial";
 /*****header link********/
-// echo"here"; exit;
+ 
 if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
   $dchkval = substr($_POST['hdnchksts'], 1);
   $id       = glb_func_chkvl($dchkval);
@@ -39,17 +40,24 @@ if (($_POST['hdnchksts'] != "") && isset($_REQUEST['hdnchksts'])) {
     $msg = "<font color=red>Record not updated</font>";
   }
 }
-if (($_POST['hdnchkval'] != "") && isset($_REQUEST['hdnchkval'])) {
-  $dchkval = substr($_POST['hdnchkval'], 1);
-  $did     = glb_func_chkvl($dchkval);
-  $delsts = funcDelAllRec('std_testmnl_mst', 'std_testmnlm_id', $did,$conn); 
 
-  if ($delsts == 'y') {
-    $msg = "<font color=red>Record deleted successfully</font>";
-  } elseif ($delsts == 'n') {
-    $msg = "<font color=red>Record can't be deleted(child records exist)</font>";
-  }
-}
+if (($_POST['hdnchkval'] != "") && isset($_REQUEST['hdnchkval'])) {
+
+  $dchkval = substr($_POST['hdnchkval'], 1);
+
+   $did     = glb_func_chkvl($dchkval);
+
+   $delsts = funcDelAllRec($conn,'std_testmnl_mst','std_testmnlm_id',$did);
+   if($delsts == 'y' )
+   {
+     $msg = "<font color=red>Record deleted successfully</font>";
+   }
+   elseif($delsts == 'n')
+   {
+     $msg = "<font color=red>Record can't be deleted(child records exist)</font>";
+   }
+ }
+
 if (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "y")) {
   $msg = "<font color=red>Record updated successfully</font>";
 } elseif (isset($_REQUEST['sts']) && (trim($_REQUEST['sts']) == "n")) {

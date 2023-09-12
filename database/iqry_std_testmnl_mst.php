@@ -43,7 +43,7 @@ if (
         //     }
         // }
         if (isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")) {
-            $bimgval = funcUpldImg('flebnrimg', 'bimg');
+            $bimgval = funcUpldImg('flebnrimg', 'img');
             if ($bimgval != "") {
                 $bimgary    = explode(":", $bimgval, 2);
                 $bdest         = $bimgary[0];

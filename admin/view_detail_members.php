@@ -17,7 +17,7 @@ Purpose :
 Company : Adroit
 ************************************************************/
 /*****header link********/
-$pagemncat = "Setup";
+$pagemncat = "Setup";	
 $pagecat = "Members";
 $pagenm = "Members";
 /*****header link********/
@@ -129,21 +129,9 @@ include_once $inc_adm_lftlnk;
 							</div>
 						</div>
             <div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Password </label>
-							<div class="col-sm-8">
-								<?php echo $db_mbrpwd;?>
-							</div>
-						</div>
-            <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Mobile No</label>
 							<div class="col-sm-8">
 								<?php echo $db_mobil;?>
-							</div>
-						</div>
-            <div class="form-group row">
-							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">IP Address</label>
-							<div class="col-sm-8">
-								<?php echo $db_ipadrs;?>
 							</div>
 						</div> 
 						<div class="form-group row">
@@ -208,8 +196,8 @@ include_once $inc_adm_lftlnk;
 									</table>
 								</div>
 						<p class="text-center">
-							<input type="Submit" class="btn btn-primary btn-cst" name="frmedtmbr" id="frmedtmbr" value="Edit" 
-						 onclick="update1()">
+							<!-- <input type="Submit" class="btn btn-primary btn-cst" name="frmedtmbr" id="frmedtmbr" value="Edit" 
+						 onclick="update1()"> -->
 						 &nbsp;&nbsp;&nbsp;
 						 <!-- <input type="reset" class="btn btn-primary btn-cst" name="btnprodcatreset" value="Clear" id="btnprodcatreset">
 						 &nbsp;&nbsp;&nbsp; -->

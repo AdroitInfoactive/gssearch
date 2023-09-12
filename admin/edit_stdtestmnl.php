@@ -156,7 +156,7 @@ include_once $inc_adm_lftshrtdesc;
         <input type="hidden" name="hdnval" value="<?php echo $srchval; ?>">
         <input type="hidden" name="hdnchk" value="<?php echo $chk; ?>">
         <input type="hidden" name="hdncnt" value="<?php echo $countstart ?>">
-        <input type="hidden" name="hdnbgimg" id="hdnbgimg" value="<?php echo $rowsprodcat_mst['prodcatm_bnrimg']; ?>">
+        <input type="hidden" name="hdnbgimg" id="hdnbgimg" value="<?php echo $rowsstdtestmnl_dtl['std_testmnlm_img']; ?>">
         <input type="hidden" name="hdnsmlimg" id="hdnsmlimg" value="<?php echo $rowsprodscat_mst['prodcatm_icn']; ?>">
         <div class="card">
             <div class="card-body">
@@ -185,6 +185,18 @@ include_once $inc_adm_lftshrtdesc;
                     <div class="col-md-12">
                         <div class="row mb-2 mt-2">
                             <div class="col-sm-3">
+                                <label>Short Description</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input name="txtsdesc" type="text" id="txtsdesc" size="45" maxlength="40" class="form-control" value="<?php echo $rowsstdtestmnl_dtl['std_testmnlm_shrtdesc']; ?>">
+                                <span id="errorsDiv_txtsdesc"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row mb-2 mt-2">
+                            <div class="col-sm-3">
                                 <label>Image</label>
                             </div>
                             <div class="col-sm-9">
@@ -195,7 +207,7 @@ include_once $inc_adm_lftshrtdesc;
                                 $imgnm = $rowsstdtestmnl_dtl['std_testmnlm_img'];
                                 $imgpath = $dwnfl_upldpth . $imgnm;
                                 if (($imgnm != "") && file_exists($imgpath)) {
-                                    echo "<img src='$imgpath' width='80pixel' height='80pixel'><br><input type='checkbox' name='chkbximg' id='chkbximg' value='$imgpath'>Remove Image";
+                                    echo "<img src='$imgpath' width='80pixel' height='80pixel'><br>";
                                 } else {
                                     echo "N.A.";
                                 }
@@ -215,8 +227,6 @@ include_once $inc_adm_lftshrtdesc;
                             </div>
                         </div>
                     </div>
-
-
                     <div class="col-md-12">
                         <div class="row mb-2 mt-2">
                             <div class="col-sm-3">
