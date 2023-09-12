@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include_once '../includes/inc_config.php'; //Making paging validation
 include_once $inc_nocache; //Clearing the cache information
 include_once $adm_session; //checking for session
@@ -83,7 +84,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Add advertisement</li>
+						<li class="breadcrumb-item active">Add Advertisement</li>
 					</ol>
 				</div><!-- /.col -->
 			</div><!-- /.row -->

@@ -469,7 +469,7 @@ require_once('settings.php');
       });
       // Load specific page
       $('#qns_lst_dsp_srch').on('click', '.page-number', function() {
-        debugger;
+        // debugger;
         let pageNumber = parseInt($(this).data('page'));
         loadPage_srch(pageNumber, srch_txt);
       });
@@ -510,7 +510,63 @@ require_once('settings.php');
       }
     });
   <?php
-  } else {
+  } 
+  else if ($page_title == "Bookmark Questions") { ?>
+    $(document).ready(function() {
+      // Initial page load
+    //  debugger;
+      var tot_qns_pg = <?php echo $tot_qns; ?>;
+      loadPage_pg(1);
+      // Load next page
+      $('#qns_lst_dsp_pg').on('click', '.next', function() {
+        let nextPage_srch = parseInt($(this).data('page'))
+        loadPage_pg(nextPage_srch);
+      });
+      // Load specific page
+      $('#qns_lst_dsp_pg').on('click', '.page-number', function() {
+        // debugger;
+        let pageNumber = parseInt($(this).data('page'));
+        loadPage_pg(pageNumber);
+      });
+
+      // Load previous page
+      $('#qns_lst_dsp_pg').on('click', '.prev', function() {
+        let prevPage_srch = parseInt($(this).data('page'))
+        loadPage_pg(prevPage_srch);
+      });
+
+      function loadPage_pg(page_srch) {
+        $.ajax({
+          url: `<?php echo $rtpth; ?>bookmark.php?page=${page_srch}`,
+          type: 'GET',
+          success: function(data_srch) {
+            var content_srch = '';
+            content_srch += data_srch;
+            // Append pagination controls
+            content_srch += '<div class="row">';
+            if (page_srch > 1) {
+              content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
+            }
+            for (let k = 1; k <= Math.ceil(tot_qns_pg / 10); k++) {
+              if (k === page_srch) {
+                content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
+              } else {
+                content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
+              }
+              content_srch += ``;
+            }
+            if (page_srch * 2 < tot_qns_pg) {
+              content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
+            }
+            content_srch += '</div>';
+            $('#qns_lst_dsp_pg').html(content_srch);
+          }
+        });
+      }
+    });
+  <?php
+  } 
+  else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
     } else {
