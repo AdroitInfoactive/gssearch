@@ -259,7 +259,9 @@ if ($count_advt > 0) {
       <?php
       while ($advt_rows = mysqli_fetch_assoc($exuqry)) {
         $ad_name = $advt_rows['advdm_name'];
+        $ad_lnk = $advt_rows['advdm_lnk'];
         $ad_img = $advt_rows['advdm_dimgnm'];
+        
         $ad_path = $gusradvd_fldnm . $ad_img;
         if ($ad_img != '' && file_exists($ad_path)) {
           $ad_image = $rtpth . $ad_path;
@@ -269,7 +271,20 @@ if ($count_advt > 0) {
       ?>
 
         <div class="col-sm-3">
-          <img src="<?php echo $ad_image; ?>">
+       <?php
+       if($ad_lnk!=''){
+        ?>
+         <a href="<?php echo $ad_lnk;?>" target="_blank"><img src="<?php echo $ad_image; ?>"></a>
+        <?php
+       }
+       else{
+        ?>
+        <img src="<?php echo $ad_image; ?>" >
+        <?php
+       }
+
+       ?>
+      
         </div>
 
       <?php

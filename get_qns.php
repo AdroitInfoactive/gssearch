@@ -186,9 +186,9 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
                 <?php echo $qn_qnm; ?>
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title="" data-original-title="Share">
-                <a data-toggle="modal" data-target="#shareProduct" class="sharelink"><i class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
 
-                <a data-toggle="modal" class="pull-right sharelink active"><i class="fa fa-bookmark" onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
+                <a data-toggle="modal" class="pull-right sharelink "><i class="fa fa-bookmark" onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
               </div>
             </div>
           </div>
