@@ -190,10 +190,10 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
                     $cnt = mysqli_num_rows($res);
                     if ($cnt > 0) {
                     ?> -->
-                      <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
+                    
                     <!-- <?php
                     } ?> -->
-
+  <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
                     <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
                 </li>
                 <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
