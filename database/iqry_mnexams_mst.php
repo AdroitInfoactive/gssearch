@@ -29,29 +29,38 @@
 		$srsprodcat_mst = mysqli_query($conn,$sqryprodcat_mst);
 			$cntrec_cat     = mysqli_num_rows($srsprodcat_mst);
 		if($cntrec_cat < 1){
-			if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){					
-				$bimgval = funcUpldImg('flebnrimg','bimg');
-				if($bimgval != ""){
-					$bimgary    = explode(":",$bimgval,2);
-					$bdest 		= $bimgary[0];					
-					$bsource 	= $bimgary[1];					
-				}						
-			}	
-			  $iqryprodcat_mst="insert into prodmnexms_mst(
-						      prodmnexmsm_name,prodmnexmsm_img,prodmnexmsm_desc,
+			// if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){					
+			// 	$bimgval = funcUpldImg('flebnrimg','bimg');
+			// 	if($bimgval != ""){
+			// 		$bimgary    = explode(":",$bimgval,2);
+			// 		$bdest 		= $bimgary[0];					
+			// 		$bsource 	= $bimgary[1];					
+			// 	}						
+			// }	
+			  // $iqryprodcat_mst="insert into prodmnexms_mst(
+				// 		      prodmnexmsm_name,prodmnexmsm_img,prodmnexmsm_desc,
+				// 			  prodmnexmsm_seotitle,prodmnexmsm_seodesc,
+				// 			  prodmnexmsm_seokywrd,
+				// 			  prodmnexmsm_seohone,prodmnexmsm_seohtwo,prodmnexmsm_sts,prodmnexmsm_prty,
+				// 			  prodmnexmsm_crtdon,prodmnexmsm_crtdby)values(							  
+				// 		      '$name','$bdest','$desc','$seotitle','$seodesc','$seokywrd',
+				// 			  '$seoh1','$seoh2','$sts','$prior',
+				// 			  '$dt','$ses_admin')";	
+								$iqryprodcat_mst="insert into prodmnexms_mst(
+						      prodmnexmsm_name,prodmnexmsm_desc,
 							  prodmnexmsm_seotitle,prodmnexmsm_seodesc,
 							  prodmnexmsm_seokywrd,
 							  prodmnexmsm_seohone,prodmnexmsm_seohtwo,prodmnexmsm_sts,prodmnexmsm_prty,
 							  prodmnexmsm_crtdon,prodmnexmsm_crtdby)values(							  
-						      '$name','$bdest','$desc','$seotitle','$seodesc','$seokywrd',
+						      '$name','$desc','$seotitle','$seodesc','$seokywrd',
 							  '$seoh1','$seoh2','$sts','$prior',
 							  '$dt','$ses_admin')";	
 							  //  echo 	$iqryprodcat_mst;exit;	
 			$irsprodcat_mst= mysqli_query($conn,$iqryprodcat_mst);
 			if($irsprodcat_mst==true){
-				if(($bsource!='none') && ($bsource!='') && ($bdest != "")){ 
-					echo move_uploaded_file($bsource,$a_mnlnks_bnrfldnm.$bdest);
-				}
+				// if(($bsource!='none') && ($bsource!='') && ($bdest != "")){ 
+				// 	echo move_uploaded_file($bsource,$a_mnlnks_bnrfldnm.$bdest);
+				// }
 				$gmsg = "Record saved successfully";
 			}
 			else{

@@ -226,7 +226,7 @@ include_once $inc_adm_lftlnk;
 					</div>
 					
 						
-					<div class="col-md-12">
+					<!-- <div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
 								<label> Image</label>
@@ -247,7 +247,7 @@ include_once $inc_adm_lftlnk;
 								?>
 							</div>
 						</div>
-					</div> 
+					</div>  -->
 					<!-- <div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">

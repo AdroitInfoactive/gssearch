@@ -155,7 +155,7 @@ include_once $inc_adm_lftlnk;
 								?>	
 							</div>
 						</div> -->
-						<div class="form-group row">
+						<!-- <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label"> Image</label>
 							<div class="col-sm-8">
 								<?php
@@ -170,7 +170,7 @@ include_once $inc_adm_lftlnk;
 						?>
 								
 							</div>
-						</div>
+						</div> -->
 						<!-- <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Type </label>
 							<div class="col-sm-8">
