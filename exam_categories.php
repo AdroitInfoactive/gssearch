@@ -30,9 +30,9 @@ include('header.php');
   <div class="container">
     <div class="row">
       <?php
-      $sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_desc,prodmnexmsm_img, exam_subcategorym_name, yearsm_id, yearsm_name from prodmnexms_mst
-      inner join addques_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
-      inner join exam_subcategory_mst on exam_subcategorym_prodmnexmsm_id = prodmnexmsm_id
+      $sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name,prodmnexmsm_img, prodmnexmsm_desc, exam_subcategorym_name, yearsm_id, yearsm_name from addques_mst
+      inner join prodmnexms_mst on prodmnexmsm_id =  addquesm_prodmnexmsm_id
+      inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
       inner join years_mst on yearsm_id = addquesm_yearsm_id
       where prodmnexmsm_sts='a' group by prodmnexmsm_id order by yearsm_name,prodmnexmsm_name desc";
       $srs_exm_cat = mysqli_query($conn, $sqry_exm_cat);
