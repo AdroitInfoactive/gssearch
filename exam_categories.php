@@ -31,7 +31,7 @@ include('header.php');
     <div class="row">
       <?php
       $sqry_exm_cat = "SELECT prodmnexmsm_id, prodmnexmsm_name,prodmnexmsm_img, prodmnexmsm_desc, exam_subcategorym_name, yearsm_id, yearsm_name from addques_mst
-      inner join prodmnexms_mst on prodmnexmsm_id =  addquesm_prodmnexmsm_id
+      inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
       inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
       inner join years_mst on yearsm_id = addquesm_yearsm_id
       where prodmnexmsm_sts='a' group by prodmnexmsm_id order by yearsm_name,prodmnexmsm_name desc";
@@ -62,14 +62,15 @@ include('header.php');
                 <!-- <img src="<?php echo $image ?>" alt="courses"> -->
               </div>
               <div class="courses_content">
-                <h4 class="title"><a href="<?php echo $rtpth . $exm_catnm_url."/".$exm_scatnm_url."/".$exm_yr; ?>">
+                <h4 class="title"><a href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>">
                     <?php echo $exm_cat_name; ?>
                   </a></h4>
                 <p class="mt-2">
                   <?php echo $exm_cat_desc; ?>
                 </p>
                 <div class="meta d-flex justify-content-between">
-                  <span><a href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url."/".$exm_yr; ?>" class="w100">View</a></span>
+                  <span><a href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>"
+                      class="w100">View</a></span>
                 </div>
               </div>
             </div>
