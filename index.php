@@ -127,18 +127,18 @@ if ($cntrec_exm_cat > 0) { ?>
           $exm_scatnm_url = funcStrRplc($exm_scatnm);
           $exm_yr = $srow_exm_cat['yearsm_name'];
           $exm_cat_img = $srow_exm_cat['prodmnexmsm_img'];
-          $path = $u_mnlnks_bnrfldnm . $exm_cat_img;
+          /* $path = $u_mnlnks_bnrfldnm . $exm_cat_img;
           if ($exm_cat_img != '' && file_exists($path)) {
             $image = $rtpth . $path;
           } else {
             $image = $rtpth . 'exm_cat_img/default.jpg';
-          }
+          } */
         ?>
           <div class="col-lg-3 col-sm-6">
             <div class="single_courses courses_gray mt-30">
               <div class="courses_image">
                 <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
-                <img src="<?php echo $image ?>" alt="courses">
+                <!-- <img src="<?php echo $image ?>" alt="courses"> -->
               </div>
               <div class="courses_content">
                 <h4 class="title"><a href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>"><?php echo $exm_cat_name; ?></a></h4>
