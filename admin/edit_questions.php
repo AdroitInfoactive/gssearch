@@ -382,7 +382,7 @@ include_once $inc_adm_lftlnk;
 								where	 
 									 yearsm_sts = 'a'
 								 order by
-									yearsm_name";
+									yearsm_name desc";
 									$rsprodmncat_mst = mysqli_query($conn, $sqryprodmncat_mst);
 									$cnt_prodmncat = mysqli_num_rows($rsprodmncat_mst);
 									?>
