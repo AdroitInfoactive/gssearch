@@ -22,9 +22,9 @@ $pagecat = "advertisement";
 $pagenm = "advertisement";
 /*****header link********/
 global $id, $pg, $countstart;
-$rd_vwpgnm = "view_detail_advertisement.php";
+$rd_vwpgnm   = "view_detail_advertisement.php";
 $rd_crntpgnm = "view_all_advertisement.php";
-$clspn_val = "4";
+$clspn_val   = "4";
 if (isset($_POST['btneadvdsbmt']) && (trim($_POST['btneadvdsbmt']) != "") && isset($_POST['txtname']) && (trim($_POST['txtname']) != "") && isset($_POST['txtprior']) && (trim($_POST['txtprior']) != "")) {
 	include_once "../includes/inc_fnct_fleupld.php"; // For uploading files 
 	include_once "../database/uqry_advd_mst.php";

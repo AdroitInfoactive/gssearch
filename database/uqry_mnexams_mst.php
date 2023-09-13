@@ -78,39 +78,39 @@ global $ses_admin;
 								prodmnexmsm_prty ='$prior',
 								prodmnexmsm_mdfdon ='$curdt',
 								prodmnexmsm_mdfdby='$ses_admin'";
-			 if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){							
-				$bimgval = funcUpldImg('flebnrimg','bimg');
-				if($bimgval != ""){
-					$bimgary    = explode(":",$bimgval,2);
-					$bdest 		= $bimgary[0];					
-					$bsource 	= $bimgary[1];					
-				}						
-					$uqryprodcat_mst .= ",prodmnexmsm_img='$bdest'";
-			}
-			else{			
-				if(isset($_POST['chkbximg']) && ($_POST['chkbximg'] != "")){
-					$delimgnm   = glb_func_chkvl($_POST['chkbximg']);	
-					$delimgpth  = $a_mnlnks_bnrfldnm.$delimgnm;								
-					if(isset($delimgnm) && file_exists($delimgpth)){
-						unlink($delimgpth);											
-						$uqryprodcat_mst .= ",prodmnexmsm_img=''";
-					}					
-				}				
-			}
+			//  if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){							
+			// 	$bimgval = funcUpldImg('flebnrimg','bimg');
+			// 	if($bimgval != ""){
+			// 		$bimgary    = explode(":",$bimgval,2);
+			// 		$bdest 		= $bimgary[0];					
+			// 		$bsource 	= $bimgary[1];					
+			// 	}						
+			// 		$uqryprodcat_mst .= ",prodmnexmsm_img='$bdest'";
+			// }
+			// else{			
+			// 	if(isset($_POST['chkbximg']) && ($_POST['chkbximg'] != "")){
+			// 		$delimgnm   = glb_func_chkvl($_POST['chkbximg']);	
+			// 		$delimgpth  = $a_mnlnks_bnrfldnm.$delimgnm;								
+			// 		if(isset($delimgnm) && file_exists($delimgpth)){
+			// 			unlink($delimgpth);											
+			// 			$uqryprodcat_mst .= ",prodmnexmsm_img=''";
+			// 		}					
+			// 	}				
+			// }
 			$uqryprodcat_mst .= "where prodmnexmsm_id=$id";
 			$ursprodmncat_mst = mysqli_query($conn,$uqryprodcat_mst);
 			if($ursprodmncat_mst==true){
-				if(($bsource!='none') && ($bsource!='') && ($bdest != "")){ 
-					$bgimgpth      = $a_mnlnks_bnrfldnm.$hdnbgimg;
-					if(($hdnbgimg != '') && file_exists($bgimgpth)){
-						unlink($bgimgpth);
+				// if(($bsource!='none') && ($bsource!='') && ($bdest != "")){ 
+				// 	$bgimgpth      = $a_mnlnks_bnrfldnm.$hdnbgimg;
+				// 	if(($hdnbgimg != '') && file_exists($bgimgpth)){
+				// 		unlink($bgimgpth);
 
-					}
+				// 	}
 											
 					// $uqryprodcat_mst . = ",prodmnexmsm_img='$bdest',
 					
-					move_uploaded_file($bsource,$a_mnlnks_bnrfldnm.$bdest);	
-				}
+				// 	move_uploaded_file($bsource,$a_mnlnks_bnrfldnm.$bdest);	
+				// }
 				// echo 	$uqryprodcat_mst ; 
 			?>
 			  <script type="text/javascript">
