@@ -17,6 +17,7 @@ require_once('settings.php');
     </div>
   </div>
 </footer>
+
 <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -232,42 +233,24 @@ require_once('settings.php');
     </div>
   </div>
 </div>
-<!-- lokesh write book mark start -->
 <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered ps-popup--select">
     <div class="modal-content">
       <div class="modal-body">
         <div class="wrap-modal-slider container-fluid">
-          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
+          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"
+            id="bkmrk_cls"><span aria-hidden="true">&times;</span></button>
           <div class="ps-popup__body">
-            <h3 class="ps-popup__title">Question Added To Bookmark.</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered ps-addcart">
-    <div class="modal-content">
-      <div class="modal-body">
-      <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
-        <div class="wrap-modal-slider container-fluid ps-addcart__body">
-          <div class="ps-addcart__product">
-            <div class="ps-product ps-product--standard pb-0">
-              <div class="ps-product__content text-center ">
-                <div class="ps-product__title acc-succ" style="background-color:lightgreen ;"><i class="fa fa-check"></i> Question Added To Bookmark.</div>
-              </div>
+            <h3 class="ps-popup__title">Bookmark</h3>
+            <div class="ps-product__social d-flex justify-content-center">
+              <p id="bkmrk_msg"></p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div> -->
-<!-- lokesh write book mark end -->
+</div>
 <!-- start edit user details -->
 <div class="modal fade" id="editusrDetail" tabindex="-1" role="dialog" aria-labelledby="editusrDetailLabel"
   aria-hidden="true">
@@ -371,36 +354,63 @@ require_once('settings.php');
           //debugger;
           // alert(data);
           if (data == "yes") {
-            location.reload();
+            document.getElementById("bkmrk_msg").innerHTML = "Question Removed from Bookmark";
           } else {
-            alert("Question  not Deleted from Bookmark");
+            document.getElementById("bkmrk_msg").innerHTML = "Something went wrong. Please try again later.";
           }
-        }
-      });
-    }
-  }
-  function frmprdsub(qns_id, crtactn) {
-    $.ajax({
-      url: `<?php echo $rtpth; ?>manage_bookmark.php?qnsid=${qns_id}&action=${crtactn}`,
-      type: "GET",
-      success: function (data) {
-        //debugger;
-        // alert(data);
-        if (data == "yes") {
-          mod = "add_wsh"
+          mod = "add_wsh";
           document.getElementById(mod).classList.add("show");
           document.getElementById(mod).style.display = "block";
           setTimeout(function () {
             document.getElementById(mod).classList.remove("show");
             document.getElementById(mod).style.display = "none";
             location.reload();
-          }, 5000);
-        } else {
-          window.location = "<?php echo $rtpth; ?>bookmark";
+          }, 3000);
+          preventDefault();
         }
-      }
-    });
+      });
+    }
   }
+  function frmprdsub(qns_id, crtactn) {
+    mbr_id = '<?php echo $membrid; ?>';
+    if (mbr_id == "") {
+      alert("Please login to Bookmark");
+      $('#loginModal').modal('show');
+    }
+    else {
+      $.ajax({
+        url: `<?php echo $rtpth; ?>manage_bookmark.php?qnsid=${qns_id}&action=${crtactn}`,
+        type: "GET",
+        success: function (data) {
+          //debugger;
+          // alert(data);
+          mod = "add_wsh";
+          if (data == "y") {
+            document.getElementById("bkmrk_msg").innerHTML = "Question Added to Bookmark";
+          }
+          if (data == "n") {
+            document.getElementById("bkmrk_msg").innerHTML = "Something Went Wrong. Please try again later";
+          }
+          if (data == "a")
+          {
+            document.getElementById("bkmrk_msg").innerHTML = "Already added to Bookmark";
+          }
+          document.getElementById(mod).classList.add("show");
+          document.getElementById(mod).style.display = "block";
+          setTimeout(function () {
+            document.getElementById(mod).classList.remove("show");
+            document.getElementById(mod).style.display = "none";
+          }, 3000);
+          preventDefault();
+        }
+      });
+    }
+  }
+  var closeButton = document.getElementById('bkmrk_cls'); // Replace 'closeButton' with your close button's ID
+  closeButton.addEventListener('click', function () {
+    document.getElementById(mod).classList.remove('show');
+    document.getElementById(mod).style.display = 'none';
+  });
   function srch(substs) {
     txtsrchval = document.frmserqtn.txtsrchval.value;
     if (txtsrchval == "") {
@@ -414,6 +424,7 @@ require_once('settings.php');
       srchtxt = srchid.replace(/ /g, "-");
       if (substs == '') {
         alert("Please Login to enable search...");
+        $('#loginModal').modal('show');
         event.preventDefault();
         return false;
       }
@@ -585,13 +596,12 @@ require_once('settings.php');
                 content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
               }
               content_srch += '</div>';
-              debugger;
               $('#qns_lst_dsp_srch').html(content_srch);
             }
           });
         }
       });
-            <?php
+                    <?php
   } else if ($page_title == "Bookmark Questions") { ?>
         $(document).ready(function () {
           // Initial page load
@@ -645,7 +655,7 @@ require_once('settings.php');
             });
           }
         });
-                  <?php
+                          <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -691,7 +701,7 @@ require_once('settings.php');
               });
             }
           });
-                  <?php
+                          <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');
