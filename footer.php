@@ -2,7 +2,8 @@
 <?php
 require_once('settings.php');
 ?>
-<footer class="footer_area bg_cover mt-60" style="background-image: url(<?php echo $rtpth; ?>assets/images/footer_bg.jpg)">
+<footer class="footer_area bg_cover mt-60"
+  style="background-image: url(<?php echo $rtpth; ?>assets/images/footer_bg.jpg)">
   <div class="footer_copyright">
     <div class="container">
       <div class="footer_copyright_wrapper text-center d-md-flex justify-content-between">
@@ -16,7 +17,8 @@ require_once('settings.php');
     </div>
   </div>
 </footer>
-<div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+<div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -27,7 +29,8 @@ require_once('settings.php');
       <div class="modal-body">
         <div class="form-title text-center">
           <h4 class="text-danger">OOPS..!</h4>
-          <p class="bg-primary p-3 mt-3 text-white">You have reached your free searches limit or your subscription expired.</p>
+          <p class="bg-primary p-3 mt-3 text-white">You have reached your free searches limit or your subscription
+            expired.</p>
         </div>
         <div class="d-flex flex-column text-center">
           <p>Please subscribe to continue searching. </p>
@@ -41,7 +44,8 @@ require_once('settings.php');
           <h4 class="text-primary"><i class="fa fa-rupee"></i>
             <?php echo $sub_amt; ?>/- per year
           </h4>
-          <form name="frm_subs" id="frm_subs" enctype="multipart/form-data" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+          <form name="frm_subs" id="frm_subs" enctype="multipart/form-data" method="POST"
+            action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <div class="form-group">
               <input type="hidden" name="hdn_mbrsub_id" id="hdn_mbrsub_id" value="<?php echo $membrid; ?>" />
               <input type="hidden" name="hdn_sub_amt_id" id="hdn_sub_amt_id" value="<?php echo $sub_id; ?>" />
@@ -64,7 +68,8 @@ require_once('settings.php');
   </div>
 </div>
 <!-- ------------------------------------------------------------------------------------- -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -77,7 +82,8 @@ require_once('settings.php');
           <h4>Login</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form name="frm_lgn" id="frm_lgn" enctype="multipart/form-data" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return performCheck('frm_lgn', lgnrules,'inline')">
+          <form name="frm_lgn" id="frm_lgn" enctype="multipart/form-data" method="POST"
+            action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return performCheck('frm_lgn', lgnrules,'inline')">
             <div class="form-group">
               <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="Email Address*">
               <span id="errorsDiv_txtemail" style="color: orangered;"></span>
@@ -90,16 +96,20 @@ require_once('settings.php');
             <input type="submit" name="btnsbmt_lgn" id="btnsbmt_lgn" value="Login" class="main-btn" />
           </form>
           <div class="text-center text-muted delimiter">or use a Google Account</div>
-          <a class="login-with-google-btn" href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i class="fab fa-google-plus-g"></i> Login / Register with Google</a>
+          <a class="login-with-google-btn"
+            href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i
+              class="fab fa-google-plus-g"></i> Login / Register with Google</a>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Not a member yet? <a href="" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" class="text-info">Register</a>.</div>
+        <div class="signup-section">Not a member yet? <a href="" data-toggle="modal" data-target="#registerModal"
+            data-dismiss="modal" class="text-info">Register</a>.</div>
       </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="chngpwdModal" tabindex="-1" role="dialog" aria-labelledby="chngpwdModalLabel" aria-hidden="true">
+<div class="modal fade" id="chngpwdModal" tabindex="-1" role="dialog" aria-labelledby="chngpwdModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -112,22 +122,27 @@ require_once('settings.php');
           <h4>Change Password</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form name="frm_chng_pwd" id="frm_chng_pwd" enctype="multipart/form-data" method="POST" action="" onsubmit="return performCheck('frm_chng_pwd', chng_pwdrules,'inline')">
+          <form name="frm_chng_pwd" id="frm_chng_pwd" enctype="multipart/form-data" method="POST" action=""
+            onsubmit="return performCheck('frm_chng_pwd', chng_pwdrules,'inline')">
             <input type="hidden" name="hdn_mbr_id" id="hdn_mbr_id" value="<?php echo $membrid; ?>" />
             <div class="form-group">
-              <input type="text" class="form-control" id="txtchngpwd_email" name="txtchngpwd_email" placeholder="Email Address*" value="<?php echo $membremail; ?>" disabled style="cursor: not-allowed;">
+              <input type="text" class="form-control" id="txtchngpwd_email" name="txtchngpwd_email"
+                placeholder="Email Address*" value="<?php echo $membremail; ?>" disabled style="cursor: not-allowed;">
               <span id="errorsDiv_txtchngpwd_email" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="txtchngpwd_oldpswd" name="txtchngpwd_oldpswd" placeholder="Old Password*">
+              <input type="password" class="form-control" id="txtchngpwd_oldpswd" name="txtchngpwd_oldpswd"
+                placeholder="Old Password*">
               <span id="errorsDiv_txtchngpwd_oldpswd" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="txtchngpwd_nwpswd" name="txtchngpwd_nwpswd" placeholder="New Password*">
+              <input type="password" class="form-control" id="txtchngpwd_nwpswd" name="txtchngpwd_nwpswd"
+                placeholder="New Password*">
               <span id="errorsDiv_txtchngpwd_nwpswd" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="txtchngpwd_nwcnfpswd" name="txtchngpwd_nwcnfpswd" placeholder="New Password*">
+              <input type="password" class="form-control" id="txtchngpwd_nwcnfpswd" name="txtchngpwd_nwcnfpswd"
+                placeholder="New Password*">
               <span id="errorsDiv_txtchngpwd_nwcnfpswd" style="color: orangered;"></span>
             </div>
             <!-- <button type="button" class="main-btn">Login</button> -->
@@ -144,7 +159,8 @@ require_once('settings.php');
     </div>
   </div>
 </div>
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -157,21 +173,25 @@ require_once('settings.php');
           <h4>Register</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form name="frm_rgstr" id="frm_rgstr" enctype="multipart/form-data" method="POST" action="" onsubmit="return performCheck('frm_rgstr', rgstrrules,'inline')">
+          <form name="frm_rgstr" id="frm_rgstr" enctype="multipart/form-data" method="POST" action=""
+            onsubmit="return performCheck('frm_rgstr', rgstrrules,'inline')">
             <div class="form-group">
               <input type="text" class="form-control" id="txtname_rgstr" name="txtname_rgstr" placeholder="Full Name*">
               <span id="errorsDiv_txtname_rgstr" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="txtemail_rgstr" name="txtemail_rgstr" placeholder="Email Address*">
+              <input type="text" class="form-control" id="txtemail_rgstr" name="txtemail_rgstr"
+                placeholder="Email Address*">
               <span id="errorsDiv_txtemail_rgstr" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="txtpswd_rgstr" name="txtpswd_rgstr" placeholder="Password*">
+              <input type="password" class="form-control" id="txtpswd_rgstr" name="txtpswd_rgstr"
+                placeholder="Password*">
               <span id="errorsDiv_txtpswd_rgstr" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="txtcnfpswd_rgstr" name="txtcnfpswd_rgstr" placeholder="Confirm Password*">
+              <input type="password" class="form-control" id="txtcnfpswd_rgstr" name="txtcnfpswd_rgstr"
+                placeholder="Confirm Password*">
               <span id="errorsDiv_txtcnfpswd_rgstr" style="color: orangered;"></span>
             </div>
             <div class="form-group">
@@ -181,11 +201,14 @@ require_once('settings.php');
             <input type="submit" name="btnsbmt_rgstr" id="btnsbmt_rgstr" value="Register" class="main-btn" />
           </form>
           <div class="text-center text-muted delimiter">or use a Google Account</div>
-          <a class="login-with-google-btn" href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i class="fab fa-google-plus-g"></i> Register / Login with Google</a>
+          <a class="login-with-google-btn"
+            href="<?= 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode(CLIENT_REDIRECT_URL) . '&response_type=code&client_id=' . CLIENT_ID . '&access_type=online' ?>"><i
+              class="fab fa-google-plus-g"></i> Register / Login with Google</a>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Already a member? <a href="#" data-toggle="modal" data-target="#subscribeModal" data-dismiss="modal" class="text-info"> Login</a>.</div>
+        <div class="signup-section">Already a member? <a href="#" data-toggle="modal" data-target="#subscribeModal"
+            data-dismiss="modal" class="text-info"> Login</a>.</div>
       </div>
     </div>
   </div>
@@ -195,12 +218,11 @@ require_once('settings.php');
     <div class="modal-content">
       <div class="modal-body">
         <div class="wrap-modal-slider container-fluid">
-          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
           <div class="ps-popup__body">
             <h3 class="ps-popup__title">Share</h3>
             <div class="ps-product__social d-flex justify-content-center">
-
-
               <ul class="ps-social ps-social--color social" id="sclshare">
               </ul>
             </div>
@@ -216,7 +238,8 @@ require_once('settings.php');
     <div class="modal-content">
       <div class="modal-body">
         <div class="wrap-modal-slider container-fluid">
-          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button class="close ps-popup__close" type="button" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
           <div class="ps-popup__body">
             <h3 class="ps-popup__title">Question Added To Bookmark.</h3>
           </div>
@@ -225,7 +248,6 @@ require_once('settings.php');
     </div>
   </div>
 </div>
-
 <!-- <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered ps-addcart">
     <div class="modal-content">
@@ -237,7 +259,6 @@ require_once('settings.php');
             <div class="ps-product ps-product--standard pb-0">
               <div class="ps-product__content text-center ">
                 <div class="ps-product__title acc-succ" style="background-color:lightgreen ;"><i class="fa fa-check"></i> Question Added To Bookmark.</div>
-
               </div>
             </div>
           </div>
@@ -248,7 +269,8 @@ require_once('settings.php');
 </div> -->
 <!-- lokesh write book mark end -->
 <!-- start edit user details -->
-<div class="modal fade" id="editusrDetail" tabindex="-1" role="dialog" aria-labelledby="editusrDetailLabel" aria-hidden="true">
+<div class="modal fade" id="editusrDetail" tabindex="-1" role="dialog" aria-labelledby="editusrDetailLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -261,33 +283,33 @@ require_once('settings.php');
           <h4>Edit Details</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form name="frm_mbr_dtl" id="frm_mbr_dtl" enctype="multipart/form-data" method="POST" action="" onsubmit="return performCheck('frm_mbr_dtl', edit_details,'inline')">
+          <form name="frm_mbr_dtl" id="frm_mbr_dtl" enctype="multipart/form-data" method="POST" action=""
+            onsubmit="return performCheck('frm_mbr_dtl', edit_details,'inline')">
             <input type="hidden" name="hdn_mbr_id" id="hdn_mbr_id" value="<?php echo $membrid; ?>" />
             <input type="hidden" name="hdn_mbr_email" id="hdn_mbr_email" value="<?php echo $email; ?>" />
             <div class="form-group">
-              <input type="text" class="form-control" id="edttxtemail" name="edttxtemail" placeholder="Email Address*" value="<?php echo $membremail; ?>" disabled style="cursor: not-allowed;">
+              <input type="text" class="form-control" id="edttxtemail" name="edttxtemail" placeholder="Email Address*"
+                value="<?php echo $membremail; ?>" disabled style="cursor: not-allowed;">
               <span id="errorsDiv_edttxtemail" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="edttxtname" name="edttxtname" placeholder="Enter Name*"  value="<?php echo $name; ?>" />
+              <input type="text" class="form-control" id="edttxtname" name="edttxtname" placeholder="Enter Name*"
+                value="<?php echo $name; ?>" />
               <span id="errorsDiv_edttxtname" style="color: orangered;"></span>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="edttxtmobile" name="edttxtmobile" placeholder="Enter Mobile Number*"  value="<?php echo $mobile; ?>" />
+              <input type="text" class="form-control" id="edttxtmobile" name="edttxtmobile"
+                placeholder="Enter Mobile Number*" value="<?php echo $mobile; ?>" />
               <span id="errorsDiv_edttxtmobile" style="color: orangered;"></span>
             </div>
             <input type="submit" name="btnsbmt_edt_dtl" id="btnsbmt_edt_dtl" value="Submit" class="main-btn" />
           </form>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>
 <!-- end edit user details -->
-
-
 <!--====== Footer PART ENDS ======-->
 <!--====== BACK TOP TOP PART START ======-->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -339,45 +361,80 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
 <script type="text/javascript">
-
-  function remvbkmrkqns(bokmark_id,crtactn) {
-    var confirmation = confirm("are you sure you want to remove this Question?");
-    if (confirmation) {
-    $.ajax({
-
-       url: `<?php echo $rtpth; ?>manage_bookmark.php?bokmark_id=${bokmark_id}&bokaction=${crtactn}`,
-      type: "GET",
-      
-      success: function(data) {
-        //debugger;
-        // alert(data);
-        if (data == "yes") {
-          location.reload();
-        } else {
-          alert("Question  not Deleted from Bookmark");
+  function get_rel_qns() {
+    var srch_txt = "<?php echo $srch_txt; ?>";
+    yr_chkbx = document.getElementsByName("year_nm");
+    var yrs_ids = [];
+    for (i = 0; i < yr_chkbx.length; i++) {
+      if (yr_chkbx[i].checked) {
+        if (yr_chkbx[i].value != null) {
+          yrs_ids.push(yr_chkbx[i].value);
         }
       }
-    
-    });
+    }
+    exm_chkbx = document.getElementsByName("exam_nm");
+    var exm_ids = [];
+    for (i = 0; i < exm_chkbx.length; i++) {
+      if (exm_chkbx[i].checked) {
+        if (exm_chkbx[i].value != null) {
+          exm_ids.push(exm_chkbx[i].value);
+        }
+      }
+    }
+    topc_chkbx = document.getElementsByName("topc_nm");
+    var topc_ids = [];
+    for (i = 0; i < topc_chkbx.length; i++) {
+      if (topc_chkbx[i].checked) {
+        if (topc_chkbx[i].value != null) {
+          topc_ids.push(topc_chkbx[i].value);
+        }
+      }
+    }
+    srch_url = "<?php echo $rtpth; ?>search?text=" + srch_txt;
+    if (yrs_ids.length != "")
+    {
+      srch_url += "&yrs_ids=" + yrs_ids; 
+    }
+    if (exm_ids.length != "")
+    {
+      srch_url += "&exm_ids=" + exm_ids;
+    }
+    if (topc_ids.length != "")
+    {
+      srch_url += "&topc_ids=" + topc_ids;
+    }
+    window.location.href = srch_url;
   }
-
+  function remvbkmrkqns(bokmark_id, crtactn) {
+    var confirmation = confirm("Are you sure you want to remove this question from bookmarks?");
+    if (confirmation) {
+      $.ajax({
+        url: `<?php echo $rtpth; ?>manage_bookmark.php?bokmark_id=${bokmark_id}&bokaction=${crtactn}`,
+        type: "GET",
+        success: function (data) {
+          //debugger;
+          // alert(data);
+          if (data == "yes") {
+            location.reload();
+          } else {
+            alert("Question  not Deleted from Bookmark");
+          }
+        }
+      });
+    }
   }
-  
   function frmprdsub(qns_id, crtactn) {
- 
-
     $.ajax({
-
       url: `<?php echo $rtpth; ?>manage_bookmark.php?qnsid=${qns_id}&action=${crtactn}`,
       type: "GET",
-      success: function(data) {
+      success: function (data) {
         //debugger;
         // alert(data);
         if (data == "yes") {
           mod = "add_wsh"
           document.getElementById(mod).classList.add("show");
           document.getElementById(mod).style.display = "block";
-          setTimeout(function() {
+          setTimeout(function () {
             document.getElementById(mod).classList.remove("show");
             document.getElementById(mod).style.display = "none";
             location.reload();
@@ -388,8 +445,6 @@ require_once('settings.php');
       }
     });
   }
-
-
   function srch(substs) {
     txtsrchval = document.frmserqtn.txtsrchval.value;
     if (txtsrchval == "") {
@@ -411,10 +466,10 @@ require_once('settings.php');
         $.ajax({
           url: `<?php echo $rtpth; ?>get_srchs_cnt.php?srchtxt=${srchtxt}`,
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             // alert(data);
             if (data == "y") {
-              document.frmserqtn.action = "<?php echo $rtpth; ?>search/" + srchtxt;
+              document.frmserqtn.action = "<?php echo $rtpth; ?>search?text=" + srchtxt;
               document.frmserqtn.submit();
             } else {
               $('#subscribeModal').modal('show');
@@ -425,18 +480,17 @@ require_once('settings.php');
           }
         });
       } else {
-        document.frmserqtn.action = "<?php echo $rtpth; ?>search/" + srchtxt;
+        document.frmserqtn.action = "<?php echo $rtpth; ?>search?text=" + srchtxt;
         document.frmserqtn.submit();
       }
       event.preventDefault();
     }
   }
-
   function show_ans(sno, optnid, qtnid) {
     $.ajax({
       url: `<?php echo $rtpth; ?>get_ans.php?sno=${sno}&optnid=${optnid}&qtnid=${qtnid}`,
       type: 'GET',
-      success: function(data) {
+      success: function (data) {
         var data_arr = data.split("<-->");
         var crct_ans = data_arr[0];
         var expl = data_arr[1];
@@ -457,176 +511,167 @@ require_once('settings.php');
   }
   <?php
   if ($page_title == "Search") { ?>
-    $(document).ready(function() {
-      // Initial page load
-      var srch_txt = "<?php echo $srch_txt; ?>";
-      var tot_qns_srch = <?php echo $tot_qns; ?>;
-      loadPage_srch(1, srch_txt);
-      // Load next page
-      $('#qns_lst_dsp_srch').on('click', '.next', function() {
-        let nextPage_srch = parseInt($(this).data('page'))
-        loadPage_srch(nextPage_srch, srch_txt);
-      });
-      // Load specific page
-      $('#qns_lst_dsp_srch').on('click', '.page-number', function() {
-        // debugger;
-        let pageNumber = parseInt($(this).data('page'));
-        loadPage_srch(pageNumber, srch_txt);
-      });
-
-      // Load previous page
-      $('#qns_lst_dsp_srch').on('click', '.prev', function() {
-        let prevPage_srch = parseInt($(this).data('page'))
-        loadPage_srch(prevPage_srch, srch_txt);
-      });
-
-      function loadPage_srch(page_srch, srch_txt) {
-        $.ajax({
-          url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
-          type: 'GET',
-          success: function(data_srch) {
-            var content_srch = '';
-            content_srch += data_srch;
-            // Append pagination controls
-            content_srch += '<div class="row">';
-            if (page_srch > 1) {
-              content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
-            }
-            for (let k = 1; k <= Math.ceil(tot_qns_srch / 10); k++) {
-              if (k === page_srch) {
-                content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
-              } else {
-                content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
+      $(document).ready(function () {
+        // Initial page load
+        var srch_txt = "<?php echo $srch_txt; ?>";
+        var tot_qns_srch = <?php echo $tot_qns; ?>;
+        loadPage_srch(1, srch_txt);
+        // Load next page
+        $('#qns_lst_dsp_srch').on('click', '.next', function () {
+          let nextPage_srch = parseInt($(this).data('page'))
+          loadPage_srch(nextPage_srch, srch_txt);
+        });
+        // Load specific page
+        $('#qns_lst_dsp_srch').on('click', '.page-number', function () {
+          // debugger;
+          let pageNumber = parseInt($(this).data('page'));
+          loadPage_srch(pageNumber, srch_txt);
+        });
+        // Load previous page
+        $('#qns_lst_dsp_srch').on('click', '.prev', function () {
+          let prevPage_srch = parseInt($(this).data('page'))
+          loadPage_srch(prevPage_srch, srch_txt);
+        });
+        function loadPage_srch(page_srch, srch_txt) {
+          $.ajax({
+            url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
+            type: 'GET',
+            success: function (data_srch) {
+              var content_srch = '';
+              content_srch += data_srch;
+              // Append pagination controls
+              content_srch += '<div class="row">';
+              if (page_srch > 1) {
+                content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
               }
-              content_srch += ``;
+              for (let k = 1; k <= Math.ceil(tot_qns_srch / 2); k++) {
+                if (k === page_srch) {
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
+                } else {
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
+                }
+                content_srch += ``;
+              }
+              if (page_srch * 2 < tot_qns_srch) {
+                content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
+              }
+              content_srch += '</div>';
+              $('#qns_lst_dsp_srch').html(content_srch);
             }
-            if (page_srch * 2 < tot_qns_srch) {
-              content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
-            }
-            content_srch += '</div>';
-            $('#qns_lst_dsp_srch').html(content_srch);
+          });
+        }
+      });
+        <?php
+  } else if ($page_title == "Bookmark Questions") { ?>
+        $(document).ready(function () {
+          // Initial page load
+          // debugger;
+          var tot_qns_pg = <?php echo $tot_qns; ?>;
+          var mbr_id = <?php echo $membrid; ?>;
+          loadPage_pg(1, mbr_id);
+          // Load next page
+          $('#qns_lst_dsp_pg').on('click', '.next', function () {
+            let nextPage_srch = parseInt($(this).data('page'))
+            loadPage_pg(nextPage_srch, mbr_id);
+          });
+          // Load specific page
+          $('#qns_lst_dsp_pg').on('click', '.page-number', function () {
+            // debugger;
+            let pageNumber = parseInt($(this).data('page'));
+            loadPage_pg(pageNumber, mbr_id);
+          });
+          // Load previous page
+          $('#qns_lst_dsp_pg').on('click', '.prev', function () {
+            let prevPage_srch = parseInt($(this).data('page'))
+            loadPage_pg(prevPage_srch, mbr_id);
+          });
+          function loadPage_pg(page_srch, mbr_id) {
+            $.ajax({
+              url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&mbr_id=${mbr_id}`,
+              // url: `<?php echo $rtpth; ?>bookmark.php?page=${page_srch}`,
+              type: 'GET',
+              success: function (data_srch) {
+                var content_srch = '';
+                content_srch += data_srch;
+                // Append pagination controls
+                content_srch += '<div class="row">';
+                if (page_srch > 1) {
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
+                }
+                for (let k = 1; k <= Math.ceil(tot_qns_pg / 2); k++) {
+                  if (k === page_srch) {
+                    content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
+                  } else {
+                    content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
+                  }
+                  content_srch += ``;
+                }
+                if (page_srch * 2 < tot_qns_pg) {
+                  content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
+                }
+                content_srch += '</div>';
+                $('#qns_lst_dsp_pg').html(content_srch);
+              }
+            });
           }
         });
-      }
-    });
-  <?php
-  } 
-  else if ($page_title == "Bookmark Questions") { ?>
-    $(document).ready(function() {
-      // Initial page load
-    //  debugger;
-      var tot_qns_pg = <?php echo $tot_qns; ?>;
-      loadPage_pg(1);
-      // Load next page
-      $('#qns_lst_dsp_pg').on('click', '.next', function() {
-        let nextPage_srch = parseInt($(this).data('page'))
-        loadPage_pg(nextPage_srch);
-      });
-      // Load specific page
-      $('#qns_lst_dsp_pg').on('click', '.page-number', function() {
-        // debugger;
-        let pageNumber = parseInt($(this).data('page'));
-        loadPage_pg(pageNumber);
-      });
-
-      // Load previous page
-      $('#qns_lst_dsp_pg').on('click', '.prev', function() {
-        let prevPage_srch = parseInt($(this).data('page'))
-        loadPage_pg(prevPage_srch);
-      });
-
-      function loadPage_pg(page_srch) {
-        $.ajax({
-          url: `<?php echo $rtpth; ?>bookmark.php?page=${page_srch}`,
-          type: 'GET',
-          success: function(data_srch) {
-            var content_srch = '';
-            content_srch += data_srch;
-            // Append pagination controls
-            content_srch += '<div class="row">';
-            if (page_srch > 1) {
-              content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
-            }
-            for (let k = 1; k <= Math.ceil(tot_qns_pg / 10); k++) {
-              if (k === page_srch) {
-                content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
-              } else {
-                content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
-              }
-              content_srch += ``;
-            }
-            if (page_srch * 2 < tot_qns_pg) {
-              content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
-            }
-            content_srch += '</div>';
-            $('#qns_lst_dsp_pg').html(content_srch);
-          }
-        });
-      }
-    });
-  <?php
-  } 
-  else {
+              <?php
+  } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
     } else {
       $tot_qns1 = $tot_qns;
     }
-  ?>
-    $(document).ready(function() {
-      // Initial page load
-      var cat_id = "<?php echo $cat_id; ?>";
-      var scat_id = "<?php echo $scat_id; ?>";
-      var yr_id = "<?php echo $yr_id; ?>";
-      var tot_qns = <?php echo $tot_qns1; ?>;
-      loadPage(1, cat_id, scat_id, yr_id);
-      // Load next page
-      $('#qns_lst_dsp').on('click', '.next', function() {
-        let nextPage = parseInt($(this).data('page'))
-        loadPage(nextPage, cat_id, scat_id, yr_id);
-      });
-
-      // Load previous page
-      $('#qns_lst_dsp').on('click', '.prev', function() {
-        let prevPage = parseInt($(this).data('page'))
-        loadPage(prevPage, cat_id, scat_id, yr_id);
-      });
-
-      function loadPage(page, cat_id, scat_id, yr_id) {
-        $.ajax({
-          url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
-          type: 'GET',
-          success: function(data) {
-            var content = '';
-            content += data;
-            // Append pagination controls
-            content += '<div class="row">';
-            if (page > 1) {
-              content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
+    ?>
+          $(document).ready(function () {
+            // Initial page load
+            var cat_id = "<?php echo $cat_id; ?>";
+            var scat_id = "<?php echo $scat_id; ?>";
+            var yr_id = "<?php echo $yr_id; ?>";
+            var tot_qns = <?php echo $tot_qns1; ?>;
+            loadPage(1, cat_id, scat_id, yr_id);
+            // Load next page
+            $('#qns_lst_dsp').on('click', '.next', function () {
+              let nextPage = parseInt($(this).data('page'))
+              loadPage(nextPage, cat_id, scat_id, yr_id);
+            });
+            // Load previous page
+            $('#qns_lst_dsp').on('click', '.prev', function () {
+              let prevPage = parseInt($(this).data('page'))
+              loadPage(prevPage, cat_id, scat_id, yr_id);
+            });
+            function loadPage(page, cat_id, scat_id, yr_id) {
+              $.ajax({
+                url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
+                type: 'GET',
+                success: function (data) {
+                  var content = '';
+                  content += data;
+                  // Append pagination controls
+                  content += '<div class="row">';
+                  if (page > 1) {
+                    content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
+                  }
+                  if (page * 2 < tot_qns) {
+                    content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
+                  }
+                  content += '</div></div>';
+                  $('#qns_lst_dsp').html(content);
+                }
+              });
             }
-            if (page * 2 < tot_qns) {
-              content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
-            }
-            content += '</div></div>';
-            $('#qns_lst_dsp').html(content);
-          }
-        });
-      }
-    });
-  <?php
+          });
+              <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');
         const errorMessage = document.getElementById('error-message');
-
         searchInput.addEventListener('mouseover', () => {
           errorMessage.style.display = 'block';
         });
-
         searchInput.addEventListener('mouseout', () => {
           errorMessage.style.display = 'none';
         });
-
         searchInput.addEventListener('blur', () => {
           searchInput.blur();
           // searchButton.blur();
@@ -634,17 +679,15 @@ require_once('settings.php');
                     <?php
     } */
   ?>
-  $(document).ready(function() {
-
-    $('.js-btn-tooltip').tooltip();
-    $('.js-btn-tooltip--custom').tooltip({
-      customClass: 'tooltip-custom'
+    $(document).ready(function () {
+      $('.js-btn-tooltip').tooltip();
+      $('.js-btn-tooltip--custom').tooltip({
+        customClass: 'tooltip-custom'
+      });
+      $('.js-btn-tooltip--custom-alt').tooltip({
+        customClass: 'tooltip-custom-alt'
+      });
     });
-    $('.js-btn-tooltip--custom-alt').tooltip({
-      customClass: 'tooltip-custom-alt'
-    });
-  });
-
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';
   lgnrules[1] = 'txtemail|email|Enter Email Id only';
@@ -661,7 +704,6 @@ require_once('settings.php');
   chng_pwdrules[2] = 'txtchngpwd_nwpswd|required|Enter New Password';
   chng_pwdrules[3] = 'txtchngpwd_nwcnfpswd|required|Enter Confirm Password';
   chng_pwdrules[4] = 'txtchngpwd_nwcnfpswd|equal|$txtchngpwd_nwpswd|Password not match';
-
   var edit_details = new Array();
   edit_details[1] = 'edttxtname|required|Enter Name';
   edit_details[2] = 'edttxtname|alphaspace|Enter Only Name';
@@ -669,8 +711,6 @@ require_once('settings.php');
   // edit_details[4] = 'edttxtemail|email|Enter Email Id only';
   edit_details[5] = 'edttxtmobile|required|Enter Mobile Number';
   edit_details[6] = 'edttxtmobile|numeric|Enter Numbers only';
-  
-
   function get_qns_lnk(url) {
     var encurl = encodeURI(url)
     var waurl = "whatsapp://send?text=" + encurl;

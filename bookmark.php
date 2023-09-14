@@ -63,7 +63,7 @@ $rowsprpg = 5; //maximum rows per page
                 $mn_li_cls = "";
                 $mn_stl = "none";
               }
-            ?>
+              ?>
               <li class="<?php echo $mn_li_cls; ?>">
                 <div class="link">
                   <?php echo $scatnm; ?><i class="fa fa-chevron-down"></i>
@@ -92,24 +92,24 @@ $rowsprpg = 5; //maximum rows per page
                       } else {
                         $mn_bg = "";
                       }
-                    ?>
+                      ?>
                       <li><a style="<?php echo $mn_bg; ?>"
                           href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url . "/" . $exm_yr_nm; ?>"><?php echo $exm_yr_nm; ?></a></li>
                       <?php
                     }
-                      ?>
+                    ?>
                   </ul>
                   <?php
                 }
-                  ?>
+                ?>
               </li>
               <?php
             }
-              ?>
+            ?>
           </ul>
           <?php
         }
-          ?>
+        ?>
         <div class="single_courses_details  mb-60">
           <h4 class="courses_details_title">Similar Questions</h4>
           <div class="courses_curriculum mt-50">
@@ -151,7 +151,7 @@ $rowsprpg = 5; //maximum rows per page
       <div class="col-lg-12 col-sm-12 pr-md-12">
         <?php
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $qnsperpg = 3;
+        $qnsperpg = 2;
         $offset = ($page - 1) * $qnsperpg;
         // $offset = 0;
         $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag,bookmark_id from addques_mst
@@ -160,7 +160,7 @@ $rowsprpg = 5; //maximum rows per page
         inner join years_mst on yearsm_id = addquesm_yearsm_id
         inner join topics_mst on topicsm_id = addquesm_topicsm_id
         inner join bookmark_mst on bookmark_qns_id=addquesm_id
-       left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id
+        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id
         where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and bookmark_usr_id='$membrid' ";
 
         $sqry_tot_qns1 .= "$sqry_tot_qns  order by bookmark_id asc limit $offset,$qnsperpg";
@@ -172,110 +172,26 @@ $rowsprpg = 5; //maximum rows per page
         $srs_tot_qns = mysqli_query($conn, $sqry_tot_qns);
         $tot_qns = mysqli_num_rows($srs_tot_qns);
         if ($tot_qns1 > 0) {
-        
-           $page = 1;
-          $i = $offset;
-          while ($srows_qns = mysqli_fetch_assoc($srs_tot_qns1)) {
-
-            $i++;
-            $bkmrk_id = $srows_qns['bookmark_id'];
-            $qn_id = $srows_qns['addquesm_id'];
-            $qn_qnm = html_entity_decode($srows_qns['addquesm_qnm']);
-            $qn_tag = $srows_qns['addquesm_qns_tag'];
-            $qn_crtans = $srows_qns['addquesm_crtans'];
-            $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
-            $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
           ?>
-            <div class="courses_curriculum mt-50">
-              <h4 class="courses_details_title">Q:
-                <?php echo $i . " (" . $qn_tag . ")"; ?>
-              </h4>
-              <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
-                <div class="courses_title">
-                  <h4 class="courses_details_title">
-                    <?php echo $qn_qnm; ?>
-                  </h4>
-                  <div class="pull-right ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title="" data-original-title="Share">
-                    <a data-toggle="modal" data-target="#shareProduct" class="sharelink"><i class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
-                    <?php
-                    $membrid = $_SESSION['sesmbrid'];
-                    $sqrybok = "select bookmark_qns_id from bookmark_mst where bookmark_qns_id='$qn_id' and bookmark_usr_id='$membrid'";
-                    $res = mysqli_query($conn, $sqrybok);
-                    $result_book = mysqli_fetch_assoc($res);
-                    $bk_qns_id = $result_book['bookmark_qns_id'];
-                    if ($bk_qns_id == $qn_id) {
-
-                    ?>
-
-                      <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-trash-o" onClick="remvbkmrkqns('<?php echo $bkmrk_id ?>','d')"></i></a>
-
-                    <?php
-                    } else {
-                    ?>
-                      <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-bookmark" onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
-                    <?php
-
-                    }
-                    ?>
-
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <?php
-                for ($j = 1; $j < 5; $j++) { ?>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="<?php echo $i; ?>customRadioInline<?php echo $j; ?>" name="<?php echo $i; ?>customRadioInline<?php echo $i; ?>" class="custom-control-input" onclick="show_ans(<?php echo $i; ?>,<?php echo $j; ?>,<?php echo $qn_id; ?>);">
-                    <label class="custom-control-label" for="<?php echo $i; ?>customRadioInline<?php echo $j; ?>">
-                      <?php echo html_entity_decode($srows_qns['addquesm_optn' . $j]); ?>
-                    </label>
-                  </div>
-                <?php
-                }
-                ?>
-
-                <p>
-                  <strong>
-                    <span class="text-success" style="display: none" id="crct<?php echo $i; ?>"><i class="fa fa-check"></i>
-                      Correct</span>
-                    <span class="text-danger" style="display: none" id="wrng<?php echo $i; ?>"><i class="fa fa-close"></i>
-                      Wrong</span>
-                  </strong>
-                </p>
-              </div>
-              <div class="scrolling-box" id="explnbx_<?php echo $i; ?>" style="display: none">
-              </div>
-            </div>
-
+          <div id="qns_lst_dsp_pg">
+          </div>
           <?php
-          }
-          ?>
-           <!-- <div id="qns_lst_dsp_pg">
-          </div> -->
-          
-        
-        <?php
         } else {
-        ?>
+          ?>
           <div align-items-center>
             No Questions Found On Bookmark Plese Add: <a href="<?php echo $rtpth; ?>">Click here</a>
           </div>
-        <?php
+          <?php
         }
         ?>
-
-
       </div>
     </div>
   </div>
 </section>
-
-
-
 <?php include('footer.php'); ?>
 <script>
-  $(function() {
-    var Accordion = function(el, multiple) {
+  $(function () {
+    var Accordion = function (el, multiple) {
       this.el = el || {};
       this.multiple = multiple || false;
       // Variables privadas
@@ -286,7 +202,7 @@ $rowsprpg = 5; //maximum rows per page
         multiple: this.multiple
       }, this.dropdown)
     }
-    Accordion.prototype.dropdown = function(e) {
+    Accordion.prototype.dropdown = function (e) {
       var $el = e.data.el;
       $this = $(this),
         $next = $this.next();

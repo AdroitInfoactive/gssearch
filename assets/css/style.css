@@ -1058,8 +1058,8 @@ p {
 
 .slider_area_3 {
     position: relative;
-    padding-top: 160px;
-    padding-bottom: 250px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 .slider_area_3::before {
