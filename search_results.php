@@ -1,13 +1,13 @@
 <?php
 include('header.php');
-if ((!isset($_REQUEST['srch']) && $_REQUEST['srch'] == "")) {
+if ((!isset($_REQUEST['text']) && $_REQUEST['text'] == "")) {
   ?>
   <script type="text/javascript">
     location.href = "<?php echo $rtpth; ?>home";
   </script>
   <?php
 }
-$srch_txt = funcStrUnRplc($_REQUEST['srch']);
+$srch_txt = funcStrUnRplc($_REQUEST['text']);
 $page_title = "Search";
 $page_seo_title = "Search | GS Search";
 $db_seokywrd = "";
@@ -36,77 +36,133 @@ $body_class = "homepage";
 <section class="about_area pt-80">
   <div class="container-fluid">
     <div class="row ">
-      <!-- <div class="col-lg-3 col-sm-3 ">
-        <?php
-      $sqry_exmscat_nms = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_id, prodmnexmsm_name, addquesm_yearsm_id, yearsm_id, yearsm_name from exam_subcategory_mst
-        inner join addques_mst on addquesm_exmscat_id = exam_subcategorym_id
-        inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
-        inner join years_mst on yearsm_id = addquesm_yearsm_id
-        where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and prodmnexmsm_name= '$cat_id_qry' group by exam_subcategorym_id order by exam_subcategorym_prty asc";
-        $srs_exmscat_nms = mysqli_query($conn, $sqry_exmscat_nms);
-        $cntrec_exmscat_nms = mysqli_num_rows($srs_exmscat_nms);
-        if ($cntrec_exmscat_nms > 0) { ?>
-          <ul id="accordion" class="accordion">
+      <div class="col-lg-3 col-sm-3 ">
+        <ul id="accordion" class="accordion">
+          <li class="<?php echo $mn_li_cls; ?>">
+            <div class="link">Year<i class="fa fa-chevron-down"></i>
+            </div>
             <?php
-            while ($srows_exmscat_nms = mysqli_fetch_assoc($srs_exmscat_nms)) {
-              $catid = $srows_exmscat_nms['prodmnexmsm_id'];
-              $catnm = $srows_exmscat_nms['prodmnexmsm_name'];
-              $scatid = $srows_exmscat_nms['exam_subcategorym_id'];
-              $scatnm = $srows_exmscat_nms['exam_subcategorym_name'];
-              $scatnm_url = funcStrRplc($scatnm);
-              if ($scatnm_url == $scat_id) {
-                $mn_li_cls = "open";
-                $mn_stl = "block";
-              } else {
-                $mn_li_cls = "";
-                $mn_stl = "none";
-              }
-              ?>
-              <li class="<?php echo $mn_li_cls; ?>">
-                <div class="link">
-                  <?php echo $scatnm; ?><i class="fa fa-chevron-down"></i>
-                </div>
+            // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
+            $sqry_srch_yr = "SELECT yearsm_id, yearsm_name, count(addquesm_id) as qns_cnt from addques_mst
+            left join years_mst on addquesm_yearsm_id = yearsm_id
+            left join prodmnexms_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+            left join exam_subcategory_mst on addquesm_exmscat_id = exam_subcategorym_id
+            left join topics_mst on addquesm_topicsm_id = topicsm_id
+            left join subtopics_mst on addquesm_subtopicsm_id = subtopicsm_id
+            where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%') group by yearsm_id order by yearsm_id asc";
+            $srs_srch_yr = mysqli_query($conn, $sqry_srch_yr);
+            $cntrec_srch_yr = mysqli_num_rows($srs_srch_yr);
+            if ($cntrec_srch_yr > 0) { ?>
+              <ul class="submenu" style="display : <?php echo $mn_stl; ?>">
                 <?php
-                $sqry_exm_nms = "SELECT yearsm_id, yearsm_name, prodmnexmsm_id, prodmnexmsm_name, exam_subcategorym_id, exam_subcategorym_name from addques_mst
-                inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
-                inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
-                inner join years_mst on yearsm_id = addquesm_yearsm_id
-                where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and exam_subcategorym_id = '$scatid' group by yearsm_id order by yearsm_name desc";
-                $srs_exm_nms = mysqli_query($conn, $sqry_exm_nms);
-                $cntrec_exm_nms = mysqli_num_rows($srs_exm_nms);
-                if ($cntrec_exm_nms > 0) { ?>
-                  <ul class="submenu" style="display : <?php echo $mn_stl; ?>">
-                    <?php
-                    while ($srows_exm_nms = mysqli_fetch_assoc($srs_exm_nms)) {
-                      $exm_yr_nm = $srows_exm_nms['yearsm_name'];
-                      $exm_catnm = $srows_exm_nms['prodmnexmsm_name'];
-                      $exm_catnm_url = funcStrRplc($exm_catnm);
-                      $exm_scatnm = $srows_exm_nms['exam_subcategorym_name'];
-                      $exm_scatnm_url = funcStrRplc($exm_scatnm);
-                      $mn_yr = $srows_exm_nms['yearsm_name'];
-                      if ($mn_yr == $yr_id) {
-                        $mn_bg = "background-color: #b63b4d";
-                      } else {
-                        $mn_bg = "";
-                      }
-                      ?>
-                      <li><a style="<?php echo $mn_bg; ?>"
-                          href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url . "/" . $exm_yr_nm; ?>"><?php echo $exm_yr_nm; ?></a></li>
-                      <?php
-                    }
-                    ?>
-                  </ul>
+                while ($srows_years = mysqli_fetch_assoc($srs_srch_yr)) {
+                  $yr_id = $srows_years['yearsm_id'];
+                  $yr_nm = $srows_years['yearsm_name'];
+                  $yr_nm_url = funcStrRplc($yr_nm);
+                  $qns_yr_cnt = $srows_years['qns_cnt'];
+                  if ($mn_yr == $yr_id) {
+                    $mn_bg = "background-color: #b63b4d";
+                  } else {
+                    $mn_bg = "";
+                  }
+                  ?>
+                  <li>
+                    <input type="checkbox" id="year_nm<?php echo $yr_id; ?>" name="year_nm" class="" value="<?php echo $yr_id; ?>" onchange="get_rel_qns();">
+                    <label for="year_nm<?php echo $yr_id; ?>"><?php echo $yr_nm . "(" . $qns_yr_cnt . ")"; ?></label>
+                  </li>
                   <?php
                 }
                 ?>
-              </li>
+              </ul>
               <?php
             }
             ?>
-          </ul>
-          <?php
-        }
-        ?>
+          </li>
+        </ul>
+        <ul id="accordion1" class="accordion">
+          <li class="<?php echo $mn_li_cls; ?>">
+            <div class="link">Exam<i class="fa fa-chevron-down"></i>
+            </div>
+            <?php
+            // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
+            $sqry_srch_exm = "SELECT prodmnexmsm_id, prodmnexmsm_name, count(addquesm_id) as qns_cnt from addques_mst
+            left join years_mst on addquesm_yearsm_id = yearsm_id
+            left join prodmnexms_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+            left join exam_subcategory_mst on addquesm_exmscat_id = exam_subcategorym_id
+            left join topics_mst on addquesm_topicsm_id = topicsm_id
+            left join subtopics_mst on addquesm_subtopicsm_id = subtopicsm_id
+            where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%') group by prodmnexmsm_id order by prodmnexmsm_id asc";
+            $srs_srch_exm = mysqli_query($conn, $sqry_srch_exm);
+            $cntrec_srch_exm = mysqli_num_rows($srs_srch_exm);
+            if ($cntrec_srch_exm > 0) { ?>
+              <ul class="submenu" style="display : <?php echo $mn_stl; ?>">
+                <?php
+                while ($srows_exm = mysqli_fetch_assoc($srs_srch_exm)) {
+                  $exm_id = $srows_exm['prodmnexmsm_id'];
+                  $exm_nm = $srows_exm['prodmnexmsm_name'];
+                  $exm_nm_url = funcStrRplc($exm_nm);
+                  $qns_exm_cnt = $srows_exm['qns_cnt'];
+                  if ($mn_yr == $exm_id) {
+                    $mn_bg = "background-color: #b63b4d";
+                  } else {
+                    $mn_bg = "";
+                  }
+                  ?>
+                  <li>
+                    <input type="checkbox" id="exam_nm<?php echo $exm_id; ?>" name="exam_nm" class="" value="<?php echo $exm_id; ?>" onchange="get_rel_qns();">
+                    <label for="exam_nm<?php echo $exm_id; ?>"><?php echo $exm_nm . "(" . $qns_exm_cnt . ")"; ?></label>
+                  </li>
+                  <?php
+                }
+                ?>
+              </ul>
+              <?php
+            }
+            ?>
+          </li>
+        </ul>
+        <ul id="accordion2" class="accordion">
+          <li class="<?php echo $mn_li_cls; ?>">
+            <div class="link">Topics<i class="fa fa-chevron-down"></i>
+            </div>
+            <?php
+            // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
+            $sqry_srch_topc = "SELECT topicsm_id, topicsm_name, count(addquesm_id) as qns_cnt from addques_mst
+            left join years_mst on addquesm_yearsm_id = yearsm_id
+            left join prodmnexms_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+            left join exam_subcategory_mst on addquesm_exmscat_id = exam_subcategorym_id
+            left join topics_mst on addquesm_topicsm_id = topicsm_id
+            left join subtopics_mst on addquesm_subtopicsm_id = subtopicsm_id
+            where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%') group by topicsm_id order by topicsm_id asc";
+            $srs_srch_topc = mysqli_query($conn, $sqry_srch_topc);
+            $cntrec_srch_topc = mysqli_num_rows($srs_srch_topc);
+            if ($cntrec_srch_topc > 0) { ?>
+              <ul class="submenu" style="display : <?php echo $mn_stl; ?>">
+                <?php
+                while ($srows_topc = mysqli_fetch_assoc($srs_srch_topc)) {
+                  $topc_id = $srows_topc['topicsm_id'];
+                  $topc_nm = $srows_topc['topicsm_name'];
+                  $topc_nm_url = funcStrRplc($topc_nm);
+                  $qns_topc_cnt = $srows_topc['qns_cnt'];
+                  if ($mn_yr == $topc_id) {
+                    $mn_bg = "background-color: #b63b4d";
+                  } else {
+                    $mn_bg = "";
+                  }
+                  ?>
+                  <li>
+                    <input type="checkbox" id="topc_nm<?php echo $topc_id; ?>" name="topc_nm" class="" value="<?php echo $topc_id; ?>" onchange="get_rel_qns();">
+                    <label for="topc_nm<?php echo $topc_id; ?>"><?php echo $topc_nm . "(" . $qns_topc_cnt . ")"; ?></label>
+                  </li>
+                  <?php
+                }
+                ?>
+              </ul>
+              <?php
+            }
+            ?>
+          </li>
+        </ul>
         <div class="single_courses_details  mb-60">
           <h4 class="courses_details_title">Similar Questions</h4>
           <div class="courses_curriculum mt-50">
@@ -144,8 +200,8 @@ $body_class = "homepage";
             </div>
           </div>
         </div>
-      </div> -->
-      <div class="col-lg-12 col-sm-12 pr-md-12">
+      </div>
+      <div class="col-lg-9 col-sm-9 pr-md-5">
         <?php
         $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
@@ -153,21 +209,20 @@ $body_class = "homepage";
         inner join years_mst on yearsm_id = addquesm_yearsm_id
         inner join topics_mst on topicsm_id = addquesm_topicsm_id
         left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
-        
+
         // prodmnexmsm_name='$cat_id_qry' and exam_subcategorym_name = '$scat_id_qry' and yearsm_name = '$yr_id_qry'";
         $srs_tot_qns = mysqli_query($conn, $sqry_tot_qns);
         $tot_qns = mysqli_num_rows($srs_tot_qns);
-        if ($tot_qns > 0)
-        {
+        if ($tot_qns > 0) {
           ?>
           <div id="qns_lst_dsp_srch">
           </div>
           <?php
-        }
-        else {
+        } else {
           ?>
           <div align-items-center>
-            No Results found for the search: <?php echo $srch_txt; ?>
+            No Results found for the search:
+            <?php echo $srch_txt; ?>
           </div>
           <?php
         }
@@ -198,6 +253,7 @@ $body_class = "homepage";
       };
     }
     var accordion = new Accordion($('#accordion'), false);
+    var accordion = new Accordion($('#accordion1'), false);
     var accordion = new Accordion($('#accordion2'), false);
   });
 </script>

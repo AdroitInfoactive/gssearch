@@ -5,7 +5,7 @@ $db_seokywrd = "";
 $db_seodesc = "";
 $current_page = "home";
 $body_class = "homepage";
-include('header-home.php');
+include('header.php');
 ?>
 <!--====== Slider PART START ======-->
 <section class="slider_area_3 bg_cover d-flex align-items-center" style="background-image: url(<?php echo $rtpth; ?>assets/images/slider-4.jpg)">
@@ -19,14 +19,14 @@ include('header-home.php');
           <div class="row  justify-content-center">
             <div class="col-lg-8">
               <div class="header_search" id="header_search">
-                <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                <?php /*?><form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
                   <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
                                                                                                       echo $_POST['txtsrchval'];
                                                                                                     } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
                                                                                                       echo $_REQUEST['txtsrchval'];
                                                                                                     } ?>">
                   <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
-                </form>
+                </form><?php */?>
               </div>
               <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
               <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
@@ -45,48 +45,84 @@ include('header-home.php');
           <h2 class="main_title">Master your <span>Thousands of
             </span> with in the Practice zone</h2>
           <div class="slider_box_wrapper d-flex flex-wrap justify-content-between">
-            <div class="single_column">
+            <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-1.png" alt="icon">
-                <p>Prelims Papers</p>
+                <p> Art &amp; Culture</p>
                 <a href="#"></a>
               </div>
             </div>
-            <div class="single_column">
+            <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-2.png" alt="icon">
-                <p>Mains Papers</p>
+                <p>Computer Knowledge</p>
                 <a href="#"></a>
               </div>
             </div>
-            <div class="single_column">
+            <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-3.png" alt="icon">
-                <p>Group 1 Papers</p>
+                <p>Current Affairs</p>
                 <a href="#"></a>
               </div>
             </div>
-            <div class="single_column">
+            <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-4.png" alt="icon">
-                <p>Group 2 Papers</p>
+                <p>Economy</p>
                 <a href="#"></a>
               </div>
             </div>
-            <div class="single_column">
+            <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-5.png" alt="icon">
-                <p>Group 3 Papers</p>
+                <p>Environment &amp; Ecology</p>
                 <a href="#"></a>
               </div>
             </div>
-            <div class="single_column">
+            </div>
+            <div class="slider_box_wrapper d-flex flex-wrap justify-content-between">
+            <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
-                <p>Group 4 Papers</p>
+                <p>General Knowledge</p>
                 <a href="#"></a>
               </div>
             </div>
+            
+            <div class="single_column col">
+              <div class="single_box">
+                <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
+                <p>Geography</p>
+                <a href="#"></a>
+              </div>
+            </div>
+            
+            <div class="single_column col">
+              <div class="single_box">
+                <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
+                <p>History</p>
+                <a href="#"></a>
+              </div>
+            </div>
+            
+            <div class="single_column col">
+              <div class="single_box">
+                <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
+                <p>Polity</p>
+                <a href="#"></a>
+              </div>
+            </div>
+            
+            <div class="single_column col">
+              <div class="single_box">
+                <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
+                <p>Science &amp; Technology</p>
+                <a href="#"></a>
+              </div>
+            </div>
+            
+            
           </div>
         </div>
       </div>

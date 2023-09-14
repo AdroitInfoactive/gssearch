@@ -22,7 +22,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'Submit') && isset($_POST['txtchngpwd_oldpswd']) && (trim($_POST['txtchngpwd_oldpswd']) != '') && isset($_POST['txtchngpwd_nwpswd']) && (trim($_POST['txtchngpwd_nwpswd']) != '') && isset($_POST['txtchngpwd_nwcnfpswd']) && (trim($_POST['txtchngpwd_nwcnfpswd']) != '')) {
   include_once "database/uqry_chng_pwd.php";
 }
-if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Submit') && isset($_POST['edttxtname']) && (trim($_POST['edttxtname']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '')) {
+if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Submit') && isset($_POST['edttxtname']) && (trim($_POST['edttxtname']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '')) {
 
   include_once "database/uqry_edit_mbr.php";
 }
@@ -74,7 +74,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
         }
       }); */
     </script>
-  <?php
+    <?php
   }
   ?>
 </head>
@@ -103,7 +103,8 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
       <div class="header_top_wrapper_2 d-flex justify-content-between">
         <div class="header_top_info d-none d-md-block">
           <ul>
-            <li><img src="<?php echo $rtpth; ?>assets/images/call-2.png" alt="call"><a href="#">+91 12345 67890</a></li>
+            <li><img src="<?php echo $rtpth; ?>assets/images/call-2.png" alt="call"><a href="#">+91 9177 666 963</a>
+            </li>
             <li><img src="<?php echo $rtpth; ?>assets/images/mail-2.png" alt="mail"><a href="#">info@gssearch.in</a>
             </li>
           </ul>
@@ -114,7 +115,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
               <a href="<?php echo $rtpth; ?>home">Home </a>
             </li>
             <li>
-              <a href="#">About Us</a>
+              <a href="<?php echo $rtpth; ?>aboutus">About Us</a>
             </li>
             <li>
               <a href="<?php echo $rtpth; ?>exam-categories">Practice Zone </a>
@@ -123,7 +124,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
               <a href="#">Gallery </a>
             </li> -->
             <li>
-              <a href="#">Contact Us</a>
+              <a href="<?php echo $rtpth; ?>contactus">Contact Us</a>
             </li>
           </ul>
         </div>
@@ -139,20 +140,20 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
             <div class="header_search" id="header_search">
               <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
                 <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
-                                                                                                    echo $_POST['txtsrchval'];
-                                                                                                  } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
-                                                                                                    echo $_REQUEST['txtsrchval'];
-                                                                                                  } ?>">
+                  echo $_POST['txtsrchval'];
+                } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
+                  echo $_REQUEST['txtsrchval'];
+                } ?>">
                 <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
               </form>
             </div>
             <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
               <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
                 <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
-                                                                                                                          echo $_POST['txtsrchval'];
-                                                                                                                        } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
-                                                                                                                          echo $_REQUEST['txtsrchval'];
-                                                                                                                        } ?>">
+                      echo $_POST['txtsrchval'];
+                    } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
+                      echo $_REQUEST['txtsrchval'];
+                    } ?>">
                 <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
               </form>
             </div>
@@ -172,7 +173,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
                 </ul>
               </div>
             </div>
-          <?php
+            <?php
           } else { ?>
             <div class="col-sm-4">
               <ul class="main_menu rightlinks text-center" id="userMenu">
@@ -189,9 +190,9 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
                     $res = mysqli_query($conn, $sqrybok);
                     $cnt = mysqli_num_rows($res);
                     if ($cnt > 0) {
-                    ?> -->
-                    
-                    <!-- <?php
+                      ?> -->
+
+                      <!-- <?php
                     } ?> -->
                     <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
                     <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
@@ -201,7 +202,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
               </li>
               </ul>
             </div>
-          <?php
+            <?php
           }
           ?>
         </div>
@@ -237,7 +238,8 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
           <a class="navbar-brand" href="<?php echo $rtpth; ?>home">
             <img src="<?php echo $rtpth; ?>assets/images/logo.png" alt="logo">
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="toggler-icon"></span>
             <span class="toggler-icon"></span>
             <span class="toggler-icon"></span>
@@ -248,7 +250,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
                 <a href="<?php echo $rtpth; ?>home">Home </a>
               </li>
               <li>
-                <a href="#">About Us</a>
+                <a href="<?php echo $rtpth; ?>aboutus">About Us</a>
               </li>
               <li>
                 <a href="<?php echo $rtpth; ?>exam-categories">Practice Zone </a>
@@ -257,7 +259,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
                 <a href="#">Gallery </a>
               </li> -->
               <li>
-                <a href="#">Contact Us</a>
+                <a href="<?php echo $rtpth; ?>contactus">Contact Us</a>
               </li>
             </ul>
           </div>
@@ -275,7 +277,7 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
 
 
 
-              <?php
+                <?php
               } else { ?>
                 <li>
                   <ul class="main_menu rightlinks text-center" id="userMenu">
@@ -294,23 +296,23 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
                   </ul>
                 </li>
                 </li>
-            </ul>
+              </ul>
 
-          <?php
+              <?php
               }
-          ?>
+              ?>
 
 
 
 
-          <li>
-            <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
-            <div class="search_bar">
-              <input type="text" placeholder="Search">
-              <button><i class="fa fa-search"></i></button>
-            </div>
-          </li>
-          </ul>
+            <li>
+              <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
+              <div class="search_bar">
+                <input type="text" placeholder="Search">
+                <button><i class="fa fa-search"></i></button>
+              </div>
+            </li>
+            </ul>
           </div>
         </nav>
       </div>

@@ -223,8 +223,6 @@ require_once('settings.php');
           <div class="ps-popup__body">
             <h3 class="ps-popup__title">Share</h3>
             <div class="ps-product__social d-flex justify-content-center">
-
-
               <ul class="ps-social ps-social--color social" id="sclshare">
               </ul>
             </div>
@@ -250,7 +248,6 @@ require_once('settings.php');
     </div>
   </div>
 </div>
-
 <!-- <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered ps-addcart">
     <div class="modal-content">
@@ -262,7 +259,6 @@ require_once('settings.php');
             <div class="ps-product ps-product--standard pb-0">
               <div class="ps-product__content text-center ">
                 <div class="ps-product__title acc-succ" style="background-color:lightgreen ;"><i class="fa fa-check"></i> Question Added To Bookmark.</div>
-
               </div>
             </div>
           </div>
@@ -308,16 +304,12 @@ require_once('settings.php');
             </div>
             <input type="submit" name="btnsbmt_edt_dtl" id="btnsbmt_edt_dtl" value="Submit" class="main-btn" />
           </form>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>
 <!-- end edit user details -->
-
-
 <!--====== Footer PART ENDS ======-->
 <!--====== BACK TOP TOP PART START ======-->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -369,12 +361,54 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
 <script type="text/javascript">
-
+  function get_rel_qns() {
+    var srch_txt = "<?php echo $srch_txt; ?>";
+    yr_chkbx = document.getElementsByName("year_nm");
+    var yrs_ids = [];
+    for (i = 0; i < yr_chkbx.length; i++) {
+      if (yr_chkbx[i].checked) {
+        if (yr_chkbx[i].value != null) {
+          yrs_ids.push(yr_chkbx[i].value);
+        }
+      }
+    }
+    exm_chkbx = document.getElementsByName("exam_nm");
+    var exm_ids = [];
+    for (i = 0; i < exm_chkbx.length; i++) {
+      if (exm_chkbx[i].checked) {
+        if (exm_chkbx[i].value != null) {
+          exm_ids.push(exm_chkbx[i].value);
+        }
+      }
+    }
+    topc_chkbx = document.getElementsByName("topc_nm");
+    var topc_ids = [];
+    for (i = 0; i < topc_chkbx.length; i++) {
+      if (topc_chkbx[i].checked) {
+        if (topc_chkbx[i].value != null) {
+          topc_ids.push(topc_chkbx[i].value);
+        }
+      }
+    }
+    srch_url = "<?php echo $rtpth; ?>search?text=" + srch_txt;
+    if (yrs_ids.length != "")
+    {
+      srch_url += "&yrs_ids=" + yrs_ids; 
+    }
+    if (exm_ids.length != "")
+    {
+      srch_url += "&exm_ids=" + exm_ids;
+    }
+    if (topc_ids.length != "")
+    {
+      srch_url += "&topc_ids=" + topc_ids;
+    }
+    window.location.href = srch_url;
+  }
   function remvbkmrkqns(bokmark_id, crtactn) {
     var confirmation = confirm("Are you sure you want to remove this question from bookmarks?");
     if (confirmation) {
       $.ajax({
-
         url: `<?php echo $rtpth; ?>manage_bookmark.php?bokmark_id=${bokmark_id}&bokaction=${crtactn}`,
         type: "GET",
         success: function (data) {
@@ -388,14 +422,9 @@ require_once('settings.php');
         }
       });
     }
-
   }
-
   function frmprdsub(qns_id, crtactn) {
-
-
     $.ajax({
-
       url: `<?php echo $rtpth; ?>manage_bookmark.php?qnsid=${qns_id}&action=${crtactn}`,
       type: "GET",
       success: function (data) {
@@ -416,8 +445,6 @@ require_once('settings.php');
       }
     });
   }
-
-
   function srch(substs) {
     txtsrchval = document.frmserqtn.txtsrchval.value;
     if (txtsrchval == "") {
@@ -442,7 +469,7 @@ require_once('settings.php');
           success: function (data) {
             // alert(data);
             if (data == "y") {
-              document.frmserqtn.action = "<?php echo $rtpth; ?>search/" + srchtxt;
+              document.frmserqtn.action = "<?php echo $rtpth; ?>search?text=" + srchtxt;
               document.frmserqtn.submit();
             } else {
               $('#subscribeModal').modal('show');
@@ -453,13 +480,12 @@ require_once('settings.php');
           }
         });
       } else {
-        document.frmserqtn.action = "<?php echo $rtpth; ?>search/" + srchtxt;
+        document.frmserqtn.action = "<?php echo $rtpth; ?>search?text=" + srchtxt;
         document.frmserqtn.submit();
       }
       event.preventDefault();
     }
   }
-
   function show_ans(sno, optnid, qtnid) {
     $.ajax({
       url: `<?php echo $rtpth; ?>get_ans.php?sno=${sno}&optnid=${optnid}&qtnid=${qtnid}`,
@@ -501,13 +527,11 @@ require_once('settings.php');
           let pageNumber = parseInt($(this).data('page'));
           loadPage_srch(pageNumber, srch_txt);
         });
-
         // Load previous page
         $('#qns_lst_dsp_srch').on('click', '.prev', function () {
           let prevPage_srch = parseInt($(this).data('page'))
           loadPage_srch(prevPage_srch, srch_txt);
         });
-
         function loadPage_srch(page_srch, srch_txt) {
           $.ajax({
             url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
@@ -537,7 +561,7 @@ require_once('settings.php');
           });
         }
       });
-    <?php
+        <?php
   } else if ($page_title == "Bookmark Questions") { ?>
         $(document).ready(function () {
           // Initial page load
@@ -556,13 +580,11 @@ require_once('settings.php');
             let pageNumber = parseInt($(this).data('page'));
             loadPage_pg(pageNumber, mbr_id);
           });
-
           // Load previous page
           $('#qns_lst_dsp_pg').on('click', '.prev', function () {
             let prevPage_srch = parseInt($(this).data('page'))
             loadPage_pg(prevPage_srch, mbr_id);
           });
-
           function loadPage_pg(page_srch, mbr_id) {
             $.ajax({
               url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&mbr_id=${mbr_id}`,
@@ -593,7 +615,7 @@ require_once('settings.php');
             });
           }
         });
-    <?php
+              <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -613,13 +635,11 @@ require_once('settings.php');
               let nextPage = parseInt($(this).data('page'))
               loadPage(nextPage, cat_id, scat_id, yr_id);
             });
-
             // Load previous page
             $('#qns_lst_dsp').on('click', '.prev', function () {
               let prevPage = parseInt($(this).data('page'))
               loadPage(prevPage, cat_id, scat_id, yr_id);
             });
-
             function loadPage(page, cat_id, scat_id, yr_id) {
               $.ajax({
                 url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
@@ -641,20 +661,17 @@ require_once('settings.php');
               });
             }
           });
-    <?php
+              <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');
         const errorMessage = document.getElementById('error-message');
-
         searchInput.addEventListener('mouseover', () => {
           errorMessage.style.display = 'block';
         });
-
         searchInput.addEventListener('mouseout', () => {
           errorMessage.style.display = 'none';
         });
-
         searchInput.addEventListener('blur', () => {
           searchInput.blur();
           // searchButton.blur();
@@ -663,7 +680,6 @@ require_once('settings.php');
     } */
   ?>
     $(document).ready(function () {
-
       $('.js-btn-tooltip').tooltip();
       $('.js-btn-tooltip--custom').tooltip({
         customClass: 'tooltip-custom'
@@ -672,7 +688,6 @@ require_once('settings.php');
         customClass: 'tooltip-custom-alt'
       });
     });
-
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';
   lgnrules[1] = 'txtemail|email|Enter Email Id only';
@@ -689,7 +704,6 @@ require_once('settings.php');
   chng_pwdrules[2] = 'txtchngpwd_nwpswd|required|Enter New Password';
   chng_pwdrules[3] = 'txtchngpwd_nwcnfpswd|required|Enter Confirm Password';
   chng_pwdrules[4] = 'txtchngpwd_nwcnfpswd|equal|$txtchngpwd_nwpswd|Password not match';
-
   var edit_details = new Array();
   edit_details[1] = 'edttxtname|required|Enter Name';
   edit_details[2] = 'edttxtname|alphaspace|Enter Only Name';
@@ -697,8 +711,6 @@ require_once('settings.php');
   // edit_details[4] = 'edttxtemail|email|Enter Email Id only';
   edit_details[5] = 'edttxtmobile|required|Enter Mobile Number';
   edit_details[6] = 'edttxtmobile|numeric|Enter Numbers only';
-
-
   function get_qns_lnk(url) {
     var encurl = encodeURI(url)
     var waurl = "whatsapp://send?text=" + encurl;
