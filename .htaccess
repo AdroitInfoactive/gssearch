@@ -19,7 +19,7 @@ RewriteRule ^my-account$ my-account.php [L]
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 # RewriteRule ^search/([A-Za-z0-9-_~()]+)$ search_results.php?srch=$1 [L,QSA]
-RewriteRule ^search$ search_results.php?text=$1&yrs=$2&exm=$3&topc=$4 [L,QSA]
+RewriteRule ^search$ search_results.php?text=$1&yrs_ids=$2&exm_ids=$3&topc_ids=$4 [L,QSA]
 RewriteRule ^([A-Za-z0-9-_~()]+)/([A-Za-z0-9-_~()]+)/([A-Za-z0-9-_~()]+)$ exam.php?catid=$1&scatid=$2&yr=$3 [L,QSA]
 RewriteRule ^([A-Za-z0-9-_~()]+)/([A-Za-z0-9-_~()]+)/([A-Za-z0-9-_~()]+)/([A-Za-z0-9-_~()]+)$ lnk_shrd.php?catid=$1&scatid=$2&yr=$3&qnsid=$4 [L,QSA]
 

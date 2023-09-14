@@ -361,50 +361,6 @@ require_once('settings.php');
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
 <script type="text/javascript">
-  function get_rel_qns() {
-    var srch_txt = "<?php echo $srch_txt; ?>";
-    yr_chkbx = document.getElementsByName("year_nm");
-    var yrs_ids = [];
-    for (i = 0; i < yr_chkbx.length; i++) {
-      if (yr_chkbx[i].checked) {
-        if (yr_chkbx[i].value != null) {
-          yrs_ids.push(yr_chkbx[i].value);
-        }
-      }
-    }
-    exm_chkbx = document.getElementsByName("exam_nm");
-    var exm_ids = [];
-    for (i = 0; i < exm_chkbx.length; i++) {
-      if (exm_chkbx[i].checked) {
-        if (exm_chkbx[i].value != null) {
-          exm_ids.push(exm_chkbx[i].value);
-        }
-      }
-    }
-    topc_chkbx = document.getElementsByName("topc_nm");
-    var topc_ids = [];
-    for (i = 0; i < topc_chkbx.length; i++) {
-      if (topc_chkbx[i].checked) {
-        if (topc_chkbx[i].value != null) {
-          topc_ids.push(topc_chkbx[i].value);
-        }
-      }
-    }
-    srch_url = "<?php echo $rtpth; ?>search?text=" + srch_txt;
-    if (yrs_ids.length != "")
-    {
-      srch_url += "&yrs_ids=" + yrs_ids; 
-    }
-    if (exm_ids.length != "")
-    {
-      srch_url += "&exm_ids=" + exm_ids;
-    }
-    if (topc_ids.length != "")
-    {
-      srch_url += "&topc_ids=" + topc_ids;
-    }
-    window.location.href = srch_url;
-  }
   function remvbkmrkqns(bokmark_id, crtactn) {
     var confirmation = confirm("Are you sure you want to remove this question from bookmarks?");
     if (confirmation) {
@@ -509,32 +465,105 @@ require_once('settings.php');
       }
     });
   }
+  function get_rel_qns() {
+    var srch_txt = "<?php echo $srch_txt; ?>";
+    var yrs_url = "<?php echo $yr_ids; ?>";
+    var exm_url = "<?php echo $exm_ids; ?>";
+    var topc_url = "<?php echo $topc_ids; ?>";
+    if (yrs_url == "") {
+      var yrs_ids = [];
+    }
+    else {
+      yrs_ids = yrs_url.split(",");
+    }
+    if (exm_url == "") {
+      var exm_ids = [];
+    }
+    else {
+      exm_ids = exm_url.split(",");
+    }
+    if (topc_url == "") {
+      var topc_ids = [];
+    }
+    else {
+      topc_ids = topc_url.split(",");
+    }
+    yr_chkbx = document.getElementsByName("year_nm");
+    for (i = 0; i < yr_chkbx.length; i++) {
+      if (yr_chkbx[i].checked) {
+        if (yr_chkbx[i].value != null) {
+          yrs_ids.push(yr_chkbx[i].value);
+        }
+      }
+    }
+    exm_chkbx = document.getElementsByName("exam_nm");
+    for (i = 0; i < exm_chkbx.length; i++) {
+      if (exm_chkbx[i].checked) {
+        if (exm_chkbx[i].value != null) {
+          exm_ids.push(exm_chkbx[i].value);
+        }
+      }
+    }
+    topc_chkbx = document.getElementsByName("topc_nm");
+    for (i = 0; i < topc_chkbx.length; i++) {
+      if (topc_chkbx[i].checked) {
+        if (topc_chkbx[i].value != null) {
+          topc_ids.push(topc_chkbx[i].value);
+        }
+      }
+    }
+    srch_url = "<?php echo $rtpth; ?>search?text=" + srch_txt;
+    if (yrs_ids.length != "") {
+      srch_url += "&yrs_ids=" + yrs_ids;
+    }
+    if (exm_ids.length != "") {
+      srch_url += "&exm_ids=" + exm_ids;
+    }
+    if (topc_ids.length != "") {
+      srch_url += "&topc_ids=" + topc_ids;
+    }
+    window.location.href = srch_url;
+  }
   <?php
   if ($page_title == "Search") { ?>
       $(document).ready(function () {
         // Initial page load
         var srch_txt = "<?php echo $srch_txt; ?>";
+        var yrs_ids = "<?php echo $yr_ids; ?>";
+        var exm_ids = "<?php echo $exm_ids; ?>";
+        var topc_ids = "<?php echo $topc_ids; ?>";
         var tot_qns_srch = <?php echo $tot_qns; ?>;
-        loadPage_srch(1, srch_txt);
+        loadPage_srch(1, srch_txt, yrs_ids, exm_ids, topc_ids);
         // Load next page
         $('#qns_lst_dsp_srch').on('click', '.next', function () {
           let nextPage_srch = parseInt($(this).data('page'))
-          loadPage_srch(nextPage_srch, srch_txt);
+          loadPage_srch(nextPage_srch, srch_txt, yrs_ids, exm_ids, topc_ids);
         });
         // Load specific page
         $('#qns_lst_dsp_srch').on('click', '.page-number', function () {
           // debugger;
           let pageNumber = parseInt($(this).data('page'));
-          loadPage_srch(pageNumber, srch_txt);
+          loadPage_srch(pageNumber, srch_txt, yrs_ids, exm_ids, topc_ids);
         });
         // Load previous page
         $('#qns_lst_dsp_srch').on('click', '.prev', function () {
           let prevPage_srch = parseInt($(this).data('page'))
-          loadPage_srch(prevPage_srch, srch_txt);
+          loadPage_srch(prevPage_srch, srch_txt, yrs_ids, exm_ids, topc_ids);
         });
-        function loadPage_srch(page_srch, srch_txt) {
+        function loadPage_srch(page_srch, srch_txt, yrs_ids, exm_ids, topc_ids) {
+          srch_url = `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`;
+          if (yrs_ids.length != "") {
+            srch_url += "&yrs_ids=" + yrs_ids;
+          }
+          if (exm_ids.length != "") {
+            srch_url += "&exm_ids=" + exm_ids;
+          }
+          if (topc_ids.length != "") {
+            srch_url += "&topc_ids=" + topc_ids;
+          }
           $.ajax({
-            url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
+            url: srch_url,
+            // url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
             type: 'GET',
             success: function (data_srch) {
               var content_srch = '';
@@ -556,12 +585,13 @@ require_once('settings.php');
                 content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
               }
               content_srch += '</div>';
+              debugger;
               $('#qns_lst_dsp_srch').html(content_srch);
             }
           });
         }
       });
-        <?php
+            <?php
   } else if ($page_title == "Bookmark Questions") { ?>
         $(document).ready(function () {
           // Initial page load
@@ -615,7 +645,7 @@ require_once('settings.php');
             });
           }
         });
-              <?php
+                  <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -661,7 +691,7 @@ require_once('settings.php');
               });
             }
           });
-              <?php
+                  <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');
