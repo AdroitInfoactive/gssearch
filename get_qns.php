@@ -135,8 +135,12 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
     <?php
   }
 }
+// ----------------------------------------------------- for search page ----------------------------------------------------------------------------------
 if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
   $srch_txt_1 = funcStrUnRplc($_GET['srch']);
+  $yrs_id = isset($_GET['yrs_ids']) ? funcStrUnRplc($_GET['yrs_ids']) : "";
+  $exm_id = isset($_GET['exm_ids']) ? funcStrUnRplc($_GET['exm_ids']) : "";
+  $topc_id = isset($_GET['topc_ids']) ? funcStrUnRplc($_GET['topc_ids']) : "";
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $qnsperpg = 2;
   $offset = ($page - 1) * $qnsperpg;
@@ -157,6 +161,15 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
       $likeConditions[] = "addquesm_optn1 LIKE '%$word%' OR addquesm_optn2 LIKE '%$word%' or addquesm_optn3 LIKE '%$word%' OR addquesm_optn4 LIKE '%$word%'";
     }
     $sqry_qns_srch1 .= " or " . implode(' OR ', $likeConditions) . ")";
+  }
+  if (isset($yrs_id) && $yrs_id != "") {
+    $sqry_qns_srch1 .= " and addquesm_yearsm_id in ($yrs_id)";
+  }
+  if (isset($exm_id) && $exm_id != "") {
+    $sqry_qns_srch1 .= " and addquesm_prodmnexmsm_id in ($exm_id)";
+  }
+  if (isset($topc_id) && $topc_id != "") {
+    $sqry_qns_srch1 .= " and addquesm_topicsm_id in ($topc_id)";
   }
   $sqry_qns_srch2 = " group by addquesm_id order by result_priority, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END, addquesm_prty asc limit $offset,$qnsperpg";
   $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2;

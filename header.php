@@ -167,7 +167,7 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                   <li><a href="" data-toggle="modal" data-target="#registerModal">Create An Account</a></li>
                   <li>
                     <!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal"> Login </button> -->
-                    <a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
+                    <a class="main-btn" data-toggle="modal" data-target="#loginModal" id="lgn_pop"><i class="fa fa-user-o"></i>
                       Login</a>
                   </li>
                 </ul>
