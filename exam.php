@@ -82,7 +82,8 @@ $body_class = "homepage";
         $srs_exmscat_nms = mysqli_query($conn, $sqry_exmscat_nms);
         $cntrec_exmscat_nms = mysqli_num_rows($srs_exmscat_nms);
         if ($cntrec_exmscat_nms > 0) { ?>
-          <ul id="accordion" class="accordion">
+          <ul id="accordion" class="accordion"><h3><?php
+            echo ucwords($cat_id_qry); ?></h3>
             <?php
             while ($srows_exmscat_nms = mysqli_fetch_assoc($srs_exmscat_nms)) {
               $catid = $srows_exmscat_nms['prodmnexmsm_id'];
@@ -143,7 +144,7 @@ $body_class = "homepage";
           <?php
         }
         ?>
-        <div class="single_courses_details  mb-60">
+        <!-- <div class="single_courses_details  mb-60">
           <h4 class="courses_details_title">Similar Questions</h4>
           <div class="courses_curriculum mt-50">
             <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
@@ -178,7 +179,7 @@ $body_class = "homepage";
                     class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-lg-9 col-sm-9 pr-md-5">
         <?php

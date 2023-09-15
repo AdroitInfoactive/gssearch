@@ -66,7 +66,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
                 <a data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i
-                    class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                    class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
                 <?php
                 $membrid = $_SESSION['sesmbrid'];
                 $sqrybok = "select bookmark_qns_id from bookmark_mst where bookmark_qns_id='$qn_id' and bookmark_usr_id='$membrid'";
@@ -136,7 +136,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
   }
 }
 // ----------------------------------------------------- for search page ----------------------------------------------------------------------------------
-if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) && $_GET['yrs_ids'] != "") || (isset($_GET['exm_ids']) && $_GET['exm_ids'] != "") || (isset($_GET['topc_ids']) && $_GET['topc_ids'] != "")) {
+if ((isset($_GET['srch']) && $_GET['srch'] != "")) {
   $srch_txt_1 = funcStrUnRplc($_GET['srch']);
   $yrs_id = isset($_GET['yrs_ids']) ? funcStrUnRplc($_GET['yrs_ids']) : "";
   $exm_id = isset($_GET['exm_ids']) ? funcStrUnRplc($_GET['exm_ids']) : "";
@@ -144,12 +144,8 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $qnsperpg = 2;
   $offset = ($page - 1) * $qnsperpg;
-  $sqry_qns_srch1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag";
-  if ($srch_txt_1 != "")
-  {
-    $sqry_qns_srch1 .= " ,CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END AS result_priority";
-  }
-  $sqry_qns_srch1 .= " from addques_mst
+  $sqry_qns_srch1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END AS result_priority
+  from addques_mst
   inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
   inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
   inner join years_mst on yearsm_id = addquesm_yearsm_id
@@ -162,7 +158,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
     $searchWords = explode(' ', $srch_txt);
     $likeConditions = [];
     foreach ($searchWords as $word) {
-      $likeConditions[] = "addquesm_qnm LIKE '%$word%' OR addquesm_optn1 LIKE '%$word%' OR addquesm_optn2 LIKE '%$word%' or addquesm_optn3 LIKE '%$word%' OR addquesm_optn4 LIKE '%$word%'";
+      $likeConditions[] = "addquesm_optn1 LIKE '%$word%' OR addquesm_optn2 LIKE '%$word%' or addquesm_optn3 LIKE '%$word%' OR addquesm_optn4 LIKE '%$word%'";
     }
     $sqry_qns_srch1 .= " or " . implode(' OR ', $likeConditions) . ")";
   }
@@ -175,12 +171,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   if (isset($topc_id) && $topc_id != "") {
     $sqry_qns_srch1 .= " and addquesm_topicsm_id in ($topc_id)";
   }
-  $sqry_qns_srch2 = " group by addquesm_id order by";
-  if ($srch_txt_1 != "")
-  {
-    $sqry_qns_srch2 .= " result_priority, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END";
-  }
-  $sqry_qns_srch2 .= " ,yearsm_name, addquesm_prty desc limit $offset,$qnsperpg";
+  $sqry_qns_srch2 = " group by addquesm_id order by result_priority, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END, addquesm_prty asc limit $offset,$qnsperpg";
   $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2;
   $srs_tot_qns = mysqli_query($conn, $sqry_qns_srch1);
   $cnt_tot_qns = mysqli_num_rows($srs_tot_qns);
@@ -215,7 +206,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
                 <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i
-                    class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                    class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
 
                 <a data-toggle="modal" class="pull-right sharelink "><i class="fa fa-bookmark"
                     onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
@@ -319,7 +310,7 @@ if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
                 <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-trash-o" onClick="remvbkmrkqns('<?php echo $bkmrk_id ?>','d')"></i></a>
-                <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i  class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i  class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
 
                     </div>
                   </div>
@@ -399,7 +390,7 @@ if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
              <?php echo $qn_qnm; ?>
            </h4>
            <div class="pull-right ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title="" data-original-title="Share">
-             <a data-toggle="modal" data-target="#shareProduct" class="sharelink"><i class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+             <a data-toggle="modal" data-target="#shareProduct" class="sharelink"><i class="fa fa-share-square-o" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
              <?php
              $membrid = $_SESSION['sesmbrid'];
              $sqrybok = "select bookmark_qns_id from bookmark_mst where bookmark_qns_id='$qn_id' and bookmark_usr_id='$membrid'";

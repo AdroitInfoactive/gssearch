@@ -38,15 +38,6 @@ $body_class = "homepage";
     </div>
   </div>
 </section>
-<?php
-$lft_qry = "SELECT yearsm_id ,yearsm_name, prodmnexmsm_id, prodmnexmsm_name, topicsm_id, topicsm_name, count(addquesm_id) as qns_cnt from addques_mst
-left join years_mst on addquesm_yearsm_id = yearsm_id
-left join prodmnexms_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
-left join exam_subcategory_mst on addquesm_exmscat_id = exam_subcategorym_id
-left join topics_mst on addquesm_topicsm_id = topicsm_id
-left join subtopics_mst on addquesm_subtopicsm_id = subtopicsm_id
-where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = 'a' and yearsm_sts = 'a'";
-?>
 <section class="about_area pt-80">
   <div class="container-fluid">
     <div class="row ">
@@ -57,19 +48,21 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
             </div>
             <?php
             // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
-            if ($srch_txt != "")
-            {
-              $sqry_srch_yr .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
-            }
+            $sqry_srch_yr = "SELECT yearsm_id, yearsm_name, count(addquesm_id) as qns_cnt from addques_mst
+            left join years_mst on addquesm_yearsm_id = yearsm_id
+            left join prodmnexms_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+            left join exam_subcategory_mst on addquesm_exmscat_id = exam_subcategorym_id
+            left join topics_mst on addquesm_topicsm_id = topicsm_id
+            left join subtopics_mst on addquesm_subtopicsm_id = subtopicsm_id
+            where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
             if ($exm_ids != "") {
-              $sqry_srch_yr .= " and addquesm_prodmnexmsm_id in ($exm_ids)";
+              $sqry_srch_exm .= " and addquesm_prodmnexmsm_id in ($exm_ids)";
             }
             if ($topc_ids != "") {
-              $sqry_srch_yr .= " and addquesm_topicsm_id in ($topc_ids)";
+              $sqry_srch_exm .= " and addquesm_topicsm_id in ($topc_ids)";
             }
             $sqry_srch_yr .= " group by yearsm_id order by yearsm_id asc";
-            $sqry_srch_yr_fnl = $lft_qry.$sqry_srch_yr;
-            $srs_srch_yr = mysqli_query($conn, $sqry_srch_yr_fnl);
+            $srs_srch_yr = mysqli_query($conn, $sqry_srch_yr);
             $cntrec_srch_yr = mysqli_num_rows($srs_srch_yr);
             if ($cntrec_srch_yr > 0) { ?>
               <ul class="submenu" style="display : <?php echo $mn_stl; ?>">
@@ -111,9 +104,13 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
             </div>
             <?php
             // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
-            if ($srch_txt != "") {
-              $sqry_srch_yr .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
-            }
+            $sqry_srch_exm = "SELECT prodmnexmsm_id, prodmnexmsm_name, count(addquesm_id) as qns_cnt from addques_mst
+            left join years_mst on addquesm_yearsm_id = yearsm_id
+            left join prodmnexms_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+            left join exam_subcategory_mst on addquesm_exmscat_id = exam_subcategorym_id
+            left join topics_mst on addquesm_topicsm_id = topicsm_id
+            left join subtopics_mst on addquesm_subtopicsm_id = subtopicsm_id
+            where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
             if ($topc_ids != "")
             {
               $sqry_srch_exm .= " and addquesm_topicsm_id in ($topc_ids)";
@@ -122,8 +119,7 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
               $sqry_srch_exm .= " and addquesm_yearsm_id in ($yr_ids)";
             }
             $sqry_srch_exm .= " group by prodmnexmsm_id order by prodmnexmsm_id asc";
-            $sqry_srch_exm_fnl = $lft_qry . $sqry_srch_exm;
-            $srs_srch_exm = mysqli_query($conn, $sqry_srch_exm_fnl);
+            $srs_srch_exm = mysqli_query($conn, $sqry_srch_exm);
             $cntrec_srch_exm = mysqli_num_rows($srs_srch_exm);
             if ($cntrec_srch_exm > 0) { ?>
               <ul class="submenu" style="display : <?php echo $mn_stl; ?>">
@@ -164,9 +160,13 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
             </div>
             <?php
             // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
-            if ($srch_txt != "") {
-              $sqry_srch_yr .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
-            }
+            $sqry_srch_topc = "SELECT topicsm_id, topicsm_name, count(addquesm_id) as qns_cnt from addques_mst
+            left join years_mst on addquesm_yearsm_id = yearsm_id
+            left join prodmnexms_mst on addquesm_prodmnexmsm_id = prodmnexmsm_id
+            left join exam_subcategory_mst on addquesm_exmscat_id = exam_subcategorym_id
+            left join topics_mst on addquesm_topicsm_id = topicsm_id
+            left join subtopics_mst on addquesm_subtopicsm_id = subtopicsm_id
+            where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
             if ($exm_ids != "") {
               $sqry_srch_topc .= " and addquesm_prodmnexmsm_id in ($exm_ids)";
             }
@@ -175,8 +175,7 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
               $sqry_srch_topc .= " and addquesm_yearsm_id in ($yr_ids)";
             }
             $sqry_srch_topc .= " group by topicsm_id order by topicsm_id asc";
-            $sqry_srch_topc_fnl = $lft_qry . $sqry_srch_topc;
-            $srs_srch_topc = mysqli_query($conn, $sqry_srch_topc_fnl);
+            $srs_srch_topc = mysqli_query($conn, $sqry_srch_topc);
             $cntrec_srch_topc = mysqli_num_rows($srs_srch_topc);
             if ($cntrec_srch_topc > 0) { ?>
               <ul class="submenu" style="display : <?php echo $mn_stl; ?>">
@@ -211,7 +210,7 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
             ?>
           </li>
         </ul>
-        <!-- <div class="single_courses_details  mb-60">
+        <div class="single_courses_details  mb-60">
           <h4 class="courses_details_title">Similar Questions</h4>
           <div class="courses_curriculum mt-50">
             <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
@@ -247,7 +246,7 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
                       class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="col-lg-9 col-sm-9 pr-md-5">
         <?php
@@ -256,11 +255,7 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
         inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
         inner join topics_mst on topicsm_id = addquesm_topicsm_id
-        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a'";
-        if($srch_txt != "")
-        {
-          $sqry_tot_qns .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
-        }
+        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
         if ($yr_ids != "")
         {
           $sqry_tot_qns .= " and addquesm_yearsm_id in ($yr_ids)";
@@ -319,10 +314,4 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
     var accordion = new Accordion($('#accordion1'), false);
     var accordion = new Accordion($('#accordion2'), false);
   });
-
-  $(document).ready(function(){
-  var windowWidth = $(window).width();
-  if(windowWidth <= 575) //for iPad & smaller devices
-     $('.open').addClass('close')
-});
 </script>

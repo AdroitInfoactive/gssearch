@@ -4904,9 +4904,9 @@ p {
 .courses_details_content {}
 
 .courses_details_title {
-    font-size: 16px;
+    font-size: 15px;
     color: #002639;
-    font-weight: bold;
+    font-weight: normal;
 	line-height:20px;
 }
 
@@ -5441,7 +5441,7 @@ p {
 
 .accordion {
     width: 100%;
-    margin: 0px auto 0px;
+    margin: 30px auto 20px;
     background: #FFF;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -5529,23 +5529,6 @@ p {
     color: #FFF;
 }
 
-.submenu li {
-    display: block;
-    text-decoration: none;
-    color: #d9d9d9;
-    padding: 12px;
-    padding-left: 42px;
-    -webkit-transition: all 0.25s ease;
-    -o-transition: all 0.25s ease;
-    transition: all 0.25s ease;
-}
-
-.submenu li:hover {
-    background: #b63b4d;
-    color: #FFF;
-}
-
-
 
 /*Accordian End*/
 
@@ -5573,11 +5556,6 @@ p {
     padding: 2rem 0rem;
 }
 .sharelink{    background: #fcc741; color: #082c67; border-radius: 100%; width: 35px; height: 35px; line-height:35px; text-align:center; cursor: pointer; margin-left:8px;}
-
-.pagination li button{padding:10px; font-size:12px; border-radius:5px; background:#fcc741; color:#000; border:none;}
-.pagination li button.prev, .pagination li button.next{padding:10px; font-size:12px; border-radius:5px; background:#fcc741; color:#000; border:none;}
-.pagination li button:hover{ background:#000; color:#fcc741; border:none;}
-.pagination li button:active{ background:#000; color:#fcc741; border:none;}
 
 @media (min-width: 576px) {
     .modal-dialog {

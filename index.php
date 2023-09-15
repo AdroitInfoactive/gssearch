@@ -41,43 +41,59 @@ include('header.php');
             <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
             </div>
           </div>
-
           <h2 class="main_title">Master your <span>Thousands of
             </span> with in the Practice zone</h2>
           <div class="slider_box_wrapper d-flex flex-wrap justify-content-between">
-            <div class="single_column col">
-              <div class="single_box">
-                <img src="<?php echo $rtpth; ?>assets/images/f-icon-1.png" alt="icon">
-                <p> Art &amp; Culture</p>
-                <a href="#"></a>
+            <?php
+            $sqry_topcs = "SELECT topicsm_id, topicsm_name from addques_mst
+            inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
+            inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
+            inner join years_mst on yearsm_id = addquesm_yearsm_id
+            inner join topics_mst on topicsm_id = addquesm_topicsm_id
+            where topicsm_sts='a' and addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' group by topicsm_id order by topicsm_name asc limit 10";
+            $srs_topcs = mysqli_query($conn, $sqry_topcs);
+            $cntrec_topcs = mysqli_num_rows($srs_topcs);
+            while ($rws_topcs = mysqli_fetch_array($srs_topcs)) {
+              $topc_id = $rws_topcs['topicsm_id'];
+              $topc_nm = $rws_topcs['topicsm_name'];
+              
+              ?>
+              <div class="single_column col">
+                <div class="single_box">
+                  <img src="<?php echo $rtpth; ?>assets/images/f-icon-1.png" alt="icon">
+                  <p> Art &amp; Culture</p>
+                  <a href="<?php echo $rtpth; ?>search?topc_ids=<?php echo $topc_id; ?>"></a>
+                </div>
               </div>
-            </div>
+              <?php
+            }
+            ?>
             <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-2.png" alt="icon">
                 <p>Computer Knowledge</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-3.png" alt="icon">
                 <p>Current Affairs</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-4.png" alt="icon">
                 <p>Economy</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             <div class="single_column col">
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/f-icon-5.png" alt="icon">
                 <p>Environment &amp; Ecology</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             </div>
@@ -86,7 +102,7 @@ include('header.php');
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
                 <p>General Knowledge</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             
@@ -94,7 +110,7 @@ include('header.php');
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
                 <p>Geography</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             
@@ -102,7 +118,7 @@ include('header.php');
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
                 <p>History</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             
@@ -110,7 +126,7 @@ include('header.php');
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
                 <p>Polity</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             
@@ -118,7 +134,7 @@ include('header.php');
               <div class="single_box">
                 <img src="<?php echo $rtpth; ?>assets/images/p-icon-6.png" alt="icon">
                 <p>Science &amp; Technology</p>
-                <a href="#"></a>
+                <a href="<?php echo $rtpth; ?>search?topc_ids=2"></a>
               </div>
             </div>
             

@@ -233,7 +233,6 @@ require_once('settings.php');
     </div>
   </div>
 </div>
-<button id="open_add_wsh" style="display: none">Open Modal</button>
 <div class="modal fade" id="add_wsh" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered ps-popup--select">
     <div class="modal-content">
@@ -392,7 +391,8 @@ require_once('settings.php');
           if (data == "n") {
             document.getElementById("bkmrk_msg").innerHTML = "Something Went Wrong. Please try again later";
           }
-          if (data == "a") {
+          if (data == "a")
+          {
             document.getElementById("bkmrk_msg").innerHTML = "Already added to Bookmark";
           }
           document.getElementById(mod).classList.add("show");
@@ -481,8 +481,25 @@ require_once('settings.php');
     var yrs_url = "<?php echo $yr_ids; ?>";
     var exm_url = "<?php echo $exm_ids; ?>";
     var topc_url = "<?php echo $topc_ids; ?>";
+    if (yrs_url == "") {
+      var yrs_ids = [];
+    }
+    else {
+      yrs_ids = yrs_url.split(",");
+    }
+    if (exm_url == "") {
+      var exm_ids = [];
+    }
+    else {
+      exm_ids = exm_url.split(",");
+    }
+    if (topc_url == "") {
+      var topc_ids = [];
+    }
+    else {
+      topc_ids = topc_url.split(",");
+    }
     yr_chkbx = document.getElementsByName("year_nm");
-    var yrs_ids = [];
     for (i = 0; i < yr_chkbx.length; i++) {
       if (yr_chkbx[i].checked) {
         if (yr_chkbx[i].value != null) {
@@ -491,7 +508,6 @@ require_once('settings.php');
       }
     }
     exm_chkbx = document.getElementsByName("exam_nm");
-    var exm_ids = [];
     for (i = 0; i < exm_chkbx.length; i++) {
       if (exm_chkbx[i].checked) {
         if (exm_chkbx[i].value != null) {
@@ -500,7 +516,6 @@ require_once('settings.php');
       }
     }
     topc_chkbx = document.getElementsByName("topc_nm");
-    var topc_ids = [];
     for (i = 0; i < topc_chkbx.length; i++) {
       if (topc_chkbx[i].checked) {
         if (topc_chkbx[i].value != null) {
@@ -565,28 +580,28 @@ require_once('settings.php');
               var content_srch = '';
               content_srch += data_srch;
               // Append pagination controls
-              content_srch += '<ul class="pagination">';
+              content_srch += '<div class="row">';
               if (page_srch > 1) {
-                content_srch += `<li><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></li>`;
+                content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
               }
               for (let k = 1; k <= Math.ceil(tot_qns_srch / 2); k++) {
                 if (k === page_srch) {
-                  content_srch += `<li><button active data-page="${k}">${k}</button></li>`;
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
                 } else {
-                  content_srch += `<li><button data-page="${k}">${k}</button></li>`;
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
                 }
                 content_srch += ``;
               }
               if (page_srch * 2 < tot_qns_srch) {
-                content_srch += `<li class="text-right"><button class="next" data-page="${page_srch + 1}">Next</button></li>`;
+                content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
               }
-              content_srch += '</ul>';
+              content_srch += '</div>';
               $('#qns_lst_dsp_srch').html(content_srch);
             }
           });
         }
       });
-                                          <?php
+                    <?php
   } else if ($page_title == "Bookmark Questions") { ?>
         $(document).ready(function () {
           // Initial page load
@@ -619,28 +634,28 @@ require_once('settings.php');
                 var content_srch = '';
                 content_srch += data_srch;
                 // Append pagination controls
-                content_srch += '<ul class="pagination">';
+                content_srch += '<div class="row">';
                 if (page_srch > 1) {
-                  content_srch += `<li><button class="prev" data-page="${page_srch - 1}">Prev</button></li>`;
+                  content_srch += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></div></div>`;
                 }
                 for (let k = 1; k <= Math.ceil(tot_qns_pg / 2); k++) {
                   if (k === page_srch) {
-                    content_srch += `<li><button active data-page="${k}">${k}</button></li>`;
+                    content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" active data-page="${k}">${k}</button></div></div>`;
                   } else {
-                    content_srch += `<li><button data-page="${k}">${k}</button></li>`;
+                    content_srch += `<div class="col-6"><div class="single_form"><button class="page-number main-btn" data-page="${k}">${k}</button></div></div>`;
                   }
                   content_srch += ``;
                 }
                 if (page_srch * 2 < tot_qns_pg) {
-                  content_srch += `<li class="text-right"><button class="next main-btn" data-page="${page_srch + 1}">Next</button>	</li>`;
+                  content_srch += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page_srch + 1}">Next</button></div></div>`;
                 }
-                content_srch += '</ul>';
+                content_srch += '</div>';
                 $('#qns_lst_dsp_pg').html(content_srch);
               }
             });
           }
         });
-                                                <?php
+                          <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -673,20 +688,20 @@ require_once('settings.php');
                   var content = '';
                   content += data;
                   // Append pagination controls
-                  content += '<ul class="pagination">';
+                  content += '<div class="row">';
                   if (page > 1) {
-                    content += `<li><button class="prev main-btn" data-page="${page - 1}">Prev</button></li>`;
+                    content += `<div class="col-6"><div class="single_form"><button class="prev main-btn" data-page="${page - 1}">Prev</button></div></div>`;
                   }
                   if (page * 2 < tot_qns) {
-                    content += `<li class="text-right"><button class="next main-btn" data-page="${page + 1}">Next</button></li>`;
+                    content += `<div class="col-6 text-right"><div class="single_form"><button class="next main-btn" data-page="${page + 1}">Next</button></div>`;
                   }
-                  content += '</li></ul>';
+                  content += '</div></div>';
                   $('#qns_lst_dsp').html(content);
                 }
               });
             }
           });
-                                                <?php
+                          <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');
@@ -713,34 +728,6 @@ require_once('settings.php');
         customClass: 'tooltip-custom-alt'
       });
     });
-  function copyPageURL() {
-    // Get the current page's URL
-    var text = window.location.href;
-    // Create a temporary text area element
-    var textArea = document.createElement('textarea');
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    // Select the text within the text area
-    textArea.select();
-    try {
-      // Use the Clipboard API to copy the text to the clipboard
-      document.execCommand('copy');
-      alert("Copied");
-    } catch (err) {
-      console.error('Unable to copy:', err);
-    }
-    // Remove the temporary text area element
-    document.body.removeChild(textArea);
-  }
-
-  // Event delegation to attach the event listener to the document
-  document.addEventListener("click", function (event) {
-    var target = event.target;
-    // Check if the clicked element is the "Copy URL" button
-    if (target && (target.id === "copy-url-button" || target.parentElement.id === "copy-url-button")) {
-      copyPageURL();
-    }
-  });
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';
   lgnrules[1] = 'txtemail|email|Enter Email Id only';
@@ -770,7 +757,6 @@ require_once('settings.php');
     var fburl = "https://www.facebook.com/sharer.php?u=" + encurl;
     var twturl = "https://twitter.com/intent/tweet?url=" + encurl;
     var mlurl = "mailto:?Subject=I would like to share a link with you&body=" + encurl;
-    var telurl = "https://t.me/share/url?url=" + encurl + "&text=I would like to share a link with you";
     var disp = "<li><a class='ps-social__link facebook' href='" + fburl +
       "' target='_blank'><i class='fa fa-facebook'> </i><span class='ps-tooltip'></span></a></li>";
     disp += "<li><a class='ps-social__link twitter' href='" + twturl +
@@ -779,9 +765,10 @@ require_once('settings.php');
       "' target='_blank'><i class='fa fa-whatsapp'></i><span class='ps-tooltip'></span></a></li>";
     disp += "<li><a class='ps-social__link envelope' href='" + mlurl +
       "' target='_blank'><i class='fa fa-envelope-o'></i><span class='ps-tooltip'></span></a></li>";
-    disp += "<li><a class='ps-social__link telegram' href='" + telurl +
+    disp += "<li><a class='ps-social__link telegram' href='" + mlurl +
       "' target='_blank'><i class='fa fa-telegram'></i><span class='ps-tooltip'></span></a></li>";
-    disp += "<li><a class='ps-social__link copy' href='#' id='copy-url-button'><i class='fa fa-copy'></i><span class='ps-tooltip'></span></a></li>";
+    disp += "<li><a class='ps-social__link copy' href='" + mlurl +
+      "' target='_blank'><i class='fa fa-copy'></i><span class='ps-tooltip'></span></a></li>";
     document.getElementById("sclshare").innerHTML = disp;
   }
 </script>

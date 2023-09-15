@@ -143,8 +143,6 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                   echo $_POST['txtsrchval'];
                 } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
                   echo $_REQUEST['txtsrchval'];
-                } elseif (isset($_REQUEST['text']) && $_REQUEST['text'] != "") {
-                  echo $_REQUEST['text'];
                 } ?>">
                 <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
               </form>
