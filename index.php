@@ -45,7 +45,7 @@ include('header.php');
           <h2 class="main_title">Master your <span>Thousands of
             </span> with in the Practice zone</h2>
           <?php
-          $sqry_topcs = "SELECT topicsm_id, topicsm_name from addques_mst
+          $sqry_topcs = "SELECT topicsm_id, topicsm_name,topicsm_img from addques_mst
             inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
             inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
             inner join years_mst on yearsm_id = addquesm_yearsm_id
@@ -57,6 +57,15 @@ include('header.php');
           while ($rws_topcs = mysqli_fetch_array($srs_topcs)) {
             $topc_id = $rws_topcs['topicsm_id'];
             $topc_nm = $rws_topcs['topicsm_name'];
+            $topc_img = $rws_topcs['topicsm_img'];
+            $path=$u_mnlnks_bnrfldnm.$topc_img;
+            if($topc_img!='' && file_exists($path)){
+              $image= $rtpth.$path;
+            }
+            else{
+              $image=$rtpth.'assets/images/favicon.png';
+            }
+         
             if ($i % 5 == 0 || $i % 5 == 5) { ?>
               <div class="slider_box_wrapper d-flex flex-wrap justify-content-between">
                 <?php
@@ -64,7 +73,7 @@ include('header.php');
             ?>
               <div class="single_column col">
                 <div class="single_box">
-                  <img src="<?php echo $rtpth; ?>assets/images/f-icon-1.png" alt="icon">
+                  <img src="<?php echo $image; ?>" alt="icon">
                   <p>
                     <?php echo $topc_nm; ?>
                   </p>
