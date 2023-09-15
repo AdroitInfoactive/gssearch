@@ -524,6 +524,7 @@ require_once('settings.php');
   if ($page_title == "Search") { ?>
       $(document).ready(function () {
         // Initial page load
+        debugger;
         var srch_txt = "<?php echo $srch_txt; ?>";
         var yrs_ids = "<?php echo $yr_ids; ?>";
         var exm_ids = "<?php echo $exm_ids; ?>";
@@ -547,7 +548,10 @@ require_once('settings.php');
           loadPage_srch(prevPage_srch, srch_txt, yrs_ids, exm_ids, topc_ids);
         });
         function loadPage_srch(page_srch, srch_txt, yrs_ids, exm_ids, topc_ids) {
-          srch_url = `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`;
+          srch_url = `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}`;
+          if (srch_txt != "") {
+            srch_url += "&srch=" + srch_txt;
+          }
           if (yrs_ids.length != "") {
             srch_url += "&yrs_ids=" + yrs_ids;
           }

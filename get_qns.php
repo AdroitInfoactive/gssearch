@@ -181,7 +181,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
     $sqry_qns_srch2 .= " result_priority, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END";
   }
   $sqry_qns_srch2 .= " ,yearsm_name, addquesm_prty desc limit $offset,$qnsperpg";
-  $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2;
+  echo $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2; exit;
   $srs_tot_qns = mysqli_query($conn, $sqry_qns_srch1);
   $cnt_tot_qns = mysqli_num_rows($srs_tot_qns);
   $pages = ceil($cnt_tot_qns / $qnsperpg);
