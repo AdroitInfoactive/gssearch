@@ -46,7 +46,7 @@
 						      '$name','$desc','$bdest','$seotitle','$seodesc','$seokywrd',
 							  '$seoh1','$seoh2','$sts','$prior',
 							  '$dt','$ses_admin')";	
-							  //echo 	$iqryprodcat_mst;exit;	
+							  // echo 	$iqryprodcat_mst;exit;	
 			$irsprodcat_mst= mysqli_query($conn,$iqryprodcat_mst);
 			if($irsprodcat_mst==true){
 				if(($bsource!='none') && ($bsource!='') && ($bdest != "")){ 

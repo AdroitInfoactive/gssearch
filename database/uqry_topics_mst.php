@@ -78,14 +78,14 @@ global $ses_admin;
 								topicsm_prty ='$prior',
 								topicsm_mdfdon ='$curdt',
 								topicsm_mdfdby='$ses_admin'"; 
-			 if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){							
+			 if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){		
 				$bimgval = funcUpldImg('flebnrimg','bimg');
 				if($bimgval != ""){
 					$bimgary    = explode(":",$bimgval,2);
 					$bdest 		= $bimgary[0];					
 					$bsource 	= $bimgary[1];					
 				}						
-					$uqryprodcat_mst .= ",topicsm_img='$bdest'"; 
+					 $uqryprodcat_mst .= ",topicsm_img='$bdest'"; 
 			}
 			$uqryprodcat_mst .= "where topicsm_id=$id";
 			$ursprodmncat_mst = mysqli_query($conn,$uqryprodcat_mst);

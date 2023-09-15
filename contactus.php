@@ -56,9 +56,9 @@ isset($_POST['txtname']) && ($_POST['txtname'] != ""))
        </tr>	
        </table>";	
 // echo $body;exit;
-       $u_prjct_email_info="info" . "@$prjct_dmn";
-							$fromemail = $u_prjct_email_info;
-							$to = $u_prjct_email_info;
+                            
+							$fromemail = $u_prjct_email;
+							$to = $u_prjct_email;
 							$headers = 'MIME-Version: 1.0' . "\r\n";
 							$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 							$headers .= "From: $fromemail" . "\r\n";
