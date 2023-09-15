@@ -524,7 +524,6 @@ require_once('settings.php');
   if ($page_title == "Search") { ?>
       $(document).ready(function () {
         // Initial page load
-        debugger;
         var srch_txt = "<?php echo $srch_txt; ?>";
         var yrs_ids = "<?php echo $yr_ids; ?>";
         var exm_ids = "<?php echo $exm_ids; ?>";

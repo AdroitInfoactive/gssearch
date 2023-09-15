@@ -180,8 +180,15 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   {
     $sqry_qns_srch2 .= " result_priority, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END";
   }
-  $sqry_qns_srch2 .= " ,yearsm_name, addquesm_prty desc limit $offset,$qnsperpg";
-  echo $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2; exit;
+  if ($srch_txt_1 == "")
+  {
+    $sqry_qns_srch2 .= " ";
+  }
+  else {
+    $sqry_qns_srch2 .= " ,";
+  }
+  $sqry_qns_srch2 .= " yearsm_name, addquesm_prty desc limit $offset,$qnsperpg";
+  $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2;
   $srs_tot_qns = mysqli_query($conn, $sqry_qns_srch1);
   $cnt_tot_qns = mysqli_num_rows($srs_tot_qns);
   $pages = ceil($cnt_tot_qns / $qnsperpg);
@@ -189,9 +196,13 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   $cntrec_qns_srch = mysqli_num_rows($srs_qns_srch);
   if ($cntrec_qns_srch > 0) { ?>
     <div class="single_courses_details mb-60">
-      Search Results for: "
-      <?php echo $srch_txt_1; ?>"
       <?php
+      if ($srch_txt_1 != "")
+      { ?>
+        Search Results for: "
+        <?php echo $srch_txt_1; ?>"
+        <?php
+      }
       $page = 1;
       $i = $offset;
       while ($srows_qns = mysqli_fetch_assoc($srs_qns_srch)) {
