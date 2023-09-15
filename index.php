@@ -157,10 +157,6 @@ if ($cntrec_exm_cat > 0) { ?>
   <?php
 }
 ?>
-
-
-
-
 <section class="testimonial_area_3">
   <div class="testimonial_title_wrapper_2 bg_cover" style="background-image: url(assets/images/testimonial_bg.jpg)">
     <div class="container">
