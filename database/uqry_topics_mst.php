@@ -17,7 +17,7 @@ global $ses_admin;
 		$name     	= glb_func_chkvl($_POST['txtname']);
 		$prior    	= glb_func_chkvl($_POST['txtprty']);
 		$desc     	= addslashes(trim($_POST['txtdesc']));
-		// $hdnbgimg	= glb_func_chkvl($_POST['hdnbgimg']);
+	 $hdnbgimg	= glb_func_chkvl($_POST['hdnbgimg']); 
 		// $cattyp    	= glb_func_chkvl($_POST['lstcattyp']);
 		// $disptyp  	= glb_func_chkvl($_POST['lstdsplytyp']);
 		$title    	= glb_func_chkvl($_POST['txtseotitle']);
@@ -66,10 +66,10 @@ global $ses_admin;
 		<?php
 		}
 		else{
-			 $uqryprodcat_mst= "update topics_mst set 
+			  $uqryprodcat_mst= "update topics_mst set 
 								topicsm_name='$name',
 								topicsm_sts='$sts',
-								topicsm_desc='$desc', 
+								topicsm_desc='$desc',
 								topicsm_seotitle='$title',
 								topicsm_seodesc='$seodesc',
 								topicsm_seokywrd='$key',
@@ -77,26 +77,16 @@ global $ses_admin;
 								topicsm_seohtwo='$seoh2',
 								topicsm_prty ='$prior',
 								topicsm_mdfdon ='$curdt',
-								topicsm_mdfdby='$ses_admin'";
-			//  if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){							
-			// 	$bimgval = funcUpldImg('flebnrimg','bimg');
-			// 	if($bimgval != ""){
-			// 		$bimgary    = explode(":",$bimgval,2);
-			// 		$bdest 		= $bimgary[0];					
-			// 		$bsource 	= $bimgary[1];					
-			// 	}						
-			// 		$uqryprodcat_mst .= ",topicsm_bnrimg='$bdest'";
-			// }
-			// else{			
-			// 	if(isset($_POST['chkbximg']) && ($_POST['chkbximg'] != "")){
-			// 		$delimgnm   = glb_func_chkvl($_POST['chkbximg']);	
-			// 		$delimgpth  = $a_mnlnks_bnrfldnm.$delimgnm;								
-			// 		if(isset($delimgnm) && file_exists($delimgpth)){
-			// 			unlink($delimgpth);											
-			// 			$uqryprodcat_mst .= ",topicsm_bnrimg=''";
-			// 		}					
-			// 	}				
-			// }
+								topicsm_mdfdby='$ses_admin'"; 
+			 if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){							
+				$bimgval = funcUpldImg('flebnrimg','bimg');
+				if($bimgval != ""){
+					$bimgary    = explode(":",$bimgval,2);
+					$bdest 		= $bimgary[0];					
+					$bsource 	= $bimgary[1];					
+				}						
+					$uqryprodcat_mst .= ",topicsm_img='$bdest'"; 
+			}
 			$uqryprodcat_mst .= "where topicsm_id=$id";
 			$ursprodmncat_mst = mysqli_query($conn,$uqryprodcat_mst);
 			if($ursprodmncat_mst==true){

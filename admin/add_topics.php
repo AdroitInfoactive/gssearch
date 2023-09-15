@@ -145,18 +145,18 @@ include_once('../includes/inc_fnct_ajax_validation.php');
 								</div>
 							</div>
 						</div>
-						<!-- <div class="col-md-12">
+						<div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">
 									<label>Image</label>
 								</div>
 								<div class="col-sm-9">
 									<div class="custom-file">
-										<input name="flemncatimg" type="file" class="form-control" id="flemncatimg" maxlength="250">
+										<input name="fletopimg" type="file" class="form-control" id="fletopimg" maxlength="250">
 									</div>
 								</div>
 							</div>
-						</div> -->
+						</div>
 						<!-- <div class="col-md-12">
 							<div class="row mb-2 mt-2">
 								<div class="col-sm-3">

@@ -132,7 +132,7 @@ isset($_POST['txtname']) && ($_POST['txtname'] != ""))
                             <div class="col-lg-10">
                                 <div class="section_title pb-30">
                                     <h3 class="main_title">Get in touch</h3>
-                                    <p>What do you think is better to receive after each lesson: a lovely looking badge or important skills you can immediately put into practice.</p>
+                                    <p>For any queries / suggestions / feedback, Please fill the below form our team will get back to you.</p>
                                 </div>
                             </div>
                         </div>
@@ -165,13 +165,13 @@ isset($_POST['txtname']) && ($_POST['txtname'] != ""))
                                 </div>
                                 <div class="col-md-12">
                                     <div class="single_form">
-                                        <textarea name="textmsg" id="textmsg" placeholder="Massage"></textarea>
+                                        <textarea name="textmsg" id="textmsg" placeholder="Message"></textarea>
                                         <span id="errorsDiv_textmsg" style="color: red;"></span>
                                     </div> <!-- single form -->
                                 </div>
                                 <div class="col-md-12">
                                     <div class="single_form">
-                                        <input type="submit" name="btncntfrm" id="btncntfrm" class="main-btn" value="Send Massage" >
+                                        <input type="submit" name="btncntfrm" id="btncntfrm" class="main-btn" value="Send Message" >
                                         <!-- <input class="btn btn-gradient big-btn" type="submit" name="btnfedenq" id="btnfedenq" value="Send message"> -->
 
                                         <!-- <button class="main-btn">Send Massage</button> -->

@@ -24,8 +24,8 @@ $u_dwnlds_fldnm = 'dwnlds/';
 $a_dprt_bnrfldnm = '../dprtbnr/';
 $u_dprt_bnrfldnm = 'dprtbnr/';
 
-$a_mnlnks_bnrfldnm = '../exm_cat_img/';
-$u_mnlnks_bnrfldnm = 'exm_cat_img/';
+$a_mnlnks_bnrfldnm = '../assets/images/';
+$u_mnlnks_bnrfldnm = 'assets/images/';
 
 $a_cat_std_testmnlfldnm = '../stdtestmnl/';
 $u_cat_std_testmnlfldnm = 'stdtestmnl/';

@@ -39,7 +39,7 @@ if(isset($_REQUEST['vw']) && (trim($_REQUEST['vw'])!="") && isset($_REQUEST['pg'
 // $rowsprodmncat_mst = mysqli_fetch_assoc($srsprodmncat_mst);
 
 $sqryprodcat_mst="SELECT 
-			topicsm_name,topicsm_desc,topicsm_seotitle,topicsm_seodesc,
+			topicsm_name,topicsm_desc,topicsm_seotitle,topicsm_seodesc,topicsm_img,
 			topicsm_seohone,topicsm_seohtwo,topicsm_seokywrd,topicsm_prty, 
 			if(topicsm_sts = 'a', 'Active','Inactive') as topicsm_sts
 		from 
@@ -138,12 +138,12 @@ include_once $inc_adm_lftlnk;
 								<?php echo $db_catdesc ;?>
 							</div>
 						</div>
-						<!-- <div class="form-group row">
+						<div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Image</label>
 							<div class="col-sm-8">
 								<?php
-								$mncatimgnm = $rowsprodmncat_mst['prodmn_catm_smlimg'];
-								$mncatimgpath  = $gcat_fldnm.$mncatimgnm;
+								$mncatimgnm = $rowsprodcat_mst['topicsm_img'];
+								$mncatimgpath  = $a_mnlnks_bnrfldnm.$mncatimgnm;
 								if(($mncatimgnm !="") && file_exists($mncatimgpath))
 								{
 									echo "<img src='$mncatimgpath' width='100pixel' height='100pixel' style='background-color:red;'>";
@@ -154,7 +154,7 @@ include_once $inc_adm_lftlnk;
 								}
 								?>	
 							</div>
-						</div> -->
+						</div>
 						<!-- <div class="form-group row">
 							<label for="txtname" class="col-sm-2 col-md-2 col-form-label">Banner Image</label>
 							<div class="col-sm-8">
