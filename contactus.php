@@ -1,11 +1,91 @@
 <?php
+            include_once 'includes/inc_nocache.php'; // Clearing the cache information
+            include_once 'includes/inc_connection.php';//Make connection with the database  	
+            include_once "includes/inc_config.php";	//path config file
+		    include_once "includes/inc_usr_functions.php";//Including user session value
 $page_title ="Contact Us";
 $page_seo_title ="Contact Us | GS Search";
 $db_seokywrd ="";
 $db_seodesc ="";
 $current_page ="home";
 $body_class ="homepage";
-include('header.php');
+
+    // echo"<pre>";
+    // var_dump($_POST);
+    // echo"</pre>";
+    // exit;
+if(isset($_POST['btncntfrm']) && ($_POST['btncntfrm'] != "") &&
+isset($_POST['txtname']) && ($_POST['txtname'] != ""))
+       {
+
+		    $name     = glb_func_chkvl($_POST['txtname']); 
+			$email     = glb_func_chkvl($_POST['txtemail']);
+			$phone    = glb_func_chkvl($_POST['textnum']);
+      $subject   = glb_func_chkvl($_POST['textsubj']);
+        $msg    = glb_func_chkvl($_POST['textmsg']);
+        // $msg    = glb_func_chkvl($_POST['txtdesc']);
+       
+			
+       $body = "<table width='60%' border='0' align='center' cellpadding='3' cellspacing='2'>
+       <tr>	
+       <td colspan='3' align='center'><h1>GS Search Contact Form</h1></td>
+       </tr>	
+       <tr>	
+       <td  bgcolor='#F0F0F0'>Name*</td>
+       <td  bgcolor='#F0F0F0'>:</td>				
+       <td  bgcolor='#F0F0F0'>".$name."</td>
+       </tr>				  	
+       <tr>
+       <td bgcolor='#F5F5F5'>Email*</td>
+       <td bgcolor='#F5F5F5'>:</td>
+       <td bgcolor='#F5F5F5'>".$email."</td>
+       </tr>	
+       <tr>
+       <td bgcolor='#F0F0F0'>Phone*</td>
+       <td bgcolor='#F0F0F0'>:</td>						
+       <td bgcolor='#F0F0F0'>".$phone."</td>
+       </tr>
+       <tr>
+       <td bgcolor='#F0F0F0'>Subject *</td>
+       <td bgcolor='#F0F0F0'>:</td>
+       <td bgcolor='#F0F0F0'>". $subject."</td>
+       </tr>
+       <td bgcolor='#F0F0F0'>Message*</td>
+       <td bgcolor='#F0F0F0'>:</td>
+       <td bgcolor='#F0F0F0'>$msg</td>
+       </tr>	
+       </table>";	
+// echo $body;exit;
+       $u_prjct_email_info="info" . "@$prjct_dmn";
+							$fromemail = $u_prjct_email_info;
+							$to = $u_prjct_email_info;
+							$headers = 'MIME-Version: 1.0' . "\r\n";
+							$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+							$headers .= "From: $fromemail" . "\r\n";
+							$subject = "Contact Form";
+							if (mail($to, $subject, $body, $headers))
+							{?>
+						
+								<script>
+								location.href='thankyou.php';
+							</script>
+							
+							<?php 	}
+							else
+							{?>
+						
+								<script>
+								location.href='error';
+							</script>
+							
+							<?php
+                          
+							}
+      }   
+    //   else{
+    //     echo"here1"; 
+    //   } 
+      include('header.php');
 ?>
 
     
@@ -25,7 +105,20 @@ include('header.php');
             </div>
         </div>
     </section>
-
+    <script src="<?php echo $rtpth; ?>assets/js/main.js"></script>
+<script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
+<script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    
+    var rules = new Array();
+  rules[0] = 'txtname|required|Enter Your Full Name';
+  rules[1] = 'txtemail:Email|required|Enter Email Id';
+  rules[2] = 'txtemail:Email|email|Enter Your Valid Email Id';
+  rules[3] = 'textsubj|required|Enter Your Subject';
+  rules[4] = 'textnum|required|Enter Your Mobile Number';
+  rules[5] = 'textnum|numeric|Enter Your Valid Mobile Number';
+  rules[6] = 'textmsg|required|Enter Your Message';  
+  </script>
 
 
        <section class="contact_area pt-80 pb-130">
@@ -44,36 +137,45 @@ include('header.php');
                             </div>
                         </div>
                         
-                        <form action="https://raistheme.com/html/edustdy/edustdy/contact.php" method="POST">
+                        <form name="frmcntct" id="frmcntct" method="POST" action="" onsubmit="return performCheck('frmcntct', rules,'inline');">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="single_form">
-                                        <input type="text" placeholder="Name">
+                                        <input type="text" name="txtname" id="txtname" placeholder="Name">
+                                        <span id="errorsDiv_txtname" style="color: red;"></span>
                                     </div> <!-- single form -->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="single_form">
-                                        <input type="email" placeholder="Email">
+                                        <input type="text" name="txtemail" id="txtemail" placeholder="Email">
+                                        <span id="errorsDiv_txtemail" style="color: red;"></span>
                                     </div> <!-- single form -->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="single_form">
-                                        <input type="text" placeholder="Subject">
+                                        <input type="text" name="textsubj" id="textsubj" placeholder="Subject">
+                                        <span id="errorsDiv_textsubj" style="color: red;"></span>
                                     </div> <!-- single form -->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="single_form">
-                                        <input type="text" placeholder="Number">
+                                        <input type="text" name="textnum" id="textnum" placeholder="Number">
+                                        <span id="errorsDiv_textnum" style="color: red;"></span>
                                     </div> <!-- single form -->
                                 </div>
                                 <div class="col-md-12">
                                     <div class="single_form">
-                                        <textarea placeholder="Massage"></textarea>
+                                        <textarea name="textmsg" id="textmsg" placeholder="Massage"></textarea>
+                                        <span id="errorsDiv_textmsg" style="color: red;"></span>
                                     </div> <!-- single form -->
                                 </div>
                                 <div class="col-md-12">
                                     <div class="single_form">
-                                        <button class="main-btn">Send Massage</button>
+                                        <input type="submit" name="btncntfrm" id="btncntfrm" class="main-btn" value="Send Massage" >
+                                        <!-- <input class="btn btn-gradient big-btn" type="submit" name="btnfedenq" id="btnfedenq" value="Send message"> -->
+
+                                        <!-- <button class="main-btn">Send Massage</button> -->
+
                                     </div> <!-- single form -->
                                 </div>
                             </div> <!-- row -->
