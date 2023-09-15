@@ -80,8 +80,8 @@ isset($_REQUEST['pg']) && trim($_REQUEST['pg'])!="" &&
 // $sqryprodmncat_mst="SELECT prodmn_catm_id, prodmn_catm_name, prodmn_catm_desc, prodmn_catm_smlimg, prodmn_catm_bnrimg, prodmn_catm_seotitle, prodmn_catm_seodesc, prodmn_catm_seokywrd, prodmn_catm_seohonetitle, prodmn_catm_seohonedesc, prodmn_catm_seohtwotitle, prodmn_catm_seohtwodesc, prodmn_catm_sts, prodmn_catm_prty, prodmn_catm_hmprty FROM prodmcat_mst WHERE prodmn_catm_id = $id";
 // $srsprodmncat_mst  = mysqli_query($conn,$sqryprodmncat_mst);
 // $rowsprodmncat_mst = mysqli_fetch_assoc($srsprodmncat_mst);
-     $sqryprodcat_mst = "select 
-								topicsm_name,topicsm_desc,topicsm_seotitle,topicsm_seodesc,
+     echo $sqryprodcat_mst = "select 
+								topicsm_name,topicsm_desc,topicsm_seotitle,topicsm_seodesc,topicsm_img,
 								topicsm_seohone,topicsm_seohtwo,topicsm_seokywrd,topicsm_prty,
 								topicsm_sts 
 							from 
@@ -196,8 +196,8 @@ include_once $inc_adm_lftlnk;
 		<input type="hidden" name="hdnchk" value="<?php echo $chk;?>">
 		<input type="hidden" name="hdnloc" value="<?php echo $loc?>">
 		<input type="hidden" name="hdncnt" value="<?php echo $countstart?>">		
-		<!-- <input type="hidden" name="hdnsmlimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_smlimg'];?>">
-		<input type="hidden" name="hdnbnrimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_bnrimg'];?>"> -->
+		<!-- <input type="hidden" name="hdnsmlimg" value="<?php echo $rowsprodmncat_mst['prodmn_catm_smlimg'];?>">-->
+		<input type="hidden" name="hdnbgimg" value="<?php echo $rowsprodcat_mst['topicsm_img'];?>"> 
 		<div class="card">
 			<div class="card-body">
 				<div class="row justify-content-center">
@@ -222,22 +222,20 @@ include_once $inc_adm_lftlnk;
 							</div>
 						</div>
 					</div>
-<!-- 					
-						
 					<div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">
-								<label>Banner Image</label>
+								<label> Image</label>
 							</div>
 							<div class="col-sm-9">
 								<div class="custom-file">
 									<input name="flebnrimg" type="file" class="form-control" id="flebnrimg">
 								</div>
 								<?php
-								$imgnm   = $rowsprodcat_mst['topicsm_bnrimg'];
+								$imgnm   = $rowsprodcat_mst['topicsm_img'];
 								$imgpath = $a_mnlnks_bnrfldnm.$imgnm;
 								if(($imgnm !="") && file_exists($imgpath)){
-									echo "<img src='$imgpath' width='80pixel' height='80pixel'><br><input type='checkbox' name='chkbximg' id='chkbximg' value='$imgpath'>Remove Image";					
+									echo "<img src='$imgpath' width='80pixel' height='80pixel'><br>";					
 								}
 								else{
 									echo "N.A.";						 			  
@@ -245,7 +243,7 @@ include_once $inc_adm_lftlnk;
 								?>
 							</div>
 						</div>
-					</div> -->
+					</div>
 					<!-- <div class="col-md-12">
 						<div class="row mb-2 mt-2">
 							<div class="col-sm-3">

@@ -29,29 +29,29 @@
 		$srsprodcat_mst = mysqli_query($conn,$sqryprodcat_mst);
 			$cntrec_cat     = mysqli_num_rows($srsprodcat_mst);
 		if($cntrec_cat < 1){
-			// if(isset($_FILES['flebnrimg']['tmp_name']) && ($_FILES['flebnrimg']['tmp_name'] != "")){					
-			// 	$bimgval = funcUpldImg('flebnrimg','bimg');
-			// 	if($bimgval != ""){
-			// 		$bimgary    = explode(":",$bimgval,2);
-			// 		$bdest 		= $bimgary[0];					
-			// 		$bsource 	= $bimgary[1];					
-			// 	}						
-			// }	
+			if(isset($_FILES['fletopimg']['tmp_name']) && ($_FILES['fletopimg']['tmp_name'] != "")){					
+				$bimgval = funcUpldImg('fletopimg','img');
+				if($bimgval != ""){
+					$bimgary    = explode(":",$bimgval,2);
+					$bdest 		= $bimgary[0];					
+					$bsource 	= $bimgary[1];					
+				}						
+			}	
 			  $iqryprodcat_mst="insert into topics_mst(
-						      topicsm_name,topicsm_desc,
+						      topicsm_name,topicsm_desc,topicsm_img,
 							  topicsm_seotitle,topicsm_seodesc,
 							  topicsm_seokywrd,
 							  topicsm_seohone,topicsm_seohtwo,topicsm_sts,topicsm_prty,
 							  topicsm_crtdon,topicsm_crtdby)values(							  
-						      '$name','$desc','$seotitle','$seodesc','$seokywrd',
+						      '$name','$desc','$bdest','$seotitle','$seodesc','$seokywrd',
 							  '$seoh1','$seoh2','$sts','$prior',
 							  '$dt','$ses_admin')";	
 							  //echo 	$iqryprodcat_mst;exit;	
 			$irsprodcat_mst= mysqli_query($conn,$iqryprodcat_mst);
-			// if($irsprodcat_mst==true){
-			// 	if(($bsource!='none') && ($bsource!='') && ($bdest != "")){ 
-			// 		echo move_uploaded_file($bsource,$a_mnlnks_bnrfldnm.$bdest);
-			// 	}
+			if($irsprodcat_mst==true){
+				if(($bsource!='none') && ($bsource!='') && ($bdest != "")){ 
+					echo move_uploaded_file($bsource,$a_mnlnks_bnrfldnm.$bdest);
+				}
 				$gmsg = "Record saved successfully";
 			}
 			else{
@@ -61,5 +61,5 @@
 		else{						
 			$gmsg = "Duplicate name. Record not saved";
 		}
-	// }
+	}
 ?>
