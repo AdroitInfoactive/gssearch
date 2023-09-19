@@ -624,7 +624,6 @@ p {
     position: absolute;
     top: -6px;
     right: -9px;
-    display:none;
 }
 
 .search_bar {
@@ -817,9 +816,9 @@ p {
     height: 60px;
     padding: 0 20px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #f0f0f0;
     color: #252628;
-    border: #bebebe 1px solid;
+    border: 0;
 }
 
 .header_search button {
@@ -4906,7 +4905,7 @@ p {
 
 .courses_details_title {
     font-size: 16px;
-    color: #0056b3;
+    color: #002639;
     font-weight: bold;
 	line-height:20px;
 }
@@ -5541,11 +5540,11 @@ p {
     transition: all 0.25s ease;
 }
 
-/*.submenu li:hover {
+.submenu li:hover {
     background: #b63b4d;
     color: #FFF;
-}*/
-.submenu li label{margin-bottom: 0;}
+}
+
 
 
 /*Accordian End*/
@@ -5570,17 +5569,15 @@ p {
 }
 
 /* ------------------------------------------------- For Login Modal ------------------------------------------------------------------------- */
-/*.container {
+.container {
     padding: 2rem 0rem;
-}*/
+}
 .sharelink{    background: #fcc741; color: #082c67; border-radius: 100%; width: 35px; height: 35px; line-height:35px; text-align:center; cursor: pointer; margin-left:8px;}
 
 .pagination li button{padding:10px; font-size:12px; border-radius:5px; background:#fcc741; color:#000; border:none;}
 .pagination li button.prev, .pagination li button.next{padding:10px; font-size:12px; border-radius:5px; background:#fcc741; color:#000; border:none;}
 .pagination li button:hover{ background:#000; color:#fcc741; border:none;}
 .pagination li button:active{ background:#000; color:#fcc741; border:none;}
-
-
 
 @media (min-width: 576px) {
     .modal-dialog {

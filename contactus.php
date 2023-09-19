@@ -7,7 +7,7 @@ $page_title ="Contact Us";
 $page_seo_title ="Contact Us | GS Search";
 $db_seokywrd ="";
 $db_seodesc ="";
-$current_page ="home";
+$current_page ="contactus";
 $body_class ="homepage";
 
     // echo"<pre>";

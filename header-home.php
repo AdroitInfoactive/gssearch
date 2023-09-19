@@ -286,13 +286,13 @@ if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Subm
             
             
             
-              <li>
+             <?php /*?> <li>
                 <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
                 <div class="search_bar">
                   <input type="text" placeholder="Search">
                   <button><i class="fa fa-search"></i></button>
                 </div>
-              </li>
+              </li><?php */?>
             </ul>
           </div>
         </nav>

@@ -35,7 +35,7 @@ $page_title = $exm_catnm;
 $page_seo_title = $exm_catnm . " | GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
-$current_page = "home";
+$current_page = "examscat";
 $body_class = "homepage";
 ?>
 <section class="page_banner bg_cover" style="background-image: url(assets/images/about_bg.jpg)">

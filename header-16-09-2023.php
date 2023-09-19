@@ -130,41 +130,38 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
         </div>
       </div>
       <div class="header_bottom_wrapper">
-        <div class="row justify-content-between align-items-center">
+        <div class="row align-items-center">
           <div class="col-lg-3">
             <div class="logo">
               <a href="<?php echo $rtpth; ?>home"><img src="<?php echo $rtpth; ?>assets/images/logo.png" alt="logo"></a>
             </div>
           </div>
-          <?php
-          if (!isset($current_page) || $current_page != 'home') { ?>
-            <div class="col-lg-5">
-              <div class="header_search" id="header_search">
-                <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                  <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
-                    echo $_POST['txtsrchval'];
-                  } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
-                    echo $_REQUEST['txtsrchval'];
-                  } elseif (isset($_REQUEST['text']) && $_REQUEST['text'] != "") {
-                    echo $_REQUEST['text'];
-                  } ?>">
-                  <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
-                </form>
-              </div>
-              <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
-                <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                  <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
-                        echo $_POST['txtsrchval'];
-                      } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
-                        echo $_REQUEST['txtsrchval'];
-                      } ?>">
-                  <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
-                </form>
-              </div>
-              <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
+          <div class="col-lg-5">
+            <div class="header_search" id="header_search">
+              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
+                  echo $_POST['txtsrchval'];
+                } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
+                  echo $_REQUEST['txtsrchval'];
+                } elseif (isset($_REQUEST['text']) && $_REQUEST['text'] != "") {
+                  echo $_REQUEST['text'];
+                } ?>">
+                <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
+              </form>
             </div>
-            <?php
-          }
+            <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
+              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
+                      echo $_POST['txtsrchval'];
+                    } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
+                      echo $_REQUEST['txtsrchval'];
+                    } ?>">
+                <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
+          </div>
+          <?php
           if ($_SESSION['sesmbrid'] == '') { ?>
             <div class="col-lg-4">
               <div class="header_bottom_login">
@@ -172,8 +169,7 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                   <li><a href="" data-toggle="modal" data-target="#registerModal">Create An Account</a></li>
                   <li>
                     <!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal"> Login </button> -->
-                    <a class="main-btn" data-toggle="modal" data-target="#loginModal" id="lgn_pop"><i
-                        class="fa fa-user-o"></i>
+                    <a class="main-btn" data-toggle="modal" data-target="#loginModal" id="lgn_pop"><i class="fa fa-user-o"></i>
                       Login</a>
                   </li>
                 </ul>
@@ -231,13 +227,8 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
           </div>
           <div class="header_top_login">
             <ul>
-              <?php
-              if ($_SESSION['sesmbrid'] == '') { ?>
-                <li><a href="" data-toggle="modal" data-target="#registerModal">Create An Account</a></li>
-                <li><a class="main-btn" data-toggle="modal" data-target="#loginModal" id="lgn_pop"><i class="fa fa-user-o"></i>Log In</a></li>
-                <?php
-              }
-              ?>
+              <li><a href="#">Create An Account</a></li>
+              <li><a class="main-btn" href="#"><i class="fa fa-user-o"></i>Log In</a></li>
             </ul>
           </div>
         </div>
@@ -276,12 +267,18 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
           </div>
           <div class="navbar_meta">
             <ul>
+
+
+
               <?php
               if ($_SESSION['sesmbrid'] == '') { ?>
 
-                <!-- <li><a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
+                <a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
                   Login</a>
-                </li> -->
+                </li>
+
+
+
                 <?php
               } else { ?>
                 <li>
@@ -306,13 +303,17 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
               <?php
               }
               ?>
-            <?php /*?>   <li>
-         <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
-         <div class="search_bar">
-           <input type="text" placeholder="Search">
-           <button><i class="fa fa-search"></i></button>
-         </div>
-       </li><?php */?>
+
+
+
+
+            <li>
+              <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
+              <div class="search_bar">
+                <input type="text" placeholder="Search">
+                <button><i class="fa fa-search"></i></button>
+              </div>
+            </li>
             </ul>
           </div>
         </nav>

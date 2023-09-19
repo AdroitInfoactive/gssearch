@@ -10,7 +10,7 @@ include_once $inc_user_fldr_pth;
 <?php
 if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) && $_GET['scatid'] != "")) {
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
-  $qnsperpg = 2;
+  $qnsperpg = 10;
   $offset = ($page - 1) * $qnsperpg;
   $sqry_qns1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
   inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
@@ -55,17 +55,17 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
         $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
-          <h4 class="courses_details_title">Q:
-            <?php echo $i . " (" . $qn_tag . ")"; ?>
+          <h4>Q:
+            <?php echo $i . " <span class='courses_details_title'>(" . $qn_tag . ")</span>"; ?>
           </h4>
           <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
             <div class="courses_title">
-              <h4 class="courses_details_title">
+              <h4 >
                 <?php echo $qn_qnm; ?>
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
-                <a data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i
+                <a title="Share" data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i
                     class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
                 <?php
                 $membrid = $_SESSION['sesmbrid'];
@@ -79,7 +79,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
                   $cls = "";
                 }
                 ?>
-                <a href="javascript:;" class="pull-right sharelink" id="bookmark"
+                <a title="Bookmark" href="javascript:;" class="pull-right sharelink" id="bookmark"
                   onclick="frmprdsub('<?php echo $qn_id; ?>','b')"><i class="fa fa-bookmark "></i></a>
 
               </div>
@@ -142,7 +142,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   $exm_id = isset($_GET['exm_ids']) ? funcStrUnRplc($_GET['exm_ids']) : "";
   $topc_id = isset($_GET['topc_ids']) ? funcStrUnRplc($_GET['topc_ids']) : "";
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
-  $qnsperpg = 2;
+  $qnsperpg = 10;
   $offset = ($page - 1) * $qnsperpg;
   $sqry_qns_srch1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag";
   if ($srch_txt_1 != "")
@@ -187,7 +187,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   else {
     $sqry_qns_srch2 .= " ,";
   }
-  $sqry_qns_srch2 .= " yearsm_name, addquesm_prty desc limit $offset,$qnsperpg";
+  $sqry_qns_srch2 .= " yearsm_name desc limit $offset,$qnsperpg";
   $sqry_qns_srch = $sqry_qns_srch1 . $sqry_qns_srch2;
   $srs_tot_qns = mysqli_query($conn, $sqry_qns_srch1);
   $cnt_tot_qns = mysqli_num_rows($srs_tot_qns);
@@ -215,20 +215,20 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
         $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
-          <h4 class="courses_details_title">Q:
-            <?php echo $i . " (" . $qn_tag . ")"; ?>
+          <h4>Q:
+            <?php echo $i . " <span class='courses_details_title'>(" . $qn_tag . ")</span>"; ?>
           </h4>
           <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
             <div class="courses_title">
-              <h4 class="courses_details_title">
+              <h4>
                 <?php echo $qn_qnm; ?>
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
-                <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i
+                <a title="Share" data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i
                     class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
 
-                <a data-toggle="modal" class="pull-right sharelink "><i class="fa fa-bookmark"
+                <a title="Bookmark" data-toggle="modal" class="pull-right sharelink "><i class="fa fa-bookmark"
                     onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
               </div>
             </div>
@@ -287,7 +287,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
 if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
   $mbr_id = funcStrUnRplc($_GET['mbr_id']);
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
-  $qnsperpg = 2;
+  $qnsperpg = 10;
   $offset = ($page - 1) * $qnsperpg;
   $sqry_qns_srch1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag,bookmark_id from addques_mst
   inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
@@ -319,12 +319,12 @@ if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
         $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
-          <h4 class="courses_details_title">Q:
-            <?php echo $i . " (" . $qn_tag . ")"; ?>
+          <h4>Q:
+            <?php echo $i . " <span class='courses_details_title'>(" . $qn_tag . ")</span>"; ?>
           </h4>
           <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
             <div class="courses_title">
-              <h4 class="courses_details_title">
+              <h4>
                 <?php echo $qn_qnm; ?>
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""

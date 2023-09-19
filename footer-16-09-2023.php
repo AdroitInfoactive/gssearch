@@ -568,19 +568,19 @@ require_once('settings.php');
               var content_srch = '';
               content_srch += data_srch;
               // Append pagination controls
-              content_srch += '<ul class="pagination col-sm-12">';
+              content_srch += '<ul class="pagination">';
               if (page_srch > 1) {
                 content_srch += `<li><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></li>`;
               }
-              for (let k = 1; k <= Math.ceil(tot_qns_srch / 10); k++) {
+              for (let k = 1; k <= Math.ceil(tot_qns_srch / 2); k++) {
                 if (k === page_srch) {
-                  content_srch += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
+                  content_srch += `<li><button active data-page="${k}">${k}</button></li>`;
                 } else {
-                  content_srch += `<li><button class="page-number" data-page="${k}">${k}</button></li>`;
+                  content_srch += `<li><button data-page="${k}">${k}</button></li>`;
                 }
                 content_srch += ``;
               }
-              if (page_srch * 10 < tot_qns_srch) {
+              if (page_srch * 2 < tot_qns_srch) {
                 content_srch += `<li class="text-right"><button class="next" data-page="${page_srch + 1}">Next</button></li>`;
               }
               content_srch += '</ul>';
@@ -589,7 +589,7 @@ require_once('settings.php');
           });
         }
       });
-                                            <?php
+                                          <?php
   } else if ($page_title == "Bookmark Questions") { ?>
         $(document).ready(function () {
           // Initial page load
@@ -626,15 +626,15 @@ require_once('settings.php');
                 if (page_srch > 1) {
                   content_srch += `<li><button class="prev" data-page="${page_srch - 1}">Prev</button></li>`;
                 }
-                for (let k = 1; k <= Math.ceil(tot_qns_pg / 10); k++) {
+                for (let k = 1; k <= Math.ceil(tot_qns_pg / 2); k++) {
                   if (k === page_srch) {
-                    content_srch += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
+                    content_srch += `<li><button active data-page="${k}">${k}</button></li>`;
                   } else {
-                    content_srch += `<li><button class="page-number" data-page="${k}">${k}</button></li>`;
+                    content_srch += `<li><button data-page="${k}">${k}</button></li>`;
                   }
                   content_srch += ``;
                 }
-                if (page_srch * 10 < tot_qns_pg) {
+                if (page_srch * 2 < tot_qns_pg) {
                   content_srch += `<li class="text-right"><button class="next main-btn" data-page="${page_srch + 1}">Next</button>	</li>`;
                 }
                 content_srch += '</ul>';
@@ -643,7 +643,7 @@ require_once('settings.php');
             });
           }
         });
-                                                  <?php
+                                                <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -663,12 +663,6 @@ require_once('settings.php');
               let nextPage = parseInt($(this).data('page'))
               loadPage(nextPage, cat_id, scat_id, yr_id);
             });
-            // Load specific page
-            $('#qns_lst_dsp').on('click', '.page-number', function () {
-              // debugger;
-              let pageNumber = parseInt($(this).data('page'));
-              loadPage(pageNumber, cat_id, scat_id, yr_id);
-            });
             // Load previous page
             $('#qns_lst_dsp').on('click', '.prev', function () {
               let prevPage = parseInt($(this).data('page'))
@@ -686,15 +680,7 @@ require_once('settings.php');
                   if (page > 1) {
                     content += `<li><button class="prev main-btn" data-page="${page - 1}">Prev</button></li>`;
                   }
-                  for (let k = 1; k <= Math.ceil(tot_qns / 10); k++) {
-                    if (k === page) {
-                      content += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
-                    } else {
-                      content += `<li><button class="page-number" data-page="${k}">${k}</button></li>`;
-                    }
-                    content += ``;
-                  }
-                  if (page * 10 < tot_qns) {
+                  if (page * 2 < tot_qns) {
                     content += `<li class="text-right"><button class="next main-btn" data-page="${page + 1}">Next</button></li>`;
                   }
                   content += '</li></ul>';
@@ -703,7 +689,7 @@ require_once('settings.php');
               });
             }
           });
-                                                  <?php
+                                                <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');

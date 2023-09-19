@@ -18,7 +18,7 @@ $page_title = "Search";
 $page_seo_title = "Search | GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
-$current_page = "home";
+$current_page = "search-results";
 $body_class = "homepage";
 ?>
 <section class="page_banner bg_cover" style="background-image: url(<?php echo $rtpth; ?>assets/images/about_bg.jpg)">
@@ -112,7 +112,7 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
             <?php
             // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
             if ($srch_txt != "") {
-              $sqry_srch_yr .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
+              $sqry_srch_exm .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
             }
             if ($topc_ids != "")
             {
@@ -165,7 +165,7 @@ where addquesm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_sts = '
             <?php
             // ------------------------------------------------------ write years query with search key word and find count ---------------------------------------
             if ($srch_txt != "") {
-              $sqry_srch_yr .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
+              $sqry_srch_topc .= " and (addquesm_qnm LIKE '%$srch_txt%' or addquesm_optn1 LIKE '%$srch_txt%' or addquesm_optn2 LIKE '%$srch_txt%' or addquesm_optn3 LIKE '%$srch_txt%' or addquesm_optn4 LIKE '%$srch_txt%')";
             }
             if ($exm_ids != "") {
               $sqry_srch_topc .= " and addquesm_prodmnexmsm_id in ($exm_ids)";

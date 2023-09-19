@@ -45,7 +45,7 @@
 
 /* Normal desktop :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
-.header_bottom_login{margin-top:10px;}
+
 .header_top_info ul li + li {
 	margin-left: 20px;
 }
@@ -899,9 +899,9 @@
 	padding-bottom: 100px;
 }
 .slider_content_3 {
-	padding-top: 80px; 	
+	padding-top: 40px;
 }
-.header_search{padding-bottom:80px;}
+
 .slider_content_3 .main_title {
 	font-size: 24px;
 }

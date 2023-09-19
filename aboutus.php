@@ -3,7 +3,7 @@ $page_title ="About Us";
 $page_seo_title ="About Us | GS Search";
 $db_seokywrd ="";
 $db_seodesc ="";
-$current_page ="home";
+$current_page ="aboutus";
 $body_class ="homepage";
 include('header.php');
 ?>

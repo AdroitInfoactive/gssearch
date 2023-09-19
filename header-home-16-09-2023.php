@@ -22,8 +22,7 @@ if (isset($_POST['btnsbmt_rgstr']) && (trim($_POST['btnsbmt_rgstr']) == 'Registe
 if (isset($_POST['btnsbmt_chng_pwd']) && (trim($_POST['btnsbmt_chng_pwd']) == 'Submit') && isset($_POST['txtchngpwd_oldpswd']) && (trim($_POST['txtchngpwd_oldpswd']) != '') && isset($_POST['txtchngpwd_nwpswd']) && (trim($_POST['txtchngpwd_nwpswd']) != '') && isset($_POST['txtchngpwd_nwcnfpswd']) && (trim($_POST['txtchngpwd_nwcnfpswd']) != '')) {
   include_once "database/uqry_chng_pwd.php";
 }
-if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Submit') && isset($_POST['edttxtname']) && (trim($_POST['edttxtname']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '')) {
-
+if(isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Submit') && isset($_POST['edttxtname']) && (trim($_POST['edttxtname']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '') && isset($_POST['edttxtmobile']) && (trim($_POST['edttxtmobile']) != '')) {
   include_once "database/uqry_edit_mbr.php";
 }
 ?>
@@ -64,8 +63,8 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
   <link rel="stylesheet" href="<?php echo $rtpth; ?>assets/css/responsive.css">
   <?php
   if ($servr_ip != "127.0.0.1") { ?>
-    <script>
-      /*  document.addEventListener('contextmenu', function (e) {
+  <script>
+     /*  document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
       });
       document.addEventListener('keydown', function (e) {
@@ -103,8 +102,7 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
       <div class="header_top_wrapper_2 d-flex justify-content-between">
         <div class="header_top_info d-none d-md-block">
           <ul>
-            <li><img src="<?php echo $rtpth; ?>assets/images/call-2.png" alt="call"><a href="#">+91 9177 666 963</a>
-            </li>
+            <li><img src="<?php echo $rtpth; ?>assets/images/call-2.png" alt="call"><a href="#">+91 12345 67890</a></li>
             <li><img src="<?php echo $rtpth; ?>assets/images/mail-2.png" alt="mail"><a href="#">info@gssearch.in</a>
             </li>
           </ul>
@@ -115,7 +113,7 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
               <a href="<?php echo $rtpth; ?>home">Home </a>
             </li>
             <li>
-              <a href="<?php echo $rtpth; ?>aboutus">About Us</a>
+              <a href="#">About Us</a>
             </li>
             <li>
               <a href="<?php echo $rtpth; ?>exam-categories">Practice Zone </a>
@@ -124,47 +122,34 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
               <a href="#">Gallery </a>
             </li> -->
             <li>
-              <a href="<?php echo $rtpth; ?>contactus">Contact Us</a>
+              <a href="#">Contact Us</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="header_bottom_wrapper">
-        <div class="row justify-content-between align-items-center">
+        <div class="row align-items-center justify-content-between">
           <div class="col-lg-3">
             <div class="logo">
               <a href="<?php echo $rtpth; ?>home"><img src="<?php echo $rtpth; ?>assets/images/logo.png" alt="logo"></a>
             </div>
           </div>
-          <?php
-          if (!isset($current_page) || $current_page != 'home') { ?>
-            <div class="col-lg-5">
-              <div class="header_search" id="header_search">
-                <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                  <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
-                    echo $_POST['txtsrchval'];
-                  } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
-                    echo $_REQUEST['txtsrchval'];
-                  } elseif (isset($_REQUEST['text']) && $_REQUEST['text'] != "") {
-                    echo $_REQUEST['text'];
-                  } ?>">
-                  <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
-                </form>
-              </div>
-              <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
-                <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
-                  <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") {
-                        echo $_POST['txtsrchval'];
-                      } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") {
-                        echo $_REQUEST['txtsrchval'];
-                      } ?>">
-                  <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
-                </form>
-              </div>
-              <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
+          <?php /*?><div class="col-lg-5">
+            <div class="header_search" id="header_search">
+              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                <input type="text" placeholder="Search" name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
+                <button id="searchbtn" type='submit'><i class="fa fa-search"></i></button>
+              </form>
             </div>
-            <?php
-          }
+            <!-- <div class="header_search" style="<?php echo $stl; ?>" id="header_search">
+              <form method="post" name="frmserqtn" id="frmserqtn" onSubmit="srch('<?php echo $membrsubsts; ?>')">
+                <input type="text" placeholder="Search" <?php echo $dsbld; ?> name="txtsrchval" id="txtsrchval" value="<?php if (isset($_POST['txtsrchval']) && $_POST['txtsrchval'] != "") { echo $_POST['txtsrchval']; } elseif (isset($_REQUEST['txtsrchval']) && $_REQUEST['txtsrchval'] != "") { echo $_REQUEST['txtsrchval']; } ?>">
+                <button id="searchbtn" <?php echo $dsbld; ?> type='submit'><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+            <div class="error-message" id="error-message" style="display: none; color: red;">Login to enable search questions across the site</div> -->
+          </div><?php */?>
+          <?php
           if ($_SESSION['sesmbrid'] == '') { ?>
             <div class="col-lg-4">
               <div class="header_bottom_login">
@@ -172,8 +157,7 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                   <li><a href="" data-toggle="modal" data-target="#registerModal">Create An Account</a></li>
                   <li>
                     <!-- <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal"> Login </button> -->
-                    <a class="main-btn" data-toggle="modal" data-target="#loginModal" id="lgn_pop"><i
-                        class="fa fa-user-o"></i>
+                    <a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
                       Login</a>
                   </li>
                 </ul>
@@ -181,32 +165,25 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
             </div>
             <?php
           } else { ?>
-            <div class="col-sm-4">
-              <ul class="main_menu rightlinks text-center" id="userMenu">
-                <li class="text-dark"> <a href="#" style="color:#484848;">
-                    Welcome, <span class="user">
-                      <?php echo $membrname; ?>
-                    </span></span><i class="fa fa-user"></i>
-                  </a>
-                  <ul class="sub-menu text-left">
-                    <li><a href="<?php echo $rtpth; ?>my-account">My Account</a> </li>
-                    <!-- <?php
-                    $membrid = $_SESSION['sesmbrid'];
-                    $sqrybok = "SELECT bookmark_usr_id from bookmark_mst where bookmark_usr_id='$membrid'";
-                    $res = mysqli_query($conn, $sqrybok);
-                    $cnt = mysqli_num_rows($res);
-                    if ($cnt > 0) {
-                      ?> -->
-
-                      <!-- <?php
-                    } ?> -->
-                    <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
-                    <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
-                </li>
-                <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
-              </ul>
+            <div class="col-sm-4"><ul class="main_menu rightlinks text-center" id="userMenu">
+              <li class="text-dark"> <a href="#" style="color:#484848;">
+                  Welcome, <span class="user">
+                    <?php echo $membrname; ?>
+                  </span></span><i class="fa fa-user"></i>
+                </a>
+                <ul class="sub-menu text-left">
+                  <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
+                  </li>
+                 
+                      <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
+                    
+               
+                  <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
               </li>
-              </ul>
+              <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
+            </ul>
+            </li>
+            </ul>
             </div>
             <?php
           }
@@ -231,13 +208,8 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
           </div>
           <div class="header_top_login">
             <ul>
-              <?php
-              if ($_SESSION['sesmbrid'] == '') { ?>
-                <li><a href="" data-toggle="modal" data-target="#registerModal">Create An Account</a></li>
-                <li><a class="main-btn" data-toggle="modal" data-target="#loginModal" id="lgn_pop"><i class="fa fa-user-o"></i>Log In</a></li>
-                <?php
-              }
-              ?>
+              <li><a href="#">Create An Account</a></li>
+              <li><a class="main-btn" href="#"><i class="fa fa-user-o"></i>Log In</a></li>
             </ul>
           </div>
         </div>
@@ -261,7 +233,7 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                 <a href="<?php echo $rtpth; ?>home">Home </a>
               </li>
               <li>
-                <a href="<?php echo $rtpth; ?>aboutus">About Us</a>
+                <a href="#">About Us</a>
               </li>
               <li>
                 <a href="<?php echo $rtpth; ?>exam-categories">Practice Zone </a>
@@ -270,49 +242,57 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                 <a href="#">Gallery </a>
               </li> -->
               <li>
-                <a href="<?php echo $rtpth; ?>contactus">Contact Us</a>
+                <a href="#">Contact Us</a>
               </li>
             </ul>
           </div>
           <div class="navbar_meta">
             <ul>
-              <?php
-              if ($_SESSION['sesmbrid'] == '') { ?>
-
-                <!-- <li><a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
+            
+            
+            
+            <?php
+          if ($_SESSION['sesmbrid'] == '') { ?>
+           
+                <a class="main-btn" data-toggle="modal" data-target="#loginModal"><i class="fa fa-user-o"></i>
                   Login</a>
-                </li> -->
-                <?php
-              } else { ?>
-                <li>
-                  <ul class="main_menu rightlinks text-center" id="userMenu">
-                    <li class="text-dark"> <a href="#" style="color:#484848;">
-                        <span class="user">
-                          <?php echo $membrname; ?>
-                        </span></span><i class="fa fa-user"></i>
-                      </a>
-                      <ul class="sub-menu text-left">
-                        <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
-                        </li>
-                        <li><a href="<?php echo $rtpth; ?>change-password">Change
-                            Password</a></li>
-                    </li>
-                    <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
-                  </ul>
+              </li>
+              
+              
+            
+            <?php
+          } else { ?>
+           <li> <ul class="main_menu rightlinks text-center" id="userMenu">
+              <li class="text-dark"> <a href="#" style="color:#484848;">
+               <span class="user">
+                  <?php echo $membrname; ?>
+                </span></span><i class="fa fa-user"></i>
+              </a>
+              <ul class="sub-menu text-left">
+                <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
                 </li>
-                </li>
-              </ul>
-
-              <?php
-              }
-              ?>
-            <?php /*?>   <li>
-         <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
-         <div class="search_bar">
-           <input type="text" placeholder="Search">
-           <button><i class="fa fa-search"></i></button>
-         </div>
-       </li><?php */?>
+                <li><a href="<?php echo $rtpth; ?>change-password">Change
+                    Password</a></li>
+              </li>
+              <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
+            </ul></li>
+            </li>
+            </ul>
+            
+            <?php
+          }
+          ?>
+            
+            
+            
+            
+              <li>
+                <a id="search" href="#"><img src="<?php echo $rtpth; ?>assets/images/search-2.png" alt="search"></a>
+                <div class="search_bar">
+                  <input type="text" placeholder="Search">
+                  <button><i class="fa fa-search"></i></button>
+                </div>
+              </li>
             </ul>
           </div>
         </nav>

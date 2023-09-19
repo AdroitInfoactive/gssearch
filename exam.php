@@ -12,7 +12,7 @@ if ((isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") && (isset($_REQUEST[
     $sqry_exm_scat1 .= " and prodmnexmsm_name = '$cat_id_qry'";
   }
   if (isset($_REQUEST['scatid']) && $_REQUEST['scatid'] != "") {
-    echo $scat_id = ($_REQUEST['scatid']);
+    $scat_id = ($_REQUEST['scatid']);
     $scat_id_qry = funcStrUnRplc($scat_id);
     $sqry_exm_scat1 .= " and exam_subcategorym_name = '$scat_id_qry'";
   }
@@ -47,7 +47,7 @@ $page_title = $exm_scatnm;
 $page_seo_title = $exm_catnm . "-" . $exm_scatnm . " | GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
-$current_page = "home";
+$current_page = "examcat";
 $body_class = "homepage";
 ?>
 <section class="page_banner bg_cover" style="background-image: url(<?php echo $rtpth; ?>assets/images/about_bg.jpg)">
@@ -82,8 +82,8 @@ $body_class = "homepage";
         $srs_exmscat_nms = mysqli_query($conn, $sqry_exmscat_nms);
         $cntrec_exmscat_nms = mysqli_num_rows($srs_exmscat_nms);
         if ($cntrec_exmscat_nms > 0) { ?>
-          <ul id="accordion" class="accordion"><h3><?php
-            echo ucwords($cat_id_qry); ?></h3>
+          <ul id="accordion" class="accordion"><h4><?php
+            echo strtoupper($cat_id_qry); ?></h3>
             <?php
             while ($srows_exmscat_nms = mysqli_fetch_assoc($srs_exmscat_nms)) {
               $catid = $srows_exmscat_nms['prodmnexmsm_id'];

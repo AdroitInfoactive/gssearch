@@ -52,7 +52,7 @@ $page_title = $exm_scatnm;
 $page_seo_title = $exm_catnm . "-" . $exm_scatnm . " | GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
-$current_page = "home";
+$current_page = "linkshared";
 $body_class = "homepage";
 include_once('script.php');
 include_once('../includes/inc_fnct_ajax_validation.php');

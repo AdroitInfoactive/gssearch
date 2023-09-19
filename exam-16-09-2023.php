@@ -1,20 +1,54 @@
 <?php
-
 include('header.php');
-// echo "<pre>";
-// var_dump($_REQUEST);
-// echo"</pre>";
-
-$membrid = $_SESSION['sesmbrid'];
-$page_title = "Bookmark Questions";
-$page_seo_title = "Bookmark Questions | GS Search";
+if ((isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") && (isset($_REQUEST['scatid']) && $_REQUEST['scatid'] != "")) {
+  $sqry_exm_scat1 = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_name from exam_subcategory_mst
+  inner join addques_mst on addquesm_exmscat_id = exam_subcategorym_id
+  inner join prodmnexms_mst on prodmnexmsm_id = exam_subcategorym_prodmnexmsm_id
+  inner join years_mst on yearsm_id = addquesm_yearsm_id
+  where exam_subcategorym_sts = 'a'";
+  if (isset($_REQUEST['catid']) && $_REQUEST['catid'] != "") {
+    $cat_id = ($_REQUEST['catid']);
+    $cat_id_qry = funcStrUnRplc($cat_id);
+    $sqry_exm_scat1 .= " and prodmnexmsm_name = '$cat_id_qry'";
+  }
+  if (isset($_REQUEST['scatid']) && $_REQUEST['scatid'] != "") {
+    echo $scat_id = ($_REQUEST['scatid']);
+    $scat_id_qry = funcStrUnRplc($scat_id);
+    $sqry_exm_scat1 .= " and exam_subcategorym_name = '$scat_id_qry'";
+  }
+  if (isset($_REQUEST['yr']) && $_REQUEST['yr'] != "") {
+    $yr_id = ($_REQUEST['yr']);
+    $yr_id_qry = funcStrUnRplc($yr_id);
+    $sqry_exm_scat1 .= " and  yearsm_name= '$yr_id_qry'";
+  }
+  $sqry_exm_scat2 = " group by exam_subcategorym_id order by exam_subcategorym_prty asc";
+  $sqry_exm_scat = $sqry_exm_scat1 . " " . $sqry_exm_scat2;
+  $srs_exm_scat = mysqli_query($conn, $sqry_exm_scat);
+  $cntrec_exm_scat = mysqli_num_rows($srs_exm_scat);
+  if ($cntrec_exm_scat > 0) {
+    $srows_exec_cat = mysqli_fetch_assoc($srs_exm_scat);
+    $exm_catnm = $srows_exec_cat['prodmnexmsm_name'];
+    $exm_scatnm = $srows_exec_cat['exam_subcategorym_name'];
+  } else {
+    ?>
+    <script type="text/javascript">
+      location.href = "<?php echo $rtpth; ?>home";
+    </script>
+    <?php
+  }
+} else {
+  ?>
+  <script type="text/javascript">
+    location.href = "<?php echo $rtpth; ?>home";
+  </script>
+  <?php
+}
+$page_title = $exm_scatnm;
+$page_seo_title = $exm_catnm . "-" . $exm_scatnm . " | GS Search";
 $db_seokywrd = "";
 $db_seodesc = "";
-$current_page = "bookmark";
+$current_page = "home";
 $body_class = "homepage";
-$loc = "";
-$rowsprpg = 5; //maximum rows per page
-
 ?>
 <section class="page_banner bg_cover" style="background-image: url(<?php echo $rtpth; ?>assets/images/about_bg.jpg)">
   <div class="container">
@@ -26,7 +60,8 @@ $rowsprpg = 5; //maximum rows per page
           </h4>
           <ul class="breadcrumb justify-content-center">
             <li><a href="<?php echo $rtpth; ?>home">Home</a></li>
-            <li><a class="active">Bookmark Questions
+            <li><a class="active">
+                <?php echo $exm_catnm . " / " . $page_title; ?>
               </a></li>
           </ul>
         </div>
@@ -37,18 +72,18 @@ $rowsprpg = 5; //maximum rows per page
 <section class="about_area pt-80">
   <div class="container-fluid">
     <div class="row ">
-      <!-- <div class="col-lg-3 col-sm-3 ">
+      <div class="col-lg-3 col-sm-3 ">
         <?php
-        $sqry_exmscat_nms = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_id, prodmnexmsm_name, addquesm_yearsm_id, yearsm_id, yearsm_name,bookmark_usr_id from exam_subcategory_mst
+        $sqry_exmscat_nms = "SELECT exam_subcategorym_id, exam_subcategorym_name, exam_subcategorym_desc,prodmnexmsm_id, prodmnexmsm_name, addquesm_yearsm_id, yearsm_id, yearsm_name from exam_subcategory_mst
         inner join addques_mst on addquesm_exmscat_id = exam_subcategorym_id
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
-        inner join bookmark_mst on bookmark_qns_id=addquesm_id
-        where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and bookmark_usr_id= '$membrid' group by exam_subcategorym_id order by exam_subcategorym_prty asc";
+        where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and prodmnexmsm_name= '$cat_id_qry' group by exam_subcategorym_id order by exam_subcategorym_prty asc";
         $srs_exmscat_nms = mysqli_query($conn, $sqry_exmscat_nms);
         $cntrec_exmscat_nms = mysqli_num_rows($srs_exmscat_nms);
         if ($cntrec_exmscat_nms > 0) { ?>
-          <ul id="accordion" class="accordion">
+          <ul id="accordion" class="accordion"><h3><?php
+            echo ucwords($cat_id_qry); ?></h3>
             <?php
             while ($srows_exmscat_nms = mysqli_fetch_assoc($srs_exmscat_nms)) {
               $catid = $srows_exmscat_nms['prodmnexmsm_id'];
@@ -73,7 +108,6 @@ $rowsprpg = 5; //maximum rows per page
                 inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
                 inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
                 inner join years_mst on yearsm_id = addquesm_yearsm_id
-                inner join bookmark_mst on bookmark_qns_id=addquesm_id
                 where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and exam_subcategorym_id = '$scatid' group by yearsm_id order by yearsm_name desc";
                 $srs_exm_nms = mysqli_query($conn, $sqry_exm_nms);
                 $cntrec_exm_nms = mysqli_num_rows($srs_exm_nms);
@@ -110,7 +144,7 @@ $rowsprpg = 5; //maximum rows per page
           <?php
         }
         ?>
-        <div class="single_courses_details  mb-60">
+        <!-- <div class="single_courses_details  mb-60">
           <h4 class="courses_details_title">Similar Questions</h4>
           <div class="courses_curriculum mt-50">
             <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
@@ -121,69 +155,45 @@ $rowsprpg = 5; //maximum rows per page
               </div>
             </div>
             <div class="card-body">
-              <form action="">
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineA">
-                    <?php echo $qn_optn1; ?>
-                  </label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
-                    Finance Initiative
-                  </label>
-                </div>
-                <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
-                      class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadioInlineA" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInlineA">
+                  <?php echo $qn_optn1; ?>
+                </label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadioInlineB" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInlineB">Asian Development Bank</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadioInlineC" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInlineC">International Monetary Fund</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadioInlineD" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInlineD">United Nations Environment Programme
+                  Finance Initiative
+                </label>
+              </div>
+              <p><strong><span class="text-success"><i class="fa fa-check"></i> Correct</span> <span
+                    class="text-danger"><i class="fa fa-close"></i> Wrong</span></strong></p>
             </div>
           </div>
-        </div>
-      </div> -->
-      <div class="col-lg-12 col-sm-12 pr-md-12">
+        </div> -->
+      </div>
+      <div class="col-lg-9 col-sm-9 pr-md-5">
         <?php
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $qnsperpg = 2;
-        $offset = ($page - 1) * $qnsperpg;
-        // $offset = 0;
-        $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag,bookmark_id from addques_mst
+        $sqry_tot_qns = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag from addques_mst
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join exam_subcategory_mst on exam_subcategorym_id = addquesm_exmscat_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
         inner join topics_mst on topicsm_id = addquesm_topicsm_id
-        inner join bookmark_mst on bookmark_qns_id=addquesm_id
-        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id
-        where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and bookmark_usr_id='$membrid' ";
-
-        $sqry_tot_qns1 .= "$sqry_tot_qns  order by bookmark_id asc limit $offset,$qnsperpg";
-
-
-        // prodmnexmsm_name='$cat_id_qry' and exam_subcategorym_name = '$scat_id_qry' and yearsm_name = '$yr_id_qry'";
-        $srs_tot_qns1 = mysqli_query($conn, $sqry_tot_qns1);
-        $tot_qns1 = mysqli_num_rows($srs_tot_qns1);
+        left join subtopics_mst on subtopicsm_id = addquesm_subtopicsm_id where addquesm_sts = 'a' and prodmnexmsm_sts = 'a' and exam_subcategorym_sts = 'a' and prodmnexmsm_name='$cat_id_qry' and exam_subcategorym_name = '$scat_id_qry' and yearsm_name = '$yr_id_qry'";
         $srs_tot_qns = mysqli_query($conn, $sqry_tot_qns);
         $tot_qns = mysqli_num_rows($srs_tot_qns);
-        if ($tot_qns1 > 0) {
-          ?>
-          <div id="qns_lst_dsp_pg">
-          </div>
-          <?php
-        } else {
-          ?>
-          <div align-items-center>
-            No Questions Found On Bookmark Plese Add: <a href="<?php echo $rtpth; ?>">Click here</a>
-          </div>
-          <?php
-        }
         ?>
+        <div id="qns_lst_dsp">
+        </div>
       </div>
     </div>
   </div>
@@ -197,10 +207,7 @@ $rowsprpg = 5; //maximum rows per page
       // Variables privadas
       var links = this.el.find('.link');
       // Evento
-      links.on('click', {
-        el: this.el,
-        multiple: this.multiple
-      }, this.dropdown)
+      links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown)
     }
     Accordion.prototype.dropdown = function (e) {
       var $el = e.data.el;
