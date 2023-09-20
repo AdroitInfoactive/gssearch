@@ -52,7 +52,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
-        $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
           <h4>Q:
@@ -60,7 +60,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
           </h4>
           <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
             <div class="courses_title">
-              <h4 >
+              <h4>
                 <?php echo $qn_qnm; ?>
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
@@ -145,8 +145,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   $qnsperpg = 10;
   $offset = ($page - 1) * $qnsperpg;
   $sqry_qns_srch1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag";
-  if ($srch_txt_1 != "")
-  {
+  if ($srch_txt_1 != "") {
     $sqry_qns_srch1 .= " ,CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END AS result_priority";
   }
   $sqry_qns_srch1 .= " from addques_mst
@@ -176,15 +175,12 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
     $sqry_qns_srch1 .= " and addquesm_topicsm_id in ($topc_id)";
   }
   $sqry_qns_srch2 = " group by addquesm_id order by";
-  if ($srch_txt_1 != "")
-  {
+  if ($srch_txt_1 != "") {
     $sqry_qns_srch2 .= " result_priority, CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END";
   }
-  if ($srch_txt_1 == "")
-  {
+  if ($srch_txt_1 == "") {
     $sqry_qns_srch2 .= " ";
-  }
-  else {
+  } else {
     $sqry_qns_srch2 .= " ,";
   }
   $sqry_qns_srch2 .= " yearsm_name desc limit $offset,$qnsperpg";
@@ -197,8 +193,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   if ($cntrec_qns_srch > 0) { ?>
     <div class="single_courses_details mb-60">
       <?php
-      if ($srch_txt_1 != "")
-      { ?>
+      if ($srch_txt_1 != "") { ?>
         Search Results for: "
         <?php echo $srch_txt_1; ?>"
         <?php
@@ -212,7 +207,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
-        $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
           <h4>Q:
@@ -316,7 +311,7 @@ if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
-        $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
           <h4>Q:
@@ -329,13 +324,15 @@ if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
-                <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-trash-o" onClick="remvbkmrkqns('<?php echo $bkmrk_id ?>','d')"></i></a>
-                <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i  class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-trash-o"
+                    onClick="remvbkmrkqns('<?php echo $bkmrk_id ?>','d')"></i></a>
+                <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i class="fa fa-share-alt"
+                    onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
 
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
             <?php
             for ($j = 1; $j < 5; $j++) { ?>
               <div class="custom-control custom-radio">

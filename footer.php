@@ -298,52 +298,45 @@ require_once('settings.php');
 <!--====== BACK TOP TOP PART START ======-->
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 <!--====== BACK TOP TOP PART ENDS ======-->
+
+
 <!--====== jquery js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/vendor/modernizr-3.6.0.min.js"></script>
 <script src="<?php echo $rtpth; ?>assets/js/vendor/jquery-1.12.4.min.js"></script>
-<!-- <script src="<?php echo $rtpth; ?>assets/js/vendor/jquery.min.js"></script> -->
+
 <!--====== Bootstrap js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo $rtpth; ?>assets/js/popper.min.js"></script>
-<!--====== Slick js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/slick.min.js"></script><!--====== Magnific Popup js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/jquery.magnific-popup.min.js"></script>
-<!--====== Counter Up js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/waypoints.min.js"></script>
-<script src="<?php echo $rtpth; ?>assets/js/jquery.counterup.min.js"></script>
-<!--====== Nice Select js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/jquery.nice-select.min.js"></script>
-<!--====== Count Down js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/jquery.countdown.min.js"></script>
-<!--====== Appear js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/jquery.appear.min.js"></script>
-<!--====== Main js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/main.js"></script>
-<!--====== jquery js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/vendor/modernizr-3.6.0.min.js"></script>
-<script src="<?php echo $rtpth; ?>assets/js/vendor/jquery-1.12.4.min.js"></script>
-<!--====== Bootstrap js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo $rtpth; ?>assets/js/popper.min.js"></script>
+
 <!--====== Slick js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/slick.min.js"></script>
+
 <!--====== Magnific Popup js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/jquery.magnific-popup.min.js"></script>
-<!--====== Ajax Contact js ======-->
-<script src="<?php echo $rtpth; ?>assets/js/ajax-contact.html"></script>
+
 <!--====== Counter Up js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/waypoints.min.js"></script>
 <script src="<?php echo $rtpth; ?>assets/js/jquery.counterup.min.js"></script>
+
 <!--====== Nice Select js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/jquery.nice-select.min.js"></script>
+
 <!--====== Count Down js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/jquery.countdown.min.js"></script>
+
 <!--====== Appear js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/jquery.appear.min.js"></script>
+
 <!--====== Main js ======-->
 <script src="<?php echo $rtpth; ?>assets/js/main.js"></script>
+
+
 <script src="<?php echo $rtpth; ?>includes/yav.js" type="text/javascript"></script>
 <script src="<?php echo $rtpth; ?>includes/yav-config.js" type="text/javascript"></script>
+
+
+
+
 <script type="text/javascript">
   function remvbkmrkqns(bokmark_id, crtactn) {
     var confirmation = confirm("Are you sure you want to remove this question from bookmarks?");
@@ -352,8 +345,6 @@ require_once('settings.php');
         url: `<?php echo $rtpth; ?>manage_bookmark.php?bokmark_id=${bokmark_id}&bokaction=${crtactn}`,
         type: "GET",
         success: function (data) {
-          //debugger;
-          // alert(data);
           if (data == "yes") {
             document.getElementById("bkmrk_msg").innerHTML = "Question Removed from Bookmark";
           } else {
@@ -383,8 +374,6 @@ require_once('settings.php');
         url: `<?php echo $rtpth; ?>manage_bookmark.php?qnsid=${qns_id}&action=${crtactn}`,
         type: "GET",
         success: function (data) {
-          //debugger;
-          // alert(data);
           mod = "add_wsh";
           if (data == "y") {
             document.getElementById("bkmrk_msg").innerHTML = "Question Added to Bookmark";
@@ -522,57 +511,108 @@ require_once('settings.php');
   }
   <?php
   if ($page_title == "Search") { ?>
+    $(document).ready(function () {
+      // Initial page load
+      var srch_txt = "<?php echo $srch_txt; ?>";
+      var yrs_ids = "<?php echo $yr_ids; ?>";
+      var exm_ids = "<?php echo $exm_ids; ?>";
+      var topc_ids = "<?php echo $topc_ids; ?>";
+      var tot_qns_srch = <?php echo $tot_qns; ?>;
+      loadPage_srch(1, srch_txt, yrs_ids, exm_ids, topc_ids);
+      // Load next page
+      $('#qns_lst_dsp_srch').on('click', '.next', function () {
+        let nextPage_srch = parseInt($(this).data('page'))
+        loadPage_srch(nextPage_srch, srch_txt, yrs_ids, exm_ids, topc_ids);
+      });
+      // Load specific page
+      $('#qns_lst_dsp_srch').on('click', '.page-number', function () {
+        let pageNumber = parseInt($(this).data('page'));
+        loadPage_srch(pageNumber, srch_txt, yrs_ids, exm_ids, topc_ids);
+      });
+      // Load previous page
+      $('#qns_lst_dsp_srch').on('click', '.prev', function () {
+        let prevPage_srch = parseInt($(this).data('page'))
+        loadPage_srch(prevPage_srch, srch_txt, yrs_ids, exm_ids, topc_ids);
+      });
+      function loadPage_srch(page_srch, srch_txt, yrs_ids, exm_ids, topc_ids) {
+        srch_url = `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}`;
+        if (srch_txt != "") {
+          srch_url += "&srch=" + srch_txt;
+        }
+        if (yrs_ids.length != "") {
+          srch_url += "&yrs_ids=" + yrs_ids;
+        }
+        if (exm_ids.length != "") {
+          srch_url += "&exm_ids=" + exm_ids;
+        }
+        if (topc_ids.length != "") {
+          srch_url += "&topc_ids=" + topc_ids;
+        }
+        $.ajax({
+          url: srch_url,
+          // url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
+          type: 'GET',
+          success: function (data_srch) {
+            var content_srch = '';
+            content_srch += data_srch;
+            // Append pagination controls
+            content_srch += '<ul class="pagination col-sm-12">';
+            if (page_srch > 1) {
+              content_srch += `<li><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></li>`;
+            }
+            for (let k = 1; k <= Math.ceil(tot_qns_srch / 10); k++) {
+              if (k === page_srch) {
+                content_srch += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
+              } else {
+                content_srch += `<li><button class="page-number" data-page="${k}">${k}</button></li>`;
+              }
+              content_srch += ``;
+            }
+            if (page_srch * 10 < tot_qns_srch) {
+              content_srch += `<li class="text-right"><button class="next" data-page="${page_srch + 1}">Next</button></li>`;
+            }
+            content_srch += '</ul>';
+            $('#qns_lst_dsp_srch').html(content_srch);
+          }
+        });
+      }
+    });
+    <?php
+  } else if ($page_title == "Bookmark Questions") { ?>
       $(document).ready(function () {
         // Initial page load
-        var srch_txt = "<?php echo $srch_txt; ?>";
-        var yrs_ids = "<?php echo $yr_ids; ?>";
-        var exm_ids = "<?php echo $exm_ids; ?>";
-        var topc_ids = "<?php echo $topc_ids; ?>";
-        var tot_qns_srch = <?php echo $tot_qns; ?>;
-        loadPage_srch(1, srch_txt, yrs_ids, exm_ids, topc_ids);
+        var tot_qns_pg = <?php echo $tot_qns; ?>;
+        var mbr_id = <?php echo $membrid; ?>;
+        loadPage_pg(1, mbr_id);
         // Load next page
-        $('#qns_lst_dsp_srch').on('click', '.next', function () {
+        $('#qns_lst_dsp_pg').on('click', '.next', function () {
           let nextPage_srch = parseInt($(this).data('page'))
-          loadPage_srch(nextPage_srch, srch_txt, yrs_ids, exm_ids, topc_ids);
+          loadPage_pg(nextPage_srch, mbr_id);
         });
         // Load specific page
-        $('#qns_lst_dsp_srch').on('click', '.page-number', function () {
-          // debugger;
+        $('#qns_lst_dsp_pg').on('click', '.page-number', function () {
           let pageNumber = parseInt($(this).data('page'));
-          loadPage_srch(pageNumber, srch_txt, yrs_ids, exm_ids, topc_ids);
+          loadPage_pg(pageNumber, mbr_id);
         });
         // Load previous page
-        $('#qns_lst_dsp_srch').on('click', '.prev', function () {
+        $('#qns_lst_dsp_pg').on('click', '.prev', function () {
           let prevPage_srch = parseInt($(this).data('page'))
-          loadPage_srch(prevPage_srch, srch_txt, yrs_ids, exm_ids, topc_ids);
+          loadPage_pg(prevPage_srch, mbr_id);
         });
-        function loadPage_srch(page_srch, srch_txt, yrs_ids, exm_ids, topc_ids) {
-          srch_url = `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}`;
-          if (srch_txt != "") {
-            srch_url += "&srch=" + srch_txt;
-          }
-          if (yrs_ids.length != "") {
-            srch_url += "&yrs_ids=" + yrs_ids;
-          }
-          if (exm_ids.length != "") {
-            srch_url += "&exm_ids=" + exm_ids;
-          }
-          if (topc_ids.length != "") {
-            srch_url += "&topc_ids=" + topc_ids;
-          }
+        function loadPage_pg(page_srch, mbr_id) {
           $.ajax({
-            url: srch_url,
-            // url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&srch=${srch_txt}`,
+            url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&mbr_id=${mbr_id}`,
+            // url: `<?php echo $rtpth; ?>bookmark.php?page=${page_srch}`,
             type: 'GET',
             success: function (data_srch) {
               var content_srch = '';
               content_srch += data_srch;
               // Append pagination controls
-              content_srch += '<ul class="pagination col-sm-12">';
+              content_srch += '<ul class="pagination">';
               if (page_srch > 1) {
-                content_srch += `<li><button class="prev main-btn" data-page="${page_srch - 1}">Prev</button></li>`;
+                content_srch += `<li><button class="prev" data-page="${page_srch - 1}">Prev</button></li>`;
               }
-              for (let k = 1; k <= Math.ceil(tot_qns_srch / 10); k++) {
+              for (let k = 1; k <= Math.ceil(tot_qns_pg / 10); k++) {
                 if (k === page_srch) {
                   content_srch += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
                 } else {
@@ -580,70 +620,16 @@ require_once('settings.php');
                 }
                 content_srch += ``;
               }
-              if (page_srch * 10 < tot_qns_srch) {
-                content_srch += `<li class="text-right"><button class="next" data-page="${page_srch + 1}">Next</button></li>`;
+              if (page_srch * 10 < tot_qns_pg) {
+                content_srch += `<li class="text-right"><button class="next main-btn" data-page="${page_srch + 1}">Next</button>	</li>`;
               }
               content_srch += '</ul>';
-              $('#qns_lst_dsp_srch').html(content_srch);
+              $('#qns_lst_dsp_pg').html(content_srch);
             }
           });
         }
       });
-                                            <?php
-  } else if ($page_title == "Bookmark Questions") { ?>
-        $(document).ready(function () {
-          // Initial page load
-          // debugger;
-          var tot_qns_pg = <?php echo $tot_qns; ?>;
-          var mbr_id = <?php echo $membrid; ?>;
-          loadPage_pg(1, mbr_id);
-          // Load next page
-          $('#qns_lst_dsp_pg').on('click', '.next', function () {
-            let nextPage_srch = parseInt($(this).data('page'))
-            loadPage_pg(nextPage_srch, mbr_id);
-          });
-          // Load specific page
-          $('#qns_lst_dsp_pg').on('click', '.page-number', function () {
-            // debugger;
-            let pageNumber = parseInt($(this).data('page'));
-            loadPage_pg(pageNumber, mbr_id);
-          });
-          // Load previous page
-          $('#qns_lst_dsp_pg').on('click', '.prev', function () {
-            let prevPage_srch = parseInt($(this).data('page'))
-            loadPage_pg(prevPage_srch, mbr_id);
-          });
-          function loadPage_pg(page_srch, mbr_id) {
-            $.ajax({
-              url: `<?php echo $rtpth; ?>get_qns.php?page=${page_srch}&mbr_id=${mbr_id}`,
-              // url: `<?php echo $rtpth; ?>bookmark.php?page=${page_srch}`,
-              type: 'GET',
-              success: function (data_srch) {
-                var content_srch = '';
-                content_srch += data_srch;
-                // Append pagination controls
-                content_srch += '<ul class="pagination">';
-                if (page_srch > 1) {
-                  content_srch += `<li><button class="prev" data-page="${page_srch - 1}">Prev</button></li>`;
-                }
-                for (let k = 1; k <= Math.ceil(tot_qns_pg / 10); k++) {
-                  if (k === page_srch) {
-                    content_srch += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
-                  } else {
-                    content_srch += `<li><button class="page-number" data-page="${k}">${k}</button></li>`;
-                  }
-                  content_srch += ``;
-                }
-                if (page_srch * 10 < tot_qns_pg) {
-                  content_srch += `<li class="text-right"><button class="next main-btn" data-page="${page_srch + 1}">Next</button>	</li>`;
-                }
-                content_srch += '</ul>';
-                $('#qns_lst_dsp_pg').html(content_srch);
-              }
-            });
-          }
-        });
-                                                  <?php
+    <?php
   } else {
     if ($tot_qns == "") {
       $tot_qns1 = 0;
@@ -651,59 +637,58 @@ require_once('settings.php');
       $tot_qns1 = $tot_qns;
     }
     ?>
-          $(document).ready(function () {
-            // Initial page load
-            var cat_id = "<?php echo $cat_id; ?>";
-            var scat_id = "<?php echo $scat_id; ?>";
-            var yr_id = "<?php echo $yr_id; ?>";
-            var tot_qns = <?php echo $tot_qns1; ?>;
-            loadPage(1, cat_id, scat_id, yr_id);
-            // Load next page
-            $('#qns_lst_dsp').on('click', '.next', function () {
-              let nextPage = parseInt($(this).data('page'))
-              loadPage(nextPage, cat_id, scat_id, yr_id);
-            });
-            // Load specific page
-            $('#qns_lst_dsp').on('click', '.page-number', function () {
-              // debugger;
-              let pageNumber = parseInt($(this).data('page'));
-              loadPage(pageNumber, cat_id, scat_id, yr_id);
-            });
-            // Load previous page
-            $('#qns_lst_dsp').on('click', '.prev', function () {
-              let prevPage = parseInt($(this).data('page'))
-              loadPage(prevPage, cat_id, scat_id, yr_id);
-            });
-            function loadPage(page, cat_id, scat_id, yr_id) {
-              $.ajax({
-                url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
-                type: 'GET',
-                success: function (data) {
-                  var content = '';
-                  content += data;
-                  // Append pagination controls
-                  content += '<ul class="pagination">';
-                  if (page > 1) {
-                    content += `<li><button class="prev main-btn" data-page="${page - 1}">Prev</button></li>`;
-                  }
-                  for (let k = 1; k <= Math.ceil(tot_qns / 10); k++) {
-                    if (k === page) {
-                      content += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
-                    } else {
-                      content += `<li><button class="page-number" data-page="${k}">${k}</button></li>`;
-                    }
-                    content += ``;
-                  }
-                  if (page * 10 < tot_qns) {
-                    content += `<li class="text-right"><button class="next main-btn" data-page="${page + 1}">Next</button></li>`;
-                  }
-                  content += '</li></ul>';
-                  $('#qns_lst_dsp').html(content);
+      $(document).ready(function () {
+        // Initial page load
+        var cat_id = "<?php echo $cat_id; ?>";
+        var scat_id = "<?php echo $scat_id; ?>";
+        var yr_id = "<?php echo $yr_id; ?>";
+        var tot_qns = <?php echo $tot_qns1; ?>;
+        loadPage(1, cat_id, scat_id, yr_id);
+        // Load next page
+        $('#qns_lst_dsp').on('click', '.next', function () {
+          let nextPage = parseInt($(this).data('page'))
+          loadPage(nextPage, cat_id, scat_id, yr_id);
+        });
+        // Load specific page
+        $('#qns_lst_dsp').on('click', '.page-number', function () {
+          let pageNumber = parseInt($(this).data('page'));
+          loadPage(pageNumber, cat_id, scat_id, yr_id);
+        });
+        // Load previous page
+        $('#qns_lst_dsp').on('click', '.prev', function () {
+          let prevPage = parseInt($(this).data('page'))
+          loadPage(prevPage, cat_id, scat_id, yr_id);
+        });
+        function loadPage(page, cat_id, scat_id, yr_id) {
+          $.ajax({
+            url: `<?php echo $rtpth; ?>get_qns.php?page=${page}&catid=${cat_id}&scatid=${scat_id}&yr=${yr_id}`,
+            type: 'GET',
+            success: function (data) {
+              var content = '';
+              content += data;
+              // Append pagination controls
+              content += '<ul class="pagination">';
+              if (page > 1) {
+                content += `<li><button class="prev main-btn" data-page="${page - 1}">Prev</button></li>`;
+              }
+              for (let k = 1; k <= Math.ceil(tot_qns / 10); k++) {
+                if (k === page) {
+                  content += `<li><button class="page-number" active data-page="${k}">${k}</button></li>`;
+                } else {
+                  content += `<li><button class="page-number" data-page="${k}">${k}</button></li>`;
                 }
-              });
+                content += ``;
+              }
+              if (page * 10 < tot_qns) {
+                content += `<li class="text-right"><button class="next main-btn" data-page="${page + 1}">Next</button></li>`;
+              }
+              content += '</li></ul>';
+              $('#qns_lst_dsp').html(content);
             }
           });
-                                                  <?php
+        }
+      });
+    <?php
   }
   /*   if (!isset($_SESSION['sesmbrid']) || ($_SESSION['sesmbrid'] == "")) { ?>
               const searchInput = document.getElementById('header_search');
@@ -721,42 +706,14 @@ require_once('settings.php');
                     <?php
     } */
   ?>
-    $(document).ready(function () {
-      $('.js-btn-tooltip').tooltip();
-      $('.js-btn-tooltip--custom').tooltip({
-        customClass: 'tooltip-custom'
-      });
-      $('.js-btn-tooltip--custom-alt').tooltip({
-        customClass: 'tooltip-custom-alt'
-      });
+  $(document).ready(function () {
+    $('.js-btn-tooltip').tooltip();
+    $('.js-btn-tooltip--custom').tooltip({
+      customClass: 'tooltip-custom'
     });
-  function copyPageURL() {
-    // Get the current page's URL
-    var text = window.location.href;
-    // Create a temporary text area element
-    var textArea = document.createElement('textarea');
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    // Select the text within the text area
-    textArea.select();
-    try {
-      // Use the Clipboard API to copy the text to the clipboard
-      document.execCommand('copy');
-      alert("Copied");
-    } catch (err) {
-      console.error('Unable to copy:', err);
-    }
-    // Remove the temporary text area element
-    document.body.removeChild(textArea);
-  }
-
-  // Event delegation to attach the event listener to the document
-  document.addEventListener("click", function (event) {
-    var target = event.target;
-    // Check if the clicked element is the "Copy URL" button
-    if (target && (target.id === "copy-url-button" || target.parentElement.id === "copy-url-button")) {
-      copyPageURL();
-    }
+    $('.js-btn-tooltip--custom-alt').tooltip({
+      customClass: 'tooltip-custom-alt'
+    });
   });
   var lgnrules = new Array();
   lgnrules[0] = 'txtemail|required|Enter Your Email';
@@ -783,26 +740,31 @@ require_once('settings.php');
   edit_details[6] = 'edttxtmobile|numeric|Enter Numbers only';
   function get_qns_lnk(url) {
     var encurl = encodeURI(url)
-    var waurl = "whatsapp://send?text=" + encurl;
+    var waurl = "whatsapp://send?text=I would like to share a link with you: " + encurl;
     var fburl = "https://www.facebook.com/sharer.php?u=" + encurl;
     var twturl = "https://twitter.com/intent/tweet?url=" + encurl;
     var mlurl = "mailto:?Subject=I would like to share a link with you&body=" + encurl;
     var telurl = "https://t.me/share/url?url=" + encurl + "&text=I would like to share a link with you";
-    var disp = "<li><a class='ps-social__link facebook' href='" + fburl +
-      "' target='_blank'><i class='fa fa-facebook'> </i><span class='ps-tooltip'></span></a></li>";
-    disp += "<li><a class='ps-social__link twitter' href='" + twturl +
-      "' target='_blank'><i class='fa fa-twitter'></i><span class='ps-tooltip'></span></a></li>";
+    var disp = "<li><a class='ps-social__link facebook' href='" + fburl +"' target='_blank'><i class='fa fa-facebook'> </i><span class='ps-tooltip'></span></a></li>";
+    disp += "<li><a class='ps-social__link twitter' href='" + twturl +"' target='_blank'><i class='fa fa-twitter'></i><span class='ps-tooltip'></span></a></li>";
     disp += "<li><a class='ps-social__link whatsapp' href='" + waurl +
       "' target='_blank'><i class='fa fa-whatsapp'></i><span class='ps-tooltip'></span></a></li>";
     disp += "<li><a class='ps-social__link envelope' href='" + mlurl +
       "' target='_blank'><i class='fa fa-envelope-o'></i><span class='ps-tooltip'></span></a></li>";
     disp += "<li><a class='ps-social__link telegram' href='" + telurl +
       "' target='_blank'><i class='fa fa-telegram'></i><span class='ps-tooltip'></span></a></li>";
-    disp += "<li><a class='ps-social__link copy' href='#' id='copy-url-button'><i class='fa fa-copy'></i><span class='ps-tooltip'></span></a></li>";
+    disp += "<li><a class='ps-social__link copy' href='#' onclick=\"copylnk('" + encurl + "')\"><i class='fa fa-copy'></i><span class='ps-tooltip'></span></a></li>";
+
     document.getElementById("sclshare").innerHTML = disp;
+  }
+  function copylnk(link) {
+    navigator.clipboard.writeText(link).then(function () {
+      alert('Copied to clipboard');
+    }).catch(function (error) {
+      console.error('Clipboard copy failed: ', error);
+    });
   }
 </script>
 </body>
-<!-- Mirrored from raistheme.com/html/GS Search/GS Search/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Aug 2023 19:13:08 GMT -->
 
 </html>

@@ -554,7 +554,9 @@
  
 /* small mobile :320px. */
 @media (max-width: 767px) {
-
+.slider_box_wrapper .single_box p {
+    font-size: 14px;
+    }
 
 .navbar{
     padding: 15px 0;
@@ -1227,7 +1229,9 @@
 /* Large Mobile :480px. */
 @media (min-width: 575px) and (max-width: 767px) {
 
-
+.slider_box_wrapper .single_box p {
+    font-size: 14px;
+    }
 
 .navbar-brand {
 	width: auto;

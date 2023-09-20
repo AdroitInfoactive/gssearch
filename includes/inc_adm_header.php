@@ -40,7 +40,7 @@ error_reporting(0);
 			<!-- Brand Logo -->
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 				<div class="image">
-					<img src="<?php echo $rtpth; ?>assets/images/logos/" class="elevation-2" alt="G S Search"
+					<img src="<?php echo $rtpth; ?>assets/images/logo.png" class="elevation-2" alt="G S Search"
 						style="background-color: white">
 				</div>
 				<div class="info">

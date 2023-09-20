@@ -134,7 +134,9 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                       }
                       ?>
                       <li><a style="<?php echo $mn_bg; ?>"
-                          href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url . "/" . $exm_yr_nm; ?>"><?php echo $exm_yr_nm; ?></a></li>
+                          href="<?php echo $rtpth . $exm_catnm_url . "/" . $exm_scatnm_url . "/" . $exm_yr_nm; ?>">
+                          <?php echo $exm_yr_nm; ?>
+                        </a></li>
                       <?php
                     }
                     ?>
@@ -150,7 +152,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
           <?php
         }
         ?>
-       <!--  <div class="single_courses_details  mb-60">
+        <!--  <div class="single_courses_details  mb-60">
           <h4 class="courses_details_title">Similar Questions</h4>
           <div class="courses_curriculum mt-50">
             <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
@@ -204,24 +206,26 @@ include_once('../includes/inc_fnct_ajax_validation.php');
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = strip_tags(html_entity_decode($srows_qns['addquesm_expln']));
-        $qns_lnk = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         $tot_qns = 1;
         ?>
         <div class="col-lg-9 col-sm-9 pr-md-5">
           <div class="single_courses_details  mb-60">
-            <h4 class="courses_details_title">(
-              <?php echo $qn_tag; ?>)
+            <h4>Q:
+              <?php echo " <span class='courses_details_title'>(" . $qn_tag . ")</span>"; ?>
             </h4>
             <div class="courses_curriculum mt-50">
               <div class="courses_top_bar d-sm-flex justify-content-between align-items-center">
                 <div class="courses_title">
-                  <h4 class="courses_details_title">
+                  <h4>
                     <?php echo $qn_qnm; ?>
                   </h4>
                   <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                     data-original-title="Share">
-                    <a data-toggle="modal" data-target="#shareProduct"><i class="fa fa-share-square-o"
-                        onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                    <a title="Share" data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i
+                        class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                    <a title="Bookmark" data-toggle="modal" class="pull-right sharelink "><i class="fa fa-bookmark"
+                        onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
                   </div>
                 </div>
               </div>
@@ -270,51 +274,52 @@ where prodmnexmsm_sts='a' group by prodmnexmsm_id order by yearsm_name,prodmnexm
 $srs_exm_cat = mysqli_query($conn, $sqry_exm_cat);
 $cntrec_exm_cat = mysqli_num_rows($srs_exm_cat);
 if ($cntrec_exm_cat > 0) { ?>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section_title text-center pb-20">
-            <h3 class="main_title">We also Recommend</h3>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <?php
-        while ($srow_exm_cat = mysqli_fetch_array($srs_exm_cat)) {
-          $exm_cat_id = $srow_exm_cat['prodmnexmsm_id'];
-          $exm_cat_name = $srow_exm_cat['prodmnexmsm_name'];
-          $exm_cat_url = funcStrRplc($exm_cat_name);
-          $exm_cat_desc = $srow_exm_cat['prodmnexmsm_desc'];
-          $exm_scatnm = $srow_exm_cat['exam_subcategorym_name'];
-          $exm_scatnm_url = funcStrRplc($exm_scatnm);
-          $exm_yr = $srow_exm_cat['yearsm_name'];
-          ?>
-          <div class="col-lg-3 col-sm-6">
-            <div class="single_courses courses_gray mt-30">
-              <div class="courses_image">
-                <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
-              </div>
-              <div class="courses_content">
-                <h4 class="title"><a
-                    href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>"><?php echo $exm_cat_name; ?></a></h4>
-                <p class="mt-2">
-                  <?php echo $exm_cat_desc; ?>
-                </p>
-                <div class="meta d-flex justify-content-between">
-                  <span><a href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>"
-                      class="w100">View</a></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <?php
-        }
-        ?>
-        <div class="col-sm-12 mt-4">
-          <p class="text-center"><a href="<?php echo $rtpth; ?>exam-categories" class="main-btn">View All</a></p>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section_title text-center pb-20">
+          <h3 class="main_title">We also Recommend</h3>
         </div>
       </div>
     </div>
+    <div class="row">
+      <?php
+      while ($srow_exm_cat = mysqli_fetch_array($srs_exm_cat)) {
+        $exm_cat_id = $srow_exm_cat['prodmnexmsm_id'];
+        $exm_cat_name = $srow_exm_cat['prodmnexmsm_name'];
+        $exm_cat_url = funcStrRplc($exm_cat_name);
+        $exm_cat_desc = $srow_exm_cat['prodmnexmsm_desc'];
+        $exm_scatnm = $srow_exm_cat['exam_subcategorym_name'];
+        $exm_scatnm_url = funcStrRplc($exm_scatnm);
+        $exm_yr = $srow_exm_cat['yearsm_name'];
+        ?>
+        <div class="col-lg-3 col-sm-6">
+          <div class="single_courses courses_gray mt-30">
+            <div class="courses_image">
+              <!-- <img src="<?php echo $rtpth; ?>assets/images/courses-2.jpg" alt="courses"> -->
+            </div>
+            <div class="courses_content">
+              <h4 class="title"><a href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>">
+                  <?php echo $exm_cat_name; ?>
+                </a></h4>
+              <p class="mt-2">
+                <?php echo $exm_cat_desc; ?>
+              </p>
+              <div class="meta d-flex justify-content-between">
+                <span><a href="<?php echo $rtpth . $exm_cat_url . "/" . $exm_scatnm_url . "/" . $exm_yr; ?>"
+                    class="w100">View</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+      <div class="col-sm-12 mt-4">
+        <p class="text-center"><a href="<?php echo $rtpth; ?>exam-categories" class="main-btn">View All</a></p>
+      </div>
+    </div>
+  </div>
   <?php
 }
 ?>
