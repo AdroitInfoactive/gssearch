@@ -190,16 +190,6 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                   </a>
                   <ul class="sub-menu text-left">
                     <li><a href="<?php echo $rtpth; ?>my-account">My Account</a> </li>
-                    <!-- <?php
-                    $membrid = $_SESSION['sesmbrid'];
-                    $sqrybok = "SELECT bookmark_usr_id from bookmark_mst where bookmark_usr_id='$membrid'";
-                    $res = mysqli_query($conn, $sqrybok);
-                    $cnt = mysqli_num_rows($res);
-                    if ($cnt > 0) {
-                      ?> -->
-
-                      <!-- <?php
-                    } ?> -->
                     <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
                     <li><a href="" data-toggle="modal" data-target="#chngpwdModal">Change Password</a></li>
                 </li>
@@ -249,12 +239,11 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
           <a class="navbar-brand" href="<?php echo $rtpth; ?>home">
             <img src="<?php echo $rtpth; ?>assets/images/logo.png" alt="logo">
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-          </button>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                    </button>
           <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto">
               <li>
@@ -294,7 +283,8 @@ if (isset($_POST['btnsbmt_edt_dtl']) && (trim($_POST['btnsbmt_edt_dtl']) == 'Sub
                       <ul class="sub-menu text-left">
                         <li><a href="<?php echo $rtpth; ?>my-account">My Account</a>
                         </li>
-                        <li><a href="<?php echo $rtpth; ?>change-password">Change
+                        <li><a href="<?php echo $rtpth; ?>bookmark">Bookmark Questions</a> </li>
+                          <li><a href="<?php echo $rtpth; ?>change-password">Change
                             Password</a></li>
                     </li>
                     <li><a href="<?php echo $rtpth; ?>logout">Logout</a></li>
