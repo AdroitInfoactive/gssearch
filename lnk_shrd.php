@@ -202,11 +202,12 @@ include_once('../includes/inc_fnct_ajax_validation.php');
       if ($cntrec_qns1 > 0) {
         $srows_qns = mysqli_fetch_assoc($srs_qns1);
         $qn_id = $srows_qns['addquesm_id'];
-        $qn_qnm = strip_tags(html_entity_decode($srows_qns['addquesm_qnm']));
+        $qn_qnm = html_entity_decode($srows_qns['addquesm_qnm']);
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
-        $qn_expln = strip_tags(html_entity_decode($srows_qns['addquesm_expln']));
+        $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
         $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk1 = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         $tot_qns = 1;
         ?>
         <div class="col-lg-9 col-sm-9 pr-md-5">
@@ -222,8 +223,13 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                   </h4>
                   <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                     data-original-title="Share">
-                    <a title="Share" data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i
+                    <!-- <a title="Share" data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a> -->
+                    <a title="Share" data-toggle="modal" class="pull-right sharelink shareButtonDesktop"
+                      data-target="#shareProduct" id="shareButtonDesktop" style="display: none;"><i
                         class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                    <a title="Share" class="pull-right sharelink shareButtonMobile" data-target="#shareProduct"
+                      id="shareButtonMobile" style="display: none;"><i class="fa fa-share-alt"
+                        onclick="shareURL('<?php echo $qns_lnk1; ?>');"></i></a>
                     <a title="Bookmark" data-toggle="modal" class="pull-right sharelink "><i class="fa fa-bookmark"
                         onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
                   </div>
@@ -238,7 +244,7 @@ include_once('../includes/inc_fnct_ajax_validation.php');
                       name="<?php echo $qn_id; ?>customRadioInline<?php echo $qn_id; ?>" class="custom-control-input"
                       onclick="show_ans(<?php echo $i; ?>,<?php echo $j; ?>,<?php echo $qn_id; ?>);">
                     <label class="custom-control-label" for="<?php echo $qn_id; ?>customRadioInline<?php echo $j; ?>">
-                      <?php echo strip_tags(html_entity_decode($srows_qns['addquesm_optn' . $j])); ?>
+                      <?php echo html_entity_decode($srows_qns['addquesm_optn' . $j]); ?>
                     </label>
                   </div>
                   <?php

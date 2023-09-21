@@ -78,7 +78,7 @@ $body_class = "homepage";
         inner join addques_mst on addquesm_exmscat_id = exam_subcategorym_id
         inner join prodmnexms_mst on prodmnexmsm_id = addquesm_prodmnexmsm_id
         inner join years_mst on yearsm_id = addquesm_yearsm_id
-        where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and prodmnexmsm_name= '$cat_id_qry' group by exam_subcategorym_id order by exam_subcategorym_prty asc";
+        where exam_subcategorym_sts = 'a' and yearsm_sts = 'a' and prodmnexmsm_sts = 'a' and addquesm_sts = 'a' and prodmnexmsm_name= '$cat_id_qry' group by exam_subcategorym_id order by CASE WHEN exam_subcategorym_name = '$scat_id_qry' THEN 1 ELSE 2 END, exam_subcategorym_prty ASC";
         $srs_exmscat_nms = mysqli_query($conn, $sqry_exmscat_nms);
         $cntrec_exmscat_nms = mysqli_num_rows($srs_exmscat_nms);
         if ($cntrec_exmscat_nms > 0) { ?>

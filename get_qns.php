@@ -53,6 +53,7 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
         $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk1 = $rtpth .$cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
           <h4>Q:
@@ -65,8 +66,14 @@ if ((isset($_GET['catid']) && $_GET['catid'] != "") && (isset($_GET['scatid']) &
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
-                <a title="Share" data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i
-                    class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                <!-- <a title="Share" data-toggle="modal" class="pull-right sharelink" data-target="#shareProduct"><i
+                    class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a> -->
+                <a title="Share" data-toggle="modal" class="pull-right sharelink shareButtonDesktop" data-target="#shareProduct"
+                  id="shareButtonDesktop" style="display: none;"><i class="fa fa-share-alt"
+                    onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                <a title="Share" class="pull-right sharelink shareButtonMobile" data-target="#shareProduct"
+                  id="shareButtonMobile" style="display: none;"><i class="fa fa-share-alt"
+                    onclick="shareURL('<?php echo $qns_lnk1; ?>');"></i></a>
                 <?php
                 $membrid = $_SESSION['sesmbrid'];
                 $sqrybok = "select bookmark_qns_id from bookmark_mst where bookmark_qns_id='$qn_id' and bookmark_usr_id='$membrid'";
@@ -144,7 +151,7 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $qnsperpg = 10;
   $offset = ($page - 1) * $qnsperpg;
-  $sqry_qns_srch1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag";
+  $sqry_qns_srch1 = "SELECT addquesm_id, addquesm_qnm, addquesm_prodmnexmsm_id, addquesm_exmscat_id, addquesm_typ_id, addquesm_yearsm_id, addquesm_topicsm_id, addquesm_subtopicsm_id, addquesm_optn1, addquesm_optn2, addquesm_optn3, addquesm_optn4, addquesm_crtans, addquesm_expln, addquesm_qns_typ, addquesm_qns_tag, prodmnexmsm_name, exam_subcategorym_name, yearsm_name";
   if ($srch_txt_1 != "") {
     $sqry_qns_srch1 .= " ,CASE WHEN (addquesm_qnm LIKE '%$srch_txt_1%' or addquesm_optn1 LIKE '%$srch_txt_1%' or addquesm_optn2 LIKE '%$srch_txt_1%' or addquesm_optn3 LIKE '%$srch_txt_1%' or addquesm_optn4 LIKE '%$srch_txt_1%') THEN 1 ELSE 2 END AS result_priority";
   }
@@ -207,7 +214,11 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
         $qn_tag = $srows_qns['addquesm_qns_tag'];
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
+        $cat_id = funcStrRplc($srows_qns['prodmnexmsm_name']);
+        $scat_id = funcStrRplc($srows_qns['exam_subcategorym_name']);
+        $yr_id = funcStrRplc($srows_qns['yearsm_name']);
         $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk1 = $rtpth. $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
           <h4>Q:
@@ -220,9 +231,14 @@ if ((isset($_GET['srch']) && $_GET['srch'] != "") || (isset($_GET['yrs_ids']) &&
               </h4>
               <div class="ps-product__item sub-toggle" data-toggle="tooltip" data-placement="left" title=""
                 data-original-title="Share">
-                <a title="Share" data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i
-                    class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
-
+                <!-- <a title="Share" data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i
+                    class="fa fa-share-alt" onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a> -->
+                <a title="Share" data-toggle="modal" class="pull-right sharelink shareButtonDesktop" data-target="#shareProduct"
+                  id="shareButtonDesktop" style="display: none;"><i class="fa fa-share-alt"
+                    onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
+                <a title="Share" class="pull-right sharelink shareButtonMobile" data-target="#shareProduct"
+                  id="shareButtonMobile" style="display: none;"><i class="fa fa-share-alt"
+                    onclick="shareURL('<?php echo $qns_lnk1; ?>');"></i></a>
                 <a title="Bookmark" data-toggle="modal" class="pull-right sharelink "><i class="fa fa-bookmark"
                     onclick="frmprdsub('<?php echo $qn_id; ?>','b')"></i></a>
               </div>
@@ -312,6 +328,7 @@ if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
         $qn_crtans = $srows_qns['addquesm_crtans'];
         $qn_expln = html_entity_decode($srows_qns['addquesm_expln']);
         $qns_lnk = $_SERVER['SERVER_NAME'] . $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
+        $qns_lnk1 = $rtpth . $cat_id . "/" . $scat_id . "/" . $yr_id . "/" . $qn_id;
         ?>
         <div class="courses_curriculum mt-50">
           <h4>Q:
@@ -326,9 +343,14 @@ if ((isset($_GET['mbr_id']) && $_GET['mbr_id'] != "")) {
                 data-original-title="Share">
                 <a data-toggle="modal" class="pull-right sharelink"><i class="fa fa-trash-o"
                     onClick="remvbkmrkqns('<?php echo $bkmrk_id ?>','d')"></i></a>
-                <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i class="fa fa-share-alt"
+                <!-- <a data-toggle="modal" data-target="#shareProduct" class="pull-right sharelink"><i class="fa fa-share-alt"
+                    onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a> -->
+                <a title="Share" data-toggle="modal" class="pull-right sharelink shareButtonDesktop" data-target="#shareProduct"
+                  id="shareButtonDesktop" style="display: none;"><i class="fa fa-share-alt"
                     onclick="get_qns_lnk('<?php echo $qns_lnk; ?>');"></i></a>
-
+                <a title="Share" class="pull-right sharelink shareButtonMobile" data-target="#shareProduct"
+                  id="shareButtonMobile" style="display: none;"><i class="fa fa-share-alt"
+                    onclick="shareURL('<?php echo $qns_lnk1; ?>');"></i></a>
               </div>
             </div>
           </div>

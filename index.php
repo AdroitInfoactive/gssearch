@@ -91,12 +91,13 @@ include('header.php');
 <!--====== Slider PART ENDS ======-->
 <!--====== Courses PART START ======-->
 <?php
-$sqry_exm_cat = "SELECT qnscnt, prodmnexmsm_id, prodmnexmsm_name, prodmnexmsm_img, prodmnexmsm_desc, exam_subcategorym_name, yearsm_name FROM (SELECT COUNT(addquesm_id) as qnscnt, prodmnexmsm_id, prodmnexmsm_name,prodmnexmsm_img, prodmnexmsm_desc, exam_subcategorym_name, yearsm_name,ROW_NUMBER() OVER (PARTITION BY prodmnexmsm_id, exam_subcategorym_name ORDER BY yearsm_name DESC) AS rn FROM addques_mst AS a
+$sqry_exm_cat = "SELECT qnscnt,prodmnexmsm_id, prodmnexmsm_name,exam_subcategorym_id,exam_subcategorym_name, yearsm_name FROM (SELECT p.prodmnexmsm_id, p.prodmnexmsm_name,e.exam_subcategorym_id,e.exam_subcategorym_name, y.yearsm_name,COUNT(addquesm_id) AS qnscnt,ROW_NUMBER() OVER (PARTITION BY p.prodmnexmsm_name ORDER BY y.yearsm_name DESC) AS rn FROM addques_mst AS a
 INNER JOIN years_mst AS y ON y.yearsm_id = a.addquesm_yearsm_id
 INNER JOIN prodmnexms_mst AS p ON p.prodmnexmsm_id = a.addquesm_prodmnexmsm_id
 INNER JOIN exam_subcategory_mst AS e ON e.exam_subcategorym_id = a.addquesm_exmscat_id
-WHERE p.prodmnexmsm_sts = 'a' GROUP BY prodmnexmsm_id) AS subquery
-WHERE rn = 1 LIMIT 4";
+WHERE p.prodmnexmsm_sts = 'a' and e.exam_subcategorym_sts = 'a' and y.yearsm_sts = 'a' and a.addquesm_sts = 'a'
+GROUP BY p.prodmnexmsm_name, e.exam_subcategorym_id, y.yearsm_name) AS subquery WHERE rn = 1
+ORDER BY qnscnt DESC LIMIT 4";
 $srs_exm_cat = mysqli_query($conn, $sqry_exm_cat);
 $cntrec_exm_cat = mysqli_num_rows($srs_exm_cat);
 if ($cntrec_exm_cat > 0) { ?>

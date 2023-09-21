@@ -764,6 +764,48 @@ require_once('settings.php');
       console.error('Clipboard copy failed: ', error);
     });
   }
+  function detectDeviceAndShowShareButton() {
+    const screenWidth = window.innerWidth;
+
+    // Select all elements with the class "shareButtonDesktop" and "shareButtonMobile"
+    const desktopShareButtons = document.querySelectorAll('.shareButtonDesktop');
+    const mobileShareButtons = document.querySelectorAll('.shareButtonMobile');
+
+    // Show/hide desktop share buttons based on device type
+    desktopShareButtons.forEach(function (button) {
+      button.style.display = screenWidth > 768 ? 'inline-block' : 'none'; // Adjust the width condition as needed
+    });
+
+    // Show/hide mobile share buttons based on device type
+    mobileShareButtons.forEach(function (button) {
+      button.style.display = screenWidth <= 768 ? 'inline-block' : 'none'; // Adjust the width condition as needed
+    });
+  }
+  function shareURL(url1) {
+    if (navigator.share) {
+      // Define the data to be shared
+      const shareData = {
+        title: 'Share this URL',
+        text: 'Check out this link:',
+        url: url1,
+      };
+      // Open the native sharing dialog
+      navigator.share(shareData)
+        .then(() => {
+          console.log('Shared successfully');
+        })
+        .catch((error) => {
+          console.error('Sharing failed:', error);
+        });
+    } else {
+      // If the `navigator.share` API is not available, provide a fallback action
+      alert('Sharing not supported on this device/browser.');
+    }
+  }
+  // Call the detectDeviceAndShowShareButton function when the page is fully loaded
+  window.addEventListener('load', function () {
+    setTimeout(detectDeviceAndShowShareButton, 5000); // 5000 milliseconds = 5 seconds
+  });
 </script>
 </body>
 
